@@ -16,11 +16,15 @@ class Coin extends JsonResource
     {
         return [
             'id' => $this->id,
+            'category' => $this->category,
+            'description' => $this->description,
             'logo' => $this->logo,
-            'market_cap' => $this->market_cap,
-            'max_supply' => $this->max_supply,
+            'marketCap' => $this->market_cap,
+            'maxSupply' => $this->max_supply,
             'name' => $this->name,
-            'total_supply' => $this->total_supply
+            'slug' => $this->slug,
+            'symbol' => $this->symbol,
+            'totalSupply' => $this->total_supply
         ];
     }
 }

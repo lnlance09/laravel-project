@@ -15,11 +15,15 @@ class CreateCoinsTable extends Migration
     {
         Schema::create('coins', function (Blueprint $table) {
             $table->id();
+            $table->string('category');
+            $table->text('description');
             $table->string('logo');
-            $table->string('market_cap');
-            $table->string('max_supply');
+            $table->bigInteger('market_cap');
+            $table->bigInteger('max_supply');
             $table->string('name');
-            $table->string('total_supply');
+            $table->string('slug');
+            $table->string('symbol');
+            $table->bigInteger('total_supply');
             $table->timestamps();
         });
     }

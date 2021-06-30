@@ -1,16 +1,6 @@
 @import "../../scss/_colors.scss";
 
 .page-header {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    max-width: none !important;
-    padding: 10px 13px 10px 13px;
-    position: fixed;
-    top: 0;
-    width: 100% !important;
-    z-index: 9999;
-
     @media only screen and (max-width: 1025px) {
         
     }
@@ -23,12 +13,14 @@
         box-shadow: none !important;
 
         .container {
-            .left.item {
-                img {
+            h1.header {
+                line-height: 48px;
+
+                img.headerLogo {
                     cursor: pointer;
                     flex: 1 1;
-                    height: 54px;
-                    width: 54px;
+                    height: 48px;
+                    width: 48px;
                 }
             }
 

@@ -3,19 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@artsy/fresnel": "^1.6.0",
     "@okta/okta-auth-js": "^5.0.2",
     "@okta/okta-react": "^5.1.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "babel-loader": "^8.2.2",
+    "highcharts": "^9.1.1",
+    "highcharts-react-official": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "node-sass": "^6.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
+    "react-apexcharts": "^1.3.9",
+    "react-crypto-chart": "0.0.2",
+    "react-debounce-input": "^3.2.3",
     "react-dom": "^17.0.2",
+    "react-ga": "^3.3.0",
+    "react-meta-tags": "^1.0.1",
+    "react-number-format": "^4.6.3",
     "react-router-dom": "^5.2.0",
+    "react-router-scroll-top": "^0.2.1",
     "react-scripts": "4.0.3",
+    "react-semantic-ui-datepickers": "^2.13.1",
+    "react-toastify": "^7.0.4",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
     "web-vitals": "^1.0.1"
@@ -49,6 +63,7 @@
     "@craco/craco": "^6.1.2",
     "@semantic-ui-react/craco-less": "^1.2.1",
     "prettier": "^2.3.1",
-    "semantic-ui-less": "^2.4.1"
+    "semantic-ui-less": "^2.4.1",
+    "use-reducer-logger": "^1.0.2"
   }
 }

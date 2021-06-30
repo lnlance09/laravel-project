@@ -22,43 +22,49 @@ const PageHeader = ({ history, q, showResults }) => {
 
     return (
         <div className="page-header">
-            <Container className="mobile">
-                <Menu borderless fitted="vertically" fixed="top" fluid>
-                    <Container>
-                        <Menu.Item>
-                            <Header as="h1">
-                                <Image
-                                    className="headerLogo"
-                                    onClick={() => history.push("/")}
-                                    rounded
-                                    src={Logo}
+            <Menu borderless fixed="top" fluid>
+                <Container>
+                    <Menu.Item>
+                        <Header as="h1">
+                            <Image
+                                className="headerLogo"
+                                onClick={() => history.push("/")}
+                                rounded
+                                src={Logo}
+                            />
+                            Sample App
+                        </Header>
+                    </Menu.Item>
+                    <Menu.Item as="a" onClick={() => history.push("/coins")}>
+                        Coins
+                    </Menu.Item>
+                    <Menu.Item as="a" onClick={() => history.push("/predictions")}>
+                        Predictions
+                    </Menu.Item>
+                    <Menu.Item as="a" onClick={() => history.push("/influencers")}>
+                        Influencers
+                    </Menu.Item>
+                    <Menu.Item as="a" onClick={() => history.push("/about")}>
+                        About
+                    </Menu.Item>
+                    <Menu.Item position="right">
+                        {authenticated === false && (
+                            <>
+                                <Button
+                                    content="Log In"
+                                    onClick={() => history.push("/login")}
+                                    secondary
                                 />
-                                Moonbois
-                            </Header>
-                        </Menu.Item>
-                        <Menu.Item>Coins</Menu.Item>
-                        <Menu.Item>Predictions</Menu.Item>
-                        <Menu.Item>Influencers</Menu.Item>
-                        <Menu.Item>About</Menu.Item>
-                        <Menu.Item position="right">
-                            {authenticated === false && (
-                                <>
-                                    <Button
-                                        color="secondary"
-                                        content="Log In"
-                                        onClick={() => history.push("/login")}
-                                    />
-                                    <Button
-                                        color="primary"
-                                        content="Sign Up"
-                                        onClick={() => history.push("/register")}
-                                    />
-                                </>
-                            )}
-                        </Menu.Item>
-                    </Container>
-                </Menu>
-            </Container>
+                                <Button
+                                    content="Sign Up"
+                                    onClick={() => history.push("/register")}
+                                    primary
+                                />
+                            </>
+                        )}
+                    </Menu.Item>
+                </Container>
+            </Menu>
 
             <Sidebar
                 as={Menu}
@@ -89,6 +95,7 @@ const PageHeader = ({ history, q, showResults }) => {
 }
 
 PageHeader.propTypes = {
+    history: PropTypes.object,
     q: PropTypes.string,
     showResults: PropTypes.bool,
     toggleSearchMode: PropTypes.func

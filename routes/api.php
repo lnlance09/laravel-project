@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CoinController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/coins', 'CoinController@index');
-Route::middleware('auth:api')->get('/coins/{id}', 'CoinController@show');
+// Route::middleware('token')->get('/coins', [CoinController::class, 'index']);
+// Route::middleware('token')->get('/coins/{id}', [CoinController::class, 'show']);
+
+Route::get('/coins', [CoinController::class, 'index']);
+Route::get('/coins/{slug}', [CoinController::class, 'show']);

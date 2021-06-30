@@ -45,11 +45,7 @@ const DefaultLayout = ({
                         toggleSearchMode={() => setSearchMode(true)}
                     />
 
-                    <Container
-                        className={`mainContainer ${containerClassName}`}
-                        text={isText}
-                        textAlign={textAlign}
-                    >
+                    <Container className={`mainContainer ${containerClassName}`}>
                         {useGrid ? (
                             <Grid className="mainGrid" stackable>
                                 <Grid.Column className="leftColumn" width={4}></Grid.Column>

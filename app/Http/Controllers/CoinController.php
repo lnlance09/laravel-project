@@ -14,9 +14,11 @@ class CoinController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new CoinCollection(Coin::all());
+        $q = $request->input('q');
+        $coins = Coin::where('name', 'LIKE', '%' . $q . '%')->get();
+        return new CoinCollection($coins);
     }
 
     /**
@@ -30,25 +32,14 @@ class CoinController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * Remove the specified resource from storage.
      *
      * @param  \App\Models\Coin  $coin
      * @return \Illuminate\Http\Response
      */
-    public function show(Coin $coin)
+    public function destroy(Coin $coin)
     {
-        return new CoinResource(Coin::findOrFail($coin));
+        //
     }
 
     /**
@@ -63,6 +54,28 @@ class CoinController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  String  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function show($slug)
+    {
+        return new CoinResource(Coin::where('slug', $slug)->firstOrFail());
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,17 +83,6 @@ class CoinController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Coin $coin)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Coin  $coin
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Coin $coin)
     {
         //
     }
