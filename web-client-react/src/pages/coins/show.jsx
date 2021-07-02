@@ -1,28 +1,25 @@
 import { Divider, Header, Segment } from "semantic-ui-react"
-import { useEffect, useReducer, useState } from "react"
+import { useContext, useEffect, useReducer, useState } from "react"
 import { DebounceInput } from "react-debounce-input"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
 import axios from "axios"
 import CoinList from "components/CoinList/"
 import DefaultLayout from "layouts/default"
+import initialState from "states/coins"
+import logger from "use-reducer-logger"
+import reducer from "reducers/coins"
+import ThemeContext from "themeContext"
 
 const toastConfig = getConfig()
 toast.configure(toastConfig)
 
-const initialState = { coins: [{}, {}, {}] }
-
-function reducer(state, action) {
-    switch (action.type) {
-        case "GET_COINS":
-            return { coins: action.coins }
-        default:
-            return state
-    }
-}
-
 const Coins = ({ history }) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const { inverted } = useContext(ThemeContext)
+    const [state, dispatch] = useReducer(
+        process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
+        initialState
+    )
     const [searchTerm, setSearchTerm] = useState("")
 
     useEffect(() => {
@@ -68,10 +65,12 @@ const Coins = ({ history }) => {
     }
 
     return (
-        <DefaultLayout textAlign="center" useGrid={false}>
-            <Segment basic className="searchContainer">
-                <Header as="h1">Find a coin</Header>
-                <div className="ui icon input big fluid">
+        <DefaultLayout inverted={inverted} textAlign="center" useGrid={false}>
+            <Segment basic className="searchSegment" inverted={inverted}>
+                <Header as="h1" inverted={inverted}>
+                    Find a coin
+                </Header>
+                <div className={`ui icon input big fluid ${inverted ? "inverted" : ""}`}>
                     <DebounceInput
                         debounceTimeout={700}
                         minLength={2}
@@ -81,10 +80,10 @@ const Coins = ({ history }) => {
                     />
                 </div>
             </Segment>
-            <Segment stacked>
-                <CoinList coins={state.coins} onClickCoin={onClickCoin} />
+            <Segment inverted={inverted} stacked>
+                <CoinList coins={state.coins} inverted={inverted} onClickCoin={onClickCoin} />
             </Segment>
-            <Divider section />
+            <Divider inverted={inverted} section />
         </DefaultLayout>
     )
 }

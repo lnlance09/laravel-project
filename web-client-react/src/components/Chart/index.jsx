@@ -11,11 +11,14 @@ import reducer from "./reducer"
 
 const Chart = ({
     coin,
+    duration = "1D",
     hideXAxis = false,
     hideYAxis = false,
     history,
     includeRanges = true,
+    inverted,
     period = 300,
+    prediction = null,
     start = Math.round(new Date().getTime() / 1000 - 3600 * 24)
 }) => {
     const [state, dispatch] = useReducer(
@@ -23,29 +26,40 @@ const Chart = ({
         initialState
     )
     const [loaded, setLoaded] = useState(false)
-    const [timeframe, setTimeframe] = useState("1D")
+    const [timeframe, setTimeframe] = useState(duration)
 
     useEffect(() => {
-        getGraphData({ coin: coin.symbol, duration: "1D", period, start })
+        getGraphData({ coin: coin.symbol, duration, period, prediction, start })
 
         if (hideXAxis) {
             dispatch({
-                type: "TOGGLE_X_AXIS"
+                type: "HIDE_X_AXIS"
             })
         }
 
         if (hideYAxis) {
             dispatch({
-                type: "TOGGLE_Y_AXIS"
+                type: "HIDE_Y_AXIS"
             })
         }
-    }, [])
 
-    const getGraphData = async ({ coin, duration, period, start }) => {
+        dispatch({
+            type: "TOGGLE_INVERTED",
+            inverted
+        })
+    }, [inverted, prediction])
+
+    const getGraphData = async ({ coin, duration, period, prediction = null, start }) => {
         return await axios
-            .get(
-                `https://poloniex.com/public?command=returnChartData&currencyPair=USDT_${coin}&start=${start}&end=9999999999999999&period=${period}`
-            )
+            .get("https://poloniex.com/public", {
+                params: {
+                    command: "returnChartData",
+                    currencyPair: `USDT_${coin}`,
+                    end: "9999999999999999",
+                    start,
+                    period
+                }
+            })
             .then((response) => {
                 const { data } = response
                 const points = []
@@ -53,8 +67,12 @@ const Chart = ({
                     points.push([data[i]["date"] * 1000, data[i].weightedAverage])
                 }
 
+                if (prediction) {
+                    points.push([prediction.date, prediction.price])
+                }
+
                 dispatch({
-                    type: "GET_GRAPH_DATA",
+                    type: "SET_GRAPH_DATA",
                     points
                 })
 
@@ -78,9 +96,9 @@ const Chart = ({
     }
 
     return (
-        <div className="chart-component">
+        <div className="chartComponent">
             {includeRanges && (
-                <Menu attached="top" tabular>
+                <Menu inverted={inverted} secondary>
                     {state.timeframes.map((item) => (
                         <Menu.Item
                             active={timeframe === item.name}
@@ -91,11 +109,12 @@ const Chart = ({
                     ))}
                 </Menu>
             )}
-            <Segment attached={includeRanges ? "bottom" : false}>
+            <Segment inverted={inverted}>
                 <HighchartsReact
                     allowChartUpdate
                     containerProps={{ className: "chartContainer" }}
                     highcharts={Highcharts}
+                    inverted={inverted}
                     options={state.options}
                 />
             </Segment>
@@ -120,7 +139,12 @@ Chart.propTypes = {
     hideXAxis: PropTypes.bool,
     hideYAxis: PropTypes.bool,
     includeRanges: PropTypes.bool,
+    inverted: PropTypes.bool,
     options: PropTypes.shape({}),
+    prediction: PropTypes.shape({
+        date: PropTypes.number,
+        price: PropTypes.number
+    }),
     timeframes: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string,

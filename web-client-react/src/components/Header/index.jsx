@@ -3,9 +3,12 @@ import Logo from "images/logos/main.png"
 import { parseJwt } from "utils/tokenFunctions"
 import { Button, Container, Header, Icon, Image, Menu, Sidebar } from "semantic-ui-react"
 import PropTypes from "prop-types"
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import ThemeContext from "themeContext"
 
 const PageHeader = ({ history, q, showResults }) => {
+    const { inverted, toggleInverted } = useContext(ThemeContext)
+
     const [authenticated, setAuthenticated] = useState(null)
     const [sidebarVisible, setSidebarVisible] = useState(false)
     const [user, setUser] = useState({})
@@ -21,11 +24,11 @@ const PageHeader = ({ history, q, showResults }) => {
     }, [])
 
     return (
-        <div className="page-header">
-            <Menu borderless fixed="top" fluid>
+        <div className="pageHeaderComponent">
+            <Menu borderless fixed="top" fluid inverted={inverted}>
                 <Container>
-                    <Menu.Item>
-                        <Header as="h1">
+                    <Menu.Item className="logoItem">
+                        <Header as="h1" inverted={inverted}>
                             <Image
                                 className="headerLogo"
                                 onClick={() => history.push("/")}
@@ -44,12 +47,18 @@ const PageHeader = ({ history, q, showResults }) => {
                     <Menu.Item as="a" onClick={() => history.push("/influencers")}>
                         Influencers
                     </Menu.Item>
-                    <Menu.Item as="a" onClick={() => history.push("/about")}>
-                        About
-                    </Menu.Item>
                     <Menu.Item position="right">
                         {authenticated === false && (
                             <>
+                                <Button
+                                    circular
+                                    color="purple"
+                                    className="moonButton"
+                                    icon
+                                    onClick={(e) => toggleInverted(e, inverted)}
+                                >
+                                    <Icon inverted={inverted} name="moon" size="large" />
+                                </Button>
                                 <Button
                                     content="Log In"
                                     onClick={() => history.push("/login")}
@@ -72,7 +81,7 @@ const PageHeader = ({ history, q, showResults }) => {
                 borderless
                 direction="bottom"
                 icon="labeled"
-                inverted
+                inverted={inverted}
                 onHide={() => setSidebarVisible(false)}
                 size="massive"
                 style={{ textAlign: "left" }}

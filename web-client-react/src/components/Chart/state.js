@@ -35,6 +35,9 @@ const initialState = {
                 color: textColor
             }
         },
+        lang: {
+            numericSymbols: null //otherwise by default ['k', 'M', 'G', 'T', 'P', 'E']
+        },
         legend: {
             enabled: false
         },
@@ -96,8 +99,7 @@ const initialState = {
             minorGridLineColor: "rgba(255,255,255,0.07)",
             minorTickInterval: null,
             labels: {
-                enabled: true,
-                format: "{value:.0f}$"
+                enabled: true
             },
             lineWidth: 0,
             opposite: false,

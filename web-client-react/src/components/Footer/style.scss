@@ -1,1 +1,12 @@
 @import "../../scss/_colors.scss";
+
+.page-footer-component {
+    .ui.segment {
+        border-top: solid 1px $twitterExtraLightGrey;
+        padding: 5em 0em;
+        
+        &.inverted {
+            border-top: none;
+        }
+    }
+}

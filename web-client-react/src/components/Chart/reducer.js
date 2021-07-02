@@ -1,6 +1,38 @@
+const darkColor = "#1b1c1d"
+const lightColor = "#fff"
+
 const reducer = (state, action) => {
     switch (action.type) {
-        case "GET_GRAPH_DATA":
+        case "HIDE_X_AXIS":
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    xAxis: {
+                        ...state.options.xAxis,
+                        labels: {
+                            ...state.options.xAxis.labels,
+                            enabled: false
+                        }
+                    }
+                }
+            }
+        case "HIDE_Y_AXIS":
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    yAxis: {
+                        ...state.options.yAxis,
+                        labels: {
+                            ...state.options.yAxis.labels,
+                            enabled: false
+                        }
+                    }
+                }
+            }
+
+        case "SET_GRAPH_DATA":
             const { points } = action
             return {
                 ...state,
@@ -36,6 +68,19 @@ const reducer = (state, action) => {
                             ...state.options.xAxis.labels,
                             format
                         }
+                    }
+                }
+            }
+        case "TOGGLE_INVERTED":
+            const newColor = action.inverted ? darkColor : lightColor
+
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    chart: {
+                        ...state.options.chart,
+                        backgroundColor: newColor
                     }
                 }
             }

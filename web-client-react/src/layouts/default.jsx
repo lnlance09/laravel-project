@@ -2,13 +2,14 @@ import { Container, Grid } from "semantic-ui-react"
 import PageFooter from "components/Footer"
 import PageHeader from "components/Header"
 import PropTypes from "prop-types"
-import React, { Fragment, useState } from "react"
+import React, { useState } from "react"
 
 const DefaultLayout = ({
     activeItem,
     children,
     containerClassName,
     history,
+    inverted,
     isText,
     q,
     showFooter,
@@ -19,7 +20,7 @@ const DefaultLayout = ({
     const [searchMode, setSearchMode] = useState(false)
 
     return (
-        <Fragment>
+        <div className={`appWrapper ${inverted ? "inverted" : ""}`}>
             {searchMode ? (
                 <Container className="searchModeContainer">
                     <Grid>
@@ -37,29 +38,34 @@ const DefaultLayout = ({
                     </Grid>
                 </Container>
             ) : (
-                <Fragment>
+                <>
                     <PageHeader
                         history={history}
+                        inverted={inverted}
                         q={q}
                         showResults={showResults}
                         toggleSearchMode={() => setSearchMode(true)}
                     />
 
-                    <Container className={`mainContainer ${containerClassName}`}>
+                    <Container
+                        className={`mainContainer ${containerClassName} ${
+                            inverted ? "inverted" : ""
+                        }`}
+                    >
                         {useGrid ? (
                             <Grid className="mainGrid" stackable>
                                 <Grid.Column className="leftColumn" width={4}></Grid.Column>
                                 <Grid.Column width={12}>{children}</Grid.Column>
                             </Grid>
                         ) : (
-                            <Fragment>{children}</Fragment>
+                            <>{children}</>
                         )}
                     </Container>
 
-                    {showFooter && <PageFooter />}
-                </Fragment>
+                    {showFooter && <PageFooter inverted={inverted} />}
+                </>
             )}
-        </Fragment>
+        </div>
     )
 }
 
@@ -68,6 +74,7 @@ DefaultLayout.propTypes = {
     children: PropTypes.node,
     containerClassName: PropTypes.string,
     history: PropTypes.object,
+    inverted: PropTypes.bool,
     isText: PropTypes.bool,
     q: PropTypes.string,
     showFooter: PropTypes.bool,
@@ -79,6 +86,7 @@ DefaultLayout.propTypes = {
 DefaultLayout.defaultProps = {
     activeItem: "home",
     containerClassName: "",
+    inverted: true,
     isText: false,
     q: "",
     showFooter: true,

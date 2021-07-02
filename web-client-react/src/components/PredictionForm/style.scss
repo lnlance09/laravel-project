@@ -1,7 +1,22 @@
 @import "../../scss/_colors.scss";
 
-.dateField {
-    .field {
-        width: 100% !important;
+.predictionFormComponent {
+    .red {
+        color: $red;
+    }
+
+    .green {
+        color: $green;
+    }
+
+    .daysFromNow {
+        color: $blue;
+        font-weight: bold;
+    }
+
+    .dateField {
+        .field {
+            width: 100% !important;
+        }
     }
 }

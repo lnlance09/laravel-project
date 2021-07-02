@@ -1,61 +1,52 @@
 import "react-toastify/dist/ReactToastify.css"
 import "semantic-ui-css/semantic.min.css"
 import "./scss/app.scss"
-import React, { Component } from "react"
+import React, { useState } from "react"
 import { Route, Router, Switch } from "react-router-dom"
-import ScrollToTop from "react-router-scroll-top"
-import history from "history.js"
 import Coin from "pages/coins"
 import Coins from "pages/coins/show"
+import history from "history.js"
 import Home from "pages/home"
 import Logo from "./images/logos/main.png"
 import NotFound from "pages/notFound"
+import ScrollToTop from "react-router-scroll-top"
 import SignIn from "pages/signIn"
 import SoundFile from "./sound.mp3"
 import SoundFileAlt from "./sound.ogg"
+import ThemeProvider from "components/ThemeProvider"
 
-class App extends Component {
-    constructor(props) {
-        super(props)
+const App = () => {
+    const [ignore, setIgonore] = useState(false)
+    const [title, setTitle] = useState("")
 
-        this.state = {
-            ignore: true,
-            title: ""
-        }
-
-        // this.sendNotification = this.sendNotification.bind(this)
-    }
-
-    handleNotificationOnClick(e, tag) {
+    const handleNotificationOnClick = (e, tag) => {
         window.location.href = e.currentTarget.data.url
     }
 
-    handleNotificationOnClose(e, tag) {}
+    const handleNotificationOnClose = (e, tag) => {}
 
-    handleNotificationOnError(e, tag) {}
+    const handleNotificationOnError = (e, tag) => {}
 
-    handleNotificationOnShow(e, tag) {
-        // this.playSound()
+    const handleNotificationOnShow = (e, tag) => {}
+
+    const handleNotSupported = () => {
+        setIgonore(true)
     }
 
-    handleNotSupported() {
-        this.setState({ ignore: true })
+    const handlePermissionDenied = () => {
+        setIgonore(true)
     }
 
-    handlePermissionDenied() {
-        this.setState({ ignore: true })
+    const handlePermissionGranted = () => {
+        setIgonore(false)
     }
 
-    handlePermissionGranted() {
-        this.setState({ ignore: false })
-    }
-
-    playSound(filename) {
+    const playSound = (filename) => {
         // document.getElementById("sound").play()
     }
 
-    sendNotification(title, body, url) {
-        if (this.state.ignore) {
+    const sendNotification = (title, body, url) => {
+        if (ignore) {
             return
         }
 
@@ -73,17 +64,20 @@ class App extends Component {
             tag
         }
 
+        setTitle(title)
+        /*
         this.setState({
             options,
             title,
             url
         })
+        */
     }
 
-    render() {
-        return (
-            <div className="app">
-                <Router history={history}>
+    return (
+        <div className="app">
+            <Router history={history}>
+                <ThemeProvider>
                     <ScrollToTop>
                         <Switch>
                             <Route
@@ -117,16 +111,16 @@ class App extends Component {
                             <Route path="*" render={(props) => <NotFound {...props} />} />
                         </Switch>
                     </ScrollToTop>
-                </Router>
+                </ThemeProvider>
+            </Router>
 
-                <audio id="sound" preload="auto">
-                    <source src={SoundFile} type="audio/mpeg" />
-                    <source src={SoundFileAlt} type="audio/ogg" />
-                    <embed autostart="false" hidden loop={false} src={SoundFile} />
-                </audio>
-            </div>
-        )
-    }
+            <audio id="sound" preload="auto">
+                <source src={SoundFile} type="audio/mpeg" />
+                <source src={SoundFileAlt} type="audio/ogg" />
+                <embed autostart="false" hidden loop={false} src={SoundFile} />
+            </audio>
+        </div>
+    )
 }
 
 export default App

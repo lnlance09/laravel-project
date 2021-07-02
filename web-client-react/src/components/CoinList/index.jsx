@@ -1,22 +1,36 @@
-import { Image, List } from "semantic-ui-react"
+import "./style.scss"
+import { Image, List, Placeholder } from "semantic-ui-react"
 import PlaceholderPic from "images/images/image.png"
 import PropTypes from "prop-types"
 
-const CoinList = ({ coins, onClickCoin }) => {
+const CoinList = ({ coins, inverted, onClickCoin }) => {
     return (
         <div className="coinList">
-            <List animated divided relaxed="very" selection size="big">
+            <List animated divided inverted={inverted} relaxed="very" selection size="big">
                 {coins.map((coin) => (
                     <List.Item onClick={() => onClickCoin(coin)}>
-                        <Image
-                            avatar
-                            onError={(i) => (i.target.src = PlaceholderPic)}
-                            src={coin.logo}
-                        />
-                        <List.Content>
-                            <List.Header>{coin.name}</List.Header>
-                            {coin.price}
-                        </List.Content>
+                        {typeof coin.id === "undefined" ? (
+                            <>
+                                <Placeholder fluid>
+                                    <Placeholder.Paragraph>
+                                        <Placeholder.Line length="full" />
+                                        <Placeholder.Line length="short" />
+                                    </Placeholder.Paragraph>
+                                </Placeholder>
+                            </>
+                        ) : (
+                            <>
+                                <Image
+                                    avatar
+                                    onError={(i) => (i.target.src = PlaceholderPic)}
+                                    src={coin.logo}
+                                />
+                                <List.Content>
+                                    <List.Header>{coin.name}</List.Header>
+                                    {coin.price}
+                                </List.Content>
+                            </>
+                        )}
                     </List.Item>
                 ))}
             </List>
@@ -27,13 +41,20 @@ const CoinList = ({ coins, onClickCoin }) => {
 CoinList.propTypes = {
     coins: PropTypes.arrayOf(
         PropTypes.shape({
+            category: PropTypes.string,
+            description: PropTypes.string,
+            id: PropTypes.number,
+            lastPrice: PropTypes.number,
             logo: PropTypes.string,
-            market_cap: PropTypes.number,
-            max_supply: PropTypes.number,
+            marketCap: PropTypes.number,
+            maxSupply: PropTypes.number,
             name: PropTypes.string.isRequired,
-            total_supply: PropTypes.number
+            slug: PropTypes.string,
+            symbol: PropTypes.string,
+            totalSupply: PropTypes.number
         })
     ),
+    inverted: PropTypes.bool,
     onClickCoin: PropTypes.func
 }
 

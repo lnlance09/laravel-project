@@ -3,8 +3,7 @@ const reducer = (state, action) => {
         case "GET_COIN":
             return {
                 ...state,
-                coin: action.coin,
-                loaded: true
+                coin: action.coin
             }
         case "GET_LAST_PRICE":
             const { points } = action
@@ -13,7 +12,8 @@ const reducer = (state, action) => {
                 coin: {
                     ...state.coin,
                     lastPrice: points[points.length - 1][1]
-                }
+                },
+                loaded: true
             }
         default:
             throw new Error()

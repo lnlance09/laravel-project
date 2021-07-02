@@ -1,6 +1,8 @@
 @import "../../scss/_colors.scss";
 
-.page-header {
+.pageHeaderComponent {
+    height: 76px;
+
     @media only screen and (max-width: 1025px) {
         
     }
@@ -13,20 +15,28 @@
         box-shadow: none !important;
 
         .container {
-            h1.header {
-                line-height: 48px;
+            .item.logoItem {
+                padding-left: 0;
 
-                img.headerLogo {
-                    cursor: pointer;
-                    flex: 1 1;
-                    height: 48px;
-                    width: 48px;
+                h1.header {
+                    line-height: 48px;
+
+                    img.headerLogo {
+                        cursor: pointer;
+                        flex: 1 1;
+                        height: 48px;
+                        width: 48px;
+                    }
                 }
             }
 
             .right.item {
                 button.secondary {
                     margin-right: 12px;
+                }
+
+                .moonButton {
+                    margin-right: 15px;
                 }
             }
         }

@@ -1,33 +1,32 @@
 import "./style.scss"
 import { Container, Grid, Header, List, Segment } from "semantic-ui-react"
+import PropTypes from "prop-types"
 
-function Footer() {
+const Footer = ({ history, inverted }) => {
     return (
-        <div className="page-footer">
-            <Segment inverted vertical style={{ padding: "5em 0em" }}>
+        <div className="page-footer-component">
+            <Segment inverted={inverted} vertical>
                 <Container>
-                    <Grid divided inverted stackable>
+                    <Grid divided inverted={inverted} stackable>
                         <Grid.Row>
                             <Grid.Column width={3}>
-                                <Header inverted as="h4" content="About" />
-                                <List link inverted>
+                                <Header as="h4" content="About" inverted={inverted} />
+                                <List inverted={inverted} link>
                                     <List.Item as="a">Sitemap</List.Item>
-                                    <List.Item as="a">Contact Us</List.Item>
-                                    <List.Item as="a">Religious Ceremonies</List.Item>
-                                    <List.Item as="a">Gazebo Plans</List.Item>
+                                    <List.Item as="a">Contact</List.Item>
+                                    <List.Item as="a">Privacy</List.Item>
+                                    <List.Item as="a">About</List.Item>
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={3}>
-                                <Header inverted as="h4" content="Services" />
-                                <List link inverted>
-                                    <List.Item as="a">Banana Pre-Order</List.Item>
-                                    <List.Item as="a">DNA FAQ</List.Item>
-                                    <List.Item as="a">How To Access</List.Item>
-                                    <List.Item as="a">Favorite X-Men</List.Item>
+                                <Header as="h4" content="Follow Us" inverted={inverted} />
+                                <List inverted={inverted} link>
+                                    <List.Item as="a">Twitter</List.Item>
+                                    <List.Item as="a">Instagram</List.Item>
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={7}>
-                                <Header as="h4" inverted>
+                                <Header as="h4" inverted={inverted}>
                                     Footer Header
                                 </Header>
                                 <p>
@@ -41,6 +40,11 @@ function Footer() {
             </Segment>
         </div>
     )
+}
+
+Footer.propTypes = {
+    history: PropTypes.object,
+    inverted: PropTypes.bool
 }
 
 export default Footer
