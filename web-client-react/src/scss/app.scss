@@ -11,48 +11,13 @@ body {
   	-moz-osx-font-smoothing: grayscale;
 }
 
-.heroSegment {
-	background-image: url('../images/backgrounds/04.svg') !important;
-    background-size: 100% auto !important;
-	height: 100%;
-  	// margin-top: $header-height !important;
-	min-height: 600px;
-
-  	.heroContainer {
-    	h1 {
-      		font-size: 4em !important;
-			font-weight: normal;
-			margin-bottom: 0;
-			margin-top: 3em !important;
-    	}
-
-    	h2 {
-      		font-size: 1.7em !important;
-			font-weight: normal;
-			margin-top: 1.5em !important;
-    	}
-
-	  	@media only screen and (max-width: 1025px) {
-			h1 {
-				font-size: 2em !important;
-			  	margin-top: 1.5em !important;
-		  	}
-  
-		  	h2 {
-				font-size: 1.5em !important;
-			  	margin-top: 0.5em !important;
-		  	}
-	  	}
-  	}
-}
-
 .appWrapper {
 	&.inverted {
 		background: $black;
 	}
 
 	.mainContainer {
-		min-height: 100vh;
+		min-height: 500px;
 		padding-top: 12px;
 
 		&.full {
@@ -60,15 +25,86 @@ body {
 		}
 
 		&.home {
-			margin-top: $header-height !important;
+			.pageHeaderComponent {
+				height: auto !important;
+			}
+
+			.heroSegment {
+				background-image: url("../images/backgrounds/04.svg") !important;
+				background-size: 100% auto !important;
+				height: 100%;
+				min-height: 600px;
+			
+				.heroContainer {
+					h1 {
+						font-size: 4em !important;
+						font-weight: normal;
+						margin-bottom: 0;
+						margin-top: 3em !important;
+					}
+			
+					h2 {
+						font-size: 1.7em !important;
+						font-weight: normal;
+						margin-top: 1.5em !important;
+					}
+			
+					@media only screen and (max-width: 1025px) {
+						h1 {
+							font-size: 2em !important;
+							margin-top: 1.5em !important;
+						}
+			  
+						h2 {
+							font-size: 1.5em !important;
+							margin-top: 0.5em !important;
+						}
+					}
+				}
+			}
+
+			.ui.segment.vertical {
+				&.padded {
+					padding: 8em 0em;
+				}
+
+				&.noPadding {
+					padding: 0;
+
+					.ui.grid > .row > .column {
+						padding-bottom: 5em;
+						padding-top: 5em;
+					}
+				}
+
+				h3 {
+					font-size: 2em;
+				}
+
+				p {
+					font-size: 1.33em;
+				}
+			}
+
+			&.inverted {
+				p {
+					color: $white;
+				}
+			}
+
+			.homePageDivider {
+				margin: 3em 0em;
+				text-transform: uppercase;
+			}
+		}
+
+		&.notFoundPage {
+			min-height: 40em;
+    		position: relative;
 		}
 
 		&.inverted {
 			background: $black;
-		}
-
-		&:after, &:before {
-			background: $fullBlack !important;
 		}
 
 		.searchSegment {
@@ -83,5 +119,16 @@ body {
 
 	.dividerHeader {
 		line-height: 0.27 !important;
+	}
+}
+
+.notFoundPage {
+	h1.notFoundHeader {
+		left: 50%;
+		margin: 0;
+		margin-right: -50%;
+    	position: absolute;
+    	top: 50%;
+    	transform: translate(-50%, -50%)
 	}
 }

@@ -14,11 +14,16 @@
     .ui.borderless.fluid.top.fixed.menu {
         box-shadow: none !important;
 
+        &.inverted {
+            border-bottom: solid 1px $white;
+        }
+
         .container {
             .item.logoItem {
                 padding-left: 0;
 
                 h1.header {
+                    cursor: pointer;
                     line-height: 48px;
 
                     img.headerLogo {

@@ -1,0 +1,45 @@
+@import "../../scss/_colors.scss";
+
+.authComponent {
+    margin: auto;
+    width: 50%;
+
+    .header.huge {
+        font-size: 40px;
+    }
+
+    @media only screen and (max-width: 1025px) {
+        margin-top: 80px !important;
+
+        .header.huge {
+            margin-bottom: 0;
+        }
+
+        .registerText {
+            font-size: 16px !important;
+        }
+    }
+
+    .authSegment {
+        border: none !important;
+        margin: 0 auto;
+
+        .error.message {
+            margin-bottom: 14px;
+        }
+
+        .divider {
+            margin-bottom: 16px;
+        }
+    }
+
+    .registerText {
+        margin-top: 4px;
+
+        .registerLink {
+            border-bottom: solid 1px $yellow;
+            cursor: pointer;
+            padding-bottom: 3px;
+        }
+    }
+}

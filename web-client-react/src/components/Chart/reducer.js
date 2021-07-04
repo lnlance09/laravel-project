@@ -31,7 +31,6 @@ const reducer = (state, action) => {
                     }
                 }
             }
-
         case "SET_GRAPH_DATA":
             const { points } = action
             return {

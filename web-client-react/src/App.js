@@ -8,9 +8,9 @@ import Coins from "pages/coins/show"
 import history from "history.js"
 import Home from "pages/home"
 import Logo from "./images/logos/main.png"
+import Login from "pages/login"
 import NotFound from "pages/notFound"
 import ScrollToTop from "react-router-scroll-top"
-import SignIn from "pages/signIn"
 import SoundFile from "./sound.mp3"
 import SoundFileAlt from "./sound.ogg"
 import ThemeProvider from "components/ThemeProvider"
@@ -106,7 +106,7 @@ const App = () => {
                                 )}
                             />
 
-                            <Route component={SignIn} path="/signin" />
+                            <Route component={Login} path="/login" />
 
                             <Route path="*" render={(props) => <NotFound {...props} />} />
                         </Switch>

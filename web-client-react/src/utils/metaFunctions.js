@@ -2,13 +2,12 @@ import React from "react"
 import MetaTags from "react-meta-tags"
 
 export const DisplayMetaTags = ({ page, props, state }) => {
-    const description =
-        "Blather is a website and application that lets users assign logical fallacies to tweets. You can make political memes out of tweets and fallacies."
+    const description = ""
     const img = ""
     let metaTags = {}
 
     switch (page) {
-        case "activity":
+        case "":
             metaTags = {
                 description,
                 img,
@@ -26,7 +25,7 @@ export const DisplayMetaTags = ({ page, props, state }) => {
 
     return (
         <MetaTags>
-            <title>{metaTags.title} - Blather</title>
+            <title>{metaTags.title} - Sample App</title>
             <meta name="description" content={metaTags.description} />
         </MetaTags>
     )

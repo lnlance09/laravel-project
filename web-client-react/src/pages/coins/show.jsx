@@ -65,7 +65,7 @@ const Coins = ({ history }) => {
     }
 
     return (
-        <DefaultLayout inverted={inverted} textAlign="center" useGrid={false}>
+        <DefaultLayout history={history} inverted={inverted} useGrid={false}>
             <Segment basic className="searchSegment" inverted={inverted}>
                 <Header as="h1" inverted={inverted}>
                     Find a coin

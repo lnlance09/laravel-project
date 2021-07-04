@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 const Footer = ({ history, inverted }) => {
     return (
-        <div className="page-footer-component">
+        <div className="pageFooterComponent">
             <Segment inverted={inverted} vertical>
                 <Container>
                     <Grid divided inverted={inverted} stackable>

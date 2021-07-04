@@ -2,8 +2,8 @@ import "./style.scss"
 import Logo from "images/logos/main.png"
 import { parseJwt } from "utils/tokenFunctions"
 import { Button, Container, Header, Icon, Image, Menu, Sidebar } from "semantic-ui-react"
+import { useContext, useEffect, useState } from "react"
 import PropTypes from "prop-types"
-import React, { useContext, useEffect, useState } from "react"
 import ThemeContext from "themeContext"
 
 const PageHeader = ({ history, q, showResults }) => {
@@ -15,12 +15,15 @@ const PageHeader = ({ history, q, showResults }) => {
 
     useEffect(() => {
         const userData = parseJwt()
+        setAuthenticated(false)
+        /*
         if (userData) {
             setUser(userData)
             setAuthenticated(true)
         } else {
             setAuthenticated(false)
         }
+        */
     }, [])
 
     return (

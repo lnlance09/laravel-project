@@ -1,8 +1,8 @@
 import { Container, Grid } from "semantic-ui-react"
+import { useState } from "react"
 import PageFooter from "components/Footer"
 import PageHeader from "components/Header"
 import PropTypes from "prop-types"
-import React, { useState } from "react"
 
 const DefaultLayout = ({
     activeItem,
@@ -39,19 +39,18 @@ const DefaultLayout = ({
                 </Container>
             ) : (
                 <>
-                    <PageHeader
-                        history={history}
-                        inverted={inverted}
-                        q={q}
-                        showResults={showResults}
-                        toggleSearchMode={() => setSearchMode(true)}
-                    />
-
                     <Container
                         className={`mainContainer ${containerClassName} ${
                             inverted ? "inverted" : ""
                         }`}
                     >
+                        <PageHeader
+                            history={history}
+                            inverted={inverted}
+                            q={q}
+                            showResults={showResults}
+                            toggleSearchMode={() => setSearchMode(true)}
+                        />
                         {useGrid ? (
                             <Grid className="mainGrid" stackable>
                                 <Grid.Column className="leftColumn" width={4}></Grid.Column>

@@ -1,5 +1,5 @@
 import { Divider, Header, Image, Loader, Segment } from "semantic-ui-react"
-import { useContext, useEffect, useReducer, useState } from "react"
+import { useContext, useEffect, useReducer } from "react"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
 import axios from "axios"

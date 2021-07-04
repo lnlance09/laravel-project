@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoinController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/coins', [CoinController::class, 'index']);
 Route::get('/coins/{slug}', [CoinController::class, 'show']);
+
+Route::get('/predictions', [PredictionController::class, 'index']);
+Route::get('/predictions/{slug}', [PredictionController::class, 'show']);
+Route::post('/predictions/create', [PredictionController::class, 'create']);
+
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/{username}', [UserController::class, 'show']);
+Route::get('/users/{username}/followers', [UserController::class, 'followers']);
+Route::post('/users/create', [UserController::class, 'create']);
+Route::post('/users/follow', [UserController::class, 'follow']);
+Route::post('/users/login', [UserController::class, 'login']);
+Route::post('/users/unfollow', [UserController::class, 'unfollow']);
+Route::post('/users/verify', [UserController::class, 'verify']);
