@@ -49,7 +49,7 @@ const Authentication = (props) => {
             setLoadingLogin(true)
 
             axios
-                .post("/api/user/login", {
+                .post(`${process.env.REACT_APP_BASE_URL}users/login`, {
                     email,
                     password
                 })
@@ -78,11 +78,12 @@ const Authentication = (props) => {
 
     const submitRegistrationForm = () => {
         setLoadingRegistration(true)
+
         axios
-            .post("/api/user/create", {
-                email,
+            .post(`${process.env.REACT_APP_BASE_URL}users/create`, {
+                email: regEmail,
                 name,
-                password,
+                password: regPassword,
                 username
             })
             .then(async (response) => {
@@ -95,10 +96,29 @@ const Authentication = (props) => {
                 setToken(data.user)
             })
             .catch((error) => {
-                toast.error(error.response.data.msg)
+                let errorMsg = ""
+                const { errors } = error.response.data
 
+                if (typeof errors.username !== "undefined") {
+                    errorMsg = errors.username[0]
+                }
+
+                if (typeof errors.name !== "undefined") {
+                    errorMsg = errors.name[0]
+                }
+
+                if (typeof errors.password !== "undefined") {
+                    errorMsg = errors.password[0]
+                }
+
+                if (typeof errors.email !== "undefined") {
+                    errorMsg = errors.email[0]
+                }
+
+                setLoadingRegistration(false)
+                toast.error(errorMsg)
                 dispatch({
-                    payload: error.response.data,
+                    errorMsg,
                     type: "SET_REGISTER_ERROR"
                 })
             })
@@ -108,7 +128,7 @@ const Authentication = (props) => {
         if (verificationCode.length === 4) {
             axios
                 .post(
-                    "/api/user/verify",
+                    `${process.env.REACT_APP_BASE_URL}users/verify`,
                     {
                         code: verificationCode
                     },
@@ -141,129 +161,6 @@ const Authentication = (props) => {
         }
     }
 
-    const MainForm = () => {
-        if (props.verify) {
-            return (
-                <Form inverted={props.inverted} onSubmit={submitVerificationForm} size={props.size}>
-                    <Form.Field>
-                        <Input
-                            inverted={props.inverted}
-                            maxLength={4}
-                            onChange={(e, { value }) => setVerificationCode(value)}
-                            placeholder="Verification code"
-                            value={verificationCode}
-                        />
-                    </Form.Field>
-                    <Button
-                        color="blue"
-                        content="Verify"
-                        disabled={verificationCode.length !== 4}
-                        fluid
-                        size={props.size}
-                        type="submit"
-                    />
-                </Form>
-            )
-        }
-
-        if (login) {
-            return (
-                <Form inverted={props.inverted} size={props.size}>
-                    <Form.Field>
-                        <Input
-                            inverted={props.inverted}
-                            onChange={(e, { value }) => {
-                                setEmail(value)
-                            }}
-                            placeholder="Email or username"
-                            value={email}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <Input
-                            inverted={props.inverted}
-                            onChange={(e, { value }) => {
-                                setPassword(value)
-                            }}
-                            placeholder="Password"
-                            type="password"
-                            value={password}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <Button
-                            color="yellow"
-                            content="Sign in"
-                            fluid
-                            loading={loadingLogin && !props.loginError}
-                            onClick={submitLoginForm}
-                            size="big"
-                            type="submit"
-                        />
-                    </Form.Field>
-                </Form>
-            )
-        }
-
-        return (
-            <>
-                <Form inverted={props.inverted} size={props.size}>
-                    <Form.Field>
-                        <Input
-                            inverted={props.inverted}
-                            onChange={(e, { value }) => {
-                                setRegEmail(value)
-                            }}
-                            placeholder="Email"
-                            value={regEmail}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <Input
-                            inverted={props.inverted}
-                            onChange={(e, { value }) => {
-                                setRegPassword(value)
-                            }}
-                            value={regPassword}
-                            placeholder="Password"
-                            type="password"
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <Input
-                            autoComplete="off"
-                            inverted={props.inverted}
-                            onChange={(e, { value }) => {
-                                setName(value)
-                            }}
-                            placeholder="Full name"
-                            value={name}
-                        />
-                    </Form.Field>
-                    <Form.Field>
-                        <Input
-                            inverted={props.inverted}
-                            onChange={(e, { value }) => {
-                                setUsername(value)
-                            }}
-                            placeholder="Username"
-                            value={username}
-                        />
-                    </Form.Field>
-                </Form>
-                <Divider inverted={props.inverted} />
-                <Button
-                    color="blue"
-                    content="Create an account"
-                    fluid
-                    loading={loadingRegistration && !props.registerError}
-                    onClick={submitRegistrationForm}
-                    size={props.size}
-                />
-            </>
-        )
-    }
-
     return (
         <div className="authComponent">
             <Header as="h1" inverted={props.inverted} size="huge">
@@ -271,7 +168,124 @@ const Authentication = (props) => {
             </Header>
 
             <Segment basic className="authSegment" inverted={props.inverted}>
-                {MainForm()}
+                {props.verify && (
+                    <Form
+                        inverted={props.inverted}
+                        onSubmit={submitVerificationForm}
+                        size={props.size}
+                    >
+                        <Form.Field>
+                            <Input
+                                inverted={props.inverted}
+                                maxLength={4}
+                                onChange={(e, { value }) => setVerificationCode(value)}
+                                placeholder="Verification code"
+                                value={verificationCode}
+                            />
+                        </Form.Field>
+                        <Button
+                            color="blue"
+                            content="Verify"
+                            disabled={verificationCode.length !== 4}
+                            fluid
+                            size={props.size}
+                            type="submit"
+                        />
+                    </Form>
+                )}
+
+                {login ? (
+                    <Form inverted={props.inverted} size={props.size}>
+                        <Form.Field>
+                            <Input
+                                inverted={props.inverted}
+                                onChange={(e, { value }) => {
+                                    setEmail(value)
+                                }}
+                                placeholder="Email or username"
+                                value={email}
+                            />
+                        </Form.Field>
+                        <Form.Field>
+                            <Input
+                                inverted={props.inverted}
+                                onChange={(e, { value }) => {
+                                    setPassword(value)
+                                }}
+                                placeholder="Password"
+                                type="password"
+                                value={password}
+                            />
+                        </Form.Field>
+                        <Form.Field>
+                            <Button
+                                color="blue"
+                                content="Sign in"
+                                fluid
+                                loading={loadingLogin && !props.loginError}
+                                onClick={submitLoginForm}
+                                size={props.size}
+                                type="submit"
+                            />
+                        </Form.Field>
+                    </Form>
+                ) : (
+                    <>
+                        <Form inverted={props.inverted} size={props.size}>
+                            <Form.Field>
+                                <Input
+                                    inverted={props.inverted}
+                                    onChange={(e, { value }) => {
+                                        setRegEmail(value)
+                                    }}
+                                    placeholder="Email"
+                                    value={regEmail}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <Input
+                                    inverted={props.inverted}
+                                    onChange={(e, { value }) => {
+                                        setRegPassword(value)
+                                    }}
+                                    value={regPassword}
+                                    placeholder="Password"
+                                    type="password"
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <Input
+                                    autoComplete="off"
+                                    inverted={props.inverted}
+                                    onChange={(e, { value }) => {
+                                        setName(value)
+                                    }}
+                                    placeholder="Full name"
+                                    value={name}
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <Input
+                                    inverted={props.inverted}
+                                    onChange={(e, { value }) => {
+                                        setUsername(value)
+                                    }}
+                                    placeholder="Username"
+                                    value={username}
+                                />
+                            </Form.Field>
+                        </Form>
+                        <Divider inverted={props.inverted} />
+                        <Button
+                            color="blue"
+                            content="Create an account"
+                            fluid
+                            loading={loadingRegistration && !props.registerError}
+                            onClick={submitRegistrationForm}
+                            size={props.size}
+                        />
+                    </>
+                )}
             </Segment>
 
             {!props.verify && (

@@ -32,7 +32,7 @@ const Coins = ({ history }) => {
         }
         return await axios
             .get(
-                "http://localhost/api/coins",
+                `${process.env.REACT_APP_BASE_URL}coins`,
                 {
                     params: {
                         q

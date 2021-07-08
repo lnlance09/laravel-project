@@ -17,8 +17,7 @@ body {
 	}
 
 	.mainContainer {
-		min-height: 500px;
-		padding-top: 12px;
+		min-height: 700px;
 
 		&.full {
 			width: 100% !important;
@@ -95,6 +94,12 @@ body {
 			.homePageDivider {
 				margin: 3em 0em;
 				text-transform: uppercase;
+			}
+		}
+
+		&.signInPage {
+			.ui.container.authContainer {
+				padding: 2em 0;
 			}
 		}
 

@@ -17,6 +17,9 @@ class Coin extends JsonResource
         return [
             'id' => $this->id,
             'category' => $this->category,
+            'circulatingSupply' => $this->circulating_supply,
+            'cmcId' => $this->cmd_id,
+            'dailyPercentChange' => $this->percent_change_24h,
             'description' => $this->description,
             'logo' => $this->logo,
             'marketCap' => $this->market_cap,

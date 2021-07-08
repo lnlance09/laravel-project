@@ -27,7 +27,7 @@ const Coin = ({ history, match }) => {
     useEffect(() => {
         const getCoin = async (slug, callback) => {
             return await axios
-                .get(`http://localhost/api/coins/${slug}`)
+                .get(`${process.env.REACT_APP_BASE_URL}coins/${slug}`)
                 .then(async (response) => {
                     const coin = response.data.data
                     dispatch({
@@ -127,6 +127,8 @@ const Coin = ({ history, match }) => {
 Coin.propTypes = {
     coin: PropTypes.shape({
         category: PropTypes.string,
+        circulatingSupply: PropTypes.number,
+        dailyPercentChange: PropTypes.number,
         description: PropTypes.string,
         id: PropTypes.number,
         lastPrice: PropTypes.number,

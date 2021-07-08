@@ -6,6 +6,8 @@ use App\Http\Resources\User as UserResource;
 use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -23,12 +25,18 @@ class UserController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     * 
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'email' => 'bail|required|email|unique:users',
+            'name' => 'required|min:3|max:30|alpha',
+            'password' => ['bail', 'required', Password::min(8)],
+            'username' => 'bail|required|max:20|unique:users,username|alpha_dash'
+        ]);
     }
 
     /**
@@ -72,7 +80,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

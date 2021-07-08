@@ -14,7 +14,7 @@ const SignIn = ({ history }) => {
             inverted={inverted}
             useGrid={false}
         >
-            <Container textAlign="center">
+            <Container className="authContainer" textAlign="center">
                 <Authentication inverted={inverted} />
             </Container>
         </DefaultLayout>

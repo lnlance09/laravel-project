@@ -27,16 +27,18 @@ class CoinFactory extends Factory
      */
     public function definition()
     {
+        $faker = $this->faker;
+
         return [
-            'category' => $this->faker->randomElement(self::CATEGORIES),
-            'description' => $this->faker->sentence(1),
+            'category' => $faker->randomElement(self::CATEGORIES),
+            'description' => $faker->sentence(1),
             'logo' => '',
-            'market_cap' => $this->faker->numberBetween(1000000, 9999999999),
-            'max_supply' => $this->faker->numberBetween(12000000, 120000000),
-            'name' => $this->faker->company(),
+            'market_cap' => $faker->numberBetween(1000000, 9999999999),
+            'max_supply' => $faker->numberBetween(12000000, 120000000),
+            'name' => $faker->company(),
             'slug' => Str::random(8),
             'symbol' => Str::random(3),
-            'total_supply' => $this->faker->numberBetween(12000000, 120000000)
+            'total_supply' => $faker->numberBetween(12000000, 120000000)
         ];
     }
 }

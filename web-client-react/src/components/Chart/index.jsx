@@ -125,6 +125,8 @@ const Chart = ({
 Chart.propTypes = {
     coin: PropTypes.shape({
         category: PropTypes.string,
+        circulatingSupply: PropTypes.number,
+        dailyPercentChange: PropTypes.number,
         description: PropTypes.string,
         id: PropTypes.number,
         lastPrice: PropTypes.number,

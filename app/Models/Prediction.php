@@ -16,12 +16,13 @@ class Prediction extends Model
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'email',
-        'img',
-        'last_name',
-        'password',
-        'username'
+        'coin_id',
+        'current_price',
+        'margin',
+        'prediction_price',
+        'status',
+        'target_date',
+        'user_id',
     ];
 
     /**
@@ -29,17 +30,12 @@ class Prediction extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = [];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected $casts = [];
 }

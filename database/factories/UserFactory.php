@@ -2,8 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Coin;
+use App\Models\Prediction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -16,20 +19,103 @@ class UserFactory extends Factory
     protected $model = User::class;
 
     /**
+     * Configure the model factory.
+     *
+     * @return $this
+     */
+    public function configure()
+    {
+        return $this->afterMaking(function (User $user) {
+        })->afterCreating(function (User $user) {
+            $totalCount = mt_rand(12, 48);
+            $percentCorrect = mt_rand(20, 80) / 100;
+            $correctCount = $totalCount * $percentCorrect;
+            $incorrectCount = $totalCount - $correctCount;
+
+            // Create correct predictions
+            $this->createPredictions($user, $correctCount);
+
+            // Create incorrect predictions
+            $this->createPredictions($user, $incorrectCount, false);
+        });
+    }
+
+    private function createPredictions($user, $amount, $correct = true)
+    {
+        for ($i = 0; $i < $amount; $i++) {
+            $coin = current(Coin::all()->random(1)->toArray());
+            $coinId = $coin['cmc_id'];
+
+            $target = $this->faker->dateTimeBetween('-6 months', '-7 days');
+            $targetDate = $target->getTimestamp();
+
+            $minsBefore = mt_rand(7200, 72000);
+            $createdAt = strtotime('-' . $minsBefore . ' minutes', $targetDate);
+
+            $margin = ($correct ? rand(1, 50) : rand(51, 4000)) / 10;
+            $margin = $i < 2 || $i % 2 === 1 ? $margin : -$margin;
+
+            // price at time of prediction
+            $currentPrice = (float) Coin::getPriceAtTimeCMC($coinId, $createdAt);
+            if (!$currentPrice) {
+                continue;
+            }
+
+            // price at target date
+            $targetPrice = (float) Coin::getPriceAtTimeCMC($coinId, $targetDate);
+            if (!$targetPrice) {
+                continue;
+            }
+
+            $predictionPrice = $targetPrice * ((100 + $margin) / 100);
+
+            Prediction::factory()->create([
+                'coin_id' => $coin['id'],
+                'created_at' => $createdAt,
+                'current_price' => $currentPrice,
+                'margin' => $margin,
+                'prediction_price' => $predictionPrice,
+                'status' => $correct ? 'Correct' : 'Incorrect',
+                'target_date' => $target,
+                'user_id' => $user->id
+            ]);
+
+            sleep(2);
+        }
+    }
+
+    /**
      * Define the model's default state.
      *
      * @return array
      */
     public function definition()
     {
+        $faker = $this->faker;
+        $gender = $faker->randomElement(['male', 'female']);
+        $createdAt = $faker->dateTimeBetween('-14 months', 'now');
+        $verifiedAt = $faker->dateTimeBetween($createdAt, '+35 minutes');
+        $firstName = $gender === 'male' ? $faker->firstNameMale() : $faker->firstNameFemale();
+        $lastName = $faker->lastName();
+        $name = $firstName . ' ' . $lastName;
+        $username = $firstName . '' . $lastName . '' . mt_rand(64, 99);
+        $password = Str::random(mt_rand(8, 24));
+
+        $contents = file_get_contents('https://thispersondoesnotexist.com/image');
+        $img = 'users/' . Str::random(24) . '.jpg';
+        Storage::disk('s3')->put($img, $contents);
+
         return [
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'img' => '',
-            'first_name' => $this->faker->name(),
-            'last_name' => $this->faker->name(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'bio' => '',
+            'created_at' => $createdAt,
+            'email' => $faker->unique()->safeEmail(),
+            'email_verified_at' => $verifiedAt,
+            'gender' => $gender,
+            'img' => $img,
+            'name' => $name,
+            'password' => $password,
             'remember_token' => Str::random(10),
+            'username' => $faker->userName()
         ];
     }
 

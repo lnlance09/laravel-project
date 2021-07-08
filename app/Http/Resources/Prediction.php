@@ -18,7 +18,9 @@ class Prediction extends JsonResource
             'id' => $this->id,
             'coinId' => $this->coin_id,
             'createdAt' => $this->created_at,
-            'price' => $this->price,
+            'currentPrice' => $this->current_price,
+            'margin' => $this->margin,
+            'predictionPrice' => $this->prediction_price,
             'targetDate' => $this->target_date
         ];
     }
