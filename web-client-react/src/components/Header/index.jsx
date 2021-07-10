@@ -65,8 +65,8 @@ const PageHeader = ({ history, q, showResults, simple }) => {
                         <Menu.Item as="a" onClick={() => history.push("/predictions")}>
                             Predictions
                         </Menu.Item>
-                        <Menu.Item as="a" onClick={() => history.push("/influencers")}>
-                            Influencers
+                        <Menu.Item as="a" onClick={() => history.push("/traders")}>
+                            Traders
                         </Menu.Item>
                         <Menu.Item position="right">
                             <Button

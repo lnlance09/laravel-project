@@ -2,7 +2,6 @@ import { Container } from "semantic-ui-react"
 import { useContext } from "react"
 import Authentication from "components/Authentication"
 import DefaultLayout from "layouts/default"
-
 import ThemeContext from "themeContext"
 
 const SignIn = ({ history }) => {

@@ -1,2 +1,19 @@
 @import "../../scss/_colors.scss";
 
+.coinList {
+    .ui.card {
+        .meta {
+            span.green {
+                color: $lightGreen;
+            }
+
+            span.red {
+                color: $lightRed;
+            }
+        }
+
+        .ellipsisSpan {
+            color: $lightBlue;
+        }
+    }
+}

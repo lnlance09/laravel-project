@@ -1,3 +1,3 @@
-const initialState = { coins: [{}, {}, {}, {}, {}, {}, {}] }
+const initialState = { coins: [{}, {}, {}, {}, {}, {}] }
 
 export default initialState

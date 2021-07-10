@@ -1,4 +1,4 @@
-import { Divider, Header } from "semantic-ui-react"
+import { Divider, Grid, Header, Segment } from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
 import { DebounceInput } from "react-debounce-input"
 import { getConfig } from "options/toast"
@@ -6,18 +6,17 @@ import { toast } from "react-toastify"
 import axios from "axios"
 import CoinList from "components/CoinList/"
 import DefaultLayout from "layouts/default"
-import initialState from "states/coins"
+import initialState from "states/traders"
 import logger from "use-reducer-logger"
-import reducer from "reducers/coins"
+import reducer from "reducers/traders"
 import ThemeContext from "themeContext"
 
 const toastConfig = getConfig()
 toast.configure(toastConfig)
 
-const Coins = ({ history }) => {
+const Traders = ({ history }) => {
     const { state } = useContext(ThemeContext)
     const { inverted } = state
-
     const [internalState, dispatch] = useReducer(
         process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
         initialState
@@ -26,13 +25,13 @@ const Coins = ({ history }) => {
 
     useEffect(() => {
         getCoins(searchTerm)
-    }, [searchTerm])
+    }, [])
 
     const getCoins = async (q) => {
         const headers = {
             "Content-Type": "application/json"
         }
-        await axios
+        return await axios
             .get(
                 `${process.env.REACT_APP_BASE_URL}coins`,
                 {
@@ -62,14 +61,14 @@ const Coins = ({ history }) => {
         await getCoins(q)
     }
 
-    const onClickCoin = (slug) => {
-        history.push(`/coins/${slug}`)
+    const onClickCoin = (coin) => {
+        history.push(`/coins/${coin.slug}`)
     }
 
     return (
         <DefaultLayout history={history} inverted={inverted} useGrid={false}>
             <Header as="h1" inverted={inverted}>
-                Find a coin
+                Traders
             </Header>
             <div className={`ui icon input big fluid ${inverted ? "inverted" : ""}`}>
                 <DebounceInput
@@ -86,4 +85,4 @@ const Coins = ({ history }) => {
     )
 }
 
-export default Coins
+export default Traders

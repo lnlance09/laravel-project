@@ -17,16 +17,18 @@ const toastConfig = getConfig()
 toast.configure(toastConfig)
 
 const Coin = ({ history, match }) => {
-    const { inverted } = useContext(ThemeContext)
+    const { state } = useContext(ThemeContext)
+    const { inverted } = state
     const { slug } = match.params
-    const [state, dispatch] = useReducer(
+    const [internalState, dispatch] = useReducer(
         process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
         initialState
     )
+    const { coin, loaded } = internalState
 
     useEffect(() => {
         const getCoin = async (slug, callback) => {
-            return await axios
+            await axios
                 .get(`${process.env.REACT_APP_BASE_URL}coins/${slug}`)
                 .then(async (response) => {
                     const coin = response.data.data
@@ -46,7 +48,7 @@ const Coin = ({ history, match }) => {
 
     const getLastPrice = async (coin) => {
         const start = Math.round(new Date().getTime() / 1000 - 86400)
-        return await axios
+        await axios
             .get("https://poloniex.com/public", {
                 params: {
                     command: "returnChartData",
@@ -75,24 +77,24 @@ const Coin = ({ history, match }) => {
 
     return (
         <DefaultLayout history={history} inverted={inverted} textAlign="center" useGrid={false}>
-            {state.loaded ? (
+            {loaded ? (
                 <>
                     <Header as="h1" inverted={inverted}>
-                        <Image circular size="huge" src={state.coin.logo} />
+                        <Image circular size="huge" src={coin.logo} />
                         <Header.Content>
-                            {state.coin.name}
+                            {coin.name}
                             <Header.Subheader>
                                 <NumberFormat
                                     decimalScale={2}
                                     displayType={"text"}
                                     prefix={"$"}
                                     thousandSeparator
-                                    value={state.coin.lastPrice}
+                                    value={coin.lastPrice}
                                 />
                             </Header.Subheader>
                         </Header.Content>
                     </Header>
-                    <Chart coin={state.coin} inverted={inverted} />
+                    <Chart coin={coin} inverted={inverted} />
                     <Divider
                         className="makePredictionDivider"
                         horizontal
@@ -105,8 +107,8 @@ const Coin = ({ history, match }) => {
                     </Divider>
                     <Segment basic inverted={inverted}>
                         <PredictionForm
-                            coin={state.coin}
-                            defaultPrice={state.coin.lastPrice * 1.1}
+                            coin={coin}
+                            defaultPrice={coin.lastPrice * 1.1}
                             history={history}
                             inverted={inverted}
                         />

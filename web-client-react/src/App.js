@@ -10,15 +10,22 @@ import Home from "pages/home"
 import Logo from "./images/logos/main.png"
 import Login from "pages/login"
 import NotFound from "pages/notFound"
+import Prediction from "pages/predictions"
+import Predictions from "pages/predictions/show"
 import ScrollToTop from "react-router-scroll-top"
 import SoundFile from "./sound.mp3"
 import SoundFileAlt from "./sound.ogg"
 import ThemeProvider from "components/ThemeProvider"
+import Trader from "pages/traders"
+import Traders from "pages/traders/show"
 
 const App = () => {
+    /*
     const [ignore, setIgonore] = useState(false)
     const [title, setTitle] = useState("")
+    */
 
+    /*
     const handleNotificationOnClick = (e, tag) => {
         window.location.href = e.currentTarget.data.url
     }
@@ -65,14 +72,8 @@ const App = () => {
         }
 
         setTitle(title)
-        /*
-        this.setState({
-            options,
-            title,
-            url
-        })
-        */
     }
+    */
 
     return (
         <div className="app">
@@ -107,6 +108,38 @@ const App = () => {
                             />
 
                             <Route component={Login} path="/login" />
+
+                            <Route
+                                exact
+                                path="/predictions"
+                                render={(props) => (
+                                    <Predictions key={window.location.pathname} {...props} />
+                                )}
+                            />
+
+                            <Route
+                                exact
+                                path="/predictions/:slug"
+                                render={(props) => (
+                                    <Prediction key={window.location.pathname} {...props} />
+                                )}
+                            />
+
+                            <Route
+                                exact
+                                path="/traders"
+                                render={(props) => (
+                                    <Traders key={window.location.pathname} {...props} />
+                                )}
+                            />
+
+                            <Route
+                                exact
+                                path="/traders/:username"
+                                render={(props) => (
+                                    <Trader key={window.location.pathname} {...props} />
+                                )}
+                            />
 
                             <Route path="*" render={(props) => <NotFound {...props} />} />
                         </Switch>

@@ -20,7 +20,7 @@ body {
 		min-height: 700px;
 
 		&.full {
-			width: 100%;
+			width: 100% !important;
 		}
 
 		&.home {
