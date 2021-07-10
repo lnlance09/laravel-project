@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Prediction;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PredictionSeeder extends Seeder
 {
@@ -16,6 +17,11 @@ class PredictionSeeder extends Seeder
      */
     public function run()
     {
-        Prediction::factory()->count(self::PREDICTION_COUNT)->create();
+        if (env('SEED_WITH_IMPORTS', false)) {
+            DB::unprepared(file_get_contents(__DIR__ . '/imports/predictions.sql'));
+            return;
+        }
+
+        // Prediction::factory()->count(self::PREDICTION_COUNT)->create();
     }
 }

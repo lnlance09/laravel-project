@@ -1,24 +1,17 @@
 import "./style.scss"
 import { Button, Divider, Form, Header, Input, Segment } from "semantic-ui-react"
-import { useCallback, useReducer, useState } from "react"
+import { useCallback, useContext, useState } from "react"
 import { getConfig } from "options/toast"
-import { setToken } from "utils/tokenFunctions"
 import { toast } from "react-toastify"
 import axios from "axios"
-import initialState from "./state"
-import logger from "use-reducer-logger"
 import PropTypes from "prop-types"
-import reducer from "./reducer"
+import ThemeContext from "themeContext"
 
 const toastConfig = getConfig()
 toast.configure(toastConfig)
 
 const Authentication = (props) => {
-    const [state, dispatch] = useReducer(
-        process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
-        initialState
-    )
-
+    const { state, dispatch } = useContext(ThemeContext)
     const [buttonText, setButtonText] = useState(props.login ? "Create an account" : "Sign in")
     const [email, setEmail] = useState("")
     const [headerText, setHeaderText] = useState(props.login ? "Sign In" : "Sign Up")
@@ -47,7 +40,6 @@ const Authentication = (props) => {
     const submitLoginForm = () => {
         if (email.length > 0 && password.length > 0) {
             setLoadingLogin(true)
-
             axios
                 .post(`${process.env.REACT_APP_BASE_URL}users/login`, {
                     email,
@@ -56,29 +48,42 @@ const Authentication = (props) => {
                 .then(async (response) => {
                     const { data } = response
                     dispatch({
-                        payload: data,
-                        type: "SET_USER_DATA"
+                        type: "SET_USER_DATA",
+                        data
                     })
-
-                    setToken(data.user)
-                    if (data.user.emailVerified) {
+                    localStorage.setItem("auth", true)
+                    localStorage.setItem("bearer", data.bearer)
+                    localStorage.setItem("user", JSON.stringify(data.user))
+                    localStorage.setItem("verify", data.verify)
+                    if (!data.verify) {
                         props.history.push("/")
                     }
                 })
                 .catch((error) => {
-                    toast.error(error.response.data.msg)
+                    let errorMsg = ""
+                    const { status } = error.response
+                    const { errors } = error.response.data
 
-                    dispatch({
-                        payload: error.response.data,
-                        type: "SET_LOGIN_ERROR"
-                    })
+                    if (status === 401) {
+                        errorMsg = error.response.data.message
+                    } else {
+                        if (typeof errors.password !== "undefined") {
+                            errorMsg = errors.password[0]
+                        }
+
+                        if (typeof errors.email !== "undefined") {
+                            errorMsg = errors.email[0]
+                        }
+                    }
+
+                    setLoadingLogin(false)
+                    toast.error(errorMsg)
                 })
         }
     }
 
     const submitRegistrationForm = () => {
         setLoadingRegistration(true)
-
         axios
             .post(`${process.env.REACT_APP_BASE_URL}users/create`, {
                 email: regEmail,
@@ -89,11 +94,13 @@ const Authentication = (props) => {
             .then(async (response) => {
                 const { data } = response
                 dispatch({
-                    payload: data,
-                    type: "SET_USER_DATA"
+                    type: "SET_USER_DATA",
+                    data
                 })
-
-                setToken(data.user)
+                localStorage.setItem("auth", true)
+                localStorage.setItem("bearer", data.bearer)
+                localStorage.setItem("user", JSON.stringify(data.user))
+                localStorage.setItem("verify", data.verify)
             })
             .catch((error) => {
                 let errorMsg = ""
@@ -117,10 +124,6 @@ const Authentication = (props) => {
 
                 setLoadingRegistration(false)
                 toast.error(errorMsg)
-                dispatch({
-                    errorMsg,
-                    type: "SET_REGISTER_ERROR"
-                })
             })
     }
 
@@ -134,29 +137,20 @@ const Authentication = (props) => {
                     },
                     {
                         headers: {
-                            // Authorization: bearer
+                            Authorization: `Bearer ${localStorage.getItem("bearer")}`
                         }
                     }
                 )
                 .then(async (response) => {
                     const { data } = response
                     dispatch({
-                        payload: data,
                         type: "VERIFY_EMAIL"
                     })
-
-                    setToken(data.user)
-                    if (!data.error) {
-                        props.history.push("/")
-                    }
+                    localStorage.setItem("verify", data.verify)
+                    props.history.push("/")
                 })
                 .catch((error) => {
-                    toast.error(error.response.data.msg)
-
-                    dispatch({
-                        payload: error.response.data,
-                        type: "SET_VERIFICATION_ERROR"
-                    })
+                    toast.error(error.response.data.message)
                 })
         }
     }
@@ -164,11 +158,11 @@ const Authentication = (props) => {
     return (
         <div className="authComponent">
             <Header as="h1" inverted={props.inverted} size="huge">
-                {props.verify ? "Verify your email" : headerText}
+                {state.verify ? "Verify your email" : headerText}
             </Header>
 
             <Segment basic className="authSegment" inverted={props.inverted}>
-                {props.verify && (
+                {state.verify ? (
                     <Form
                         inverted={props.inverted}
                         onSubmit={submitVerificationForm}
@@ -192,103 +186,105 @@ const Authentication = (props) => {
                             type="submit"
                         />
                     </Form>
-                )}
-
-                {login ? (
-                    <Form inverted={props.inverted} size={props.size}>
-                        <Form.Field>
-                            <Input
-                                inverted={props.inverted}
-                                onChange={(e, { value }) => {
-                                    setEmail(value)
-                                }}
-                                placeholder="Email or username"
-                                value={email}
-                            />
-                        </Form.Field>
-                        <Form.Field>
-                            <Input
-                                inverted={props.inverted}
-                                onChange={(e, { value }) => {
-                                    setPassword(value)
-                                }}
-                                placeholder="Password"
-                                type="password"
-                                value={password}
-                            />
-                        </Form.Field>
-                        <Form.Field>
-                            <Button
-                                color="blue"
-                                content="Sign in"
-                                fluid
-                                loading={loadingLogin && !props.loginError}
-                                onClick={submitLoginForm}
-                                size={props.size}
-                                type="submit"
-                            />
-                        </Form.Field>
-                    </Form>
                 ) : (
                     <>
-                        <Form inverted={props.inverted} size={props.size}>
-                            <Form.Field>
-                                <Input
-                                    inverted={props.inverted}
-                                    onChange={(e, { value }) => {
-                                        setRegEmail(value)
-                                    }}
-                                    placeholder="Email"
-                                    value={regEmail}
+                        {login ? (
+                            <Form inverted={props.inverted} size={props.size}>
+                                <Form.Field>
+                                    <Input
+                                        inverted={props.inverted}
+                                        onChange={(e, { value }) => {
+                                            setEmail(value)
+                                        }}
+                                        placeholder="Email or username"
+                                        value={email}
+                                    />
+                                </Form.Field>
+                                <Form.Field>
+                                    <Input
+                                        inverted={props.inverted}
+                                        onChange={(e, { value }) => {
+                                            setPassword(value)
+                                        }}
+                                        placeholder="Password"
+                                        type="password"
+                                        value={password}
+                                    />
+                                </Form.Field>
+                                <Form.Field>
+                                    <Button
+                                        color="blue"
+                                        content="Sign in"
+                                        fluid
+                                        loading={loadingLogin && !props.loginError}
+                                        onClick={submitLoginForm}
+                                        size={props.size}
+                                        type="submit"
+                                    />
+                                </Form.Field>
+                            </Form>
+                        ) : (
+                            <>
+                                <Form inverted={props.inverted} size={props.size}>
+                                    <Form.Field>
+                                        <Input
+                                            inverted={props.inverted}
+                                            onChange={(e, { value }) => {
+                                                setRegEmail(value)
+                                            }}
+                                            placeholder="Email"
+                                            value={regEmail}
+                                        />
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <Input
+                                            inverted={props.inverted}
+                                            onChange={(e, { value }) => {
+                                                setRegPassword(value)
+                                            }}
+                                            value={regPassword}
+                                            placeholder="Password"
+                                            type="password"
+                                        />
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <Input
+                                            autoComplete="off"
+                                            inverted={props.inverted}
+                                            onChange={(e, { value }) => {
+                                                setName(value)
+                                            }}
+                                            placeholder="Full name"
+                                            value={name}
+                                        />
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <Input
+                                            inverted={props.inverted}
+                                            onChange={(e, { value }) => {
+                                                setUsername(value)
+                                            }}
+                                            placeholder="Username"
+                                            value={username}
+                                        />
+                                    </Form.Field>
+                                </Form>
+                                <Divider inverted={props.inverted} />
+                                <Button
+                                    color="blue"
+                                    content="Create an account"
+                                    fluid
+                                    loading={loadingRegistration && !props.registerError}
+                                    onClick={submitRegistrationForm}
+                                    size={props.size}
                                 />
-                            </Form.Field>
-                            <Form.Field>
-                                <Input
-                                    inverted={props.inverted}
-                                    onChange={(e, { value }) => {
-                                        setRegPassword(value)
-                                    }}
-                                    value={regPassword}
-                                    placeholder="Password"
-                                    type="password"
-                                />
-                            </Form.Field>
-                            <Form.Field>
-                                <Input
-                                    autoComplete="off"
-                                    inverted={props.inverted}
-                                    onChange={(e, { value }) => {
-                                        setName(value)
-                                    }}
-                                    placeholder="Full name"
-                                    value={name}
-                                />
-                            </Form.Field>
-                            <Form.Field>
-                                <Input
-                                    inverted={props.inverted}
-                                    onChange={(e, { value }) => {
-                                        setUsername(value)
-                                    }}
-                                    placeholder="Username"
-                                    value={username}
-                                />
-                            </Form.Field>
-                        </Form>
-                        <Divider inverted={props.inverted} />
-                        <Button
-                            color="blue"
-                            content="Create an account"
-                            fluid
-                            loading={loadingRegistration && !props.registerError}
-                            onClick={submitRegistrationForm}
-                            size={props.size}
-                        />
+                            </>
+                        )}
                     </>
                 )}
             </Segment>
 
-            {!props.verify && (
+            {!state.verify && (
                 <Header as="p" className="registerText" inverted={props.inverted}>
                     {registerText}{" "}
                     <span className="registerLink" onClick={() => toggleLogin()}>
@@ -301,17 +297,9 @@ const Authentication = (props) => {
 }
 
 Authentication.propTypes = {
-    bearer: PropTypes.string,
     inverted: PropTypes.bool,
     login: PropTypes.bool,
-    loginError: PropTypes.bool,
-    loginErrorMsg: PropTypes.string,
-    registerError: PropTypes.bool,
-    registerErrorMsg: PropTypes.string,
-    size: PropTypes.string,
-    verify: PropTypes.bool,
-    verifyError: PropTypes.bool,
-    verifyErrorMsg: PropTypes.string
+    size: PropTypes.string
 }
 
 Authentication.defaultProps = {

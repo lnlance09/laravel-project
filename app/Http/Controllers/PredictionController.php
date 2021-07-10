@@ -18,7 +18,7 @@ class PredictionController extends Controller
     {
         $q = $request->input('q');
         $users = Prediction::where('name', 'LIKE', '%' . $q . '%')->get();
-        return new PRedictionCollection($users);
+        return new PredictionCollection($users);
     }
 
     /**

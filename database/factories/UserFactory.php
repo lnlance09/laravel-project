@@ -27,16 +27,18 @@ class UserFactory extends Factory
     {
         return $this->afterMaking(function (User $user) {
         })->afterCreating(function (User $user) {
-            $totalCount = mt_rand(12, 48);
-            $percentCorrect = mt_rand(20, 80) / 100;
-            $correctCount = $totalCount * $percentCorrect;
-            $incorrectCount = $totalCount - $correctCount;
+            if (env('SEED_WITH_IMPORTS', false)) {
+                $totalCount = mt_rand(12, 48);
+                $percentCorrect = mt_rand(20, 80) / 100;
+                $correctCount = $totalCount * $percentCorrect;
+                $incorrectCount = $totalCount - $correctCount;
 
-            // Create correct predictions
-            $this->createPredictions($user, $correctCount);
+                // Create correct predictions
+                $this->createPredictions($user, $correctCount);
 
-            // Create incorrect predictions
-            $this->createPredictions($user, $incorrectCount, false);
+                // Create incorrect predictions
+                $this->createPredictions($user, $incorrectCount, false);
+            }
         });
     }
 

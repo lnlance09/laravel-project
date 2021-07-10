@@ -17,13 +17,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'api_token',
         'bio',
         'name',
         'email',
         'gender',
         'img',
         'password',
-        'username'
+        'username',
+        'verification_code'
     ];
 
     /**
@@ -32,10 +34,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'email_verified_at',
+        // 'email_verified_at',
         'gender',
         'password',
-        'remember_token'
+        'remember_token',
+        'verification_code'
     ];
 
     /**

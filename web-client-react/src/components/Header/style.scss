@@ -11,6 +11,13 @@
         
     }
 
+    .simpleLogo {
+        cursor: pointer;
+        height: 64px;
+        margin-top: 8px;
+        width: 64px;
+    }
+
     .ui.borderless.fluid.top.fixed.menu {
         box-shadow: none !important;
 
@@ -42,6 +49,12 @@
 
                 .moonButton {
                     margin-right: 15px;
+                }
+
+                .dropdown {
+                    .menu.transition.visible {
+                        width: 160px;
+                    }
                 }
             }
         }

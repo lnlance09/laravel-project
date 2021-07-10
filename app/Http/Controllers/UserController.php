@@ -2,15 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\User as UserResource;
 use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api')->only('verify');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +50,79 @@ class UserController extends Controller
             'password' => ['bail', 'required', Password::min(8)],
             'username' => 'bail|required|max:20|unique:users,username|alpha_dash'
         ]);
+
+        $user = User::create([
+            'api_token' => Str::random(60),
+            'email' => $request->input('email'),
+            'name' => $request->input('name'),
+            'password' => $request->input('password'),
+            'username' => $request->input('username'),
+            'verification_code' => mt_rand(1000, 9999)
+        ]);
+        $user->refresh();
+
+        return response()->json([
+            'bearer' => $user->api_token,
+            'user' => $user,
+            'verify' => true
+        ]);
+    }
+
+    /**
+     * Login
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'bail|required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::where([
+            'email' => $request->input('email'),
+            'password' => $request->input('password')
+        ])->first();
+
+        if (!$user) {
+            return response([
+                'message' => 'Incorrect password'
+            ], 401);
+        }
+
+        return response()->json([
+            'bearer' => $user->api_token,
+            'user' => $user,
+            'verify' => $user->email_verified_at === null
+        ]);
+    }
+
+    /**
+     * Verify
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function verify(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|numeric',
+        ]);
+
+        $user = $request->user();
+        if ($user->verification_code === $request->input('code')) {
+            $user->email_verified_at = now();
+            $user->save();
+            return response()->json([
+                'verify' => false
+            ]);
+        }
+
+        return response([
+            'message' => 'That code is incorrect'
+        ], 401);
     }
 
     /**

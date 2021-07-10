@@ -14,6 +14,7 @@ const DefaultLayout = ({
     q,
     showFooter,
     showResults,
+    simpleHeader,
     textAlign,
     useGrid
 }) => {
@@ -49,6 +50,7 @@ const DefaultLayout = ({
                             inverted={inverted}
                             q={q}
                             showResults={showResults}
+                            simple={simpleHeader}
                             toggleSearchMode={() => setSearchMode(true)}
                         />
                         {useGrid ? (
@@ -78,6 +80,7 @@ DefaultLayout.propTypes = {
     q: PropTypes.string,
     showFooter: PropTypes.bool,
     showResults: PropTypes.bool,
+    simpleHeader: PropTypes.bool,
     textAlign: PropTypes.string,
     useGrid: PropTypes.bool
 }
@@ -90,6 +93,7 @@ DefaultLayout.defaultProps = {
     q: "",
     showFooter: true,
     showResults: true,
+    simpleHeader: false,
     textAlign: "left",
     useGrid: true
 }

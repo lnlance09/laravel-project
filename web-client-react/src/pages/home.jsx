@@ -1,10 +1,12 @@
 import { Button, Container, Divider, Grid, Header, Icon, Image, Segment } from "semantic-ui-react"
 import { useContext } from "react"
+import defaultImg from "images/images/image.png"
 import DefaultLayout from "layouts/default"
 import ThemeContext from "themeContext"
 
 const Home = ({ history, mobile }) => {
-    const { inverted } = useContext(ThemeContext)
+    const { state } = useContext(ThemeContext)
+    const { inverted } = state
 
     return (
         <DefaultLayout
@@ -14,17 +16,17 @@ const Home = ({ history, mobile }) => {
             textAlign="center"
             useGrid={false}
         >
-            <Segment className="heroSegment" inverted={inverted} textAlign="center" vertical>
-                <Container className="heroContainer" text>
-                    <Header as="h1" content="Imagine-a-Company" inverted={inverted} />
+            <Segment className="heroSegment" inverted={inverted} textAlign="left" vertical>
+                <Container className="heroContainer">
+                    <Header as="h1" content="Predictions for the Technologically Savvy" inverted />
                     <Header
                         as="h2"
-                        content="Do whatever you want when you want to."
-                        inverted={inverted}
+                        content="Browse the ideas and opinions of some of the most versatile traders"
+                        inverted
                     />
-                    <Button inverted={inverted} primary size="huge">
+                    <Button primary size="huge">
                         Get Started
-                        <Icon inverted={inverted} name="right arrow" />
+                        <Icon name="right arrow" />
                     </Button>
                 </Container>
             </Segment>
@@ -52,6 +54,7 @@ const Home = ({ history, mobile }) => {
                             <Grid.Column floated="right" width={6}>
                                 <Image
                                     bordered
+                                    onError={(i) => (i.target.src = defaultImg)}
                                     rounded
                                     size="large"
                                     src="/images/wireframe/white-image.png"
@@ -60,69 +63,51 @@ const Home = ({ history, mobile }) => {
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column textAlign="center">
-                                <Button inverted={inverted} size="huge">
+                                <Button color="green" inverted={inverted} size="huge">
                                     Check Them Out
                                 </Button>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
                 </Segment>
-
-                <Segment className="noPadding" vertical>
-                    <Grid celled="internally" columns="equal" stackable>
-                        <Grid.Row textAlign="center">
-                            <Grid.Column>
-                                <Header as="h3" inverted={inverted}>
-                                    "What a Company"
-                                </Header>
-                                <p>That is what they all say about us</p>
-                            </Grid.Column>
-                            <Grid.Column>
-                                <Header as="h3" inverted={inverted}>
-                                    "I shouldn't have gone with their competitor."
-                                </Header>
-                                <p>
-                                    <Image avatar src="/images/avatar/large/nan.jpg" />
-                                    <b>Nan</b> Chief Fun Officer Acme Toys
-                                </p>
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
-                </Segment>
-
-                <Segment vertical>
-                    <Container text>
-                        <Header as="h3" inverted={inverted}>
-                            Breaking The Grid, Grabs Your Attention
-                        </Header>
-                        <p>
-                            Instead of focusing on content creation and hard work, we have learned
-                            how to master the art of doing nothing by providing massive amounts of
-                            whitespace and generic content that can seem massive, monolithic and
-                            worth your attention.
-                        </p>
-                        <Button as="a" inverted={inverted} size="large">
-                            Read More
-                        </Button>
-
-                        <Divider as="h4" className="homePageDivider" horizontal inverted={inverted}>
-                            Case Studies
-                        </Divider>
-
-                        <Header as="h3" inverted={inverted}>
-                            Did We Tell You About Our Bananas?
-                        </Header>
-                        <p>
-                            Yes I know you probably disregarded the earlier boasts as non-sequitur
-                            filler content, but it's really true. It took years of gene splicing and
-                            combinatory DNA research, but our bananas can really dance.
-                        </p>
-                        <Button as="a" inverted={inverted} size="large">
-                            I'm Still Quite Interested
-                        </Button>
-                    </Container>
-                </Segment>
             </Container>
+
+            <Segment className="noPadding" vertical>
+                <Container text></Container>
+            </Segment>
+
+            <Segment padded="very" vertical>
+                <Container text>
+                    <Header as="h3" inverted={inverted}>
+                        Breaking The Grid, Grabs Your Attention
+                    </Header>
+                    <p>
+                        Instead of focusing on content creation and hard work, we have learned how
+                        to master the art of doing nothing by providing massive amounts of
+                        whitespace and generic content that can seem massive, monolithic and worth
+                        your attention.
+                    </p>
+                    <Button color="blue" inverted={inverted} size="large">
+                        Read More
+                    </Button>
+
+                    <Divider as="h4" className="homePageDivider" horizontal inverted={inverted}>
+                        Case Studies
+                    </Divider>
+
+                    <Header as="h3" inverted={inverted}>
+                        Did We Tell You About Our Bananas?
+                    </Header>
+                    <p>
+                        Yes I know you probably disregarded the earlier boasts as non-sequitur
+                        filler content, but it's really true. It took years of gene splicing and
+                        combinatory DNA research, but our bananas can really dance.
+                    </p>
+                    <Button color="blue" inverted={inverted} size="large">
+                        I'm Still Quite Interested
+                    </Button>
+                </Container>
+            </Segment>
         </DefaultLayout>
     )
 }

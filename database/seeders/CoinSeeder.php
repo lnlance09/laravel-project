@@ -17,7 +17,10 @@ class CoinSeeder extends Seeder
      */
     public function run()
     {
-        // DB::unprepared(file_get_contents(__DIR__ . '/imports/coins.sql'));
+        if (env('SEED_WITH_IMPORTS', false)) {
+            DB::unprepared(file_get_contents(__DIR__ . '/imports/coins.sql'));
+            return;
+        }
 
         $coins = (array) Coin::getAll(self::COIN_COUNT);
         if (!$coins) {
