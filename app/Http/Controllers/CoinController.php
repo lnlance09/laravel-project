@@ -17,7 +17,13 @@ class CoinController extends Controller
     public function index(Request $request)
     {
         $q = $request->input('q');
-        $coins = Coin::where('name', 'LIKE', '%' . $q . '%')->get();
+        $sort = $request->input('sort', 'id');
+        $dir = $request->input('dir', 'asc');
+
+        $coins = Coin::where('name', 'LIKE', '%' . $q . '%')
+            ->withCount(['predictions'])
+            ->orderBy($sort, $dir)
+            ->get();
         return new CoinCollection($coins);
     }
 

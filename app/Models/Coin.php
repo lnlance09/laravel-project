@@ -41,4 +41,9 @@ class Coin extends PublicApi
      * @var array
      */
     protected $casts = [];
+
+    public function predictions()
+    {
+        return $this->hasMany(Prediction::class);
+    }
 }

@@ -4,12 +4,19 @@ import { Card } from "semantic-ui-react"
 import CoinCard from "./card"
 import PropTypes from "prop-types"
 
-const CoinList = ({ coins, inverted, onClickCoin }) => {
+const CoinList = ({ coins, inverted, loading, onClickCoin }) => {
     return (
         <div className="coinList">
             <Card.Group className={inverted ? "inverted" : ""} itemsPerRow={3}>
                 {coins.map((coin, i) => {
-                    return <CoinCard coin={coin} inverted={inverted} onClickCoin={onClickCoin} />
+                    return (
+                        <CoinCard
+                            coin={coin}
+                            inverted={inverted}
+                            loading={loading}
+                            onClickCoin={onClickCoin}
+                        />
+                    )
                 })}
             </Card.Group>
         </div>
@@ -37,6 +44,7 @@ CoinList.propTypes = {
         })
     ),
     inverted: PropTypes.bool,
+    loading: PropTypes.bool,
     onClickCoin: PropTypes.func
 }
 

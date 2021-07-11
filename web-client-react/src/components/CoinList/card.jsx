@@ -2,11 +2,12 @@ import "./style.scss"
 import "fomantic-ui-css/semantic.min.css"
 import { useState } from "react"
 import { Card, Icon, Image, Placeholder } from "semantic-ui-react"
+import { formatPlural } from "utils/textFunctions"
 import PlaceholderPic from "images/images/image.png"
 import PropTypes from "prop-types"
 import Truncate from "react-truncate"
 
-const CoinCard = ({ coin, inverted, onClickCoin }) => {
+const CoinCard = ({ coin, inverted, loading, onClickCoin }) => {
     const { dailyPercentChange, description, id, logo, name, slug, symbol } = coin
 
     const [expanded, setExpanded] = useState(false)
@@ -24,7 +25,7 @@ const CoinCard = ({ coin, inverted, onClickCoin }) => {
 
     return (
         <Card key={`coin${id}`} onClick={() => onClickCoin(slug)}>
-            {typeof id === "undefined" ? (
+            {loading ? (
                 <Card.Content>
                     <Placeholder fluid inverted={inverted}>
                         <Placeholder.Paragraph>
@@ -38,7 +39,6 @@ const CoinCard = ({ coin, inverted, onClickCoin }) => {
                 <>
                     <Card.Content>
                         <Image
-                            bordered
                             floated="right"
                             onError={(i) => (i.target.src = PlaceholderPic)}
                             size="mini"
@@ -78,10 +78,8 @@ const CoinCard = ({ coin, inverted, onClickCoin }) => {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <a>
-                            <Icon name="user" />
-                            10 Friends
-                        </a>
+                        <Icon inverted={inverted} name="bullseye" />
+                        {coin.predictionsCount} {formatPlural(coin.predictionsCount, "prediction")}
                     </Card.Content>
                 </>
             )}
@@ -95,19 +93,19 @@ CoinCard.propTypes = {
         circulatingSupply: PropTypes.number,
         dailyPercentChange: PropTypes.string,
         description: PropTypes.string,
-        expanded: PropTypes.bool,
         id: PropTypes.number,
         lastPrice: PropTypes.number,
         logo: PropTypes.string,
         marketCap: PropTypes.number,
         maxSupply: PropTypes.number,
         name: PropTypes.string,
+        predictionsCount: PropTypes.number,
         slug: PropTypes.string,
         symbol: PropTypes.string,
-        totalSupply: PropTypes.number,
-        truncated: PropTypes.bool
+        totalSupply: PropTypes.number
     }),
     inverted: PropTypes.bool,
+    loading: PropTypes.bool,
     onClickCoin: PropTypes.func
 }
 

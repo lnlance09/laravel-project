@@ -49,13 +49,8 @@ const PageHeader = ({ history, q, showResults, simple }) => {
                 <Menu borderless fixed="top" fluid inverted={inverted}>
                     <Container>
                         <Menu.Item className="logoItem">
-                            <Header as="h1" inverted={inverted}>
-                                <Image
-                                    className="headerLogo"
-                                    onClick={() => history.push("/")}
-                                    rounded
-                                    src={Logo}
-                                />
+                            <Header as="h1" inverted={inverted} onClick={() => history.push("/")}>
+                                <Image className="headerLogo" rounded src={Logo} />
                                 Sample App
                             </Header>
                         </Menu.Item>
