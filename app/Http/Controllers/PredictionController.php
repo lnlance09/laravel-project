@@ -16,9 +16,25 @@ class PredictionController extends Controller
      */
     public function index(Request $request)
     {
-        $q = $request->input('q');
-        $users = Prediction::where('name', 'LIKE', '%' . $q . '%')->get();
-        return new PredictionCollection($users);
+        $coinId = $request->input('coinId', null);
+        $status = $request->input('status', null);
+        $sort = $request->input('sort', 'id');
+        $dir = $request->input('dir', 'asc');
+
+        $where = [];
+        if ($coinId) {
+            $where['coin_id'] = $coinId;
+        }
+
+        if ($status) {
+            $where['status'] = $status;
+        }
+
+        $predictions = Prediction::with('coin')
+            ->where($where)
+            ->orderBy($sort, $dir)
+            ->get();
+        return new PredictionCollection($predictions);
     }
 
     /**
@@ -59,9 +75,9 @@ class PredictionController extends Controller
      * @param  String  $username
      * @return \Illuminate\Http\Response
      */
-    public function show($username)
+    public function show($id)
     {
-        return new PredictionResource(Prediction::where('user', $username)->firstOrFail());
+        return new PredictionResource(Prediction::find($id));
     }
 
     /**

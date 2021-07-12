@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Coin as CoinResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Prediction extends JsonResource
@@ -16,11 +17,12 @@ class Prediction extends JsonResource
     {
         return [
             'id' => $this->id,
-            'coinId' => $this->coin_id,
+            'coin' => new CoinResource($this->coin),
             'createdAt' => $this->created_at,
             'currentPrice' => $this->current_price,
             'margin' => $this->margin,
             'predictionPrice' => $this->prediction_price,
+            'status' => $this->status,
             'targetDate' => $this->target_date
         ];
     }

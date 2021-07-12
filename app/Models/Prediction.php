@@ -38,4 +38,9 @@ class Prediction extends Model
      * @var array
      */
     protected $casts = [];
+
+    public function coin()
+    {
+        return $this->hasOne(Coin::class, 'id', 'coin_id');
+    }
 }

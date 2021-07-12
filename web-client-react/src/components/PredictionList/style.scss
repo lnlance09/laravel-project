@@ -1,0 +1,13 @@
+@import "../../scss/_colors.scss";
+
+.predictionList {
+    .item {
+        .extra {
+            .ui.red.label {
+                .close.icon {
+                    margin: 0 .75em 0 0;
+                }
+            }
+        }
+    }
+}

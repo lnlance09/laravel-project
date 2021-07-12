@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\Coin as CoinResource;
 use App\Http\Resources\CoinCollection;
+// use App\Http\Resources\CoinOption as CoinOptionResource;
+use App\Http\Resources\CoinOptionCollection;
 use App\Models\Coin;
 use Illuminate\Http\Request;
 
@@ -25,6 +27,14 @@ class CoinController extends Controller
             ->orderBy($sort, $dir)
             ->get();
         return new CoinCollection($coins);
+    }
+
+    public function showOptions(Request $request)
+    {
+        $coins = Coin::withCount(['predictions'])
+            ->orderBy('predictions_count', 'desc')
+            ->get();
+        return new CoinOptionCollection($coins);
     }
 
     /**

@@ -1,7 +1,5 @@
-import "./style.scss"
-import "fomantic-ui-css/semantic.min.css"
 import { useState } from "react"
-import { Card, Icon, Image, Placeholder } from "semantic-ui-react"
+import { Card, Image, Placeholder } from "semantic-ui-react"
 import { formatPlural } from "utils/textFunctions"
 import PlaceholderPic from "images/images/image.png"
 import PropTypes from "prop-types"
@@ -78,7 +76,6 @@ const CoinCard = ({ coin, inverted, loading, onClickCoin }) => {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <Icon inverted={inverted} name="bullseye" />
                         {coin.predictionsCount} {formatPlural(coin.predictionsCount, "prediction")}
                     </Card.Content>
                 </>

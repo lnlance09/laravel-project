@@ -1,5 +1,5 @@
-import "./style.scss"
 import "fomantic-ui-css/semantic.min.css"
+import "./style.scss"
 import { Card } from "semantic-ui-react"
 import CoinCard from "./card"
 import PropTypes from "prop-types"
@@ -8,7 +8,7 @@ const CoinList = ({ coins, inverted, loading, onClickCoin }) => {
     return (
         <div className="coinList">
             <Card.Group className={inverted ? "inverted" : ""} itemsPerRow={3}>
-                {coins.map((coin, i) => {
+                {coins.map((coin) => {
                     return (
                         <CoinCard
                             coin={coin}

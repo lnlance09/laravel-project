@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoinController;
+use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,11 +21,12 @@ use Illuminate\Support\Facades\Route;
 // Route::middleware('token')->get('/coins/{id}', [CoinController::class, 'show']);
 
 Route::get('/coins', [CoinController::class, 'index']);
+Route::get('/coins/options', [CoinController::class, 'showOptions']);
 Route::get('/coins/{slug}', [CoinController::class, 'show']);
 
 Route::get('/predictions', [PredictionController::class, 'index']);
-Route::get('/predictions/{slug}', [PredictionController::class, 'show']);
 Route::post('/predictions/create', [PredictionController::class, 'create']);
+Route::get('/predictions/{id}', [PredictionController::class, 'show']);
 
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/{username}', [UserController::class, 'show']);

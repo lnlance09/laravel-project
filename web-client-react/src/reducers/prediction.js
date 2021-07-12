@@ -3,6 +3,7 @@ const reducer = (state, action) => {
         case "GET_PREDICTION":
             return {
                 ...state,
+                loaded: true,
                 prediction: action.prediction
             }
         default:
