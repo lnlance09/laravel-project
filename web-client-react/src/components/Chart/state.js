@@ -1,3 +1,4 @@
+const areaColor = "#a291fb"
 const backgroundColor = "#fff"
 const textColor = "#ccc"
 const secDay = 3600 * 24
@@ -36,7 +37,7 @@ const initialState = {
             }
         },
         lang: {
-            numericSymbols: null //otherwise by default ['k', 'M', 'G', 'T', 'P', 'E']
+            numericSymbols: null // otherwise by default ['k', 'M', 'G', 'T', 'P', 'E']
         },
         legend: {
             enabled: false
@@ -45,12 +46,17 @@ const initialState = {
             enabled: false
         },
         plotOptions: {
-            area: {},
+            area: {
+                animation: false,
+                color: areaColor,
+                crisp: false,
+                fillOpacity: 1
+            },
             line: {
                 animation: false,
                 marker: {
                     enabled: false,
-                    lineColor: "#333"
+                    lineColor: areaColor
                 }
             }
         },
@@ -70,8 +76,19 @@ const initialState = {
         textColor,
         title: false,
         tooltip: {
-            pointFormat: `<span style="color:{series.color}">●</span> {point.y:.0f} {series.name}<br>`,
-            xDateFormat: "%a, %Y-%m-%d %H:%M"
+            backgroundColor: "#090127",
+            borderColor: "rgba(255, 255, 255, 0.1)",
+            crosshairs: true,
+            pointFormat:
+                "<span style='color: #fff; display: block; font-size: 16px; padding-top: 1em;'>${point.y:.0f}<span><br>",
+            positioner: function () {
+                return { x: 0, y: 0 }
+            },
+            style: {
+                fontSize: "16px"
+            },
+            useHtml: true,
+            xDateFormat: "<span style='color: #fff; font-size: 14px;'>%a, %b %e %l:%M %p</span>"
         },
         xAxis: {
             categories: null,
@@ -93,10 +110,10 @@ const initialState = {
         },
         yAxis: {
             alternateGridColor: null,
-            crosshair: true,
+            crosshair: false,
             gridLineColor: "rgba(255, 255, 255, .1)",
             index: 0,
-            minorGridLineColor: "rgba(255,255,255,0.07)",
+            minorGridLineColor: "rgba(255, 255, 255, 0.07)",
             minorTickInterval: null,
             labels: {
                 enabled: true

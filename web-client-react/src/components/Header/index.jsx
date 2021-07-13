@@ -46,23 +46,19 @@ const PageHeader = ({ history, q, showResults, simple }) => {
                     />
                 </Container>
             ) : (
-                <Menu borderless fixed="top" fluid inverted={inverted}>
+                <Menu borderless fixed="top" fluid inverted={inverted} size="big">
                     <Container>
                         <Menu.Item className="logoItem">
                             <Header as="h1" inverted={inverted} onClick={() => history.push("/")}>
                                 <Image className="headerLogo" rounded src={Logo} />
-                                Sample App
+                                Preditc
                             </Header>
                         </Menu.Item>
-                        <Menu.Item as="a" onClick={() => history.push("/coins")}>
-                            Coins
-                        </Menu.Item>
-                        <Menu.Item as="a" onClick={() => history.push("/predictions")}>
+                        <Menu.Item onClick={() => history.push("/coins")}>Coins</Menu.Item>
+                        <Menu.Item onClick={() => history.push("/predictions")}>
                             Predictions
                         </Menu.Item>
-                        <Menu.Item as="a" onClick={() => history.push("/traders")}>
-                            Traders
-                        </Menu.Item>
+                        <Menu.Item onClick={() => history.push("/traders")}>Traders</Menu.Item>
                         <Menu.Item position="right">
                             <Button
                                 circular

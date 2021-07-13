@@ -1,4 +1,3 @@
-import "fomantic-ui-css/semantic.min.css"
 import "./style.scss"
 import { Item } from "semantic-ui-react"
 import PredictionItem from "./item"

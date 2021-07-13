@@ -1,4 +1,3 @@
-import "fomantic-ui-css/semantic.min.css"
 import "./style.scss"
 import { Card } from "semantic-ui-react"
 import CoinCard from "./card"

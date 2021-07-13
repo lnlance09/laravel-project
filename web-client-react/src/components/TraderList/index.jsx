@@ -1,6 +1,5 @@
-import "fomantic-ui-css/semantic.min.css"
 import "./style.scss"
-import { Item, Placeholder, Segment } from "semantic-ui-react"
+import { Item, Placeholder } from "semantic-ui-react"
 import TraderItem from "./item"
 import PropTypes from "prop-types"
 

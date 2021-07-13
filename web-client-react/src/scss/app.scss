@@ -13,7 +13,7 @@ body {
 
 .appWrapper {
 	&.inverted {
-		background: $black;
+		background: $invertedBackgroundColor;
 	}
 
 	.mainContainer {
@@ -130,7 +130,7 @@ body {
 		}
 
 		&.inverted {
-			background: $black;
+			background: $invertedBackgroundColor;
 		}
 
 		.searchSegment {

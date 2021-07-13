@@ -109,15 +109,14 @@ const Chart = ({
                     ))}
                 </Menu>
             )}
-            <Segment inverted={inverted}>
-                <HighchartsReact
-                    allowChartUpdate
-                    containerProps={{ className: "chartContainer" }}
-                    highcharts={Highcharts}
-                    inverted={inverted}
-                    options={state.options}
-                />
-            </Segment>
+
+            <HighchartsReact
+                allowChartUpdate
+                containerProps={{ className: "chartContainer" }}
+                highcharts={Highcharts}
+                inverted={inverted}
+                options={state.options}
+            />
         </div>
     )
 }

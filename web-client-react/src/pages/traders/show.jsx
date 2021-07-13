@@ -158,6 +158,7 @@ const Traders = ({ history }) => {
                     traders={internalState.traders}
                 />
             </Visibility>
+            <Divider hidden section />
         </DefaultLayout>
     )
 }

@@ -19,10 +19,10 @@
     }
 
     .ui.borderless.fluid.top.fixed.menu {
-        box-shadow: none !important;
-
         &.inverted {
-            border-bottom: solid 1px lighten($black, 11%);
+            background: darken($invertedBackgroundColor, 0%);
+            // border-bottom: solid 1px #333;
+            opacity: 0.94;
         }
 
         .container {
@@ -31,13 +31,14 @@
 
                 h1.header {
                     cursor: pointer;
-                    line-height: 48px;
+                    line-height: 60px;
 
                     img.headerLogo {
                         cursor: pointer;
                         flex: 1 1;
-                        height: 48px;
-                        width: 48px;
+                        height: 54px;
+                        vertical-align: middle;
+                        width: 54px;
                     }
                 }
             }

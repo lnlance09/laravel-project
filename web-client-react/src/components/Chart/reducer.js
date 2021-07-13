@@ -1,5 +1,8 @@
-const darkColor = "#1b1c1d"
+const darkColor = "#090127"
 const lightColor = "#fff"
+
+const darkAreaColor = "#2185d0"
+const lightAreaColor = ""
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -72,6 +75,7 @@ const reducer = (state, action) => {
             }
         case "TOGGLE_INVERTED":
             const newColor = action.inverted ? darkColor : lightColor
+            const newAreaColor = action.inverted ? darkAreaColor : lightAreaColor
 
             return {
                 ...state,
@@ -80,6 +84,13 @@ const reducer = (state, action) => {
                     chart: {
                         ...state.options.chart,
                         backgroundColor: newColor
+                    },
+                    plotOptions: {
+                        ...state.options.plotOptions,
+                        area: {
+                            ...state.options.plotOptions.area,
+                            color: newAreaColor
+                        }
                     }
                 }
             }
