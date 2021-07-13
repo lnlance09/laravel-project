@@ -36,23 +36,29 @@ class UserController extends Controller
         $sort = $request->input('sort', 'accuracy');
         $dir = $request->input('dir', 'desc');
 
+        if (!in_array($dir, ['asc', 'desc'])) {
+            return response([
+                'message' => 'Invalid sort direction'
+            ], 422);
+        }
+
         $users = User::where('name', 'LIKE', '%' . $q . '%')
             ->withCount([
                 'predictions',
                 'incorrectPredictions',
                 'correctPredictions',
                 'pendingPredictions'
-            ])
-            ->paginate(15);
+            ]);
 
-        if ($dir === 'asc') {
-            $sorted = $users->getCollection()->sortBy([$sort])->values();
-        } else {
-            $sorted = $users->getCollection()->sortByDesc([$sort])->values();
+        if ($sort === 'accuracy') {
+            $users = $users->orderByRaw('(correct_predictions_count / predictions_count - pending_predictions_count) ' . $dir);
         }
 
-        $users->setCollection($sorted);
+        if ($sort === 'predictions') {
+            $users = $users->orderByRaw('predictions_count ' . $dir);
+        }
 
+        $users = $users->paginate(15);
         return new UserCollection($users);
     }
 

@@ -2,6 +2,7 @@ import { Button, Divider, Grid, Header, Visibility } from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
 import { DebounceInput } from "react-debounce-input"
 import { getConfig } from "options/toast"
+import { setIcon } from "utils/textFunctions"
 import { toast } from "react-toastify"
 import axios from "axios"
 import DefaultLayout from "layouts/default"
@@ -95,10 +96,6 @@ const Traders = ({ history }) => {
         setActiveItem("predictions")
         setDirection(newVal)
         getTraders(searchTerm, "predictions", newVal)
-    }
-
-    const setIcon = (value) => {
-        return value === "asc" ? "arrow up" : value === "desc" ? "arrow down" : false
     }
 
     return (

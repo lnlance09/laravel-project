@@ -2,6 +2,7 @@ import { Button, Divider, Dropdown, Grid, Header, Icon } from "semantic-ui-react
 import { useContext, useEffect, useReducer, useState } from "react"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
+import { setIcon } from "utils/textFunctions"
 import { statusOptions } from "options/status"
 import axios from "axios"
 import PredictionList from "components/PredictionList"
@@ -115,10 +116,6 @@ const Predictions = ({ history }) => {
         setActiveItem("target_date")
         setDirection(newVal)
         getPredictions(coinId, status, "target_date", newVal)
-    }
-
-    const setIcon = (value) => {
-        return value === "asc" ? "arrow up" : value === "desc" ? "arrow down" : false
     }
 
     return (

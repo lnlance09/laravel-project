@@ -17,4 +17,8 @@ export const formatPlural = (count, term) => {
     return parseInt(count, 10) === 1 ? term : `${term}s`
 }
 
+export const setIcon = (value) => {
+    return value === "asc" ? "arrow up" : value === "desc" ? "arrow down" : false
+}
+
 export const hyphenateText = (text) => text.toLowerCase().split(" ").join("-")

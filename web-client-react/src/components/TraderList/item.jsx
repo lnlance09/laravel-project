@@ -38,11 +38,14 @@ const TraderItem = ({ i, inverted, loading, onClickTrader, trader }) => {
                         <Item.Meta>@{username}</Item.Meta>
                         <Item.Description>{bio}</Item.Description>
                         <Item.Extra>
-                            <Label color={accuracy > 50 ? "green" : "red"} inverted={inverted}>
+                            <Label
+                                className={inverted ? "inverted" : ""}
+                                color={accuracy > 50 ? "green" : "red"}
+                            >
                                 <Icon name="bullseye" />
                                 {accuracy.toFixed(2)}%
                             </Label>
-                            <Label color="orange" inverted={inverted}>
+                            <Label className={inverted ? "inverted" : ""} color="violet">
                                 {predictionsCount} {formatPlural(predictionsCount, "prediction")}
                             </Label>
                         </Item.Extra>
