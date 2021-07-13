@@ -15,13 +15,17 @@ class User extends JsonResource
     public function toArray($request)
     {
         return [
-            'bio' => $this->bio,
+            'accuracy' => $this->accuracy,
+            'bio' => empty($this->bio) ? 'Apparently, this trader prefers to keep an air of mystery about them.' : $this->bio,
+            'correctPredictionsCount' => $this->correct_predictions_count,
             'createdAt' => $this->created_at,
             'email' => $this->email,
             'id' => $this->id,
-            'img' => $this->img,
+            'img' => env('AWS_URL') . $this->img,
+            'incorrectPredictionsCount' => $this->incorrect_predictions_count,
             'name' => $this->name,
-            // 'password' => $this->password,
+            'pendingPredictionsCount' => $this->pending_predictions_count,
+            'predictionsCount' => $this->predictions_count,
             'username' => $this->username
         ];
     }

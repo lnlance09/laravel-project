@@ -3,6 +3,7 @@ const reducer = (state, action) => {
         case "GET_TRADER":
             return {
                 ...state,
+                loaded: true,
                 trader: action.trader
             }
         default:

@@ -8,6 +8,7 @@ use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
@@ -32,7 +33,26 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $q = $request->input('q');
-        $users = User::where('name', 'LIKE', '%' . $q . '%')->get();
+        $sort = $request->input('sort', 'accuracy');
+        $dir = $request->input('dir', 'desc');
+
+        $users = User::where('name', 'LIKE', '%' . $q . '%')
+            ->withCount([
+                'predictions',
+                'incorrectPredictions',
+                'correctPredictions',
+                'pendingPredictions'
+            ])
+            ->paginate(15);
+
+        if ($dir === 'asc') {
+            $sorted = $users->getCollection()->sortBy([$sort])->values();
+        } else {
+            $sorted = $users->getCollection()->sortByDesc([$sort])->values();
+        }
+
+        $users->setCollection($sorted);
+
         return new UserCollection($users);
     }
 
@@ -155,7 +175,22 @@ class UserController extends Controller
      */
     public function show($username)
     {
-        return new UserResource(User::where('user', $username)->firstOrFail());
+        $user = User::where('username', $username)
+            ->withCount([
+                'predictions',
+                'incorrectPredictions',
+                'correctPredictions',
+                'pendingPredictions'
+            ])
+            ->first();
+
+        if (empty($user)) {
+            return response([
+                'message' => 'That user does not exist'
+            ], 404);
+        }
+
+        return new UserResource($user);
     }
 
     /**

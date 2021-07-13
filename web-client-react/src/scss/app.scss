@@ -103,6 +103,21 @@ body {
 			}
 		}
 
+		&.traderPage {
+			padding: 1.5em 0;
+
+			.ui.grid {
+				.imgColumn {
+					padding-left: 4em;
+					padding-right: 0;
+
+					.ui.segment {
+						padding: 3px;
+					}
+				}
+			}
+		}
+
 		&.signInPage {
 			.ui.container.authContainer {
 				padding: 2em 0;
