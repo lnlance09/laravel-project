@@ -90,10 +90,10 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
                 {formIsValid && (
                     <Grid stackable>
                         <Grid.Row>
-                            <Grid.Column style={{ height: "200px" }} width={8}>
+                            <Grid.Column style={{ height: "250px" }} width={8}>
                                 <Chart
                                     coin={coin}
-                                    containerProps={{ style: { height: "200px" } }}
+                                    containerProps={{ style: { height: "250px" } }}
                                     duration="1Y"
                                     hideYAxis
                                     includeRanges={false}
@@ -149,7 +149,7 @@ PredictionForm.propTypes = {
         logo: PropTypes.string,
         marketCap: PropTypes.number,
         maxSupply: PropTypes.number,
-        name: PropTypes.string.isRequired,
+        name: PropTypes.string,
         predictionsCount: PropTypes.number,
         slug: PropTypes.string,
         symbol: PropTypes.string,

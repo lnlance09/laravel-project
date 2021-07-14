@@ -136,7 +136,7 @@ Chart.propTypes = {
         logo: PropTypes.string,
         marketCap: PropTypes.number,
         maxSupply: PropTypes.number,
-        name: PropTypes.string.isRequired,
+        name: PropTypes.string,
         predictionsCount: PropTypes.number,
         slug: PropTypes.string,
         symbol: PropTypes.string,

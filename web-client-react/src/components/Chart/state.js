@@ -20,7 +20,7 @@ const initialState = {
     options: {
         chart: {
             backgroundColor,
-            height: 200,
+            height: 250,
             plotBackgroundColor: null,
             plotShadow: false,
             plotBorderWidth: 0,
@@ -81,7 +81,8 @@ const initialState = {
             borderColor: "rgba(255, 255, 255, 0.1)",
             crosshairs: true,
             pointFormat:
-                "<span style='color: #fff; display: block; font-size: 16px; padding-top: 1em;'>${point.y:.0f}<span><br>",
+                // eslint-disable-next-line
+                "<span style='color: #fff; display: block; font-size: 16px; padding-top: 1em;'>${point.y:.3f}<span><br>",
             positioner: function () {
                 return { x: 0, y: 0 }
             },
