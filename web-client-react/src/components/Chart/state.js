@@ -20,6 +20,7 @@ const initialState = {
     options: {
         chart: {
             backgroundColor,
+            height: 200,
             plotBackgroundColor: null,
             plotShadow: false,
             plotBorderWidth: 0,

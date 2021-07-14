@@ -1748,7 +1748,7 @@ select.ui.dropdown {
 /* General rules and basic dropdowns */
 .ui.dropdown .inverted.menu,
 .ui.inverted.dropdown .menu {
-  background: #000000;
+  background: #090127;
   box-shadow: none;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
@@ -1770,7 +1770,7 @@ select.ui.dropdown {
 .ui.inverted.dropdown.selected,
 .ui.dropdown .inverted.menu .selected.item,
 .ui.inverted.dropdown .menu .selected.item {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(43, 5, 130, 0.25);
   color: rgba(255, 255, 255, 0.8);
 }
 .ui.dropdown .inverted.menu > .header,

@@ -1,6 +1,6 @@
 import "./style.scss"
 import { useEffect, useReducer, useState } from "react"
-import { Menu, Segment } from "semantic-ui-react"
+import { Loader, Menu } from "semantic-ui-react"
 import axios from "axios"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
@@ -29,7 +29,7 @@ const Chart = ({
     const [timeframe, setTimeframe] = useState(duration)
 
     useEffect(() => {
-        getGraphData({ coin: coin.symbol, duration, period, prediction, start })
+        getGraphData(coin.cmcId, timeframe)
 
         if (hideXAxis) {
             dispatch({
@@ -49,22 +49,19 @@ const Chart = ({
         })
     }, [inverted, prediction])
 
-    const getGraphData = async ({ coin, duration, period, prediction = null, start }) => {
-        return await axios
-            .get("https://poloniex.com/public", {
+    const getGraphData = async (id, range) => {
+        await axios
+            .get("https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart", {
                 params: {
-                    command: "returnChartData",
-                    currencyPair: `USDT_${coin}`,
-                    end: "9999999999999999",
-                    start,
-                    period
+                    id,
+                    range
                 }
             })
             .then((response) => {
-                const { data } = response
+                const { data } = response.data
                 const points = []
-                for (let i in data) {
-                    points.push([data[i]["date"] * 1000, data[i].weightedAverage])
+                for (let key in data.points) {
+                    points.push([key * 1000, data.points[key]["v"][0]])
                 }
 
                 if (prediction) {
@@ -78,7 +75,7 @@ const Chart = ({
 
                 dispatch({
                     type: "SET_X_AXIS_FORMAT",
-                    duration
+                    duration: range
                 })
 
                 setLoaded(true)
@@ -88,11 +85,9 @@ const Chart = ({
             })
     }
 
-    const handleTimeChange = async (e, { name }) => {
+    const handleTimeChange = (e, { name }) => {
         setTimeframe(name)
-        const timeframe = await state.timeframes.filter((t) => t.name === name)
-        const { period, start } = timeframe[0]
-        getGraphData({ coin: coin.symbol, duration: name, period, start })
+        getGraphData(coin.cmcId, name)
     }
 
     return (
@@ -110,13 +105,21 @@ const Chart = ({
                 </Menu>
             )}
 
-            <HighchartsReact
-                allowChartUpdate
-                containerProps={{ className: "chartContainer" }}
-                highcharts={Highcharts}
-                inverted={inverted}
-                options={state.options}
-            />
+            {loaded ? (
+                <HighchartsReact
+                    allowChartUpdate
+                    containerProps={{ className: "chartContainer" }}
+                    highcharts={Highcharts}
+                    inverted={inverted}
+                    options={state.options}
+                />
+            ) : (
+                <>
+                    <div className="centered">
+                        <Loader active inverted={inverted} size="big" />
+                    </div>
+                </>
+            )}
         </div>
     )
 }
@@ -125,7 +128,7 @@ Chart.propTypes = {
     coin: PropTypes.shape({
         category: PropTypes.string,
         circulatingSupply: PropTypes.number,
-        dailyPercentChange: PropTypes.number,
+        dailyPercentChange: PropTypes.string,
         description: PropTypes.string,
         id: PropTypes.number,
         lastPrice: PropTypes.number,

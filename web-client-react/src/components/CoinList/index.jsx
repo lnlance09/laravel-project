@@ -1,26 +1,66 @@
 import "./style.scss"
-import { Card } from "semantic-ui-react"
-import CoinCard from "./card"
+import { Card, Image, Placeholder } from "semantic-ui-react"
+import { formatPlural } from "utils/textFunctions"
+import PlaceholderPic from "images/images/image.png"
 import PropTypes from "prop-types"
+import Truncate from "react-truncate"
 
-const CoinList = ({ coins, inverted, loading, onClickCoin }) => {
-    return (
-        <div className="coinList">
-            <Card.Group className={inverted ? "inverted" : ""} itemsPerRow={3}>
-                {coins.map((coin) => {
-                    return (
-                        <CoinCard
-                            coin={coin}
-                            inverted={inverted}
-                            loading={loading}
-                            onClickCoin={onClickCoin}
-                        />
-                    )
-                })}
-            </Card.Group>
-        </div>
-    )
-}
+const CoinList = ({ coins, inverted, loading, onClickCoin }) => (
+    <div className="coinList">
+        <Card.Group className={inverted ? "inverted" : ""} itemsPerRow={3}>
+            {coins.map((coin, i) => {
+                const { dailyPercentChange, description, logo, name, slug, symbol } = coin
+                return (
+                    <Card key={`coin${i}`} onClick={() => onClickCoin(slug)}>
+                        {loading ? (
+                            <Card.Content>
+                                <Placeholder fluid inverted={inverted}>
+                                    <Placeholder.Paragraph>
+                                        <Placeholder.Line length="full" />
+                                        <Placeholder.Line length="long" />
+                                        <Placeholder.Line length="short" />
+                                    </Placeholder.Paragraph>
+                                </Placeholder>
+                            </Card.Content>
+                        ) : (
+                            <>
+                                <Card.Content>
+                                    <Image
+                                        floated="right"
+                                        onError={(i) => (i.target.src = PlaceholderPic)}
+                                        size="mini"
+                                        src={logo}
+                                    />
+                                    <Card.Header>{name}</Card.Header>
+                                    <Card.Meta>
+                                        {symbol}{" "}
+                                        <span
+                                            className={`percent ${
+                                                dailyPercentChange > 0 ? "green" : "red"
+                                            }`}
+                                        >
+                                            {dailyPercentChange > 0 ? "+" : ""}
+                                            {dailyPercentChange}%
+                                        </span>
+                                    </Card.Meta>
+                                    <Card.Description>
+                                        <Truncate ellipsis={<span>...</span>} lines={4}>
+                                            {description}
+                                        </Truncate>
+                                    </Card.Description>
+                                </Card.Content>
+                                <Card.Content extra>
+                                    {coin.predictionsCount}{" "}
+                                    {formatPlural(coin.predictionsCount, "prediction")}
+                                </Card.Content>
+                            </>
+                        )}
+                    </Card>
+                )
+            })}
+        </Card.Group>
+    </div>
+)
 
 CoinList.propTypes = {
     coins: PropTypes.arrayOf(

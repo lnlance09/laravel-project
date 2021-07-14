@@ -1,7 +1,8 @@
 import "react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css"
 import "./style.scss"
 import { useEffect, useState } from "react"
-import { Button, Divider, Form, Header, Icon, Segment } from "semantic-ui-react"
+import { Button, Divider, Form, Grid, Header, Segment } from "semantic-ui-react"
+import { formatPlural } from "utils/textFunctions"
 import Chart from "components/Chart"
 import moment from "moment"
 import NumberFormat from "react-number-format"
@@ -47,9 +48,6 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
             <Form size="large">
                 <Form.Group widths="equal">
                     <Form.Field>
-                        <Header as="p" inverted={inverted} textAlign="center">
-                            The value will be{" "}
-                        </Header>
                         <div className={`ui labeled input ${inverted ? "inverted" : ""}`}>
                             <div className="ui basic label label">$</div>
                             <NumberFormat
@@ -73,9 +71,6 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
                         </div>
                     </Form.Field>
                     <Form.Field className="dateField">
-                        <Header as="p" inverted={inverted} textAlign="center">
-                            When?{" "}
-                        </Header>
                         <SemanticDatepicker
                             className="fluid inverted"
                             datePickerOnly
@@ -93,36 +88,51 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
                     </Form.Field>
                 </Form.Group>
                 {formIsValid && (
-                    <>
-                        <Chart
-                            coin={coin}
-                            duration="1Y"
-                            hideYAxis
-                            includeRanges={false}
-                            inverted={inverted}
-                            period={86400}
-                            prediction={{
-                                date: Math.round(new Date(date).getTime()),
-                                price: parseInt(price, 10)
-                            }}
-                        />
-                        <Divider inverted={inverted} />
-                        <Segment inverted={inverted} placeholder>
-                            <Header icon>
-                                <Icon name="chess" />
-                                You're predicting that {coin.symbol} will be worth{" "}
-                                <span className={operator === "more" ? "green" : "red"}>
-                                    {percentDiff}%
-                                </span>{" "}
-                                {operator} <span className="daysFromNow">{daysFromNow} days</span>{" "}
-                                from now
-                            </Header>
-                        </Segment>
-                    </>
+                    <Grid stackable>
+                        <Grid.Row>
+                            <Grid.Column style={{ height: "200px" }} width={8}>
+                                <Chart
+                                    coin={coin}
+                                    containerProps={{ style: { height: "200px" } }}
+                                    duration="1Y"
+                                    hideYAxis
+                                    includeRanges={false}
+                                    inverted={inverted}
+                                    period={86400}
+                                    prediction={{
+                                        date: Math.round(new Date(date).getTime()),
+                                        price: parseInt(price, 10)
+                                    }}
+                                />
+                            </Grid.Column>
+                            <Grid.Column width={8}>
+                                <Segment inverted={inverted}>
+                                    <Header as="p" inverted={inverted}>
+                                        You're predicting that {coin.symbol} will be worth{" "}
+                                        <span className={operator === "more" ? "green" : "red"}>
+                                            {percentDiff}%
+                                        </span>{" "}
+                                        {operator}{" "}
+                                        <span className="daysFromNow">
+                                            {daysFromNow} {formatPlural(daysFromNow, "day")}
+                                        </span>{" "}
+                                        from now
+                                    </Header>
+                                </Segment>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
                 )}
-                <Divider inverted={inverted} />
-                <Button content="Submit" disabled={!formIsValid} fluid primary size="large" />
             </Form>
+            <Divider inverted={inverted} />
+            <Button
+                color="purple"
+                content="Predict"
+                disabled={!formIsValid}
+                fluid
+                secondary
+                size="large"
+            />
         </div>
     )
 }

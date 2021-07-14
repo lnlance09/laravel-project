@@ -21,4 +21,28 @@ export const setIcon = (value) => {
     return value === "asc" ? "arrow up" : value === "desc" ? "arrow down" : false
 }
 
+export const setIconColor = (status) => {
+    switch (status) {
+        case "Correct":
+            return "green"
+        case "Incorrect":
+            return "red"
+        default:
+            return "orange"
+    }
+}
+
+export const setIconName = (status) => {
+    switch (status) {
+        case "Correct":
+            return "check"
+        case "Incorrect":
+            return "close"
+        default:
+            return "hourglass"
+    }
+}
+
+export const setImage = (img) => img.replace("64x64", "128x128")
+
 export const hyphenateText = (text) => text.toLowerCase().split(" ").join("-")

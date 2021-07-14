@@ -120,7 +120,7 @@ const Predictions = ({ history }) => {
 
     return (
         <DefaultLayout history={history} inverted={inverted} useGrid={false}>
-            <Header as="h1" inverted={inverted}>
+            <Header as="h1" className="massive" inverted={inverted}>
                 Browse predictions
             </Header>
             <Grid>

@@ -1,7 +1,8 @@
-import { Button, Divider, Dropdown, Grid, Header } from "semantic-ui-react"
+import { Button, Divider, Grid, Header } from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
 import { DebounceInput } from "react-debounce-input"
 import { getConfig } from "options/toast"
+import { setIcon } from "utils/textFunctions"
 import { toast } from "react-toastify"
 import axios from "axios"
 import CoinList from "components/CoinList/"
@@ -22,12 +23,16 @@ const Coins = ({ history }) => {
         process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
         initialState
     )
+    const [activeItem, setActiveItem] = useState(null)
+    const [direction, setDirection] = useState(null)
     const [loading, setLoading] = useState(false)
+    const [marketCap, setMarketCap] = useState(null)
+    const [predictions, setPredictions] = useState(null)
     const [searchTerm, setSearchTerm] = useState("")
 
     useEffect(() => {
-        getCoins(searchTerm)
-    }, [searchTerm])
+        getCoins(null, null, null)
+    }, [])
 
     const getCoins = async (q, sort, dir) => {
         setLoading(true)
@@ -52,34 +57,42 @@ const Coins = ({ history }) => {
             })
     }
 
-    const onChangeMarketCap = (e, { value }) => {
-        getCoins(searchTerm, "market_cap", value)
-    }
-
-    const onChangePredictions = (e, { value }) => {
-        getCoins(searchTerm, "predictions_count", value)
-    }
-
     const onChangeText = async (e) => {
         const q = e.target.value
         setSearchTerm(q)
-        await getCoins(q)
+        await getCoins(q, activeItem, direction)
     }
 
     const onClickCoin = (slug) => {
         history.push(`/coins/${slug}`)
     }
 
+    const toggleMarketCap = () => {
+        const newVal = marketCap === null || marketCap === "desc" ? "asc" : "desc"
+        setMarketCap(newVal)
+        setActiveItem("market_cap")
+        setDirection(newVal)
+        getCoins(searchTerm, "market_cap", newVal)
+    }
+
+    const togglePredictions = () => {
+        const newVal = predictions === null || predictions === "desc" ? "asc" : "desc"
+        setPredictions(newVal)
+        setActiveItem("predictions_count")
+        setDirection(newVal)
+        getCoins(searchTerm, "predictions_count", newVal)
+    }
+
     return (
         <DefaultLayout history={history} inverted={inverted} useGrid={false}>
-            <Header as="h1" inverted={inverted}>
+            <Header as="h1" className="massive" inverted={inverted}>
                 Browse coins
             </Header>
             <Grid>
                 <Grid.Column width={10}>
                     <div className={`ui icon input big basic fluid ${inverted ? "inverted" : ""}`}>
                         <DebounceInput
-                            debounceTimeout={700}
+                            debounceTimeout={400}
                             minLength={2}
                             onChange={onChangeText}
                             placeholder="Search..."
@@ -88,60 +101,25 @@ const Coins = ({ history }) => {
                     </div>
                 </Grid.Column>
                 <Grid.Column width={3}>
-                    <Dropdown
-                        className="inverted"
+                    <Button
+                        color="blue"
+                        content="Predictions"
                         fluid
-                        icon={false}
-                        onChange={onChangePredictions}
-                        options={[
-                            { icon: "arrow up green", key: "most", text: "Most", value: "desc" },
-                            {
-                                icon: "arrow down red",
-                                key: "fewest",
-                                text: "Fewest",
-                                value: "asc"
-                            }
-                        ]}
-                        trigger={
-                            <Button
-                                color="blue"
-                                content="Predictions"
-                                fluid
-                                inverted={inverted}
-                                size="big"
-                            />
-                        }
+                        icon={activeItem === "predictions_count" && setIcon(predictions)}
+                        inverted={inverted}
+                        onClick={togglePredictions}
+                        size="big"
                     />
                 </Grid.Column>
                 <Grid.Column width={3}>
-                    <Dropdown
-                        className="inverted"
+                    <Button
+                        color="violet"
+                        content="Market Cap"
                         fluid
-                        icon={false}
-                        onChange={onChangeMarketCap}
-                        options={[
-                            {
-                                icon: "arrow up green",
-                                key: "highest",
-                                text: "Highest",
-                                value: "desc"
-                            },
-                            {
-                                icon: "arrow down red",
-                                key: "lowest",
-                                text: "Lowest",
-                                value: "asc"
-                            }
-                        ]}
-                        trigger={
-                            <Button
-                                color="violet"
-                                content="Market Cap"
-                                fluid
-                                inverted={inverted}
-                                size="big"
-                            />
-                        }
+                        icon={activeItem === "market_cap" && setIcon(marketCap)}
+                        inverted={inverted}
+                        onClick={toggleMarketCap}
+                        size="big"
                     />
                 </Grid.Column>
             </Grid>

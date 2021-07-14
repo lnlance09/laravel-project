@@ -1,3 +1,5 @@
 /*******************************
     User Variable Overrides
 *******************************/
+@invertedMenuBackground: #090127;
+@invertedSelectedBackground: lighten(rgba(09, 01, 27, 0.25), 21%);

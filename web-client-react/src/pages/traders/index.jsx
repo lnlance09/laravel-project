@@ -6,12 +6,10 @@ import axios from "axios"
 import DefaultLayout from "layouts/default"
 import initialState from "states/trader"
 import logger from "use-reducer-logger"
-import NumberFormat from "react-number-format"
 import PlaceholderPic from "images/avatar/large/steve.jpg"
 import PropTypes from "prop-types"
 import reducer from "reducers/trader"
 import ThemeContext from "themeContext"
-import Traders from "./show"
 
 const toastConfig = getConfig()
 toast.configure(toastConfig)

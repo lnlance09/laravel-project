@@ -1,4 +1,4 @@
-import { Divider, Header, Image, Loader, Segment } from "semantic-ui-react"
+import { Divider, Grid, Header, Image, List, Loader, Segment } from "semantic-ui-react"
 import { useContext, useEffect, useReducer } from "react"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
@@ -6,6 +6,7 @@ import axios from "axios"
 import Chart from "components/Chart"
 import DefaultLayout from "layouts/default"
 import initialState from "states/coin"
+import Linkify from "react-linkify"
 import logger from "use-reducer-logger"
 import NumberFormat from "react-number-format"
 import PredictionForm from "components/PredictionForm"
@@ -36,7 +37,7 @@ const Coin = ({ history, match }) => {
                         type: "GET_COIN",
                         coin
                     })
-                    await callback(coin.symbol)
+                    await callback(coin.cmcId)
                 })
                 .catch(() => {
                     toast.error("There was an error")
@@ -46,23 +47,19 @@ const Coin = ({ history, match }) => {
         getCoin(slug, getLastPrice)
     }, [slug])
 
-    const getLastPrice = async (coin) => {
-        const start = Math.round(new Date().getTime() / 1000 - 86400)
+    const getLastPrice = async (id) => {
         await axios
-            .get("https://poloniex.com/public", {
+            .get("https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart", {
                 params: {
-                    command: "returnChartData",
-                    currencyPair: `USDT_${coin}`,
-                    end: "9999999999999999",
-                    start,
-                    period: 300
+                    id,
+                    range: "1D"
                 }
             })
             .then((response) => {
-                const { data } = response
+                const { data } = response.data
                 const points = []
-                for (let i in data) {
-                    points.push([data[i]["date"] * 1000, data[i].weightedAverage])
+                for (let key in data.points) {
+                    points.push([key * 1000, data.points[key]["v"][0]])
                 }
 
                 dispatch({
@@ -94,26 +91,104 @@ const Coin = ({ history, match }) => {
                             </Header.Subheader>
                         </Header.Content>
                     </Header>
-                    <Chart coin={coin} inverted={inverted} />
-                    <Divider
-                        className="makePredictionDivider"
-                        horizontal
+                    <Header as="p" inverted={inverted}>
+                        <Linkify
+                            properties={{
+                                target: "_blank"
+                            }}
+                        >
+                            {coin.description}
+                        </Linkify>
+                    </Header>
+
+                    <Header
+                        as="h2"
+                        className="dividerHeader"
+                        dividing
                         inverted={inverted}
-                        section
+                        size="huge"
                     >
-                        <Header as="h2" className="dividerHeader" inverted={inverted}>
-                            Make a Prediction
-                        </Header>
-                    </Divider>
-                    <Segment basic inverted={inverted}>
-                        <PredictionForm
-                            coin={coin}
-                            defaultPrice={coin.lastPrice * 1.1}
-                            history={history}
-                            inverted={inverted}
-                        />
+                        Metrics
+                    </Header>
+
+                    <Segment inverted={inverted}>
+                        <Grid columns={2} stackable>
+                            <Grid.Row>
+                                <Grid.Column>
+                                    <List size="big">
+                                        <List.Item>
+                                            <b>Market Cap:</b>{" "}
+                                            <NumberFormat
+                                                decimalScale={2}
+                                                displayType={"text"}
+                                                prefix={"$"}
+                                                thousandSeparator
+                                                value={coin.marketCap}
+                                            />
+                                        </List.Item>
+                                        <List.Item>
+                                            <b>Circ Supply:</b>{" "}
+                                            <NumberFormat
+                                                displayType={"text"}
+                                                thousandSeparator
+                                                value={coin.circulatingSupply}
+                                            />
+                                        </List.Item>
+                                        <List.Item>
+                                            <b>Max Supply:</b>{" "}
+                                            <NumberFormat
+                                                displayType={"text"}
+                                                thousandSeparator
+                                                value={coin.maxSupply}
+                                            />
+                                        </List.Item>
+                                    </List>
+                                </Grid.Column>
+                                <Grid.Column></Grid.Column>
+                            </Grid.Row>
+                        </Grid>
                     </Segment>
-                    <Divider inverted={inverted} section />
+
+                    <Header
+                        as="h2"
+                        className="dividerHeader"
+                        dividing
+                        inverted={inverted}
+                        size="huge"
+                    >
+                        Performance
+                    </Header>
+
+                    <Chart coin={coin} inverted={inverted} />
+
+                    <Header
+                        as="h2"
+                        className="dividerHeader"
+                        dividing
+                        inverted={inverted}
+                        size="huge"
+                    >
+                        Make a Prediction
+                    </Header>
+
+                    <PredictionForm
+                        coin={coin}
+                        defaultPrice={coin.lastPrice * 1.1}
+                        history={history}
+                        inverted={inverted}
+                    />
+
+                    <Header
+                        as="h2"
+                        className="dividerHeader"
+                        dividing
+                        inverted={inverted}
+                        size="huge"
+                    >
+                        Best {coin.symbol} Traders
+                    </Header>
+
+                    <Divider hidden section />
                 </>
             ) : (
                 <>
@@ -130,7 +205,7 @@ Coin.propTypes = {
     coin: PropTypes.shape({
         category: PropTypes.string,
         circulatingSupply: PropTypes.number,
-        dailyPercentChange: PropTypes.number,
+        dailyPercentChange: PropTypes.string,
         description: PropTypes.string,
         id: PropTypes.number,
         lastPrice: PropTypes.number,

@@ -46,7 +46,7 @@ const PageHeader = ({ history, q, showResults, simple }) => {
                     />
                 </Container>
             ) : (
-                <Menu borderless fixed="top" fluid inverted={inverted} size="big">
+                <Menu borderless fixed="top" fluid inverted={inverted}>
                     <Container>
                         <Menu.Item className="logoItem">
                             <Header as="h1" inverted={inverted} onClick={() => history.push("/")}>
@@ -96,11 +96,13 @@ const PageHeader = ({ history, q, showResults, simple }) => {
                                         content="Log In"
                                         onClick={() => history.push("/login")}
                                         secondary
+                                        size="large"
                                     />
                                     <Button
                                         content="Sign Up"
                                         onClick={() => history.push("/login?type=join")}
                                         primary
+                                        size="large"
                                     />
                                 </>
                             )}
