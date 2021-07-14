@@ -8,6 +8,7 @@ import axios from "axios"
 import DefaultLayout from "layouts/default"
 import initialState from "states/traders"
 import logger from "use-reducer-logger"
+import PropTypes from "prop-types"
 import reducer from "reducers/traders"
 import ThemeContext from "themeContext"
 import TraderList from "components/TraderList/"
@@ -18,6 +19,7 @@ toast.configure(toastConfig)
 const Traders = ({ history }) => {
     const { state } = useContext(ThemeContext)
     const { inverted } = state
+
     const [internalState, dispatch] = useReducer(
         process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
         initialState
@@ -161,6 +163,10 @@ const Traders = ({ history }) => {
             <Divider hidden section />
         </DefaultLayout>
     )
+}
+
+Traders.propTypes = {
+    history: PropTypes.object
 }
 
 export default Traders

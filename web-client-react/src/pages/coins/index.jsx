@@ -21,6 +21,7 @@ const Coin = ({ history, match }) => {
     const { state } = useContext(ThemeContext)
     const { inverted } = state
     const { slug } = match.params
+
     const [internalState, dispatch] = useReducer(
         process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
         initialState
@@ -202,21 +203,8 @@ const Coin = ({ history, match }) => {
 }
 
 Coin.propTypes = {
-    coin: PropTypes.shape({
-        category: PropTypes.string,
-        circulatingSupply: PropTypes.number,
-        dailyPercentChange: PropTypes.string,
-        description: PropTypes.string,
-        id: PropTypes.number,
-        lastPrice: PropTypes.number,
-        logo: PropTypes.string,
-        marketCap: PropTypes.number,
-        maxSupply: PropTypes.number,
-        name: PropTypes.string.isRequired,
-        slug: PropTypes.string,
-        symbol: PropTypes.string,
-        totalSupply: PropTypes.number
-    })
+    history: PropTypes.object,
+    match: PropTypes.object
 }
 
 export default Coin

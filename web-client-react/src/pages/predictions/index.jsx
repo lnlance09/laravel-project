@@ -94,21 +94,8 @@ const Prediction = ({ history, match }) => {
 }
 
 Prediction.propTypes = {
-    prediction: PropTypes.shape({
-        category: PropTypes.string,
-        circulatingSupply: PropTypes.number,
-        dailyPercentChange: PropTypes.number,
-        description: PropTypes.string,
-        id: PropTypes.number,
-        lastPrice: PropTypes.number,
-        logo: PropTypes.string,
-        marketCap: PropTypes.number,
-        maxSupply: PropTypes.number,
-        name: PropTypes.string.isRequired,
-        slug: PropTypes.string,
-        symbol: PropTypes.string,
-        totalSupply: PropTypes.number
-    })
+    history: PropTypes.object,
+    match: PropTypes.object
 }
 
 export default Prediction

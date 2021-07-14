@@ -1,14 +1,11 @@
 import "react-toastify/dist/ReactToastify.css"
-// import "semantic-ui-css/semantic.min.css"
 import "./semantic/dist/semantic.min.css"
-// import "fomantic-ui-css/semantic.min.css"
 import "./scss/app.scss"
 import React, { useState } from "react"
 import { Route, Router, Switch } from "react-router-dom"
 import Coin from "pages/coins"
 import Coins from "pages/coins/show"
 import history from "history.js"
-import Home from "pages/home"
 import Logo from "./images/logos/main.png"
 import Login from "pages/login"
 import NotFound from "pages/notFound"
@@ -87,11 +84,9 @@ const App = () => {
                                 exact
                                 path="/"
                                 render={(props) => (
-                                    <Home key={window.location.pathname} {...props} />
+                                    <Predictions key={window.location.pathname} {...props} />
                                 )}
                             />
-
-                            <Route component={Home} exact path="/home" />
 
                             <Route
                                 exact

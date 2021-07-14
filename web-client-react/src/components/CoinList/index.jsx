@@ -67,19 +67,19 @@ CoinList.propTypes = {
         PropTypes.shape({
             category: PropTypes.string,
             circulatingSupply: PropTypes.number,
+            cmcId: PropTypes.number,
             dailyPercentChange: PropTypes.string,
             description: PropTypes.string,
-            expanded: PropTypes.bool,
             id: PropTypes.number,
             lastPrice: PropTypes.number,
             logo: PropTypes.string,
             marketCap: PropTypes.number,
             maxSupply: PropTypes.number,
-            name: PropTypes.string,
+            name: PropTypes.string.isRequired,
+            predictionsCount: PropTypes.number,
             slug: PropTypes.string,
             symbol: PropTypes.string,
-            totalSupply: PropTypes.number,
-            truncated: PropTypes.bool
+            totalSupply: PropTypes.number
         })
     ),
     inverted: PropTypes.bool,

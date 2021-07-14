@@ -2,6 +2,7 @@ import { Container } from "semantic-ui-react"
 import { useContext } from "react"
 import Authentication from "components/Authentication"
 import DefaultLayout from "layouts/default"
+import PropTypes from "prop-types"
 import ThemeContext from "themeContext"
 
 const SignIn = ({ history }) => {
@@ -26,6 +27,10 @@ const SignIn = ({ history }) => {
             </Container>
         </DefaultLayout>
     )
+}
+
+SignIn.propTypes = {
+    history: PropTypes.object
 }
 
 export default SignIn

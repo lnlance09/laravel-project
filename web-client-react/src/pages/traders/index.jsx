@@ -18,6 +18,7 @@ const Trader = ({ history, match }) => {
     const { state } = useContext(ThemeContext)
     const { inverted } = state
     const { username } = match.params
+
     const [internalState, dispatch] = useReducer(
         process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
         initialState
@@ -117,7 +118,8 @@ const Trader = ({ history, match }) => {
 }
 
 Trader.propTypes = {
-    trader: PropTypes.shape({})
+    history: PropTypes.object,
+    match: PropTypes.object
 }
 
 export default Trader

@@ -140,6 +140,9 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
 PredictionForm.propTypes = {
     coin: PropTypes.shape({
         category: PropTypes.string,
+        circulatingSupply: PropTypes.number,
+        cmcId: PropTypes.number,
+        dailyPercentChange: PropTypes.string,
         description: PropTypes.string,
         id: PropTypes.number,
         lastPrice: PropTypes.number,
@@ -147,6 +150,7 @@ PredictionForm.propTypes = {
         marketCap: PropTypes.number,
         maxSupply: PropTypes.number,
         name: PropTypes.string.isRequired,
+        predictionsCount: PropTypes.number,
         slug: PropTypes.string,
         symbol: PropTypes.string,
         totalSupply: PropTypes.number

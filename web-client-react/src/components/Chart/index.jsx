@@ -128,6 +128,7 @@ Chart.propTypes = {
     coin: PropTypes.shape({
         category: PropTypes.string,
         circulatingSupply: PropTypes.number,
+        cmcId: PropTypes.number,
         dailyPercentChange: PropTypes.string,
         description: PropTypes.string,
         id: PropTypes.number,
@@ -136,26 +137,20 @@ Chart.propTypes = {
         marketCap: PropTypes.number,
         maxSupply: PropTypes.number,
         name: PropTypes.string.isRequired,
+        predictionsCount: PropTypes.number,
         slug: PropTypes.string,
         symbol: PropTypes.string,
         totalSupply: PropTypes.number
     }),
     hideXAxis: PropTypes.bool,
     hideYAxis: PropTypes.bool,
+    history: PropTypes.object,
     includeRanges: PropTypes.bool,
     inverted: PropTypes.bool,
-    options: PropTypes.shape({}),
     prediction: PropTypes.shape({
         date: PropTypes.number,
         price: PropTypes.number
-    }),
-    timeframes: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string,
-            period: PropTypes.number,
-            start: PropTypes.number
-        })
-    )
+    })
 }
 
 export default Chart

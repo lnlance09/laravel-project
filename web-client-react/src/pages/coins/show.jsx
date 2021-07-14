@@ -10,6 +10,7 @@ import DefaultLayout from "layouts/default"
 import initialState from "states/coins"
 import logger from "use-reducer-logger"
 import reducer from "reducers/coins"
+import PropTypes from "prop-types"
 import ThemeContext from "themeContext"
 
 const toastConfig = getConfig()
@@ -133,6 +134,10 @@ const Coins = ({ history }) => {
             <Divider hidden />
         </DefaultLayout>
     )
+}
+
+Coins.propTypes = {
+    history: PropTypes.object
 }
 
 export default Coins

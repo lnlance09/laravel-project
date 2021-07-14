@@ -9,6 +9,7 @@ import PredictionList from "components/PredictionList"
 import DefaultLayout from "layouts/default"
 import initialState from "states/predictions"
 import logger from "use-reducer-logger"
+import PropTypes from "prop-types"
 import reducer from "reducers/predictions"
 import ThemeContext from "themeContext"
 
@@ -218,6 +219,11 @@ const Predictions = ({ history }) => {
             />
         </DefaultLayout>
     )
+}
+
+Predictions.propTypes = {
+    history: PropTypes.object,
+    match: PropTypes.object
 }
 
 export default Predictions
