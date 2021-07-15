@@ -1,5 +1,6 @@
-import { Divider, Header, Loader, Segment } from "semantic-ui-react"
+import { Divider, Header, Loader } from "semantic-ui-react"
 import { useContext, useEffect, useReducer } from "react"
+import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
 import axios from "axios"
@@ -7,7 +8,6 @@ import DefaultLayout from "layouts/default"
 import initialState from "states/prediction"
 import logger from "use-reducer-logger"
 import NumberFormat from "react-number-format"
-import PredictionForm from "components/PredictionForm"
 import PropTypes from "prop-types"
 import reducer from "reducers/prediction"
 import ThemeContext from "themeContext"
@@ -46,6 +46,7 @@ const Prediction = ({ history, match }) => {
 
     return (
         <DefaultLayout history={history} inverted={inverted} textAlign="center" useGrid={false}>
+            <DisplayMetaTags page="predictions" state={internalState} />
             {loaded ? (
                 <>
                     <Header as="h1" inverted={inverted}>
@@ -62,25 +63,8 @@ const Prediction = ({ history, match }) => {
                             </Header.Subheader>
                         </Header.Content>
                     </Header>
-                    <Divider
-                        className="makePredictionDivider"
-                        horizontal
-                        inverted={inverted}
-                        section
-                    >
-                        <Header as="h2" className="dividerHeader" inverted={inverted}>
-                            Make a Prediction
-                        </Header>
-                    </Divider>
-                    <Segment basic inverted={inverted}>
-                        <PredictionForm
-                            coin={prediction.coin}
-                            defaultPrice={prediction.coin.lastPrice * 1.1}
-                            history={history}
-                            inverted={inverted}
-                        />
-                    </Segment>
-                    <Divider inverted={inverted} section />
+
+                    <Divider hidden section />
                 </>
             ) : (
                 <>

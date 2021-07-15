@@ -1,5 +1,6 @@
 import { Button, Divider, Dropdown, Grid, Header, Icon } from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
+import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
 import { setIcon } from "utils/textFunctions"
@@ -121,6 +122,7 @@ const Predictions = ({ history }) => {
 
     return (
         <DefaultLayout history={history} inverted={inverted} useGrid={false}>
+            <DisplayMetaTags page="predictions" state={internalState} />
             <Header as="h1" className="massive" inverted={inverted}>
                 Browse predictions
             </Header>

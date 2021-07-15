@@ -1,5 +1,6 @@
 import { Divider, Grid, Header, Image, List, Loader, Segment } from "semantic-ui-react"
 import { useContext, useEffect, useReducer } from "react"
+import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
 import axios from "axios"
@@ -75,6 +76,7 @@ const Coin = ({ history, match }) => {
 
     return (
         <DefaultLayout history={history} inverted={inverted} textAlign="center" useGrid={false}>
+            <DisplayMetaTags page="coin" state={internalState} />
             {loaded ? (
                 <>
                     <Header as="h1" inverted={inverted}>

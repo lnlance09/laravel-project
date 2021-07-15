@@ -1,5 +1,6 @@
 import { Divider, Grid, Header, Image, List, Loader, Segment } from "semantic-ui-react"
 import { useContext, useEffect, useReducer } from "react"
+import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
 import axios from "axios"
@@ -7,6 +8,7 @@ import DefaultLayout from "layouts/default"
 import initialState from "states/trader"
 import logger from "use-reducer-logger"
 import PlaceholderPic from "images/avatar/large/steve.jpg"
+import PredictionList from "components/PredictionList"
 import PropTypes from "prop-types"
 import reducer from "reducers/trader"
 import ThemeContext from "themeContext"
@@ -23,7 +25,7 @@ const Trader = ({ history, match }) => {
         process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
         initialState
     )
-    const { loaded, trader } = internalState
+    const { loaded, predictions, trader } = internalState
 
     useEffect(() => {
         const getTrader = async (user) => {
@@ -35,6 +37,7 @@ const Trader = ({ history, match }) => {
                         type: "GET_TRADER",
                         trader
                     })
+                    getPredictions(trader.id, null, null, null)
                 })
                 .catch(() => {
                     toast.error("There was an error")
@@ -44,6 +47,32 @@ const Trader = ({ history, match }) => {
         getTrader(username)
     }, [username])
 
+    const getPredictions = async (userId, status, sort, dir) => {
+        await axios
+            .get(`${process.env.REACT_APP_BASE_URL}predictions`, {
+                params: {
+                    userId,
+                    status,
+                    sort,
+                    dir
+                }
+            })
+            .then((response) => {
+                const predictions = response.data.data
+                dispatch({
+                    type: "GET_PREDICTIONS",
+                    predictions
+                })
+            })
+            .catch(() => {
+                toast.error("There was an error")
+            })
+    }
+
+    const onClickPrediction = (id) => {
+        history.push(`/predictions/${id}`)
+    }
+
     return (
         <DefaultLayout
             containerClassName="traderPage"
@@ -52,6 +81,7 @@ const Trader = ({ history, match }) => {
             textAlign="center"
             useGrid={false}
         >
+            <DisplayMetaTags page="trader" state={internalState} />
             {loaded ? (
                 <>
                     <Grid>
@@ -104,7 +134,13 @@ const Trader = ({ history, match }) => {
                     </Grid>
 
                     <Divider inverted={inverted} section />
-                    <Segment basic inverted={inverted}></Segment>
+
+                    <PredictionList
+                        inverted={inverted}
+                        loading={predictions.loading}
+                        predictions={predictions.data}
+                        onClickPrediction={onClickPrediction}
+                    />
                 </>
             ) : (
                 <>

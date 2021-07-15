@@ -1,5 +1,6 @@
-import { Container } from "semantic-ui-react"
 import { useContext } from "react"
+import { Container } from "semantic-ui-react"
+import { DisplayMetaTags } from "utils/metaFunctions"
 import Authentication from "components/Authentication"
 import DefaultLayout from "layouts/default"
 import PropTypes from "prop-types"
@@ -18,6 +19,7 @@ const SignIn = ({ history }) => {
             simpleHeader
             useGrid={false}
         >
+            <DisplayMetaTags page="signin" />
             <Container className="authContainer" textAlign="center">
                 <Authentication
                     history={history}

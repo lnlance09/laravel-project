@@ -16,6 +16,7 @@ class PredictionController extends Controller
      */
     public function index(Request $request)
     {
+        $userId = $request->input('userId', null);
         $coinId = $request->input('coinId', null);
         $status = $request->input('status', null);
         $sort = $request->input('sort', 'id');
@@ -28,6 +29,10 @@ class PredictionController extends Controller
 
         if ($status) {
             $where['status'] = $status;
+        }
+
+        if ($userId) {
+            $where['user_id'] = $userId;
         }
 
         $predictions = Prediction::with('coin')

@@ -1,6 +1,7 @@
 import { Button, Divider, Grid, Header, Visibility } from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
 import { DebounceInput } from "react-debounce-input"
+import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
 import { setIcon } from "utils/textFunctions"
 import { toast } from "react-toastify"
@@ -102,6 +103,7 @@ const Traders = ({ history }) => {
 
     return (
         <DefaultLayout history={history} inverted={inverted} useGrid={false}>
+            <DisplayMetaTags page="traders" state={internalState} />
             <Header as="h1" className="massive" inverted={inverted}>
                 Traders
             </Header>
