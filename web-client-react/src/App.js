@@ -132,7 +132,7 @@ const App = () => {
 
                             <Route
                                 exact
-                                path="/traders/:username"
+                                path="/:username"
                                 render={(props) => (
                                     <Trader key={window.location.pathname} {...props} />
                                 )}

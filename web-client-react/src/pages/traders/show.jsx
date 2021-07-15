@@ -82,7 +82,7 @@ const Traders = ({ history }) => {
     }
 
     const onClickTrader = (username) => {
-        history.push(`/traders/${username}`)
+        history.push(`/${username}`)
     }
 
     const toggleAccuracy = () => {

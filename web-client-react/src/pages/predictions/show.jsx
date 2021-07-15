@@ -181,7 +181,7 @@ const Predictions = ({ history }) => {
                 <Grid.Column width={3}>
                     <Button
                         color="orange"
-                        content="Created Date"
+                        content="Created At"
                         fluid
                         icon={activeItem === "created_at" && setIcon(createdAt)}
                         inverted={inverted}

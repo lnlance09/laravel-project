@@ -14,6 +14,14 @@ const reducer = (state, action) => {
                 loaded: true,
                 trader: action.trader
             }
+        case "SET_LOADING_PREDICTIONS":
+            return {
+                ...state,
+                predictions: {
+                    ...state.predictions,
+                    loading: true
+                }
+            }
         default:
             throw new Error()
     }

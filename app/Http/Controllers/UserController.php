@@ -15,6 +15,8 @@ use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
+    const PROTECTED_USERNAMES = ['options'];
+
     /**
      * Instantiate a new controller instance.
      *
@@ -77,12 +79,23 @@ class UserController extends Controller
             'username' => 'bail|required|max:20|unique:users,username|alpha_dash'
         ]);
 
+        $username = $request->input('username');
+        if (in_array(strtolower($username), self::PROTECTED_USERNAMES)) {
+            return response([
+                'errors' => [
+                    'username' => [
+                        'That username is invalid'
+                    ]
+                ]
+            ], 422);
+        }
+
         $user = User::create([
             'api_token' => Str::random(60),
             'email' => $request->input('email'),
             'name' => $request->input('name'),
             'password' => $request->input('password'),
-            'username' => $request->input('username'),
+            'username' => $username,
             'verification_code' => mt_rand(1000, 9999)
         ]);
         $user->refresh();

@@ -1,5 +1,5 @@
-import { Divider, Grid, Header, Image, List, Loader, Segment } from "semantic-ui-react"
-import { useContext, useEffect, useReducer } from "react"
+import { Divider, Grid, Header, Image, Label, List, Loader, Segment } from "semantic-ui-react"
+import { useContext, useEffect, useReducer, useState } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
@@ -26,6 +26,7 @@ const Trader = ({ history, match }) => {
         initialState
     )
     const { loaded, predictions, trader } = internalState
+    const [activeItem, setActiveItem] = useState("all")
 
     useEffect(() => {
         const getTrader = async (user) => {
@@ -37,7 +38,7 @@ const Trader = ({ history, match }) => {
                         type: "GET_TRADER",
                         trader
                     })
-                    getPredictions(trader.id, null, null, null)
+                    getPredictions(trader.id, null)
                 })
                 .catch(() => {
                     toast.error("There was an error")
@@ -47,7 +48,11 @@ const Trader = ({ history, match }) => {
         getTrader(username)
     }, [username])
 
-    const getPredictions = async (userId, status, sort, dir) => {
+    const getPredictions = async (userId, status, sort = "created_at", dir = "desc") => {
+        dispatch({
+            type: "SET_LOADING_PREDICTIONS"
+        })
+
         await axios
             .get(`${process.env.REACT_APP_BASE_URL}predictions`, {
                 params: {
@@ -100,31 +105,84 @@ const Trader = ({ history, match }) => {
                             </Grid.Column>
                             <Grid.Column width={12}>
                                 <Header as="h1" inverted={inverted}>
-                                    {trader.name}
-                                    <Header.Subheader>@{trader.username}</Header.Subheader>
+                                    <Header.Content>
+                                        {trader.name}
+                                        <Header.Subheader>@{trader.username}</Header.Subheader>
+                                    </Header.Content>
+                                    <Label
+                                        basic
+                                        className={inverted ? "inverted" : null}
+                                        color="pink"
+                                    >
+                                        {trader.accuracy.toFixed(2)} % accurate
+                                    </Label>
                                 </Header>
                                 <Header as="p" inverted={inverted} size="small">
                                     {trader.bio}
                                 </Header>
                                 <List horizontal inverted={inverted} size="large">
-                                    <List.Item>
+                                    <List.Item
+                                        as="a"
+                                        className={activeItem === "all" ? "active" : null}
+                                        onClick={() => {
+                                            setActiveItem("all")
+                                            getPredictions(trader.id, null)
+                                        }}
+                                    >
                                         <List.Content>
                                             <List.Header>
                                                 {trader.predictionsCount} predictions
                                             </List.Header>
                                         </List.Content>
                                     </List.Item>
-                                    <List.Item>
+                                    <List.Item
+                                        as="a"
+                                        className={activeItem === "correct" ? "active" : null}
+                                        onClick={() => {
+                                            setActiveItem("correct")
+                                            getPredictions(trader.id, "Correct")
+                                        }}
+                                    >
                                         <List.Content>
                                             <List.Header>
-                                                {trader.correctPredictionsCount} correct
+                                                <span className="green">
+                                                    {trader.correctPredictionsCount}
+                                                </span>{" "}
+                                                correct
                                             </List.Header>
                                         </List.Content>
                                     </List.Item>
-                                    <List.Item>
+                                    <List.Item
+                                        as="a"
+                                        className={activeItem === "incorrect" ? "active" : null}
+                                        onClick={() => {
+                                            setActiveItem("incorrect")
+                                            getPredictions(trader.id, "Incorrect")
+                                        }}
+                                    >
                                         <List.Content>
                                             <List.Header>
-                                                {trader.incorrectPredictionsCount} wrong
+                                                <span className="red">
+                                                    {trader.incorrectPredictionsCount}
+                                                </span>{" "}
+                                                wrong
+                                            </List.Header>
+                                        </List.Content>
+                                    </List.Item>
+                                    <List.Item
+                                        as="a"
+                                        className={activeItem === "pending" ? "active" : null}
+                                        onClick={() => {
+                                            setActiveItem("pending")
+                                            getPredictions(trader.id, "Pending")
+                                        }}
+                                    >
+                                        <List.Content>
+                                            <List.Header>
+                                                <span className="orange">
+                                                    {trader.pendingPredictionsCount}
+                                                </span>{" "}
+                                                pending
                                             </List.Header>
                                         </List.Content>
                                     </List.Item>
@@ -133,7 +191,7 @@ const Trader = ({ history, match }) => {
                         </Grid.Row>
                     </Grid>
 
-                    <Divider inverted={inverted} section />
+                    <Divider hidden section />
 
                     <PredictionList
                         inverted={inverted}
