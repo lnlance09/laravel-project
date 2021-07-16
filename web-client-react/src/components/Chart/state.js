@@ -105,10 +105,12 @@ const initialState = {
             minPadding: 0,
             ordinal: true,
             showLastLabel: true,
+            tickWidth: 0,
             title: {
                 text: null
             },
-            type: "datetime"
+            type: "datetime",
+            visible: false
         },
         yAxis: {
             alternateGridColor: null,
@@ -124,10 +126,11 @@ const initialState = {
             opposite: false,
             tickWidth: 0,
             showLastLabel: false,
-            type: "logarithmic",
             title: {
                 text: null
-            }
+            },
+            type: "logarithmic",
+            visible: false
         }
     },
     timeframes: [

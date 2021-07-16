@@ -121,7 +121,13 @@ const Predictions = ({ history }) => {
     }
 
     return (
-        <DefaultLayout history={history} inverted={inverted} useGrid={false}>
+        <DefaultLayout
+            activeItem="predictions"
+            containerClassName="predictionsPage"
+            history={history}
+            inverted={inverted}
+            useGrid={false}
+        >
             <DisplayMetaTags page="predictions" state={internalState} />
             <Header as="h1" className="massive" inverted={inverted}>
                 Browse predictions

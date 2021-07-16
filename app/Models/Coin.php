@@ -18,14 +18,20 @@ class Coin extends PublicApi
         'circulating_supply',
         'cmc_id',
         'description',
+        'last_price',
         'logo',
         'market_cap',
         'max_supply',
         'name',
         'percent_change_24h',
+        'percent_change_7d',
+        'percent_change_30d',
+        'percent_change_60d',
+        'percent_change_90d',
         'slug',
         'symbol',
-        'total_supply'
+        'total_supply',
+        'volume_24h'
     ];
 
     /**

@@ -14,18 +14,25 @@ class User extends JsonResource
      */
     public function toArray($request)
     {
+        $correctCount = $this->correct_predictions_count;
+        $incorrectCount = $this->incorrect_predictions_count;
+        $pendingCount = $this->pending_predictions_count;
+        $totalCount = $this->predictions_count;
+        $activeCount = $totalCount - $pendingCount;
+
         return [
-            'accuracy' => $this->accuracy,
+            // 'accuracy' => $this->accuracy,
+            'accuracy' => $activeCount === 0 ? 0 : ($correctCount / $activeCount) * 100,
             'bio' => empty($this->bio) ? 'Apparently, this trader prefers to keep an air of mystery about them.' : $this->bio,
-            'correctPredictionsCount' => $this->correct_predictions_count,
+            'correctPredictionsCount' => $correctCount,
             'createdAt' => $this->created_at,
             'email' => $this->email,
             'id' => $this->id,
             'img' => env('AWS_URL') . $this->img,
-            'incorrectPredictionsCount' => $this->incorrect_predictions_count,
+            'incorrectPredictionsCount' => $incorrectCount,
             'name' => $this->name,
-            'pendingPredictionsCount' => $this->pending_predictions_count,
-            'predictionsCount' => $this->predictions_count,
+            'pendingPredictionsCount' => $pendingCount,
+            'predictionsCount' => $totalCount,
             'username' => $this->username
         ];
     }

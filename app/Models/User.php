@@ -87,7 +87,6 @@ class User extends Authenticatable
             return 0;
         }
 
-        return $this->accuracy = ($correct / $total) * 100;;
-        // return ($correct / $total) * 100;
+        return $this->accuracy = ($correct / $total) * 100;
     }
 }

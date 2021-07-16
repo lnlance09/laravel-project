@@ -1,7 +1,7 @@
 import "./style.scss"
 import { Item, Label, Placeholder } from "semantic-ui-react"
 import { formatPlural } from "utils/textFunctions"
-import PlaceholderPic from "images/images/image.png"
+import PlaceholderPic from "images/images/image-square.png"
 import PropTypes from "prop-types"
 
 const TraderList = ({ inverted, loading, loadingMore, onClickTrader, traders }) => (
@@ -32,6 +32,7 @@ const TraderList = ({ inverted, loading, loadingMore, onClickTrader, traders }) 
                         ) : (
                             <>
                                 <Item.Image
+                                    circular
                                     onError={(i) => (i.target.src = PlaceholderPic)}
                                     size="small"
                                     src={img}

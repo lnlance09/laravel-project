@@ -46,6 +46,7 @@ const DefaultLayout = ({
                         }`}
                     >
                         <PageHeader
+                            activeItem={activeItem}
                             history={history}
                             inverted={inverted}
                             q={q}
@@ -86,7 +87,7 @@ DefaultLayout.propTypes = {
 }
 
 DefaultLayout.defaultProps = {
-    activeItem: "home",
+    activeItem: null,
     containerClassName: "",
     inverted: true,
     isText: false,

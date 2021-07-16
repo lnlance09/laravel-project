@@ -1,7 +1,7 @@
 import "./style.scss"
 import { Card, Image, Placeholder } from "semantic-ui-react"
 import { formatPlural } from "utils/textFunctions"
-import PlaceholderPic from "images/images/image.png"
+import PlaceholderPic from "images/images/image-square.png"
 import PropTypes from "prop-types"
 import Truncate from "react-truncate"
 
@@ -9,7 +9,7 @@ const CoinList = ({ coins, inverted, loading, onClickCoin }) => (
     <div className="coinList">
         <Card.Group className={inverted ? "inverted" : ""} itemsPerRow={3}>
             {coins.map((coin, i) => {
-                const { dailyPercentChange, description, logo, name, slug, symbol } = coin
+                const { description, logo, name, slug, symbol } = coin
                 return (
                     <Card key={`coin${i}`} onClick={() => onClickCoin(slug)}>
                         {loading ? (
@@ -36,11 +36,11 @@ const CoinList = ({ coins, inverted, loading, onClickCoin }) => (
                                         {symbol}{" "}
                                         <span
                                             className={`percent ${
-                                                dailyPercentChange > 0 ? "green" : "red"
+                                                coin.percentages["24h"] > 0 ? "green" : "red"
                                             }`}
                                         >
-                                            {dailyPercentChange > 0 ? "+" : ""}
-                                            {dailyPercentChange}%
+                                            {coin.percentages["24h"] > 0 ? "+" : ""}
+                                            {coin.percentages["24h"]}%
                                         </span>
                                     </Card.Meta>
                                     <Card.Description>
@@ -68,7 +68,6 @@ CoinList.propTypes = {
             category: PropTypes.string,
             circulatingSupply: PropTypes.number,
             cmcId: PropTypes.number,
-            dailyPercentChange: PropTypes.string,
             description: PropTypes.string,
             id: PropTypes.number,
             lastPrice: PropTypes.number,
@@ -76,6 +75,14 @@ CoinList.propTypes = {
             marketCap: PropTypes.number,
             maxSupply: PropTypes.number,
             name: PropTypes.string,
+            percentages: PropTypes.shape({
+                "1h": PropTypes.number,
+                "24h": PropTypes.number,
+                "7d": PropTypes.number,
+                "30d": PropTypes.number,
+                "60d": PropTypes.number,
+                "90d": PropTypes.number
+            }),
             predictionsCount: PropTypes.number,
             slug: PropTypes.string,
             symbol: PropTypes.string,

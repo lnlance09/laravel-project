@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddVerificationCodeToUsersTable extends Migration
+class AddMoreUsercolumns extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddVerificationCodeToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('verification_code', 80)->after('api_token')
+            $table->boolean('has_api_access')->after('password')
                 ->nullable()
                 ->default(null);
         });
@@ -28,7 +28,7 @@ class AddVerificationCodeToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('verification_code');
+            $table->dropColumn('has_api_access');
         });
     }
 }

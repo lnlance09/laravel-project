@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/coins', [CoinController::class, 'index']);
 Route::get('/coins/options', [CoinController::class, 'showOptions']);
+Route::get('/coins/topTraders', [CoinController::class, 'topTraders']);
 Route::get('/coins/{slug}', [CoinController::class, 'show']);
 
 Route::get('/predictions', [PredictionController::class, 'index']);

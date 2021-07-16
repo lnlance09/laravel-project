@@ -86,7 +86,13 @@ const Coins = ({ history }) => {
     }
 
     return (
-        <DefaultLayout history={history} inverted={inverted} useGrid={false}>
+        <DefaultLayout
+            activeItem="coins"
+            containerClassName="coinsPage"
+            history={history}
+            inverted={inverted}
+            useGrid={false}
+        >
             <DisplayMetaTags page="coins" state={internalState} />
             <Header as="h1" className="massive" inverted={inverted}>
                 Browse coins

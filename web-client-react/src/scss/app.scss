@@ -12,6 +12,10 @@ body {
 }
 
 .appWrapper {
+	a {
+		color: $lightBlue;
+	}
+
 	span.blue {
 		color: $blue;
 	}
@@ -30,6 +34,10 @@ body {
 
 	&.inverted {
 		background: $invertedBackgroundColor;
+
+		a {
+			color: $lightBlue;
+		}
 
 		span.blue {
 			color: $lightBlue;
@@ -53,6 +61,49 @@ body {
 
 		&.full {
 			width: 100% !important;
+		}
+
+		.centeredLoader {
+			min-height: 300px;
+			position: relative;
+
+			.ui.loader.inverted {
+				color: $white;
+				left: 50%;
+				position: absolute;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+		}
+
+		&.coinPage {
+			p.header {
+				font-weight: normal;
+			}
+
+			.topTraderImg {
+				cursor: pointer;
+			}
+
+			.ui.grid.metricsGrid {
+				.row {
+					.column {
+						padding-bottom: 0.6%;
+						padding-top: 0.6%;
+					}
+				}
+			}
+		}
+
+		&.notFoundPage {
+			h1.notFoundHeader {
+				left: 50%;
+				margin: 0;
+				margin-right: -50%;
+				position: absolute;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
 		}
 
 		&.traderPage {
@@ -104,16 +155,5 @@ body {
 
 	.dividerHeader {
 		line-height: 0.27;
-	}
-}
-
-.notFoundPage {
-	h1.notFoundHeader {
-		left: 50%;
-		margin: 0;
-		margin-right: -50%;
-    	position: absolute;
-    	top: 50%;
-    	transform: translate(-50%, -50%);
 	}
 }

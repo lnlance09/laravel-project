@@ -6,8 +6,11 @@ use App\Http\Resources\Coin as CoinResource;
 use App\Http\Resources\CoinCollection;
 // use App\Http\Resources\CoinOption as CoinOptionResource;
 use App\Http\Resources\CoinOptionCollection;
+use App\Http\Resources\UserCollection;
 use App\Models\Coin;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CoinController extends Controller
 {
@@ -77,7 +80,47 @@ class CoinController extends Controller
      */
     public function show($slug)
     {
-        return new CoinResource(Coin::where('slug', $slug)->firstOrFail());
+        $coin = Coin::where('slug', $slug)->first();
+        if (empty($coin)) {
+            return response([
+                'message' => 'That coin does not exist'
+            ], 404);
+        }
+
+        if (strtotime($coin->updated_at) < strtotime('-5 minutes')) {
+            $this->setLatestCoinInfo($coin);
+        }
+
+        return new CoinResource($coin);
+    }
+
+    /**
+     * 
+     *
+     * @param  Object  $coin
+     * @return \Illuminate\Http\Response
+     */
+    public function setLatestCoinInfo($coin)
+    {
+        $info = Coin::getExtendedInfo($coin->cmc_id);
+
+        if ($info) {
+            $quote = current($info['quote']);
+            $coin->circulating_supply = $info['circulating_supply'];
+            $coin->last_price = $quote['price'];
+            $coin->market_cap = $quote['market_cap'];
+            $coin->max_supply = $info['max_supply'];
+            $coin->percent_change_1h = $quote['percent_change_1h'];
+            $coin->percent_change_24h = $quote['percent_change_24h'];
+            $coin->percent_change_7d = $quote['percent_change_7d'];
+            $coin->percent_change_30d = $quote['percent_change_30d'];
+            $coin->percent_change_60d = $quote['percent_change_60d'];
+            $coin->percent_change_90d = $quote['percent_change_90d'];
+            $coin->total_supply = $info['total_supply'];
+            $coin->volume_24h = $quote['volume_24h'];
+            $coin->save();
+            $coin->refresh();
+        }
     }
 
     /**
@@ -89,6 +132,39 @@ class CoinController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    /**
+     * 
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function topTraders(Request $request)
+    {
+        $coinId = $request->input('coinId');
+
+        $users = User::withCount([
+            'predictions' => function ($query) use ($coinId) {
+                $query->where('coin_id', $coinId);
+            },
+            'incorrectPredictions' => function ($query) use ($coinId) {
+                $query->where('coin_id', $coinId);
+            },
+            'correctPredictions' => function ($query) use ($coinId) {
+                $query->where('coin_id', $coinId);
+            },
+            'pendingPredictions' => function ($query) use ($coinId) {
+                $query->where('coin_id', $coinId);
+            }
+        ])
+            ->whereHas('predictions', function ($query) use ($coinId) {
+                $query->where('coin_id', $coinId)->where('status', 'Correct');
+            })
+            ->orderByRaw('(correct_predictions_count / predictions_count - pending_predictions_count) desc')
+            ->limit(20)
+            ->get();
+        return new UserCollection($users);
     }
 
     /**

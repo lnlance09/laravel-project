@@ -80,6 +80,7 @@ const Trader = ({ history, match }) => {
 
     return (
         <DefaultLayout
+            activeItem="traders"
             containerClassName="traderPage"
             history={history}
             inverted={inverted}
@@ -202,7 +203,7 @@ const Trader = ({ history, match }) => {
                 </>
             ) : (
                 <>
-                    <div className="centered">
+                    <div className="centeredLoader">
                         <Loader active inverted={inverted} size="big" />
                     </div>
                 </>

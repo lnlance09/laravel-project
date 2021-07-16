@@ -3,17 +3,16 @@ const reducer = (state, action) => {
         case "GET_COIN":
             return {
                 ...state,
-                coin: action.coin
+                coin: action.coin,
+                loaded: true
             }
-        case "GET_LAST_PRICE":
-            const { points } = action
+        case "GET_TRADERS":
             return {
                 ...state,
-                coin: {
-                    ...state.coin,
-                    lastPrice: points[points.length - 1][1]
-                },
-                loaded: true
+                traders: {
+                    data: action.traders,
+                    loaded: true
+                }
             }
         default:
             throw new Error()

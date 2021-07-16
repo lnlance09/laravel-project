@@ -6,7 +6,7 @@ import Logo from "images/logos/main.png"
 import PropTypes from "prop-types"
 import ThemeContext from "themeContext"
 
-const PageHeader = ({ history, q, showResults, simple }) => {
+const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
     const { state, dispatch } = useContext(ThemeContext)
     const { auth, inverted, user } = state
     const [sidebarVisible, setSidebarVisible] = useState(false)
@@ -54,11 +54,26 @@ const PageHeader = ({ history, q, showResults, simple }) => {
                                 Preditc
                             </Header>
                         </Menu.Item>
-                        <Menu.Item onClick={() => history.push("/coins")}>Coins</Menu.Item>
-                        <Menu.Item onClick={() => history.push("/predictions")}>
+                        <Menu.Item
+                            active={activeItem === "coins"}
+                            onClick={() => {
+                                history.push("/coins")
+                            }}
+                        >
+                            Coins
+                        </Menu.Item>
+                        <Menu.Item
+                            active={activeItem === "predictions"}
+                            onClick={() => history.push("/predictions")}
+                        >
                             Predictions
                         </Menu.Item>
-                        <Menu.Item onClick={() => history.push("/traders")}>Traders</Menu.Item>
+                        <Menu.Item
+                            active={activeItem === "traders"}
+                            onClick={() => history.push("/traders")}
+                        >
+                            Traders
+                        </Menu.Item>
                         <Menu.Item position="right">
                             <Button
                                 circular
@@ -140,6 +155,7 @@ const PageHeader = ({ history, q, showResults, simple }) => {
 }
 
 PageHeader.propTypes = {
+    activeItem: PropTypes.string,
     history: PropTypes.object,
     q: PropTypes.string,
     showResults: PropTypes.bool,
@@ -148,6 +164,7 @@ PageHeader.propTypes = {
 }
 
 PageHeader.defaultProps = {
+    activeItem: null,
     q: "",
     showResults: true,
     simple: false

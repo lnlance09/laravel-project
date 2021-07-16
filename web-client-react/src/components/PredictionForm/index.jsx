@@ -126,10 +126,11 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
             </Form>
             <Divider inverted={inverted} />
             <Button
-                color="purple"
+                color="violet"
                 content="Predict"
                 disabled={!formIsValid}
                 fluid
+                inverted={inverted}
                 secondary
                 size="large"
             />

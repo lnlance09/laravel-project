@@ -102,7 +102,13 @@ const Traders = ({ history }) => {
     }
 
     return (
-        <DefaultLayout history={history} inverted={inverted} useGrid={false}>
+        <DefaultLayout
+            activeItem="traders"
+            containerClassName="tradersPage"
+            history={history}
+            inverted={inverted}
+            useGrid={false}
+        >
             <DisplayMetaTags page="traders" state={internalState} />
             <Header as="h1" className="massive" inverted={inverted}>
                 Traders

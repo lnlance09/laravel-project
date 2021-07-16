@@ -32,6 +32,7 @@
     "react-scripts": "4.0.3",
     "react-semantic-ui-datepickers": "^2.13.1",
     "react-toastify": "^7.0.4",
+    "react-tooltip": "^4.2.21",
     "react-truncate": "^2.4.0",
     "react-truncate-markup": "^5.1.0",
     "semantic-ui-css": "^2.4.1",

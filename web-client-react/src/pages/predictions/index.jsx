@@ -45,7 +45,14 @@ const Prediction = ({ history, match }) => {
     }, [slug])
 
     return (
-        <DefaultLayout history={history} inverted={inverted} textAlign="center" useGrid={false}>
+        <DefaultLayout
+            activeItem="predictions"
+            containerClassName="predictionPage"
+            history={history}
+            inverted={inverted}
+            textAlign="center"
+            useGrid={false}
+        >
             <DisplayMetaTags page="predictions" state={internalState} />
             {loaded ? (
                 <>
@@ -68,7 +75,7 @@ const Prediction = ({ history, match }) => {
                 </>
             ) : (
                 <>
-                    <div className="centered">
+                    <div className="centeredLoader">
                         <Loader active inverted={inverted} size="big" />
                     </div>
                 </>
