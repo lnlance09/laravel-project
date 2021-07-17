@@ -11,6 +11,7 @@ import reducer from "./reducer"
 
 const Chart = ({
     coin,
+    color = null,
     duration = "1D",
     hideXAxis = false,
     hideYAxis = false,
@@ -47,6 +48,13 @@ const Chart = ({
             type: "TOGGLE_INVERTED",
             inverted
         })
+
+        if (color) {
+            dispatch({
+                type: "SET_COLOR",
+                color
+            })
+        }
     }, [inverted, prediction])
 
     const getGraphData = async (id, range) => {
@@ -115,7 +123,7 @@ const Chart = ({
                 />
             ) : (
                 <>
-                    <div className="centered">
+                    <div className="centeredLoader">
                         <Loader active inverted={inverted} size="big" />
                     </div>
                 </>
@@ -129,7 +137,6 @@ Chart.propTypes = {
         category: PropTypes.string,
         circulatingSupply: PropTypes.number,
         cmcId: PropTypes.number,
-        dailyPercentChange: PropTypes.string,
         description: PropTypes.string,
         id: PropTypes.number,
         lastPrice: PropTypes.number,
@@ -137,11 +144,20 @@ Chart.propTypes = {
         marketCap: PropTypes.number,
         maxSupply: PropTypes.number,
         name: PropTypes.string,
+        percentages: PropTypes.shape({
+            "1h": PropTypes.number,
+            "24h": PropTypes.number,
+            "7d": PropTypes.number,
+            "30d": PropTypes.number,
+            "60d": PropTypes.number,
+            "90d": PropTypes.number
+        }),
         predictionsCount: PropTypes.number,
         slug: PropTypes.string,
         symbol: PropTypes.string,
         totalSupply: PropTypes.number
     }),
+    color: PropTypes.string,
     hideXAxis: PropTypes.bool,
     hideYAxis: PropTypes.bool,
     history: PropTypes.object,

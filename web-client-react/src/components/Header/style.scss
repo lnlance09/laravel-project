@@ -24,10 +24,13 @@
     }
 
     .ui.borderless.fluid.top.fixed.menu {
-        a.item.active {
-            background: $white;
+        a.item {
             font-size: 15px;
-            font-weight: bold;
+
+            &.active {
+                background: $white;
+                font-weight: bold;
+            }
         }
 
         &.inverted {
@@ -37,7 +40,6 @@
             a.item.active {
                 background: $invertedBackgroundColor;
                 color: $offWhite !important;
-                font-weight: bold;
             }
         }
 
@@ -74,6 +76,8 @@
 
                 .dropdown {
                     .menu.transition.visible {
+                        left: -50px;
+                        top: 36px;
                         width: 160px;
                     }
                 }

@@ -2,13 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\CoinController;
 use App\Http\Resources\Prediction as PredictionResource;
 use App\Http\Resources\PredictionCollection;
+use App\Models\Coin;
 use App\Models\Prediction;
 use Illuminate\Http\Request;
 
 class PredictionController extends Controller
 {
+    /**
+     * Instantiate a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api')->only('create');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,11 +57,40 @@ class PredictionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return PredictionResource
+     * @param  \Illuminate\Http\Request  $request
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'coin' => 'bail|required|exists:coins,id',
+            'predictionPrice' => 'bail|required|gt:0',
+            'targetDate' => 'bail|required|date|after:today',
+        ]);
+
+        $coinId = $request->input('coin');
+        $predictionPrice = $request->input('predictionPrice');
+        $targetDate = $request->input('targetDate');
+        $user = $request->user();
+
+        $coin = Coin::find($coinId);
+        $coinController = new CoinController();
+        $coin = $coinController->setLatestCoinInfo($coin);
+        $currentPrice = $coin->last_price;
+        $priceDiff = $predictionPrice - $currentPrice;
+        $margin = ($priceDiff / $currentPrice) * 100;
+
+        $prediction = Prediction::create([
+            'coin_id' => $coinId,
+            'current_price' => $currentPrice,
+            'margin' => $margin,
+            'prediction_price' => $predictionPrice,
+            'target_date' => $targetDate,
+            'user_id' => $user->id
+        ]);
+        $prediction->refresh();
+
+        return new PredictionResource($prediction);
     }
 
     /**
@@ -82,7 +123,17 @@ class PredictionController extends Controller
      */
     public function show($id)
     {
-        return new PredictionResource(Prediction::find($id));
+        $prediction = Prediction::where('id', $id)
+            ->with(['user'])
+            ->first();
+
+        if (empty($prediction)) {
+            return response([
+                'message' => 'That prediction does not exist'
+            ], 404);
+        }
+
+        return new PredictionResource($prediction);
     }
 
     /**

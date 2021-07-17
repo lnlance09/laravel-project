@@ -1,47 +1,92 @@
 import "react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css"
 import "./style.scss"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Button, Divider, Form, Grid, Header, Segment } from "semantic-ui-react"
-import { formatPlural } from "utils/textFunctions"
+import { getConfig } from "options/toast"
+import { toast } from "react-toastify"
+import axios from "axios"
 import Chart from "components/Chart"
 import moment from "moment"
 import NumberFormat from "react-number-format"
 import SemanticDatepicker from "react-semantic-ui-datepickers"
 import PropTypes from "prop-types"
 
+const toastConfig = getConfig()
+toast.configure(toastConfig)
+
 const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
     const [date, setDate] = useState(new Date())
     const [daysFromNow, setDaysFromNow] = useState(1)
+    const [loading, setLoading] = useState(false)
     const [operator, setOperator] = useState("more")
-    const [percentDiff, setPercentDiff] = useState(0)
     const [price, setPrice] = useState(defaultPrice)
-    const [priceDiff, setPriceDiff] = useState(10)
 
-    useEffect(() => {
-        const { percent, price } = calculatePriceDiff(coin.lastPrice, defaultPrice)
-        setPriceDiff(price)
-        setPercentDiff(percent)
-    }, [])
-
-    const formIsValid = price > 0 && priceDiff !== 0 && date !== ""
+    const calculatePriceDiff = (oldPrice, newPrice) => {
+        const price = parseFloat(newPrice - oldPrice, 10)
+        const percent = (price / oldPrice) * 100
+        return {
+            percentDiff: percent.toFixed(2),
+            priceDiff: price
+        }
+    }
 
     const changeDate = (e, data) => {
         setDate(data.value)
-
         const now = moment(new Date())
         const newDate = moment(new Date(data.value))
         const duration = moment.duration(newDate.diff(now))
         setDaysFromNow(Math.ceil(duration.asDays()))
     }
 
-    const calculatePriceDiff = (oldPrice, newPrice) => {
-        const price = parseInt(newPrice - oldPrice, 10)
-        const percent = Math.round((price / oldPrice) * 100)
-        return {
-            percent,
-            price
-        }
+    const submitPrediction = async () => {
+        setLoading(true)
+        await axios
+            .post(
+                `${process.env.REACT_APP_BASE_URL}predictions/create`,
+                {
+                    coin: coin.id,
+                    predictionPrice: price,
+                    targetDate: date
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("bearer")}`
+                    }
+                }
+            )
+            .then((response) => {
+                const { data } = response.data
+                history.push(`/predictions/${data.id}`)
+            })
+            .catch((error) => {
+                let errorMsg = ""
+                const { status } = error.response
+                const { errors } = error.response.data
+
+                if (status === 401) {
+                    errorMsg = error.response.data.message
+                } else {
+                    if (typeof errors.targetDate !== "undefined") {
+                        errorMsg = errors.targetDate[0]
+                    }
+
+                    if (typeof errors.predictionPrice !== "undefined") {
+                        errorMsg = errors.predictionPrice[0]
+                    }
+
+                    if (typeof errors.coin !== "undefined") {
+                        errorMsg = errors.coin[0]
+                    }
+                }
+
+                setLoading(false)
+                toast.error(errorMsg)
+            })
     }
+
+    const { percentDiff, priceDiff } = calculatePriceDiff(coin.lastPrice, price)
+
+    const formIsValid = price > 0 && priceDiff !== 0 && date !== ""
 
     return (
         <div className="predictionFormComponent">
@@ -55,14 +100,8 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
                                 onValueChange={(values) => {
                                     const { value } = values
                                     setPrice(value)
-
-                                    const { percent, price } = calculatePriceDiff(
-                                        defaultPrice,
-                                        value
-                                    )
-                                    setPriceDiff(price)
-                                    setPercentDiff(percent)
-                                    setOperator(price > 0 ? "more" : "less")
+                                    const { priceDiff } = calculatePriceDiff(defaultPrice, value)
+                                    setOperator(priceDiff > 0 ? "more" : "less")
                                 }}
                                 thousandSeparator
                                 thousandsGroupStyle="dollar"
@@ -90,9 +129,10 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
                 {formIsValid && (
                     <Grid stackable>
                         <Grid.Row>
-                            <Grid.Column style={{ height: "250px" }} width={8}>
+                            <Grid.Column style={{ height: "240px" }} width={8}>
                                 <Chart
                                     coin={coin}
+                                    color={operator === "more" ? "green" : "red"}
                                     containerProps={{ style: { height: "250px" } }}
                                     duration="1Y"
                                     hideYAxis
@@ -113,10 +153,8 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
                                             {percentDiff}%
                                         </span>{" "}
                                         {operator}{" "}
-                                        <span className="daysFromNow">
-                                            {daysFromNow} {formatPlural(daysFromNow, "day")}
-                                        </span>{" "}
-                                        from now
+                                        <span className="daysFromNow">{daysFromNow} days</span> from
+                                        now
                                     </Header>
                                 </Segment>
                             </Grid.Column>
@@ -131,7 +169,8 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
                 disabled={!formIsValid}
                 fluid
                 inverted={inverted}
-                secondary
+                loading={loading}
+                onClick={submitPrediction}
                 size="large"
             />
         </div>
@@ -143,7 +182,6 @@ PredictionForm.propTypes = {
         category: PropTypes.string,
         circulatingSupply: PropTypes.number,
         cmcId: PropTypes.number,
-        dailyPercentChange: PropTypes.string,
         description: PropTypes.string,
         id: PropTypes.number,
         lastPrice: PropTypes.number,
@@ -151,6 +189,14 @@ PredictionForm.propTypes = {
         marketCap: PropTypes.number,
         maxSupply: PropTypes.number,
         name: PropTypes.string,
+        percentages: PropTypes.shape({
+            "1h": PropTypes.number,
+            "24h": PropTypes.number,
+            "7d": PropTypes.number,
+            "30d": PropTypes.number,
+            "60d": PropTypes.number,
+            "90d": PropTypes.number
+        }),
         predictionsCount: PropTypes.number,
         slug: PropTypes.string,
         symbol: PropTypes.string,

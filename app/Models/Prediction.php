@@ -18,6 +18,7 @@ class Prediction extends Model
      */
     protected $fillable = [
         'coin_id',
+        'created_at',
         'current_price',
         'margin',
         'prediction_price',
@@ -38,10 +39,17 @@ class Prediction extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'target_date' => 'datetime'
+    ];
 
     public function coin()
     {
         return $this->hasOne(Coin::class, 'id', 'coin_id');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

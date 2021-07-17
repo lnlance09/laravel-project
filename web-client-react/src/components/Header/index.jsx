@@ -93,14 +93,21 @@ const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
                             </Button>
                             {auth ? (
                                 <Dropdown
-                                    direction="left"
+                                    className={inverted ? "inverted" : null}
+                                    direction="bottom"
                                     icon={false}
                                     pointing="top"
                                     trigger={trigger}
                                 >
                                     <Dropdown.Menu>
-                                        <Dropdown.Item>Profile</Dropdown.Item>
-                                        <Dropdown.Item>Settings</Dropdown.Item>
+                                        <Dropdown.Item
+                                            onClick={() => history.push(`/${user.username}`)}
+                                        >
+                                            Profile
+                                        </Dropdown.Item>
+                                        <Dropdown.Item onClick={() => history.push("/settings")}>
+                                            Settings
+                                        </Dropdown.Item>
                                         <Dropdown.Divider />
                                         <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item>
                                     </Dropdown.Menu>

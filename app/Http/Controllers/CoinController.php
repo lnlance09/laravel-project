@@ -76,7 +76,7 @@ class CoinController extends Controller
      * Display the specified resource.
      *
      * @param  String  $slug
-     * @return \Illuminate\Http\Response
+     * @return CoinResource
      */
     public function show($slug)
     {
@@ -98,7 +98,7 @@ class CoinController extends Controller
      * 
      *
      * @param  Object  $coin
-     * @return \Illuminate\Http\Response
+     * @return \App\Models\Coin $info
      */
     public function setLatestCoinInfo($coin)
     {
@@ -121,6 +121,8 @@ class CoinController extends Controller
             $coin->save();
             $coin->refresh();
         }
+
+        return $coin;
     }
 
     /**

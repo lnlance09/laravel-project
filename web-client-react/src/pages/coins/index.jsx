@@ -93,7 +93,12 @@ const Coin = ({ history, match }) => {
             {loaded ? (
                 <>
                     <Header as="h1" inverted={inverted}>
-                        <Image circular size="huge" src={coin.logo} />
+                        <Image
+                            circular
+                            onError={(i) => (i.target.src = PlaceholderPic)}
+                            size="huge"
+                            src={coin.logo}
+                        />
                         <Header.Content>
                             {coin.name}
                             <Header.Subheader>

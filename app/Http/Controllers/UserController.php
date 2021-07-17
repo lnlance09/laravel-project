@@ -15,7 +15,20 @@ use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
-    const PROTECTED_USERNAMES = ['options'];
+    const PROTECTED_USERNAMES = [
+        'about',
+        'coin',
+        'coins',
+        'contact',
+        'login',
+        'options',
+        'prediction',
+        'predictions',
+        'privacy',
+        'terms',
+        'trader',
+        'traders'
+    ];
 
     /**
      * Instantiate a new controller instance.
@@ -74,7 +87,7 @@ class UserController extends Controller
     {
         $request->validate([
             'email' => 'bail|required|email|unique:users',
-            'name' => 'required|min:3|max:30|alpha',
+            'name' => 'bail|required|min:3|max:30|alpha',
             'password' => ['bail', 'required', Password::min(8)],
             'username' => 'bail|required|max:20|unique:users,username|alpha_dash'
         ]);

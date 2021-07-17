@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\Coin as CoinResource;
+use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Prediction extends JsonResource
@@ -21,9 +22,10 @@ class Prediction extends JsonResource
             'createdAt' => $this->created_at,
             'currentPrice' => $this->current_price,
             'margin' => $this->margin,
-            'predictionPrice' => $this->prediction_price,
+            'predictionPrice' => (float) $this->prediction_price,
             'status' => $this->status,
-            'targetDate' => $this->target_date
+            'targetDate' => $this->target_date,
+            'user' => new UserResource($this->user)
         ];
     }
 }

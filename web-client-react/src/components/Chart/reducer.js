@@ -34,6 +34,20 @@ const reducer = (state, action) => {
                     }
                 }
             }
+        case "SET_COLOR":
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    plotOptions: {
+                        ...state.options.plotOptions,
+                        area: {
+                            ...state.options.plotOptions.area,
+                            color: action.color
+                        }
+                    }
+                }
+            }
         case "SET_GRAPH_DATA":
             const { points } = action
             return {
