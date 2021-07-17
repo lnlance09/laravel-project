@@ -15,6 +15,7 @@ import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
 import axios from "axios"
 import DefaultLayout from "layouts/default"
+import ImageUpload from "components/ImageUpload"
 import initialState from "states/trader"
 import logger from "use-reducer-logger"
 import PlaceholderPic from "images/avatar/large/steve.jpg"
@@ -28,7 +29,7 @@ toast.configure(toastConfig)
 
 const Trader = ({ history, match }) => {
     const { state } = useContext(ThemeContext)
-    const { inverted } = state
+    const { auth, inverted, user } = state
     const { username } = match.params
 
     const [internalState, dispatch] = useReducer(
@@ -39,6 +40,7 @@ const Trader = ({ history, match }) => {
 
     const [activeItem, setActiveItem] = useState(null)
     const [hasMore, setHasMore] = useState(false)
+    const [imageLoaded, setImageLoaded] = useState(false)
     const [loadingMore, setLoadingMore] = useState(false)
     const [page, setPage] = useState(1)
 
@@ -99,6 +101,56 @@ const Trader = ({ history, match }) => {
         history.push(`/predictions/${id}`)
     }
 
+    const changeProfilePic = async (file) => {
+        const formData = new FormData()
+        formData.set("file", file)
+
+        await axios
+            .post(`${process.env.REACT_APP_BASE_URL}users/profilePic`, formData, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+                    "Content-Type": "multipart/form-data",
+                    enctype: "multipart/form-data"
+                }
+            })
+            .then((response) => {
+                const { data } = response.data
+                localStorage.setItem("user", JSON.stringify(data))
+
+                dispatch({
+                    type: "GET_TRADER",
+                    trader: data
+                })
+            })
+            .catch((error) => {
+                toast.error(error.response.data.msg)
+            })
+    }
+
+    const ProfilePic = () => {
+        if (auth && trader.id === user.id) {
+            return (
+                <ImageUpload
+                    callback={(file) => changeProfilePic(file)}
+                    img={trader.img === null ? PlaceholderPic : trader.img}
+                    inverted={inverted}
+                />
+            )
+        }
+
+        return (
+            <Image
+                bordered
+                circular
+                className={`inverted smooth-image image-${imageLoaded ? "visible" : "hidden"}`}
+                onError={(i) => (i.target.src = PlaceholderPic)}
+                onLoad={() => setImageLoaded(true)}
+                size="small"
+                src={trader.img}
+            />
+        )
+    }
+
     return (
         <DefaultLayout
             activeItem="traders"
@@ -114,15 +166,8 @@ const Trader = ({ history, match }) => {
                     <Grid>
                         <Grid.Row>
                             <Grid.Column className="imgColumn" width={4}>
-                                <Segment circular>
-                                    <Image
-                                        bordered
-                                        circular
-                                        className="inverted"
-                                        onError={(i) => (i.target.src = PlaceholderPic)}
-                                        size="small"
-                                        src={trader.img}
-                                    />
+                                <Segment circular style={{ height: "150px", width: "150px" }}>
+                                    {ProfilePic()}
                                 </Segment>
                             </Grid.Column>
                             <Grid.Column width={12}>

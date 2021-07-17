@@ -35,5 +35,6 @@ Route::get('/users/{username}/followers', [UserController::class, 'followers']);
 Route::post('/users/create', [UserController::class, 'create']);
 Route::post('/users/follow', [UserController::class, 'follow']);
 Route::post('/users/login', [UserController::class, 'login']);
+Route::post('/users/profilePic', [UserController::class, 'changeProfilePic']);
 Route::post('/users/unfollow', [UserController::class, 'unfollow']);
 Route::post('/users/verify', [UserController::class, 'verify']);

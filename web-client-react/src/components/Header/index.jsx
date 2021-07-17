@@ -26,7 +26,12 @@ const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
             {user && (
                 <>
                     <span style={{ marginLeft: "12px", marginRight: "12px" }}>{user.name}</span>
-                    <Image avatar onError={(i) => (i.target.src = defaultImg)} src={user.img} />
+                    <Image
+                        avatar
+                        bordered
+                        onError={(i) => (i.target.src = defaultImg)}
+                        src={user.img}
+                    />
                 </>
             )}
         </>
@@ -94,7 +99,6 @@ const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
                             {auth ? (
                                 <Dropdown
                                     className={inverted ? "inverted" : null}
-                                    direction="bottom"
                                     icon={false}
                                     pointing="top"
                                     trigger={trigger}

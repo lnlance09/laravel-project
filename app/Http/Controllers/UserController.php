@@ -10,8 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
@@ -37,7 +39,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api')->only('verify');
+        $this->middleware('auth:api')->only('verify')->only('changeProfilePic');
     }
 
     /**
@@ -115,7 +117,7 @@ class UserController extends Controller
 
         return response()->json([
             'bearer' => $user->api_token,
-            'user' => $user,
+            'user' => new UserResource($user),
             'verify' => true
         ]);
     }
@@ -136,7 +138,14 @@ class UserController extends Controller
         $user = User::where([
             'email' => $request->input('email'),
             'password' => $request->input('password')
-        ])->first();
+        ])
+            ->withCount([
+                'predictions',
+                'incorrectPredictions',
+                'correctPredictions',
+                'pendingPredictions'
+            ])
+            ->first();
 
         if (!$user) {
             return response([
@@ -146,7 +155,7 @@ class UserController extends Controller
 
         return response()->json([
             'bearer' => $user->api_token,
-            'user' => $user,
+            'user' => new UserResource($user),
             'verify' => $user->email_verified_at === null
         ]);
     }
@@ -221,6 +230,38 @@ class UserController extends Controller
                 'message' => 'That user does not exist'
             ], 404);
         }
+
+        return new UserResource($user);
+    }
+
+    public function changeProfilePic(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|image',
+        ]);
+
+        $userId = $request->user()->id;
+        $file = $request->file('file');
+        $img = Image::make($file);
+        $img->resize(320, 320);
+        $img->save($file);
+
+        $contents = file_get_contents($file);
+        $img = 'users/' . Str::random(24) . '.jpg';
+        Storage::disk('s3')->put($img, $contents);
+
+        $user = User::find($userId);
+        $user->img = $img;
+        $user->save();
+
+        $user = User::where('id', $userId)
+            ->withCount([
+                'predictions',
+                'incorrectPredictions',
+                'correctPredictions',
+                'pendingPredictions'
+            ])
+            ->first();
 
         return new UserResource($user);
     }

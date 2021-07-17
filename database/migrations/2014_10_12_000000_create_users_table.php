@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('gender')->default('male');
-            $table->string('img')->default('https://preditc.s3.us-west-2.amazonaws.com/avatar/large/chris.jpg');
+            $table->string('img')->default('avatar/large/chris.jpg');
             $table->string('name');
             $table->string('password');
             $table->string('username')->unique();

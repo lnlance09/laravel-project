@@ -32,6 +32,19 @@ body {
 		color: $red;
 	}
 
+	.smooth-image {
+		transition: opacity 1s;
+	}
+	
+	.image-visible {
+		opacity: 1;
+	}
+
+	.image-hidden {
+		background-image: linear-gradient(90deg, #ccc, #999, #ccc);
+		opacity: 0;
+	}
+
 	&.inverted {
 		background: $invertedBackgroundColor;
 
