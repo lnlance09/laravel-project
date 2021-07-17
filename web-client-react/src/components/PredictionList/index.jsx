@@ -5,7 +5,7 @@ import Moment from "react-moment"
 import PlaceholderPic from "images/images/image.png"
 import PropTypes from "prop-types"
 
-const PredictionList = ({ inverted, loading, onClickPrediction, predictions }) => (
+const PredictionList = ({ inverted, loading, loadingMore, onClickPrediction, predictions }) => (
     <div className="predictionList">
         <Item.Group className={inverted ? "inverted" : ""} divided link>
             {predictions.map((prediction, i) => {
@@ -61,6 +61,25 @@ const PredictionList = ({ inverted, loading, onClickPrediction, predictions }) =
                     </Item>
                 )
             })}
+            {loadingMore && (
+                <Item key="loadingMore">
+                    <Placeholder
+                        inverted={inverted}
+                        style={{ height: 150, width: 150, marginRight: "1em" }}
+                    >
+                        <Placeholder.Image />
+                    </Placeholder>
+                    <Item.Content>
+                        <Placeholder inverted={inverted} fluid>
+                            <Placeholder.Paragraph>
+                                <Placeholder.Line />
+                                <Placeholder.Line />
+                                <Placeholder.Line />
+                            </Placeholder.Paragraph>
+                        </Placeholder>
+                    </Item.Content>
+                </Item>
+            )}
         </Item.Group>
     </div>
 )
@@ -68,6 +87,7 @@ const PredictionList = ({ inverted, loading, onClickPrediction, predictions }) =
 PredictionList.propTypes = {
     inverted: PropTypes.bool,
     loading: PropTypes.bool,
+    loadingMore: PropTypes.bool,
     onClickPrediction: PropTypes.func,
     predictions: PropTypes.arrayOf(PropTypes.shape({}))
 }

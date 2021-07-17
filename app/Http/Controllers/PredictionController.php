@@ -50,7 +50,7 @@ class PredictionController extends Controller
         $predictions = Prediction::with('coin')
             ->where($where)
             ->orderBy($sort, $dir)
-            ->get();
+            ->paginate(15);
         return new PredictionCollection($predictions);
     }
 

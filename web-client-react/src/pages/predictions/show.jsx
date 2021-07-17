@@ -1,4 +1,4 @@
-import { Button, Divider, Dropdown, Grid, Header, Icon } from "semantic-ui-react"
+import { Button, Divider, Dropdown, Grid, Header, Icon, Visibility } from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
@@ -31,7 +31,10 @@ const Predictions = ({ history }) => {
     const [coinOptions, setCoinOptions] = useState([])
     const [createdAt, setCreatedAt] = useState(null)
     const [direction, setDirection] = useState(null)
+    const [hasMore, setHasMore] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [loadingMore, setLoadingMore] = useState(false)
+    const [page, setPage] = useState(1)
     const [percentChange, setPercentChange] = useState(null)
     const [status, setStatus] = useState(null)
     const [targetDate, setTargetDate] = useState(null)
@@ -46,24 +49,37 @@ const Predictions = ({ history }) => {
         loadPage()
     }, [])
 
-    const getPredictions = async (coinId, status, sort, dir) => {
-        setLoading(true)
+    const getPredictions = async (coinId, status, sort, dir, page = 1) => {
+        if (page === 1) {
+            setLoading(true)
+        } else {
+            setLoadingMore(true)
+        }
+
         await axios
             .get(`${process.env.REACT_APP_BASE_URL}predictions`, {
                 params: {
                     coinId,
                     status,
                     sort,
-                    dir
+                    dir,
+                    page
                 }
             })
             .then((response) => {
-                const predictions = response.data.data
+                const { data, meta } = response.data
                 dispatch({
                     type: "GET_PREDICTIONS",
-                    predictions
+                    predictions: data,
+                    page
                 })
-                setLoading(false)
+                setPage(page + 1)
+                setHasMore(meta.current_page < meta.last_page)
+                if (page === 1) {
+                    setLoading(false)
+                } else {
+                    setLoadingMore(false)
+                }
             })
             .catch(() => {
                 toast.error("There was an error")
@@ -219,12 +235,23 @@ const Predictions = ({ history }) => {
                 </Grid.Column>
             </Grid>
             <Divider hidden />
-            <PredictionList
-                inverted={inverted}
-                loading={loading}
-                predictions={internalState.predictions}
-                onClickPrediction={onClickPrediction}
-            />
+            <Visibility
+                continuous
+                offset={[50, 50]}
+                onBottomVisible={() => {
+                    if (!loading && !loadingMore && hasMore) {
+                        getPredictions(coinId, status, activeItem, direction, page)
+                    }
+                }}
+            >
+                <PredictionList
+                    inverted={inverted}
+                    loading={loading}
+                    loadingMore={loadingMore}
+                    predictions={internalState.predictions}
+                    onClickPrediction={onClickPrediction}
+                />
+            </Visibility>
         </DefaultLayout>
     )
 }
