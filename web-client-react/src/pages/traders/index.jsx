@@ -1,4 +1,14 @@
-import { Divider, Grid, Header, Image, Label, List, Loader, Segment } from "semantic-ui-react"
+import {
+    Divider,
+    Grid,
+    Header,
+    Image,
+    Label,
+    List,
+    Loader,
+    Segment,
+    Visibility
+} from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
@@ -26,7 +36,11 @@ const Trader = ({ history, match }) => {
         initialState
     )
     const { loaded, predictions, trader } = internalState
-    const [activeItem, setActiveItem] = useState("all")
+
+    const [activeItem, setActiveItem] = useState(null)
+    const [hasMore, setHasMore] = useState(false)
+    const [loadingMore, setLoadingMore] = useState(false)
+    const [page, setPage] = useState(1)
 
     useEffect(() => {
         const getTrader = async (user) => {
@@ -48,7 +62,7 @@ const Trader = ({ history, match }) => {
         getTrader(username)
     }, [username])
 
-    const getPredictions = async (userId, status, sort = "created_at", dir = "desc") => {
+    const getPredictions = async (userId, status, sort = "created_at", dir = "desc", page = 1) => {
         dispatch({
             type: "SET_LOADING_PREDICTIONS"
         })
@@ -59,15 +73,22 @@ const Trader = ({ history, match }) => {
                     userId,
                     status,
                     sort,
-                    dir
+                    dir,
+                    page
                 }
             })
             .then((response) => {
-                const predictions = response.data.data
+                const { data, meta } = response.data
                 dispatch({
                     type: "GET_PREDICTIONS",
-                    predictions
+                    predictions: data,
+                    page
                 })
+                setPage(page + 1)
+                setHasMore(meta.current_page < meta.last_page)
+                if (page > 1) {
+                    setLoadingMore(false)
+                }
             })
             .catch(() => {
                 toast.error("There was an error")
@@ -124,9 +145,9 @@ const Trader = ({ history, match }) => {
                                 <List horizontal inverted={inverted} size="large">
                                     <List.Item
                                         as="a"
-                                        className={activeItem === "all" ? "active" : null}
+                                        className={activeItem === null ? "active" : null}
                                         onClick={() => {
-                                            setActiveItem("all")
+                                            setActiveItem(null)
                                             getPredictions(trader.id, null)
                                         }}
                                     >
@@ -138,9 +159,9 @@ const Trader = ({ history, match }) => {
                                     </List.Item>
                                     <List.Item
                                         as="a"
-                                        className={activeItem === "correct" ? "active" : null}
+                                        className={activeItem === "Correct" ? "active" : null}
                                         onClick={() => {
-                                            setActiveItem("correct")
+                                            setActiveItem("Correct")
                                             getPredictions(trader.id, "Correct")
                                         }}
                                     >
@@ -155,9 +176,9 @@ const Trader = ({ history, match }) => {
                                     </List.Item>
                                     <List.Item
                                         as="a"
-                                        className={activeItem === "incorrect" ? "active" : null}
+                                        className={activeItem === "Incorrect" ? "active" : null}
                                         onClick={() => {
-                                            setActiveItem("incorrect")
+                                            setActiveItem("Incorrect")
                                             getPredictions(trader.id, "Incorrect")
                                         }}
                                     >
@@ -172,9 +193,9 @@ const Trader = ({ history, match }) => {
                                     </List.Item>
                                     <List.Item
                                         as="a"
-                                        className={activeItem === "pending" ? "active" : null}
+                                        className={activeItem === "Pending" ? "active" : null}
                                         onClick={() => {
-                                            setActiveItem("pending")
+                                            setActiveItem("Pending")
                                             getPredictions(trader.id, "Pending")
                                         }}
                                     >
@@ -194,12 +215,23 @@ const Trader = ({ history, match }) => {
 
                     <Divider hidden section />
 
-                    <PredictionList
-                        inverted={inverted}
-                        loading={predictions.loading}
-                        predictions={predictions.data}
-                        onClickPrediction={onClickPrediction}
-                    />
+                    <Visibility
+                        continuous
+                        offset={[50, 50]}
+                        onBottomVisible={() => {
+                            if (!predictions.loading && !loadingMore && hasMore) {
+                                getPredictions(trader.id, activeItem, "created_at", "desc", page)
+                            }
+                        }}
+                    >
+                        <PredictionList
+                            inverted={inverted}
+                            loading={predictions.loading}
+                            loadingMore={loadingMore}
+                            predictions={predictions.data}
+                            onClickPrediction={onClickPrediction}
+                        />
+                    </Visibility>
                 </>
             ) : (
                 <>
