@@ -4,19 +4,6 @@ const textColor = "#ccc"
 const secDay = 3600 * 24
 
 const initialState = {
-    coin: {
-        category: "",
-        description: "",
-        id: 0,
-        logo: "",
-        marketCap: 0,
-        maxSupply: 0,
-        name: "",
-        slug: "",
-        symbol: "",
-        totalSupply: 0
-    },
-    includeRanges: true,
     options: {
         chart: {
             backgroundColor,

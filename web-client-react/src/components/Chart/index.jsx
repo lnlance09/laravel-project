@@ -57,6 +57,15 @@ const Chart = ({
         }
     }, [inverted, prediction])
 
+    const fillGapData = (start, end, currentPrice, targetPrice) => {
+        const pointCount = 4
+        const points = [currentPrice * 1.2]
+        let index = 0
+        for (let i = start; i < end; i + 5) {
+            index++
+        }
+    }
+
     const getGraphData = async (id, range) => {
         await axios
             .get("https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart", {
@@ -69,11 +78,33 @@ const Chart = ({
                 const { data } = response.data
                 const points = []
                 for (let key in data.points) {
-                    points.push([key * 1000, data.points[key]["v"][0]])
+                    points.push({ x: key * 1000, y: data.points[key]["v"][0] })
                 }
 
                 if (prediction) {
-                    points.push([prediction.date, prediction.price])
+                    points.push({
+                        dataLabels: {
+                            align: "right",
+                            crop: false,
+                            enabled: true,
+                            format: "{y}",
+                            overflow: true,
+                            style: {
+                                color: "white",
+                                fontSize: "16px"
+                            },
+                            verticalAlign: "text-top",
+                            x: 0,
+                            y: -30
+                        },
+                        marker: {
+                            enabled: true,
+                            fillColor: "#fff",
+                            radius: 4
+                        },
+                        x: prediction.date,
+                        y: prediction.price
+                    })
                 }
 
                 dispatch({

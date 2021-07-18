@@ -259,18 +259,12 @@ const Coin = ({ history, match }) => {
 
                     <PredictionForm
                         coin={coin}
-                        defaultPrice={coin.lastPrice * 1.1}
+                        defaultPrice={coin.lastPrice * 1.8}
                         history={history}
                         inverted={inverted}
                     />
 
-                    <Header
-                        as="h2"
-                        className="dividerHeader"
-                        inverted={inverted}
-                        size="huge"
-                        textAlign="center"
-                    >
+                    <Header as="h2" className="dividerHeader" inverted={inverted} size="huge">
                         Best {coin.symbol} Traders
                     </Header>
 

@@ -15,8 +15,8 @@ const toastConfig = getConfig()
 toast.configure(toastConfig)
 
 const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
-    const [date, setDate] = useState(new Date())
-    const [daysFromNow, setDaysFromNow] = useState(1)
+    const [date, setDate] = useState(moment().add(30, "days").toDate())
+    const [daysFromNow, setDaysFromNow] = useState(30)
     const [loading, setLoading] = useState(false)
     const [operator, setOperator] = useState("more")
     const [price, setPrice] = useState(defaultPrice)
@@ -86,7 +86,7 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
 
     const { percentDiff, priceDiff } = calculatePriceDiff(coin.lastPrice, price)
 
-    const formIsValid = price > 0 && priceDiff !== 0 && date !== ""
+    const formIsValid = priceDiff !== 0 && date !== ""
 
     return (
         <div className="predictionFormComponent">
@@ -127,48 +127,50 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
                     </Form.Field>
                 </Form.Group>
                 {formIsValid && (
-                    <Grid stackable>
-                        <Grid.Row>
-                            <Grid.Column style={{ height: "240px" }} width={8}>
-                                <Chart
-                                    coin={coin}
-                                    color={operator === "more" ? "green" : "red"}
-                                    containerProps={{ style: { height: "250px" } }}
-                                    duration="1Y"
-                                    hideYAxis
-                                    includeRanges={false}
-                                    inverted={inverted}
-                                    period={86400}
-                                    prediction={{
-                                        date: Math.round(new Date(date).getTime()),
-                                        price: parseInt(price, 10)
-                                    }}
-                                />
-                            </Grid.Column>
-                            <Grid.Column width={8}>
-                                <Segment inverted={inverted}>
-                                    <Header as="p" inverted={inverted}>
-                                        You're predicting that {coin.symbol} will be worth{" "}
-                                        <span className={operator === "more" ? "green" : "red"}>
-                                            {percentDiff}%
-                                        </span>{" "}
-                                        {operator}{" "}
-                                        <span className="daysFromNow">{daysFromNow} days</span> from
-                                        now
-                                    </Header>
-                                </Segment>
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
+                    <>
+                        <Divider inverted={inverted} />
+                        <Grid divided inverted={inverted} stackable>
+                            <Grid.Row>
+                                <Grid.Column width={8}>
+                                    <Chart
+                                        coin={coin}
+                                        color={operator === "more" ? "green" : "red"}
+                                        containerProps={{ style: { height: "250px" } }}
+                                        duration="1Y"
+                                        hideYAxis
+                                        includeRanges={false}
+                                        inverted={inverted}
+                                        period={86400}
+                                        prediction={{
+                                            date: Math.round(new Date(date).getTime()),
+                                            price: parseFloat(price, 10)
+                                        }}
+                                    />
+                                </Grid.Column>
+                                <Grid.Column width={8}>
+                                    <Segment inverted={inverted}>
+                                        <Header as="p" inverted={inverted}>
+                                            You're predicting that {coin.symbol} will be worth{" "}
+                                            <span className={operator === "more" ? "green" : "red"}>
+                                                {percentDiff}%
+                                            </span>{" "}
+                                            {operator}{" "}
+                                            <span className="daysFromNow">{daysFromNow} days</span>{" "}
+                                            from now
+                                        </Header>
+                                    </Segment>
+                                </Grid.Column>
+                            </Grid.Row>
+                        </Grid>
+                    </>
                 )}
             </Form>
             <Divider inverted={inverted} />
             <Button
-                color="violet"
+                color="blue"
                 content="Predict"
                 disabled={!formIsValid}
                 fluid
-                inverted={inverted}
                 loading={loading}
                 onClick={submitPrediction}
                 size="large"
@@ -202,7 +204,7 @@ PredictionForm.propTypes = {
         symbol: PropTypes.string,
         totalSupply: PropTypes.number
     }),
-    defaultPrice: PropTypes.number,
+    defaultPrice: PropTypes.string,
     inverted: PropTypes.bool
 }
 
