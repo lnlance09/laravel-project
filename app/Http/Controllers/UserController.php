@@ -18,18 +18,24 @@ use Intervention\Image\ImageManagerStatic as Image;
 class UserController extends Controller
 {
     const PROTECTED_USERNAMES = [
+        'all',
         'about',
         'coin',
         'coins',
         'contact',
+        'create',
+        'follow',
         'login',
         'options',
         'prediction',
         'predictions',
         'privacy',
+        'profilePic',
         'terms',
         'trader',
-        'traders'
+        'traders',
+        'unfollow',
+        'verify'
     ];
 
     /**
@@ -264,6 +270,14 @@ class UserController extends Controller
             ->first();
 
         return new UserResource($user);
+    }
+
+    public function all(Request $request)
+    {
+        $count = User::all()->count();
+        return response([
+            'count' => $count
+        ]);
     }
 
     /**

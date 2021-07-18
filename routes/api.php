@@ -30,6 +30,7 @@ Route::post('/predictions/create', [PredictionController::class, 'create']);
 Route::get('/predictions/{id}', [PredictionController::class, 'show']);
 
 Route::get('/users', [UserController::class, 'index']);
+Route::get('/users/all', [UserController::class, 'all']);
 Route::get('/users/{username}', [UserController::class, 'show']);
 Route::get('/users/{username}/followers', [UserController::class, 'followers']);
 Route::post('/users/create', [UserController::class, 'create']);

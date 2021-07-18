@@ -1,15 +1,46 @@
 import "./style.scss"
-import { Button, Container, Dropdown, Header, Icon, Image, Menu, Sidebar } from "semantic-ui-react"
-import { useContext, useState } from "react"
+import {
+    Button,
+    Container,
+    Dropdown,
+    Header,
+    Icon,
+    Image,
+    Label,
+    Menu,
+    Sidebar
+} from "semantic-ui-react"
+import { useContext, useEffect, useState } from "react"
+import axios from "axios"
 import defaultImg from "images/images/image.png"
-import Logo from "images/logos/main.png"
+import Logo from "images/logos/predictive.svg"
+import NumberFormat from "react-number-format"
 import PropTypes from "prop-types"
 import ThemeContext from "themeContext"
 
 const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
     const { state, dispatch } = useContext(ThemeContext)
-    const { auth, inverted, user } = state
+    const { auth, inverted, memberCount, user } = state
     const [sidebarVisible, setSidebarVisible] = useState(false)
+
+    useEffect(() => {
+        getMemberCount()
+    }, [])
+
+    const getMemberCount = async () => {
+        return axios
+            .get(`${process.env.REACT_APP_BASE_URL}users/all`)
+            .then(async (response) => {
+                const { count } = response.data
+                dispatch({
+                    type: "SET_MEMBER_COUNT",
+                    count
+                })
+            })
+            .catch(() => {
+                console.error("Last price could not be fetched")
+            })
+    }
 
     const logout = () => {
         localStorage.setItem("auth", false)
@@ -77,7 +108,16 @@ const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
                             active={activeItem === "traders"}
                             onClick={() => history.push("/traders")}
                         >
-                            Traders
+                            Traders{" "}
+                            {memberCount > 0 && (
+                                <Label color="pink">
+                                    <NumberFormat
+                                        displayType={"text"}
+                                        thousandSeparator
+                                        value={memberCount}
+                                    />
+                                </Label>
+                            )}
                         </Menu.Item>
                         <Menu.Item position="right">
                             <Button
