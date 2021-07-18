@@ -32,7 +32,7 @@ toast.configure(toastConfig)
 
 const Coin = ({ history, match }) => {
     const { state } = useContext(ThemeContext)
-    const { inverted } = state
+    const { auth, inverted } = state
     const { slug } = match.params
 
     const [internalState, dispatch] = useReducer(
@@ -258,6 +258,7 @@ const Coin = ({ history, match }) => {
                     </Header>
 
                     <PredictionForm
+                        auth={auth}
                         coin={coin}
                         defaultPrice={coin.lastPrice * 1.8}
                         history={history}

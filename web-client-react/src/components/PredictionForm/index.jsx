@@ -14,7 +14,7 @@ import PropTypes from "prop-types"
 const toastConfig = getConfig()
 toast.configure(toastConfig)
 
-const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
+const PredictionForm = ({ auth, coin, defaultPrice = "", history, inverted }) => {
     const [date, setDate] = useState(moment().add(30, "days").toDate())
     const [daysFromNow, setDaysFromNow] = useState(30)
     const [loading, setLoading] = useState(false)
@@ -172,7 +172,14 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
                 disabled={!formIsValid}
                 fluid
                 loading={loading}
-                onClick={submitPrediction}
+                onClick={() => {
+                    if (auth) {
+                        submitPrediction()
+                        return
+                    }
+
+                    history.push("/login")
+                }}
                 size="large"
             />
         </div>
@@ -180,6 +187,7 @@ const PredictionForm = ({ coin, defaultPrice = "", history, inverted }) => {
 }
 
 PredictionForm.propTypes = {
+    auth: PropTypes.bool,
     coin: PropTypes.shape({
         category: PropTypes.string,
         circulatingSupply: PropTypes.number,

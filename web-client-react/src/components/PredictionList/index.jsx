@@ -65,7 +65,7 @@ const PredictionList = ({ inverted, loading, loadingMore, onClickPrediction, pre
                 <Item key="loadingMore">
                     <Placeholder
                         inverted={inverted}
-                        style={{ height: 150, width: 150, marginRight: "1em" }}
+                        style={{ height: 90, width: 90, marginRight: "1em" }}
                     >
                         <Placeholder.Image />
                     </Placeholder>
