@@ -1,8 +1,9 @@
 import "react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css"
 import "./style.scss"
 import { useState } from "react"
-import { Button, Divider, Form, Grid, Header, Segment } from "semantic-ui-react"
+import { Button, Divider, Form, Grid, Header, Segment, TextArea } from "semantic-ui-react"
 import { getConfig } from "options/toast"
+import { dateDiff } from "utils/dateFunctions"
 import { toast } from "react-toastify"
 import axios from "axios"
 import Chart from "components/Chart"
@@ -14,9 +15,12 @@ import PropTypes from "prop-types"
 const toastConfig = getConfig()
 toast.configure(toastConfig)
 
-const PredictionForm = ({ auth, coin, defaultPrice = "", history, inverted }) => {
-    const [date, setDate] = useState(moment().add(30, "days").toDate())
-    const [daysFromNow, setDaysFromNow] = useState(30)
+const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inverted }) => {
+    const defaultDate = moment().add(days, "days").toDate()
+
+    const [date, setDate] = useState(defaultDate)
+    const [daysFromNow, setDaysFromNow] = useState(days)
+    const [explanation, setExplanation] = useState("")
     const [loading, setLoading] = useState(false)
     const [operator, setOperator] = useState("more")
     const [price, setPrice] = useState(defaultPrice)
@@ -32,10 +36,8 @@ const PredictionForm = ({ auth, coin, defaultPrice = "", history, inverted }) =>
 
     const changeDate = (e, data) => {
         setDate(data.value)
-        const now = moment(new Date())
-        const newDate = moment(new Date(data.value))
-        const duration = moment.duration(newDate.diff(now))
-        setDaysFromNow(Math.ceil(duration.asDays()))
+        const days = dateDiff(null, data.value)
+        setDaysFromNow(days)
     }
 
     const submitPrediction = async () => {
@@ -45,6 +47,7 @@ const PredictionForm = ({ auth, coin, defaultPrice = "", history, inverted }) =>
                 `${process.env.REACT_APP_BASE_URL}predictions/create`,
                 {
                     coin: coin.id,
+                    explanation,
                     predictionPrice: price,
                     targetDate: date
                 },
@@ -158,6 +161,12 @@ const PredictionForm = ({ auth, coin, defaultPrice = "", history, inverted }) =>
                                             <span className="daysFromNow">{daysFromNow} days</span>{" "}
                                             from now
                                         </Header>
+                                        <TextArea
+                                            onChange={(e, { value }) => setExplanation(value)}
+                                            placeholder="What's your reasoning for this opinion? (Optional)"
+                                            rows={8}
+                                            value={explanation}
+                                        />
                                     </Segment>
                                 </Grid.Column>
                             </Grid.Row>
@@ -212,7 +221,8 @@ PredictionForm.propTypes = {
         symbol: PropTypes.string,
         totalSupply: PropTypes.number
     }),
-    defaultPrice: PropTypes.string,
+    days: PropTypes.number,
+    defaultPrice: PropTypes.number,
     inverted: PropTypes.bool
 }
 

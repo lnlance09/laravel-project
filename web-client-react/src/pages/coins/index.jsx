@@ -270,7 +270,7 @@ const Coin = ({ history, match }) => {
                     </Header>
 
                     {traders.data.length > 0 && traders.loaded ? (
-                        <Grid columns="equal">
+                        <Grid columns="equal" stackable>
                             {traders.data.map((trader, i) => {
                                 let accuracy = 0
                                 let tooltip = ""

@@ -69,6 +69,7 @@ class PredictionController extends Controller
         ]);
 
         $coinId = $request->input('coin');
+        $explanation = $request->input('explanation');
         $predictionPrice = $request->input('predictionPrice');
         $targetDate = $request->input('targetDate');
         $user = $request->user();
@@ -83,6 +84,7 @@ class PredictionController extends Controller
         $prediction = Prediction::create([
             'coin_id' => $coinId,
             'current_price' => $currentPrice,
+            'explanation' => $explanation,
             'margin' => $margin,
             'prediction_price' => $predictionPrice,
             'target_date' => $targetDate,

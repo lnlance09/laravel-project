@@ -34,8 +34,8 @@ const Predictions = ({ history }) => {
     const [hasMore, setHasMore] = useState(false)
     const [loading, setLoading] = useState(true)
     const [loadingMore, setLoadingMore] = useState(false)
+    const [margin, setMargin] = useState(null)
     const [page, setPage] = useState(1)
-    const [percentChange, setPercentChange] = useState(null)
     const [status, setStatus] = useState(null)
     const [targetDate, setTargetDate] = useState(null)
 
@@ -120,10 +120,10 @@ const Predictions = ({ history }) => {
         getPredictions(coinId, status, "created_at", newVal)
     }
 
-    const togglePercentChange = () => {
-        const newVal = percentChange === null || percentChange === "desc" ? "asc" : "desc"
-        setPercentChange(newVal)
-        setActiveItem("percent_change")
+    const toggleMargin = () => {
+        const newVal = margin === null || margin === "desc" ? "asc" : "desc"
+        setMargin(newVal)
+        setActiveItem("margin")
         setDirection(newVal)
         getPredictions(coinId, status, "margin", newVal)
     }
@@ -148,7 +148,7 @@ const Predictions = ({ history }) => {
             <Header as="h1" className="massive" inverted={inverted}>
                 Browse predictions
             </Header>
-            <Grid>
+            <Grid stackable>
                 <Grid.Column width={4}>
                     <Dropdown
                         className="inverted"
@@ -227,9 +227,9 @@ const Predictions = ({ history }) => {
                         color="violet"
                         content="Margin"
                         fluid
-                        icon={activeItem === "percent_change" && setIcon(percentChange)}
+                        icon={activeItem === "margin" && setIcon(margin)}
                         inverted={inverted}
-                        onClick={togglePercentChange}
+                        onClick={toggleMargin}
                         size="big"
                     />
                 </Grid.Column>

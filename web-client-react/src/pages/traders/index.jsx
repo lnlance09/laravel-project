@@ -163,7 +163,7 @@ const Trader = ({ history, match }) => {
             <DisplayMetaTags page="trader" state={internalState} />
             {loaded ? (
                 <>
-                    <Grid>
+                    <Grid stackable>
                         <Grid.Row>
                             <Grid.Column className="imgColumn" width={4}>
                                 <Segment circular style={{ height: "150px", width: "150px" }}>

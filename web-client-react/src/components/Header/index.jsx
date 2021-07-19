@@ -68,6 +68,24 @@ const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
         </>
     )
 
+    const ProfileDropdown = (
+        <Dropdown
+            className={inverted ? "inverted" : null}
+            icon={false}
+            pointing="top"
+            trigger={trigger}
+        >
+            <Dropdown.Menu>
+                <Dropdown.Item onClick={() => history.push(`/${user.username}`)}>
+                    Profile
+                </Dropdown.Item>
+                <Dropdown.Item onClick={() => history.push("/settings")}>Settings</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item>
+            </Dropdown.Menu>
+        </Dropdown>
+    )
+
     return (
         <div className="pageHeaderComponent">
             {simple ? (
@@ -83,7 +101,7 @@ const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
                 </Container>
             ) : (
                 <Menu borderless fixed="top" fluid inverted={inverted}>
-                    <Container>
+                    <Container className="desktop">
                         <Menu.Item className="logoItem">
                             <Header as="h1" inverted={inverted} onClick={() => history.push("/")}>
                                 <Image className="headerLogo" rounded src={Logo} />
@@ -137,25 +155,7 @@ const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
                                 <Icon inverted={inverted} name="moon" size="large" />
                             </Button>
                             {auth ? (
-                                <Dropdown
-                                    className={inverted ? "inverted" : null}
-                                    icon={false}
-                                    pointing="top"
-                                    trigger={trigger}
-                                >
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item
-                                            onClick={() => history.push(`/${user.username}`)}
-                                        >
-                                            Profile
-                                        </Dropdown.Item>
-                                        <Dropdown.Item onClick={() => history.push("/settings")}>
-                                            Settings
-                                        </Dropdown.Item>
-                                        <Dropdown.Divider />
-                                        <Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
+                                <>{ProfileDropdown}</>
                             ) : (
                                 <>
                                     <Button
@@ -174,13 +174,28 @@ const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
                             )}
                         </Menu.Item>
                     </Container>
+
+                    <Container className="mobile">
+                        <Menu.Item className="logoItem">
+                            <Header as="h1" inverted={inverted} onClick={() => history.push("/")}>
+                                <Image className="headerLogo" rounded src={Logo} />
+                            </Header>
+                        </Menu.Item>
+                        <Menu.Item position="right">
+                            <Icon
+                                color={sidebarVisible ? "blue" : null}
+                                inverted
+                                name="ellipsis horizontal"
+                                onClick={() => setSidebarVisible(!sidebarVisible)}
+                                size="big"
+                            />
+                        </Menu.Item>
+                    </Container>
                 </Menu>
             )}
 
             <Sidebar
                 as={Menu}
-                animation="push"
-                borderless
                 direction="bottom"
                 icon="labeled"
                 inverted={inverted}
@@ -190,14 +205,22 @@ const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
                 vertical
                 visible={sidebarVisible}
             >
-                <Menu.Item as="a" onClick={() => history.push("/")}>
-                    <Icon name="home" size="small" />
-                    Home
+                <Menu.Item as="a" onClick={() => history.push("/predictions")}>
+                    Predictions
                 </Menu.Item>
-                {auth && (
+                <Menu.Item as="a" onClick={() => history.push("/traders")}>
+                    Traders
+                </Menu.Item>
+                <Menu.Item as="a" onClick={() => history.push("/coins")}>
+                    Coins
+                </Menu.Item>
+                {auth ? (
                     <Menu.Item as="a" onClick={() => history.push(`/${user.username}`)}>
-                        <Icon name="user" size="small" />
                         Profile
+                    </Menu.Item>
+                ) : (
+                    <Menu.Item as="a" onClick={() => history.push("/login")}>
+                        Sign In
                     </Menu.Item>
                 )}
             </Sidebar>

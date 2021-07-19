@@ -1,15 +1,19 @@
 @import "../../scss/_colors.scss";
-@import url('https://fonts.googleapis.com/css?family=Quantico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
 
 .pageHeaderComponent {
     height: 76px;
 
     @media only screen and (max-width: 1025px) {
-        
+        .container.desktop {
+            display: none;
+        }
     }
 
     @media only screen and (min-width: 1025px) {
-        
+        .container.mobile {
+            display: none;
+        }
     }
 
     .simpleLogo {
@@ -43,11 +47,9 @@
             height: 76px;
 
             .item.logoItem {
-                padding-left: 0;
-
                 h1.header {
                     cursor: pointer;
-                    font-family: 'Quantico';
+                    font-family: 'Lexend Deca', sans-serif;
                     font-size: 36px;
                     line-height: 60px;
 
@@ -59,6 +61,12 @@
                         vertical-align: middle;
                         width: 54px;
                     }
+                }
+            }
+
+            &.desktop {
+                .item.logoItem {
+                    padding-left: 0;
                 }
             }
 
@@ -83,7 +91,7 @@
     }
 
 	.sidebar.ui.labeled.icon.menu .item {
-		background: lighten($invertedBackgroundColor, 2%) !important;
+		background: lighten($invertedBackgroundColor, 4%) !important;
 		color: $white !important;
         font-weight: bold !important;
         line-height: 24px !important;

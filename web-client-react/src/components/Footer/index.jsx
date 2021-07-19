@@ -12,10 +12,18 @@ const Footer = ({ history, inverted }) => {
                             <Grid.Column width={3}>
                                 <Header as="h4" content="About" inverted={inverted} />
                                 <List inverted={inverted} link>
-                                    <List.Item as="a">Sitemap</List.Item>
-                                    <List.Item as="a">Contact</List.Item>
-                                    <List.Item as="a">Privacy</List.Item>
-                                    <List.Item as="a">About</List.Item>
+                                    <List.Item as="a" onClick={() => history.push("sitemap")}>
+                                        Sitemap
+                                    </List.Item>
+                                    <List.Item as="a" onClick={() => history.push("contact")}>
+                                        Contact
+                                    </List.Item>
+                                    <List.Item as="a" onClick={() => history.push("privacy")}>
+                                        Privacy
+                                    </List.Item>
+                                    <List.Item as="a" onClick={() => history.push("about")}>
+                                        About
+                                    </List.Item>
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={3}>
@@ -27,12 +35,9 @@ const Footer = ({ history, inverted }) => {
                             </Grid.Column>
                             <Grid.Column width={7}>
                                 <Header as="h4" inverted={inverted}>
-                                    Footer Header
+                                    Support
                                 </Header>
-                                <p>
-                                    Extra space for a call to action inside the footer that could
-                                    help re-engage users.
-                                </p>
+                                <p>Address:</p>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>

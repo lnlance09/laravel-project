@@ -89,6 +89,17 @@ body {
 			}
 		}
 
+		&.coinsPage, &.predictionsPage, &.tradersPage {
+			.ui.grid.stackable {
+				.column {
+					@media only screen and (max-width: 1025px) {
+						padding-bottom: 7px;
+						padding-top: 7px;
+					}
+				}
+			}
+		}
+
 		&.coinPage {
 			p.header {
 				font-weight: normal;
@@ -117,6 +128,32 @@ body {
 				top: 50%;
 				transform: translate(-50%, -50%);
 			}
+		}
+
+		&.predictionPage {
+			h1.predictionHeader {
+				img {
+					cursor: pointer;
+				}
+
+				@media only screen and (max-width: 1025px) {
+					img {
+						display: none !important;
+					}
+				}
+			}
+
+			.ui.list.divided {
+				.item {
+					.label {
+						float: right;
+					}
+				}
+			}
+		}
+
+		&.predictionsPage {
+			
 		}
 
 		&.traderPage {

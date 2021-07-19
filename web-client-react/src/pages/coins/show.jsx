@@ -97,7 +97,7 @@ const Coins = ({ history }) => {
             <Header as="h1" className="massive" inverted={inverted}>
                 Browse coins
             </Header>
-            <Grid>
+            <Grid stackable>
                 <Grid.Column width={10}>
                     <div className={`ui icon input big basic fluid ${inverted ? "inverted" : ""}`}>
                         <DebounceInput

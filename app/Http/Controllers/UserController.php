@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\User as UserResource;
 use App\Http\Resources\UserCollection;
+use App\Mail\ForgotPassword;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
@@ -25,6 +27,7 @@ class UserController extends Controller
         'contact',
         'create',
         'follow',
+        'forgot',
         'login',
         'options',
         'prediction',
@@ -85,6 +88,46 @@ class UserController extends Controller
         return new UserCollection($users);
     }
 
+    public function all(Request $request)
+    {
+        $count = User::all()->count();
+        return response([
+            'count' => $count
+        ]);
+    }
+
+    public function changeProfilePic(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|image',
+        ]);
+
+        $userId = $request->user()->id;
+        $file = $request->file('file');
+        $img = Image::make($file);
+        $img->resize(320, 320);
+        $img->save($file);
+
+        $contents = file_get_contents($file);
+        $img = 'users/' . Str::random(24) . '.jpg';
+        Storage::disk('s3')->put($img, $contents);
+
+        $user = User::find($userId);
+        $user->img = $img;
+        $user->save();
+
+        $user = User::where('id', $userId)
+            ->withCount([
+                'predictions',
+                'incorrectPredictions',
+                'correctPredictions',
+                'pendingPredictions'
+            ])
+            ->first();
+
+        return new UserResource($user);
+    }
+
     /**
      * Show the form for creating a new resource.
      * 
@@ -129,6 +172,55 @@ class UserController extends Controller
     }
 
     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
+        //
+    }
+
+    /**
+     * Forgot
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function forgot(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $email = $request->input('email');
+        $count = User::where('email', $email)->get()->count();
+
+        if ($count === 1) {
+            Mail::to($email)->send(new ForgotPassword());
+            return response([
+                'message' => 'Success'
+            ]);
+        }
+
+        return response([
+            'message' => 'No user found'
+        ], 401);
+    }
+
+    /**
      * Login
      * 
      * @param  \Illuminate\Http\Request  $request
@@ -167,54 +259,6 @@ class UserController extends Controller
     }
 
     /**
-     * Verify
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function verify(Request $request)
-    {
-        $request->validate([
-            'code' => 'required|numeric',
-        ]);
-
-        $user = $request->user();
-        if ($user->verification_code === $request->input('code')) {
-            $user->email_verified_at = now();
-            $user->save();
-            return response()->json([
-                'verify' => false
-            ]);
-        }
-
-        return response([
-            'message' => 'That code is incorrect'
-        ], 401);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  String  $username
@@ -240,46 +284,6 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function changeProfilePic(Request $request)
-    {
-        $request->validate([
-            'file' => 'required|image',
-        ]);
-
-        $userId = $request->user()->id;
-        $file = $request->file('file');
-        $img = Image::make($file);
-        $img->resize(320, 320);
-        $img->save($file);
-
-        $contents = file_get_contents($file);
-        $img = 'users/' . Str::random(24) . '.jpg';
-        Storage::disk('s3')->put($img, $contents);
-
-        $user = User::find($userId);
-        $user->img = $img;
-        $user->save();
-
-        $user = User::where('id', $userId)
-            ->withCount([
-                'predictions',
-                'incorrectPredictions',
-                'correctPredictions',
-                'pendingPredictions'
-            ])
-            ->first();
-
-        return new UserResource($user);
-    }
-
-    public function all(Request $request)
-    {
-        $count = User::all()->count();
-        return response([
-            'count' => $count
-        ]);
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -300,5 +304,31 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //
+    }
+
+    /**
+     * Verify
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function verify(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|numeric',
+        ]);
+
+        $user = $request->user();
+        if ($user->verification_code === $request->input('code')) {
+            $user->email_verified_at = now();
+            $user->save();
+            return response()->json([
+                'verify' => false
+            ]);
+        }
+
+        return response([
+            'message' => 'That code is incorrect'
+        ], 401);
     }
 }

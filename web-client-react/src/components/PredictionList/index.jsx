@@ -9,7 +9,16 @@ const PredictionList = ({ inverted, loading, loadingMore, onClickPrediction, pre
     <div className="predictionList">
         <Item.Group className={inverted ? "inverted" : ""} divided link>
             {predictions.map((prediction, i) => {
-                const { coin, createdAt, id, predictionPrice, status, targetDate } = prediction
+                const {
+                    coin,
+                    createdAt,
+                    explanation,
+                    id,
+                    margin,
+                    predictionPrice,
+                    status,
+                    targetDate
+                } = prediction
                 return (
                     <Item key={`prediction${i}`} onClick={() => onClickPrediction(id)}>
                         {loading ? (
@@ -33,26 +42,28 @@ const PredictionList = ({ inverted, loading, loadingMore, onClickPrediction, pre
                         ) : (
                             <>
                                 <Item.Image
+                                    className="itemImg"
                                     onError={(i) => (i.target.src = PlaceholderPic)}
                                     size="tiny"
                                     src={setImage(coin.logo)}
                                 />
                                 <Item.Content>
                                     <Item.Header>
-                                        {coin.name} to ${predictionPrice} on{" "}
-                                        <Moment date={targetDate} format="MMM D, YYYY" />
+                                        {coin.name} to ${predictionPrice}
                                     </Item.Header>
                                     <Item.Meta>
-                                        <Moment date={createdAt} fromNow />
+                                        On <Moment date={targetDate} format="MMM D, YYYY" />•{" "}
+                                        Predicted <Moment date={createdAt} fromNow />
                                     </Item.Meta>
-                                    <Item.Description></Item.Description>
+                                    <Item.Meta>{margin}% margin</Item.Meta>
+                                    <Item.Description>{explanation}</Item.Description>
                                     <Item.Extra>
                                         <Label
-                                            basic
                                             className={inverted ? "inverted" : ""}
                                             color={setIconColor(status)}
                                             content={status}
                                             icon={setIconName(status)}
+                                            size="tiny"
                                         />
                                     </Item.Extra>
                                 </Item.Content>

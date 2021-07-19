@@ -18,9 +18,11 @@ class Prediction extends JsonResource
     {
         return [
             'id' => $this->id,
+            'actualPrice' => $this->actual_price,
             'coin' => new CoinResource($this->coin),
             'createdAt' => $this->created_at,
             'currentPrice' => $this->current_price,
+            'explanation' => $this->explanation === null ? 'No explanation given...' : $this->explanation,
             'margin' => $this->margin,
             'predictionPrice' => (float) $this->prediction_price,
             'status' => $this->status,

@@ -7,7 +7,7 @@ import Truncate from "react-truncate"
 
 const CoinList = ({ coins, inverted, loading, onClickCoin }) => (
     <div className="coinList">
-        <Card.Group className={inverted ? "inverted" : ""} itemsPerRow={3}>
+        <Card.Group className={inverted ? "inverted" : ""} itemsPerRow={3} stackable>
             {coins.map((coin, i) => {
                 const { description, logo, name, slug, symbol } = coin
                 return (

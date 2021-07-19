@@ -2,6 +2,16 @@
 
 .predictionList {
     .item {
+        @media only screen and (max-width: 1025px) {
+            .itemImg {
+                display: none !important;
+            }
+        }
+    
+        @media only screen and (min-width: 1025px) {
+            
+        }
+
         .extra {
             .ui.red.label {
                 .close.icon {

@@ -33,13 +33,24 @@
         }
     }
 
-    .registerText {
+    .footerText {
         margin-top: 4px;
 
-        .registerLink {
+        .footerLink {
             border-bottom: solid 1px $blue;
             cursor: pointer;
             padding-bottom: 3px;
+        }
+    }
+
+    .forgotText {
+        cursor: pointer;
+        font-weight: normal !important;
+        margin-top: 4px;
+
+        .icon.arrow {
+            font-size: 18px !important;
+            margin-right: 4px !important;
         }
     }
 }

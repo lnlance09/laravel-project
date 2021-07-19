@@ -17,9 +17,11 @@ class Prediction extends Model
      * @var array
      */
     protected $fillable = [
+        'actual_price',
         'coin_id',
         'created_at',
         'current_price',
+        'explanation',
         'margin',
         'prediction_price',
         'status',
