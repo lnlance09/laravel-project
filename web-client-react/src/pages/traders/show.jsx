@@ -37,7 +37,7 @@ const Traders = ({ history }) => {
 
     useEffect(() => {
         getTraders(searchTerm, null, null)
-    }, [])
+    }, [searchTerm])
 
     const getTraders = async (q, sort, dir, page = 1) => {
         if (page === 1) {
@@ -75,10 +75,8 @@ const Traders = ({ history }) => {
             })
     }
 
-    const onChangeText = async (e) => {
-        const q = e.target.value
-        setSearchTerm(q)
-        await getTraders(q, activeItem, direction)
+    const onChangeText = (e) => {
+        setSearchTerm(e.target.value)
     }
 
     const onClickTrader = (username) => {

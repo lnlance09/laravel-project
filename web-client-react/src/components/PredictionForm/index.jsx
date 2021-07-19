@@ -1,7 +1,7 @@
 import "react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css"
 import "./style.scss"
-import { useState } from "react"
-import { Button, Divider, Form, Grid, Header, Segment, TextArea } from "semantic-ui-react"
+import { useRef, useState } from "react"
+import { Button, Divider, Form, Grid, Header, Segment } from "semantic-ui-react"
 import { getConfig } from "options/toast"
 import { dateDiff } from "utils/dateFunctions"
 import { toast } from "react-toastify"
@@ -18,9 +18,9 @@ toast.configure(toastConfig)
 const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inverted }) => {
     const defaultDate = moment().add(days, "days").toDate()
 
+    const explanation = useRef(null)
     const [date, setDate] = useState(defaultDate)
     const [daysFromNow, setDaysFromNow] = useState(days)
-    const [explanation, setExplanation] = useState("")
     const [loading, setLoading] = useState(false)
     const [operator, setOperator] = useState("more")
     const [price, setPrice] = useState(defaultPrice)
@@ -47,7 +47,7 @@ const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inv
                 `${process.env.REACT_APP_BASE_URL}predictions/create`,
                 {
                     coin: coin.id,
-                    explanation,
+                    explanation: explanation.current.value,
                     predictionPrice: price,
                     targetDate: date
                 },
@@ -161,11 +161,11 @@ const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inv
                                             <span className="daysFromNow">{daysFromNow} days</span>{" "}
                                             from now
                                         </Header>
-                                        <TextArea
-                                            onChange={(e, { value }) => setExplanation(value)}
+                                        <textarea
+                                            name="explanation"
                                             placeholder="What's your reasoning for this opinion? (Optional)"
+                                            ref={explanation}
                                             rows={8}
-                                            value={explanation}
                                         />
                                     </Segment>
                                 </Grid.Column>

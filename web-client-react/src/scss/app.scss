@@ -159,6 +159,12 @@ body {
 		&.traderPage {
 			padding: 1.5em 0;
 
+			.traderPageDivider {
+				@media only screen and (max-width: 1025px) {
+					display: none;
+				}
+			}
+
 			.ui.grid {
 				.imgColumn {
 					padding-left: 4em;

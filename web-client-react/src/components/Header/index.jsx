@@ -18,13 +18,14 @@ import NumberFormat from "react-number-format"
 import PropTypes from "prop-types"
 import ThemeContext from "themeContext"
 
-const PageHeader = ({ activeItem, history, q, showResults, simple }) => {
+const PageHeader = ({ activeItem, history, q, simple }) => {
     const { state, dispatch } = useContext(ThemeContext)
     const { auth, inverted, memberCount, user } = state
     const [sidebarVisible, setSidebarVisible] = useState(false)
 
     useEffect(() => {
         getMemberCount()
+        // eslint-disable-next-line
     }, [])
 
     const getMemberCount = async () => {
@@ -232,7 +233,6 @@ PageHeader.propTypes = {
     activeItem: PropTypes.string,
     history: PropTypes.object,
     q: PropTypes.string,
-    showResults: PropTypes.bool,
     simple: PropTypes.bool,
     toggleSearchMode: PropTypes.func
 }
@@ -240,7 +240,6 @@ PageHeader.propTypes = {
 PageHeader.defaultProps = {
     activeItem: null,
     q: "",
-    showResults: true,
     simple: false
 }
 

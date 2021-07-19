@@ -6,10 +6,21 @@
             .itemImg {
                 display: none !important;
             }
+
+            .placeholderPicWrapper {
+                display: none !important;
+            }
         }
     
         @media only screen and (min-width: 1025px) {
-            
+            .placeholderPicWrapper {
+                height: 90px;
+                width: 90px;
+            }
+        }
+
+        .placeholderPicWrapper {
+            margin-right: 1em;
         }
 
         .extra {

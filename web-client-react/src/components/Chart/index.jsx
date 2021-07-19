@@ -18,9 +18,7 @@ const Chart = ({
     history,
     includeRanges = true,
     inverted,
-    period = 300,
-    prediction = null,
-    start = Math.round(new Date().getTime() / 1000 - 3600 * 24)
+    prediction = null
 }) => {
     const [state, dispatch] = useReducer(
         process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
@@ -55,16 +53,8 @@ const Chart = ({
                 color
             })
         }
+        // eslint-disable-next-line
     }, [inverted, prediction])
-
-    const fillGapData = (start, end, currentPrice, targetPrice) => {
-        const pointCount = 4
-        const points = [currentPrice * 1.2]
-        let index = 0
-        for (let i = start; i < end; i + 5) {
-            index++
-        }
-    }
 
     const getGraphData = async (id, range) => {
         await axios

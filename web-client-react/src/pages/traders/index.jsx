@@ -258,7 +258,7 @@ const Trader = ({ history, match }) => {
                         </Grid.Row>
                     </Grid>
 
-                    <Divider hidden section />
+                    <Divider className="traderPageDivider" hidden section />
 
                     <Visibility
                         continuous

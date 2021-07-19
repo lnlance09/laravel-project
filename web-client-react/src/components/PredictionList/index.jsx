@@ -5,95 +5,80 @@ import Moment from "react-moment"
 import PlaceholderPic from "images/images/image.png"
 import PropTypes from "prop-types"
 
-const PredictionList = ({ inverted, loading, loadingMore, onClickPrediction, predictions }) => (
-    <div className="predictionList">
-        <Item.Group className={inverted ? "inverted" : ""} divided link>
-            {predictions.map((prediction, i) => {
-                const {
-                    coin,
-                    createdAt,
-                    explanation,
-                    id,
-                    margin,
-                    predictionPrice,
-                    status,
-                    targetDate
-                } = prediction
-                return (
-                    <Item key={`prediction${i}`} onClick={() => onClickPrediction(id)}>
-                        {loading ? (
-                            <>
-                                <Placeholder
-                                    inverted={inverted}
-                                    style={{ height: 90, width: 90, marginRight: "1em" }}
-                                >
-                                    <Placeholder.Image />
-                                </Placeholder>
-                                <Item.Content>
-                                    <Placeholder inverted={inverted} fluid>
-                                        <Placeholder.Paragraph>
-                                            <Placeholder.Line />
-                                            <Placeholder.Line />
-                                            <Placeholder.Line />
-                                        </Placeholder.Paragraph>
-                                    </Placeholder>
-                                </Item.Content>
-                            </>
-                        ) : (
-                            <>
-                                <Item.Image
-                                    className="itemImg"
-                                    onError={(i) => (i.target.src = PlaceholderPic)}
-                                    size="tiny"
-                                    src={setImage(coin.logo)}
-                                />
-                                <Item.Content>
-                                    <Item.Header>
-                                        {coin.name} to ${predictionPrice}
-                                    </Item.Header>
-                                    <Item.Meta>
-                                        On <Moment date={targetDate} format="MMM D, YYYY" />•{" "}
-                                        Predicted <Moment date={createdAt} fromNow />
-                                    </Item.Meta>
-                                    <Item.Meta>{margin}% margin</Item.Meta>
-                                    <Item.Description>{explanation}</Item.Description>
-                                    <Item.Extra>
-                                        <Label
-                                            className={inverted ? "inverted" : ""}
-                                            color={setIconColor(status)}
-                                            content={status}
-                                            icon={setIconName(status)}
-                                            size="tiny"
-                                        />
-                                    </Item.Extra>
-                                </Item.Content>
-                            </>
-                        )}
-                    </Item>
-                )
-            })}
-            {loadingMore && (
-                <Item key="loadingMore">
-                    <Placeholder
-                        inverted={inverted}
-                        style={{ height: 90, width: 90, marginRight: "1em" }}
-                    >
-                        <Placeholder.Image />
-                    </Placeholder>
-                    <Item.Content>
-                        <Placeholder inverted={inverted} fluid>
-                            <Placeholder.Paragraph>
-                                <Placeholder.Line />
-                                <Placeholder.Line />
-                                <Placeholder.Line />
-                            </Placeholder.Paragraph>
-                        </Placeholder>
-                    </Item.Content>
-                </Item>
-            )}
-        </Item.Group>
-    </div>
-)
+const PredictionList = ({ inverted, loading, loadingMore, onClickPrediction, predictions }) => {
+    const PlaceholderSegment = (
+        <>
+            <Placeholder className="placeholderPicWrapper" inverted={inverted}>
+                <Placeholder.Image />
+            </Placeholder>
+            <Item.Content>
+                <Placeholder inverted={inverted} fluid>
+                    <Placeholder.Paragraph>
+                        <Placeholder.Line />
+                        <Placeholder.Line />
+                        <Placeholder.Line />
+                    </Placeholder.Paragraph>
+                </Placeholder>
+            </Item.Content>
+        </>
+    )
+
+    return (
+        <div className="predictionList">
+            <Item.Group className={inverted ? "inverted" : ""} divided link>
+                {predictions.map((prediction, i) => {
+                    const {
+                        coin,
+                        createdAt,
+                        explanation,
+                        id,
+                        margin,
+                        predictionPrice,
+                        status,
+                        targetDate
+                    } = prediction
+                    return (
+                        <Item key={`prediction${i}`} onClick={() => onClickPrediction(id)}>
+                            {loading ? (
+                                <>{PlaceholderSegment}</>
+                            ) : (
+                                <>
+                                    <Item.Image
+                                        className="itemImg"
+                                        onError={(i) => (i.target.src = PlaceholderPic)}
+                                        size="tiny"
+                                        src={setImage(coin.logo)}
+                                    />
+                                    <Item.Content>
+                                        <Item.Header>
+                                            {coin.name} to ${predictionPrice}
+                                        </Item.Header>
+                                        <Item.Meta>
+                                            On <Moment date={targetDate} format="MMM D, YYYY" />•{" "}
+                                            Predicted <Moment date={createdAt} fromNow />
+                                        </Item.Meta>
+                                        <Item.Meta>{margin}% margin</Item.Meta>
+                                        <Item.Description>{explanation}</Item.Description>
+                                        <Item.Extra>
+                                            <Label
+                                                className={inverted ? "inverted" : ""}
+                                                color={setIconColor(status)}
+                                                content={status}
+                                                icon={setIconName(status)}
+                                                size="tiny"
+                                            />
+                                        </Item.Extra>
+                                    </Item.Content>
+                                </>
+                            )}
+                        </Item>
+                    )
+                })}
+                {loadingMore && <Item key="loadingMore">{PlaceholderSegment}</Item>}
+            </Item.Group>
+        </div>
+    )
+}
 
 PredictionList.propTypes = {
     inverted: PropTypes.bool,
