@@ -164,91 +164,91 @@ a.ui.nag {
 -------------- */
 
 .ui.primary.nag {
-  background-color: #FF1493;
+  background-color: #e03997;
 }
 .ui.inverted.primary.nag {
   background-color: #54C8FF;
 }
 .ui.secondary.nag {
-  background-color: #0E6EB8;
+  background-color: #2185d0;
 }
 .ui.inverted.secondary.nag {
   background-color: #545454;
 }
 .ui.red.nag {
-  background-color: #B03060;
+  background-color: #db2828;
 }
 .ui.inverted.red.nag {
   background-color: #FF695E;
 }
 .ui.orange.nag {
-  background-color: #FE9A76;
+  background-color: #f2711c;
 }
 .ui.inverted.orange.nag {
   background-color: #FF851B;
 }
 .ui.yellow.nag {
-  background-color: #FFD700;
+  background-color: #fbbd08;
 }
 .ui.inverted.yellow.nag {
   background-color: #FFE21F;
 }
 .ui.olive.nag {
-  background-color: #32CD32;
+  background-color: #b5cc18;
 }
 .ui.inverted.olive.nag {
   background-color: #D9E778;
 }
 .ui.green.nag {
-  background-color: #016936;
+  background-color: #21ba45;
 }
 .ui.inverted.green.nag {
   background-color: #2ECC40;
 }
 .ui.teal.nag {
-  background-color: #008080;
+  background-color: #00b5ad;
 }
 .ui.inverted.teal.nag {
   background-color: #6DFFFF;
 }
 .ui.blue.nag {
-  background-color: #0E6EB8;
+  background-color: #2185d0;
 }
 .ui.inverted.blue.nag {
   background-color: #54C8FF;
 }
 .ui.violet.nag {
-  background-color: #EE82EE;
+  background-color: #6435c9;
 }
 .ui.inverted.violet.nag {
   background-color: #A291FB;
 }
 .ui.purple.nag {
-  background-color: #B413EC;
+  background-color: #a333c8;
 }
 .ui.inverted.purple.nag {
   background-color: #DC73FF;
 }
 .ui.pink.nag {
-  background-color: #FF1493;
+  background-color: #e03997;
 }
 .ui.inverted.pink.nag {
   background-color: #FF8EDF;
 }
 .ui.brown.nag {
-  background-color: #A52A2A;
+  background-color: #a5673f;
 }
 .ui.inverted.brown.nag {
   background-color: #D67C1C;
 }
 .ui.grey.nag {
-  background-color: #A0A0A0;
+  background-color: #767676;
 }
 .ui.inverted.grey.nag {
   background-color: #DCDDDE;
 }
 .ui.black.nag {
-  background-color: #000000;
+  background-color: #1b1c1d;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.black.nag {

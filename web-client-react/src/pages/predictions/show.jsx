@@ -252,6 +252,7 @@ const Predictions = ({ history }) => {
                     onClickPrediction={onClickPrediction}
                 />
             </Visibility>
+            <Divider hidden section />
         </DefaultLayout>
     )
 }

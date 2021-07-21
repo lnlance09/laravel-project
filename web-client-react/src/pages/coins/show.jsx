@@ -139,7 +139,7 @@ const Coins = ({ history }) => {
                 loading={loading}
                 onClickCoin={onClickCoin}
             />
-            <Divider hidden />
+            <Divider hidden section />
         </DefaultLayout>
     )
 }

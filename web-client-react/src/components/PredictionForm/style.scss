@@ -23,11 +23,13 @@
         }
     }
 
-    textarea {
-        background: transparent !important;
-	    border: solid 1px rgba(255, 255, 255, 0.4) !important;
-	    caret-color: $white;
-	    color: $white !important;
-	    outline: none !important;
+    &.inverted {
+        textarea {
+            background: transparent !important;
+            border: solid 1px rgba(255, 255, 255, 0.4) !important;
+            caret-color: $white;
+            color: $white !important;
+            outline: none !important;
+        }
     }
 }

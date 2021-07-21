@@ -145,10 +145,10 @@
   background: #cf9b0d;
 }
 .ui.toast-container .toast-box > .attached.progress.success .bar.bar.bar {
-  background: #001d0f;
+  background: #15792d;
 }
 .ui.toast-container .toast-box > .attached.progress.error .bar.bar.bar {
-  background: #74203f;
+  background: #9c1a1a;
 }
 .ui.toast-container .toast-box > .attached.progress.neutral .bar.bar.bar {
   background: #d9d9d9;
@@ -399,11 +399,11 @@
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.toast.success {
-  background-color: #016936;
+  background-color: #21ba45;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.toast.error {
-  background-color: #B03060;
+  background-color: #db2828;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.toast.neutral {
@@ -520,7 +520,7 @@
 -------------- */
 
 .ui.primary.toast {
-  background-color: #FF1493;
+  background-color: #e03997;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.primary.toast,
@@ -529,7 +529,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.secondary.toast {
-  background-color: #0E6EB8;
+  background-color: #2185d0;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.secondary.toast,
@@ -538,7 +538,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.red.toast {
-  background-color: #B03060;
+  background-color: #db2828;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.red.toast,
@@ -547,7 +547,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.orange.toast {
-  background-color: #FE9A76;
+  background-color: #f2711c;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.orange.toast,
@@ -556,7 +556,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.yellow.toast {
-  background-color: #FFD700;
+  background-color: #fbbd08;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.yellow.toast,
@@ -565,7 +565,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.olive.toast {
-  background-color: #32CD32;
+  background-color: #b5cc18;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.olive.toast,
@@ -574,7 +574,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.green.toast {
-  background-color: #016936;
+  background-color: #21ba45;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.green.toast,
@@ -583,7 +583,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.teal.toast {
-  background-color: #008080;
+  background-color: #00b5ad;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.teal.toast,
@@ -592,7 +592,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.blue.toast {
-  background-color: #0E6EB8;
+  background-color: #2185d0;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.blue.toast,
@@ -601,7 +601,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.violet.toast {
-  background-color: #EE82EE;
+  background-color: #6435c9;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.violet.toast,
@@ -610,7 +610,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.purple.toast {
-  background-color: #B413EC;
+  background-color: #a333c8;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.purple.toast,
@@ -619,7 +619,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.pink.toast {
-  background-color: #FF1493;
+  background-color: #e03997;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.pink.toast,
@@ -628,7 +628,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.brown.toast {
-  background-color: #A52A2A;
+  background-color: #a5673f;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.brown.toast,
@@ -637,7 +637,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.grey.toast {
-  background-color: #A0A0A0;
+  background-color: #767676;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.grey.toast,
@@ -646,7 +646,7 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.black.toast {
-  background-color: #000000;
+  background-color: #1b1c1d;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.black.toast,
@@ -656,7 +656,7 @@
 }
 .ui.inverted.toast {
   color: rgba(255, 255, 255, 0.9);
-  background-color: #000000;
+  background-color: #1b1c1d;
 }
 @media only screen and (max-width: 420px) {
   .ui.toast-container .toast-box.toast-box,

@@ -17,103 +17,103 @@ span.ui.text {
   line-height: 1;
 }
 span.ui.primary.text {
-  color: #FF1493;
+  color: #e03997;
 }
 span.ui.inverted.primary.text {
   color: #54C8FF;
 }
 span.ui.secondary.text {
-  color: #0E6EB8;
+  color: #2185d0;
 }
 span.ui.inverted.secondary.text {
   color: #545454;
 }
 span.ui.red.text {
-  color: #B03060;
+  color: #db2828;
 }
 span.ui.inverted.red.text {
   color: #FF695E;
 }
 span.ui.orange.text {
-  color: #FE9A76;
+  color: #f2711c;
 }
 span.ui.inverted.orange.text {
   color: #FF851B;
 }
 span.ui.yellow.text {
-  color: #FFD700;
+  color: #fbbd08;
 }
 span.ui.inverted.yellow.text {
   color: #FFE21F;
 }
 span.ui.olive.text {
-  color: #32CD32;
+  color: #b5cc18;
 }
 span.ui.inverted.olive.text {
   color: #D9E778;
 }
 span.ui.green.text {
-  color: #016936;
+  color: #21ba45;
 }
 span.ui.inverted.green.text {
   color: #2ECC40;
 }
 span.ui.teal.text {
-  color: #008080;
+  color: #00b5ad;
 }
 span.ui.inverted.teal.text {
   color: #6DFFFF;
 }
 span.ui.blue.text {
-  color: #0E6EB8;
+  color: #2185d0;
 }
 span.ui.inverted.blue.text {
   color: #54C8FF;
 }
 span.ui.violet.text {
-  color: #EE82EE;
+  color: #6435c9;
 }
 span.ui.inverted.violet.text {
   color: #A291FB;
 }
 span.ui.purple.text {
-  color: #B413EC;
+  color: #a333c8;
 }
 span.ui.inverted.purple.text {
   color: #DC73FF;
 }
 span.ui.pink.text {
-  color: #FF1493;
+  color: #e03997;
 }
 span.ui.inverted.pink.text {
   color: #FF8EDF;
 }
 span.ui.brown.text {
-  color: #A52A2A;
+  color: #a5673f;
 }
 span.ui.inverted.brown.text {
   color: #D67C1C;
 }
 span.ui.grey.text {
-  color: #A0A0A0;
+  color: #767676;
 }
 span.ui.inverted.grey.text {
   color: #DCDDDE;
 }
 span.ui.black.text {
-  color: #000000;
+  color: #1b1c1d;
 }
 span.ui.inverted.black.text {
   color: #545454;
 }
 span.ui.error.text {
-  color: #B03060;
+  color: #db2828;
 }
 span.ui.info.text {
   color: #31CCEC;
 }
 span.ui.success.text {
-  color: #016936;
+  color: #21ba45;
 }
 span.ui.warning.text {
   color: #F2C037;

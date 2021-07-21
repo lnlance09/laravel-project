@@ -92,7 +92,7 @@ const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inv
     const formIsValid = priceDiff !== 0 && date !== ""
 
     return (
-        <div className="predictionFormComponent">
+        <div className={`predictionFormComponent ${inverted ? "inverted" : null}`}>
             <Form size="large">
                 <Form.Group widths="equal">
                     <Form.Field>
@@ -151,7 +151,7 @@ const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inv
                                     />
                                 </Grid.Column>
                                 <Grid.Column width={8}>
-                                    <Segment inverted={inverted}>
+                                    <Segment basic inverted={inverted}>
                                         <Header as="p" inverted={inverted}>
                                             You're predicting that {coin.symbol} will be worth{" "}
                                             <span className={operator === "more" ? "green" : "red"}>

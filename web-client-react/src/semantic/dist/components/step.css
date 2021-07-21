@@ -352,7 +352,7 @@
 /* Completed */
 .ui.steps .step.completed > i.icon:before,
 .ui.ordered.steps .step.completed:before {
-  color: #016936;
+  color: #21ba45;
 }
 
 /* Disabled */
@@ -563,11 +563,11 @@
 }
 .ui.inverted.steps .step {
   color: rgba(255, 255, 255, 0.9);
-  background: #000000;
+  background: #1b1c1d;
   border-color: #555555;
 }
 .ui.inverted.steps .step:after {
-  background-color: #000000;
+  background-color: #1b1c1d;
   border-color: #555555;
 }
 .ui.inverted.steps .step .description {
