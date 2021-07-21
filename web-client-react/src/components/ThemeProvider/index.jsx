@@ -18,8 +18,6 @@ const initialState = {
     verify: verify === null || verify === "false" ? false : true
 }
 
-console.log("initial state", initialState)
-
 const reducer = (state, action) => {
     const { data } = action
 

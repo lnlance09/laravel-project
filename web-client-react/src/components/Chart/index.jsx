@@ -58,17 +58,17 @@ const Chart = ({
 
     const getGraphData = async (id, range) => {
         await axios
-            .get("https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart", {
+            .get(`${process.env.REACT_APP_BASE_URL}coins/graph`, {
                 params: {
                     id,
                     range
                 }
             })
-            .then((response) => {
-                const { data } = response.data
+            .then(async (response) => {
+                const data = response.data
                 const points = []
-                for (let key in data.points) {
-                    points.push({ x: key * 1000, y: data.points[key]["v"][0] })
+                for (let key in data) {
+                    points.push({ x: key * 1000, y: data[key]["v"][0] })
                 }
 
                 if (prediction) {
@@ -109,8 +109,8 @@ const Chart = ({
 
                 setLoaded(true)
             })
-            .catch(() => {
-                console.error("There was an error")
+            .catch((error) => {
+                console.error(error)
             })
     }
 

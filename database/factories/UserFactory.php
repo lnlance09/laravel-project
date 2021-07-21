@@ -28,7 +28,7 @@ class UserFactory extends Factory
         return $this->afterMaking(function (User $user) {
         })->afterCreating(function (User $user) {
             if (env('SEED_WITH_IMPORTS', false)) {
-                $totalCount = mt_rand(12, 48);
+                $totalCount = mt_rand(5, 30);
                 $percentCorrect = mt_rand(20, 80) / 100;
                 $correctCount = $totalCount * $percentCorrect;
                 $incorrectCount = $totalCount - $correctCount;
@@ -64,14 +64,15 @@ class UserFactory extends Factory
             }
 
             // price at target date
-            $targetPrice = (float) Coin::getPriceAtTimeCMC($coinId, $targetDate);
-            if (!$targetPrice) {
+            $actualPrice = (float) Coin::getPriceAtTimeCMC($coinId, $targetDate);
+            if (!$actualPrice) {
                 continue;
             }
 
-            $predictionPrice = $targetPrice * ((100 + $margin) / 100);
+            $predictionPrice = ($actualPrice * (100 + $margin)) / 100;
 
             Prediction::factory()->create([
+                'actual_price' => $actualPrice,
                 'coin_id' => $coin['id'],
                 'created_at' => $createdAt,
                 'current_price' => $currentPrice,
@@ -95,12 +96,13 @@ class UserFactory extends Factory
     {
         $faker = $this->faker;
         $gender = $faker->randomElement(['male', 'female']);
+        $separator = $faker->randomElement(['-', '_', '.']);
         $createdAt = $faker->dateTimeBetween('-14 months', 'now');
         $verifiedAt = $faker->dateTimeBetween($createdAt, '+35 minutes');
         $firstName = $gender === 'male' ? $faker->firstNameMale() : $faker->firstNameFemale();
         $lastName = $faker->lastName();
         $name = $firstName . ' ' . $lastName;
-        $username = $firstName . '' . $lastName . '' . mt_rand(64, 99);
+        $username = $firstName . $separator . $lastName . '' . mt_rand(10, 9999);
         $password = Str::random(mt_rand(8, 24));
 
         $contents = file_get_contents('https://thispersondoesnotexist.com/image');
@@ -113,11 +115,12 @@ class UserFactory extends Factory
             'email' => $faker->unique()->safeEmail(),
             'email_verified_at' => $verifiedAt,
             'gender' => $gender,
+            'has_api_access' => true,
             'img' => $img,
             'name' => $name,
             'password' => $password,
             'remember_token' => Str::random(10),
-            'username' => $faker->userName()
+            'username' => $username
         ];
     }
 

@@ -1,7 +1,7 @@
 import "./style.scss"
 import { Item, Label, Placeholder } from "semantic-ui-react"
 import { formatPlural } from "utils/textFunctions"
-import PlaceholderPic from "images/images/image-square.png"
+import PlaceholderPic from "images/avatar/large/steve.jpg"
 import PropTypes from "prop-types"
 
 const TraderList = ({ inverted, loading, loadingMore, onClickTrader, traders }) => {

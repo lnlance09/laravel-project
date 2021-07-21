@@ -103,6 +103,24 @@ class PublicApi extends Model
         return false;
     }
 
+    public static function getGraphData($id, $range)
+    {
+        $response = Http::retry(3, 10000)->withHeaders([
+            'Accepts' => 'application/json',
+        ])->get('https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart', [
+            'id' => $id,
+            'range' => $range
+        ]);
+
+        if ($response->ok()) {
+            $json = $response->json();
+            $points = $json['data']['points'];
+            return $points;
+        }
+
+        return null;
+    }
+
     /**
      * Get a coin's price at a given time
      * 

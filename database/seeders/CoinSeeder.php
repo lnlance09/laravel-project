@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class CoinSeeder extends Seeder
 {
-    const COIN_COUNT = 500;
+    const COIN_COUNT = 125;
 
     /**
      * Run the database seeds.

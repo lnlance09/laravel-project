@@ -20,7 +20,7 @@ const ImageUpload = ({ callback, fluid, headerSize, inverted, img, imgSize, msg 
                 <section>
                     <div {...getRootProps()}>
                         <input {...getInputProps()} />
-                        <Header className="imageUploadHeader" inverted={inverted} size={headerSize}>
+                        <Header className="imageUploadHeader" inverted size={headerSize}>
                             {msg}
                         </Header>
                         <Button className="changePicBtn" color="blue" icon>
@@ -40,6 +40,7 @@ const ImageUpload = ({ callback, fluid, headerSize, inverted, img, imgSize, msg 
                 dimmed={active}
                 dimmer={{ active, content, inverted: false }}
                 fluid={fluid}
+                inverted={inverted}
                 onError={(i) => (i.target.src = ImagePic)}
                 onMouseEnter={() => setActive(true)}
                 onMouseLeave={() => setActive(false)}

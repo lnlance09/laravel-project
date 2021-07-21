@@ -28,7 +28,7 @@ class User extends JsonResource
             'createdAt' => $this->created_at,
             'email' => $this->email,
             'id' => $this->id,
-            'img' => env('AWS_URL') . $this->img,
+            'img' => env('AWS_URL', 'https://preditc.s3.us-west-2.amazonaws.com/') . $this->img,
             'incorrectPredictionsCount' => $incorrectCount,
             'name' => $this->name,
             'pendingPredictionsCount' => $pendingCount,

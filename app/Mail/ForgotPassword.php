@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -12,13 +13,21 @@ class ForgotPassword extends Mailable
     use Queueable, SerializesModels;
 
     /**
+     * The order instance.
+     *
+     * @var \App\Models\User
+     */
+    public $user;
+
+    /**
      * Create a new message instance.
      *
+     * @param  \App\Models\User  $user
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -29,6 +38,6 @@ class ForgotPassword extends Mailable
     public function build()
     {
         return $this->from('noreply@preditc.com')
-            ->view('welcome');
+            ->view('forgotPassword');
     }
 }

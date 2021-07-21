@@ -48,7 +48,6 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api')->only('verify')->only('changeProfilePic');
     }
 
     /**
@@ -159,6 +158,7 @@ class UserController extends Controller
             'email' => $request->input('email'),
             'name' => $request->input('name'),
             'password' => $request->input('password'),
+            'remember_token' => Str::random(10),
             'username' => $username,
             'verification_code' => mt_rand(1000, 9999)
         ]);
@@ -206,10 +206,15 @@ class UserController extends Controller
         ]);
 
         $email = $request->input('email');
-        $count = User::where('email', $email)->get()->count();
+        $user = User::where('email', $email)->first();
 
-        if ($count === 1) {
-            Mail::to($email)->send(new ForgotPassword());
+        if ($user) {
+            $rememberToken = Str::random(10);
+            $user->remember_token = $rememberToken;
+            $user->save();
+            $user->refresh();
+
+            Mail::to($email)->send(new ForgotPassword($user));
             return response([
                 'message' => 'Success'
             ]);
@@ -319,6 +324,7 @@ class UserController extends Controller
         ]);
 
         $user = $request->user();
+
         if ($user->verification_code === $request->input('code')) {
             $user->email_verified_at = now();
             $user->save();

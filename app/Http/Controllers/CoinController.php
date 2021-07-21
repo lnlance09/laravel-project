@@ -32,14 +32,6 @@ class CoinController extends Controller
         return new CoinCollection($coins);
     }
 
-    public function showOptions(Request $request)
-    {
-        $coins = Coin::withCount(['predictions'])
-            ->orderBy('predictions_count', 'desc')
-            ->get();
-        return new CoinOptionCollection($coins);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -70,6 +62,22 @@ class CoinController extends Controller
     public function edit(Coin $coin)
     {
         //
+    }
+
+    public function graph(Request $request)
+    {
+        $id = $request->input('id', 1);
+        $range = $request->input('range', '1D');
+
+        $points = Coin::getGraphData($id, $range);
+
+        if ($points) {
+            return response($points);
+        }
+
+        return response([
+            'message' => 'Error fetching graph data'
+        ], 422);
     }
 
     /**
@@ -123,6 +131,14 @@ class CoinController extends Controller
         }
 
         return $coin;
+    }
+
+    public function showOptions(Request $request)
+    {
+        $coins = Coin::withCount(['predictions'])
+            ->orderBy('predictions_count', 'desc')
+            ->get();
+        return new CoinOptionCollection($coins);
     }
 
     /**

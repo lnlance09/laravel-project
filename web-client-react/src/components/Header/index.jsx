@@ -12,6 +12,7 @@ import {
 } from "semantic-ui-react"
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
+import Bitcoin from "bitcoin-address-generator"
 import defaultImg from "images/images/image.png"
 import Logo from "images/logos/predictive.svg"
 import NumberFormat from "react-number-format"
@@ -24,6 +25,10 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
     const [sidebarVisible, setSidebarVisible] = useState(false)
 
     useEffect(() => {
+        Bitcoin.createWalletAddress((response) => {
+            console.log("wallet", response)
+        })
+
         getMemberCount()
         // eslint-disable-next-line
     }, [])

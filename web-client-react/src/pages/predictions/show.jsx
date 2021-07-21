@@ -151,7 +151,7 @@ const Predictions = ({ history }) => {
             <Grid stackable>
                 <Grid.Column width={4}>
                     <Dropdown
-                        className="inverted"
+                        className={inverted ? "inverted" : null}
                         fluid
                         icon={false}
                         onChange={onChangeCoin}
@@ -184,7 +184,7 @@ const Predictions = ({ history }) => {
                 </Grid.Column>
                 <Grid.Column width={3}>
                     <Dropdown
-                        className="inverted"
+                        className={inverted ? "inverted" : null}
                         fluid
                         icon={false}
                         onChange={onChangeStatus}

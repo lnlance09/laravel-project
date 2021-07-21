@@ -24,7 +24,7 @@ const SignIn = ({ history }) => {
                 <Authentication
                     history={history}
                     inverted={state.inverted}
-                    login={type !== "join"}
+                    showLogin={type !== "join"}
                 />
             </Container>
         </DefaultLayout>

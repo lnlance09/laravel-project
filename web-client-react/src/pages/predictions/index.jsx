@@ -63,7 +63,6 @@ const Prediction = ({ history, match }) => {
         getPrediction(slug)
     }, [slug])
 
-    console.log("loaded", loaded)
     return (
         <DefaultLayout
             activeItem="predictions"
@@ -132,7 +131,7 @@ const Prediction = ({ history, match }) => {
                         Stats
                     </Header>
 
-                    <Segment inverted={inverted} style={{ paddingLeft: 0, paddingRight: 0 }}>
+                    <Segment basic inverted={inverted} style={{ paddingLeft: 0, paddingRight: 0 }}>
                         <List divided inverted={inverted} relaxed="very" size="big">
                             <List.Item>
                                 Status{" "}

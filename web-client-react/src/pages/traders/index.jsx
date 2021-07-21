@@ -123,7 +123,19 @@ const Trader = ({ history, match }) => {
                 })
             })
             .catch((error) => {
-                toast.error(error.response.data.msg)
+                let errorMsg = ""
+                const { status } = error.response
+                const { errors } = error.response.data
+
+                if (status === 403) {
+                    errorMsg = error.response.data.message
+                } else {
+                    if (typeof errors.file !== "undefined") {
+                        errorMsg = errors.file[0]
+                    }
+                }
+
+                toast.error(errorMsg)
             })
     }
 

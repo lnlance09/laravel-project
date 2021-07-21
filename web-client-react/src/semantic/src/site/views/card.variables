@@ -3,5 +3,5 @@
 *******************************/
 @invertedBackground: #090127;
 @invertedLinkHoverBackground: #090127;
-@invertedBoxShadow: 0 1px 3px 0 rgba(33, 33, 33, 0.95), 0 0 0 1px rgba(33, 33, 33, 0.95);
-@linkHoverBoxShadow: 0 1px 3px 0 rgba(55, 55, 55, 0.95), 0 0 0 1px rgba(55, 55, 55, 0.95);
+@invertedBoxShadow: 0 1px 3px 0 rgba(44, 44, 44, 0.9), 0 0 0 1px rgba(44, 44, 44, 0.9);
+@linkHoverBoxShadow: 0 1px 3px 0 rgba(66, 66, 66, 0.9), 0 0 0 1px rgba(66, 66, 66, 0.9);
