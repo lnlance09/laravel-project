@@ -6,6 +6,7 @@ use App\Models\Coin;
 use App\Models\Prediction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -27,18 +28,16 @@ class UserFactory extends Factory
     {
         return $this->afterMaking(function (User $user) {
         })->afterCreating(function (User $user) {
-            if (env('SEED_WITH_IMPORTS', false)) {
-                $totalCount = mt_rand(5, 30);
-                $percentCorrect = mt_rand(20, 80) / 100;
-                $correctCount = $totalCount * $percentCorrect;
-                $incorrectCount = $totalCount - $correctCount;
+            $totalCount = mt_rand(5, 30);
+            $percentCorrect = mt_rand(20, 80) / 100;
+            $correctCount = $totalCount * $percentCorrect;
+            $incorrectCount = $totalCount - $correctCount;
 
-                // Create correct predictions
-                $this->createPredictions($user, $correctCount);
+            // Create correct predictions
+            $this->createPredictions($user, $correctCount);
 
-                // Create incorrect predictions
-                $this->createPredictions($user, $incorrectCount, false);
-            }
+            // Create incorrect predictions
+            $this->createPredictions($user, $incorrectCount, false);
         });
     }
 
@@ -54,8 +53,11 @@ class UserFactory extends Factory
             $minsBefore = mt_rand(7200, 72000);
             $createdAt = strtotime('-' . $minsBefore . ' minutes', $targetDate);
 
-            $margin = ($correct ? rand(1, 50) : rand(51, 4000)) / 10;
-            $margin = $i < 2 || $i % 2 === 1 ? $margin : -$margin;
+            $margin = ($correct ? mt_rand(1, 50) : mt_rand(51, 5000)) / 10;
+            $margin = ($i < 2 || $i % 2 === 1) ? $margin : -$margin;
+            if ($margin < -99) {
+                $margin = abs($margin);
+            }
 
             // price at time of prediction
             $currentPrice = (float) Coin::getPriceAtTimeCMC($coinId, $createdAt);
@@ -69,7 +71,10 @@ class UserFactory extends Factory
                 continue;
             }
 
-            $predictionPrice = ($actualPrice * (100 + $margin)) / 100;
+            $predictionPrice = $actualPrice * (1 + ($margin / 100));
+            if ($margin < 0) {
+                // $predictionPrice = $actualPrice - ($actualPrice * abs($margin / 100));
+            }
 
             Prediction::factory()->create([
                 'actual_price' => $actualPrice,
@@ -87,6 +92,29 @@ class UserFactory extends Factory
         }
     }
 
+    public function getImage($age, $gender, $perPage = 1, $page = 1, $order_by = 'latest')
+    {
+        $response = Http::retry(3, 10000)->withHeaders([
+            'Accepts' => 'application/json',
+            'Authorization' => 'API-Key Cph30qkLrdJDkjW-THCeyA'
+        ])->get('https://api.generated.photos/api/frontend/v1/images', [
+            'age' => $age,
+            'gender' => $gender,
+            'hair_length' => 'long',
+            'order_by' => $order_by,
+            'page' => $page,
+            'per_page' => $perPage
+        ]);
+
+        if ($response->ok()) {
+            $json = $response->json();
+            $images = $json['images'];
+            return $images[0]['thumb_url'];
+        }
+
+        return null;
+    }
+
     /**
      * Define the model's default state.
      *
@@ -95,7 +123,7 @@ class UserFactory extends Factory
     public function definition()
     {
         $faker = $this->faker;
-        $gender = $faker->randomElement(['male', 'female']);
+        $gender = mt_rand(1, 20) > 13 ? 'female' : 'male';
         $separator = $faker->randomElement(['-', '_', '.']);
         $createdAt = $faker->dateTimeBetween('-14 months', 'now');
         $verifiedAt = $faker->dateTimeBetween($createdAt, '+35 minutes');
@@ -105,7 +133,14 @@ class UserFactory extends Factory
         $username = $firstName . $separator . $lastName . '' . mt_rand(10, 9999);
         $password = Str::random(mt_rand(8, 24));
 
-        $contents = file_get_contents('https://thispersondoesnotexist.com/image');
+
+        if ($gender === 'male') {
+            $contents = file_get_contents('https://thispersondoesnotexist.com/image');
+        } else {
+            $profilePic = $this->getImage('young-adult', 'female', 1, mt_rand(1, 550000));
+            $contents = file_get_contents($profilePic);
+        }
+
         $img = 'users/' . Str::random(24) . '.jpg';
         Storage::disk('s3')->put($img, $contents);
 
@@ -119,8 +154,7 @@ class UserFactory extends Factory
             'img' => $img,
             'name' => $name,
             'password' => $password,
-            'remember_token' => Str::random(10),
-            'username' => $username
+            'username' => strtolower($username)
         ];
     }
 

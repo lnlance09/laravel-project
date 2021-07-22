@@ -14,10 +14,6 @@ class AddExplanationColumnPredictionsTable extends Migration
     public function up()
     {
         Schema::table('predictions', function (Blueprint $table) {
-            $table->decimal('actual_price', 16, 4)->before('coin_id')
-                ->nullable()
-                ->default(null);
-
             $table->text('explanation')->after('current_price')
                 ->nullable()
                 ->default(null);
@@ -32,7 +28,6 @@ class AddExplanationColumnPredictionsTable extends Migration
     public function down()
     {
         Schema::table('predictions', function (Blueprint $table) {
-            $table->dropColumn('actual_price');
             $table->dropColumn('explanation');
         });
     }

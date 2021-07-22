@@ -1,8 +1,8 @@
 const darkColor = "#090127"
 const lightColor = "#fff"
 
-const darkAreaColor = "#2185d0"
-const lightAreaColor = ""
+const darkAreaColor = "#54c8ff"
+const lightAreaColor = "#2185d0"
 
 const reducer = (state, action) => {
     switch (action.type) {

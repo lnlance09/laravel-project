@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "babel-loader": "^8.2.2",
     "bitcoin-address-generator": "^1.0.2",
+    "ethers": "^5.4.1",
     "fomantic-ui": "^2.8.8",
     "fomantic-ui-css": "^2.8.8",
     "highcharts": "^9.1.1",
@@ -40,8 +41,10 @@
     "react-twitter-widgets": "^1.10.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
+    "simple-bitcoin-wallet": "0.0.9",
     "validator": "^13.6.0",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "web3": "^1.4.0"
   },
   "scripts": {
     "prettify": "prettier --print-width 100 --tab-width 4 --use-tabs --no-semi --trailing-comma none --jsx-bracket-same-line false --parser flow --write 'src/**/*.{js,jsx}'",

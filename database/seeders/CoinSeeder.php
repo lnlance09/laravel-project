@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Coin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CoinSeeder extends Seeder
 {
@@ -17,10 +19,10 @@ class CoinSeeder extends Seeder
      */
     public function run()
     {
-        if (env('SEED_WITH_IMPORTS', false)) {
-            DB::unprepared(file_get_contents(__DIR__ . '/imports/coins.sql'));
-            return;
-        }
+        // if (env('SEED_WITH_IMPORTS', false)) {
+        DB::unprepared(file_get_contents(__DIR__ . '/imports/coins.sql'));
+        return;
+        // }
 
         $coins = (array) Coin::getAll(self::COIN_COUNT);
         if (!$coins) {
@@ -52,12 +54,27 @@ class CoinSeeder extends Seeder
                 break;
             }
 
+            $dailyVolume = 0;
             $marketCap = 0;
-            $dailyPercentChange = 0;
+            $lastPrice = null;
+            $hourlyPercentChange = null;
+            $dailyPercentChange = null;
+            $weeklyPercentChange = null;
+            $monthlyPercentChange = null;
+            $biMonthlyPercentChange = null;
+            $triMonthlyPercentChange = null;
+
             if (count($extendedData['quote']) === 1) {
                 $quote = current($extendedData['quote']);
+                $lastPrice = $quote['price'];
                 $marketCap = $quote['market_cap'];
+                $hourlyPercentChange = $quote['percent_change_1h'];
                 $dailyPercentChange = $quote['percent_change_24h'];
+                $weeklyPercentChange = $quote['percent_change_7d'];
+                $monthlyPercentChange = $quote['percent_change_30d'];
+                $biMonthlyPercentChange = $quote['percent_change_60d'];
+                $triMonthlyPercentChange = $quote['percent_change_90d'];
+                $dailyVolume = $quote['volume_24h'];
             }
 
             $category = $data['category'];
@@ -82,19 +99,30 @@ class CoinSeeder extends Seeder
                 continue;
             }
 
+            $img = 'coins/' . Str::random(24) . '.png';
+            $contents = file_get_contents($logo);
+            Storage::disk('s3')->put($img, $contents);
+
             Coin::factory()->create([
                 'category' => $category,
                 'circulating_supply' => $circulatingSupply,
                 'cmc_id' => $cmcId,
                 'description' => $description,
-                'logo' => $logo,
+                'last_price' => $lastPrice,
+                'logo' => $img,
                 'market_cap' => $marketCap,
                 'max_supply' => $maxSupply,
                 'name' => $name,
+                'percent_change_1h' => $hourlyPercentChange,
                 'percent_change_24h' => $dailyPercentChange,
+                'percent_change_7d' => $weeklyPercentChange,
+                'percent_change_30d' => $monthlyPercentChange,
+                'percent_change_60d' => $biMonthlyPercentChange,
+                'percent_change_90d' => $triMonthlyPercentChange,
                 'slug' => $slug,
                 'symbol' => $symbol,
-                'total_supply' => $totalSupply
+                'total_supply' => $totalSupply,
+                'volume_24h' => $dailyVolume
             ]);
         }
     }

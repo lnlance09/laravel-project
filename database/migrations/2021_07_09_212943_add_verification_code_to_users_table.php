@@ -14,7 +14,7 @@ class AddVerificationCodeToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('verification_code', 80)->after('api_token')
+            $table->string('verification_code', 80)->after('username')
                 ->nullable()
                 ->default(null);
         });

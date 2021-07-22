@@ -14,7 +14,7 @@ class AddMoreUsercolumns extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('has_api_access')->after('password')
+            $table->boolean('has_api_access')->after('gender')
                 ->nullable()
                 ->default(null);
         });

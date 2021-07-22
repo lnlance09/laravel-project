@@ -21,7 +21,7 @@ class Coin extends JsonResource
             'cmcId' => $this->cmc_id,
             'description' => $this->description,
             'lastPrice' => (float) $this->last_price,
-            'logo' => $this->logo,
+            'logo' => env('AWS_URL', 'https://preditc.s3.us-west-2.amazonaws.com/') . $this->logo,
             'marketCap' => $this->market_cap,
             'maxSupply' => $this->max_supply,
             'name' => $this->name,
