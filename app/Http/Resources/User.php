@@ -20,6 +20,15 @@ class User extends JsonResource
         $totalCount = $this->predictions_count;
         $activeCount = $totalCount - $pendingCount;
 
+        $gender = $this->gender;
+        $predictionsReserved = null;
+        if ($gender === 'male') {
+            $predictionsReserved = 0;
+        }
+        if ($gender === 'female') {
+            $predictionsReserved = 1;
+        }
+
         return [
             // 'accuracy' => $this->accuracy,
             'accuracy' => $activeCount === 0 ? 0 : ($correctCount / $activeCount) * 100,
@@ -33,6 +42,7 @@ class User extends JsonResource
             'name' => $this->name,
             'pendingPredictionsCount' => $pendingCount,
             'predictionsCount' => $totalCount,
+            'predictionsReserved' => $predictionsReserved,
             'username' => $this->username
         ];
     }

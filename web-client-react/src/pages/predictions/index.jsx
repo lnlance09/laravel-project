@@ -1,17 +1,18 @@
 import {
-    Button,
-    Card,
-    Divider,
-    Header,
-    Icon,
-    Image,
-    Label,
-    List,
-    Loader,
-    Segment
+	Button,
+	Card,
+	Divider,
+	Header,
+	Icon,
+	Image,
+	Label,
+	List,
+	Loader,
+	Segment
 } from "semantic-ui-react"
 import { useContext, useEffect, useReducer } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
+import { RedditShareButton, TwitterShareButton } from "react-share"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
 import { dateDiff } from "utils/dateFunctions"
@@ -34,222 +35,292 @@ const toastConfig = getConfig()
 toast.configure(toastConfig)
 
 const Prediction = ({ history, match }) => {
-    const { state } = useContext(ThemeContext)
-    const { inverted } = state
-    const { slug } = match.params
+	const { state } = useContext(ThemeContext)
+	const { inverted } = state
+	const { slug } = match.params
 
-    const [internalState, dispatch] = useReducer(
-        process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
-        initialState
-    )
-    const { loaded, prediction } = internalState
+	const [internalState, dispatch] = useReducer(
+		process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
+		initialState
+	)
+	const { loaded, prediction } = internalState
 
-    useEffect(() => {
-        const getPrediction = async (slug) => {
-            await axios
-                .get(`${process.env.REACT_APP_BASE_URL}predictions/${slug}`)
-                .then(async (response) => {
-                    const prediction = response.data.data
-                    dispatch({
-                        type: "GET_PREDICTION",
-                        prediction
-                    })
-                })
-                .catch(() => {
-                    toast.error("There was an error")
-                })
-        }
+	useEffect(() => {
+		const getPrediction = async (slug) => {
+			await axios
+				.get(`${process.env.REACT_APP_BASE_URL}predictions/${slug}`)
+				.then(async (response) => {
+					const prediction = response.data.data
+					dispatch({
+						type: "GET_PREDICTION",
+						prediction
+					})
+				})
+				.catch(() => {
+					toast.error("There was an error")
+				})
+		}
 
-        getPrediction(slug)
-    }, [slug])
+		getPrediction(slug)
+	}, [slug])
 
-    return (
-        <DefaultLayout
-            activeItem="predictions"
-            containerClassName="predictionPage"
-            history={history}
-            inverted={inverted}
-            textAlign="center"
-            useGrid={false}
-        >
-            <DisplayMetaTags page="predictions" state={internalState} />
-            {loaded ? (
-                <>
-                    <Header as="h1" className="predictionHeader" inverted={inverted}>
-                        <Image
-                            circular
-                            onClick={() => history.push(`/coins/${prediction.coin.slug}`)}
-                            onError={(i) => (i.target.src = PlaceholderPic)}
-                            size="huge"
-                            src={prediction.coin.logo}
-                        />
-                        <Header.Content>
-                            {prediction.coin.symbol} to{" "}
-                            <NumberFormat
-                                decimalScale={2}
-                                displayType={"text"}
-                                prefix={"$"}
-                                thousandSeparator
-                                value={prediction.predictionPrice}
-                            />
-                            <Header.Subheader>
-                                On <Moment date={prediction.targetDate} format="MMM D, YYYY" /> •
-                                Predicted <Moment date={prediction.createdAt} fromNow />
-                            </Header.Subheader>
-                        </Header.Content>
-                    </Header>
+	const getDuration = () => {
+		const { createdAt, targetDate } = prediction
+		const daysDiff = dateDiff(createdAt, targetDate)
+		const range = Math.round(daysDiff / 2)
 
-                    <Chart
-                        coin={prediction.coin}
-                        containerProps={{ style: { height: "250px" } }}
-                        duration="1Y"
-                        hideYAxis
-                        includeRanges={false}
-                        inverted={inverted}
-                        period={86400}
-                        prediction={{
-                            date: moment(prediction.targetDate).unix() * 1000,
-                            price: prediction.predictionPrice
-                        }}
-                    />
+		const startDate = moment(createdAt).subtract(range, "days").unix()
+		const endDate = moment(targetDate).add(range, "days").unix()
 
-                    <Card className={`${inverted ? "inverted" : null}`} fluid>
-                        <Card.Content>
-                            <Card.Description>{prediction.explanation}</Card.Description>
-                        </Card.Content>
-                        <Card.Content extra>
-                            <span className="left floated like">
-                                <Icon color="pink" name="heart" size="large" />
-                            </span>
-                            <span className="left floated star" style={{ marginLeft: "10px" }}>
-                                <Icon color="blue" name="share" size="large" />
-                            </span>
-                        </Card.Content>
-                    </Card>
+		const rangeFilter = `${startDate}~${endDate}`
+		return rangeFilter
+	}
 
-                    <Header as="h2" className="dividerHeader" inverted={inverted} size="huge">
-                        Stats
-                    </Header>
+	const { coin, createdAt, currentPrice, predictionPrice, status, targetDate, user } = prediction
+	const title = loaded
+		? `${coin.symbol} to ${predictionPrice} on ${moment(targetDate).format("MMM D, YYYY")}`
+		: ""
 
-                    <Segment basic inverted={inverted} style={{ paddingLeft: 0, paddingRight: 0 }}>
-                        <List divided inverted={inverted} relaxed="very" size="big">
-                            <List.Item>
-                                Status{" "}
-                                <Label
-                                    basic
-                                    className={inverted ? "inverted" : ""}
-                                    color={setIconColor(prediction.status)}
-                                    horizontal
-                                    size="large"
-                                >
-                                    {prediction.status}
-                                </Label>
-                            </List.Item>
-                            <List.Item>
-                                Original Price{" "}
-                                <Label
-                                    basic
-                                    className={inverted ? "inverted" : ""}
-                                    color="orange"
-                                    horizontal
-                                    size="large"
-                                >
-                                    ${prediction.currentPrice}
-                                </Label>
-                            </List.Item>
-                            <List.Item>
-                                Actual price
-                                {prediction.status === "Pending" ? (
-                                    <span style={{ float: "right" }}>N/A</span>
-                                ) : (
-                                    <Label
-                                        basic
-                                        className={inverted ? "inverted" : ""}
-                                        color="violet"
-                                        horizontal
-                                        size="large"
-                                    >
-                                        ${prediction.actualPrice}
-                                    </Label>
-                                )}
-                            </List.Item>
-                            <List.Item>
-                                Margin of error{" "}
-                                {prediction.status === "Pending" ? (
-                                    <span style={{ float: "right" }}>N/A</span>
-                                ) : (
-                                    <Label
-                                        basic
-                                        className={inverted ? "inverted" : ""}
-                                        color="teal"
-                                        horizontal
-                                        size="large"
-                                    >
-                                        {prediction.margin}%
-                                    </Label>
-                                )}
-                            </List.Item>
-                            <List.Item>
-                                Prediction length{" "}
-                                <Label
-                                    basic
-                                    className={inverted ? "inverted" : ""}
-                                    color="olive"
-                                    horizontal
-                                    size="large"
-                                >
-                                    {dateDiff(prediction.createdAt, prediction.targetDate)} days
-                                </Label>
-                            </List.Item>
-                        </List>
-                    </Segment>
+	return (
+		<DefaultLayout
+			activeItem="predictions"
+			containerClassName="predictionPage"
+			history={history}
+			inverted={inverted}
+			textAlign="center"
+			useGrid={false}
+		>
+			<DisplayMetaTags page="predictions" state={internalState} />
+			{loaded ? (
+				<>
+					<Header as="h1" className="predictionHeader" inverted={inverted}>
+						<Image
+							circular
+							onClick={() => history.push(`/coins/${coin.slug}`)}
+							onError={(i) => (i.target.src = PlaceholderPic)}
+							size="huge"
+							src={coin.logo}
+						/>
+						<Header.Content>
+							{coin.symbol} to{" "}
+							<NumberFormat
+								decimalScale={2}
+								displayType={"text"}
+								prefix={"$"}
+								thousandSeparator
+								value={predictionPrice}
+							/>
+							<Header.Subheader>
+								Predicted <Moment date={createdAt} fromNow /> •{" "}
+								<Moment date={createdAt} format="MMM D, YYYY" />
+							</Header.Subheader>
+						</Header.Content>
+					</Header>
 
-                    <Header as="h2" className="dividerHeader" inverted={inverted} size="huge">
-                        Predicter
-                    </Header>
+					<Chart
+						addSeries
+						coin={coin}
+						color="#2185d0"
+						containerProps={{ style: { height: "250px" } }}
+						duration={getDuration()}
+						hideYAxis
+						includeRanges={false}
+						inverted={inverted}
+						prediction={{
+							currentPrice: currentPrice,
+							date: moment(targetDate).unix(),
+							price: predictionPrice
+						}}
+						startDate={moment(createdAt).unix()}
+					/>
 
-                    <Card className={`${inverted ? "inverted" : null}`}>
-                        <Image
-                            label={{ as: "a", corner: "left", icon: "heart" }}
-                            onError={(i) => (i.target.src = UserPic)}
-                            src={prediction.user.img}
-                            ui={false}
-                            wrapped
-                        />
-                        <Card.Content>
-                            <Card.Header>{prediction.user.name}</Card.Header>
-                            <Card.Meta>
-                                <span className="date">@{prediction.user.username}</span>
-                            </Card.Meta>
-                            <Card.Description>{prediction.user.bio}</Card.Description>
-                        </Card.Content>
-                        <Button
-                            animated="fade"
-                            attached="bottom"
-                            color="pink"
-                            onClick={() => history.push(`/${prediction.user.username}`)}
-                        >
-                            <Button.Content visible>Ask {prediction.user.name}</Button.Content>
-                            <Button.Content hidden>Get a prediction</Button.Content>
-                        </Button>
-                    </Card>
+					<Card className={`${inverted ? "inverted" : null}`} fluid>
+						<Card.Content>
+							<Card.Description>{prediction.explanation}</Card.Description>
+						</Card.Content>
+						<Card.Content extra>
+							<span className="left floated">
+								<Icon color="pink" name="heart" size="large" />
+							</span>
+							<span className="left floated">
+								<TwitterShareButton
+									title={title}
+									url={`${window.location.origin}/predictions/${slug}`}
+								>
+									<Icon
+										className="twitterIcon"
+										color="twitter"
+										name="twitter"
+										size="large"
+									/>
+								</TwitterShareButton>
+							</span>
+							<span className="left floated">
+								<RedditShareButton
+									url={`${window.location.origin}/predictions/${slug}`}
+								>
+									<Icon
+										className="redditIcon"
+										color="reddit"
+										name="reddit"
+										size="large"
+									/>
+								</RedditShareButton>
+							</span>
+						</Card.Content>
+					</Card>
 
-                    <Divider hidden section />
-                </>
-            ) : (
-                <>
-                    <div className="centeredLoader">
-                        <Loader active inverted={inverted} size="big" />
-                    </div>
-                </>
-            )}
-        </DefaultLayout>
-    )
+					<Header as="h2" className="dividerHeader" inverted={inverted} size="huge">
+						Stats
+					</Header>
+
+					<Segment basic inverted={inverted} style={{ paddingLeft: 0, paddingRight: 0 }}>
+						<List divided inverted={inverted} relaxed="very" size="big">
+							<List.Item>
+								Status{" "}
+								<Label
+									basic
+									className={inverted ? "inverted" : ""}
+									color={setIconColor(status)}
+									horizontal
+									size="large"
+								>
+									{status}
+								</Label>
+							</List.Item>
+							<List.Item>
+								Target Date{" "}
+								<Label
+									basic
+									className={inverted ? "inverted" : ""}
+									color="pink"
+									horizontal
+									size="large"
+								>
+									<Moment date={targetDate} format="MMM D, YYYY" />
+								</Label>
+							</List.Item>
+							<List.Item>
+								Original Price{" "}
+								<Label
+									basic
+									className={inverted ? "inverted" : ""}
+									color="orange"
+									horizontal
+									size="large"
+								>
+									${prediction.currentPrice}
+								</Label>
+							</List.Item>
+							<List.Item>
+								Prediction Price{" "}
+								<Label
+									basic
+									className={inverted ? "inverted" : ""}
+									color="yellow"
+									horizontal
+									size="large"
+								>
+									${predictionPrice}
+								</Label>
+							</List.Item>
+							<List.Item>
+								Actual price
+								{status === "Pending" ? (
+									<span style={{ float: "right" }}>N/A</span>
+								) : (
+									<Label
+										basic
+										className={inverted ? "inverted" : ""}
+										color="violet"
+										horizontal
+										size="large"
+									>
+										${prediction.actualPrice}
+									</Label>
+								)}
+							</List.Item>
+							<List.Item>
+								Margin of error{" "}
+								{status === "Pending" ? (
+									<span style={{ float: "right" }}>N/A</span>
+								) : (
+									<Label
+										basic
+										className={inverted ? "inverted" : ""}
+										color="teal"
+										horizontal
+										size="large"
+									>
+										{prediction.margin}%
+									</Label>
+								)}
+							</List.Item>
+							<List.Item>
+								Prediction length{" "}
+								<Label
+									basic
+									className={inverted ? "inverted" : ""}
+									color="olive"
+									horizontal
+									size="large"
+								>
+									{dateDiff(createdAt, targetDate)} days
+								</Label>
+							</List.Item>
+						</List>
+					</Segment>
+
+					<Header as="h2" className="dividerHeader" inverted={inverted} size="huge">
+						Predicter
+					</Header>
+
+					<Card className={`${inverted ? "inverted" : null}`}>
+						<Image
+							label={
+								status === "Correct"
+									? { as: "a", color: "green", corner: "left", icon: "checkmark" }
+									: null
+							}
+							onError={(i) => (i.target.src = UserPic)}
+							src={user.img}
+							ui={false}
+							wrapped
+						/>
+						<Card.Content>
+							<Card.Header>{user.name}</Card.Header>
+							<Card.Meta>
+								<span className="date">@{user.username}</span>
+							</Card.Meta>
+							<Card.Description>{user.bio}</Card.Description>
+						</Card.Content>
+						<Button
+							animated="fade"
+							attached="bottom"
+							color={user.predictionsReserved === 1 ? "pink" : "blue"}
+							onClick={() => history.push(`/${user.username}`)}
+						>
+							<Button.Content visible>Get a prediction</Button.Content>
+							<Button.Content hidden>Ask {user.name.split(" ")[0]}</Button.Content>
+						</Button>
+					</Card>
+
+					<Divider hidden section />
+				</>
+			) : (
+				<>
+					<div className="centeredLoader">
+						<Loader active inverted={inverted} size="big" />
+					</div>
+				</>
+			)}
+		</DefaultLayout>
+	)
 }
 
 Prediction.propTypes = {
-    history: PropTypes.object,
-    match: PropTypes.object
+	history: PropTypes.object,
+	match: PropTypes.object
 }
 
 export default Prediction

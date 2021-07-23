@@ -14,10 +14,16 @@ class CoinOption extends JsonResource
      */
     public function toArray($request)
     {
+        $text = $this->name;
+
+        if ($request->input('showCounts') == 1) {
+            $text .= ' (' . number_format($this->predictions_count) . ')';
+        }
+
         return [
             'key' => $this->id,
             'name' => $this->name,
-            'text' => $this->name . ' (' . number_format($this->predictions_count) . ')',
+            'text' => $text,
             'value' => $this->id
         ];
     }

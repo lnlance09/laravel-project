@@ -5,140 +5,152 @@ const darkAreaColor = "#54c8ff"
 const lightAreaColor = "#2185d0"
 
 const reducer = (state, action) => {
-    switch (action.type) {
-        case "HIDE_X_AXIS":
-            return {
-                ...state,
-                options: {
-                    ...state.options,
-                    xAxis: {
-                        ...state.options.xAxis,
-                        labels: {
-                            ...state.options.xAxis.labels,
-                            enabled: false
-                        }
-                    }
-                }
-            }
-        case "HIDE_Y_AXIS":
-            return {
-                ...state,
-                options: {
-                    ...state.options,
-                    yAxis: {
-                        ...state.options.yAxis,
-                        labels: {
-                            ...state.options.yAxis.labels,
-                            enabled: false
-                        }
-                    }
-                }
-            }
-        case "SET_COLOR":
-            return {
-                ...state,
-                options: {
-                    ...state.options,
-                    plotOptions: {
-                        ...state.options.plotOptions,
-                        area: {
-                            ...state.options.plotOptions.area,
-                            color: action.color
-                        }
-                    }
-                }
-            }
-        case "SET_GRAPH_DATA":
-            const { points } = action
-            return {
-                ...state,
-                options: {
-                    ...state.options,
-                    series: [
-                        {
-                            ...state.options.series[0],
-                            data: points
-                        }
-                    ]
-                }
-            }
-        case "SET_X_AXIS_FORMAT":
-            const { duration } = action
-            let format = "{value:%a %l %p}"
+	switch (action.type) {
+		case "ADD_SERIES":
+			const newSeries = [...state.options.series, action.series]
+			return {
+				...state,
+				options: {
+					...state.options,
+					series: newSeries
+				}
+			}
 
-            if (duration === "1M" || duration === "3M") {
-                format = "{value:%b %e}"
-            }
+		case "HIDE_X_AXIS":
+			return {
+				...state,
+				options: {
+					...state.options,
+					xAxis: {
+						...state.options.xAxis,
+						labels: {
+							...state.options.xAxis.labels,
+							enabled: false
+						}
+					}
+				}
+			}
+		case "HIDE_Y_AXIS":
+			return {
+				...state,
+				options: {
+					...state.options,
+					yAxis: {
+						...state.options.yAxis,
+						labels: {
+							...state.options.yAxis.labels,
+							enabled: false
+						}
+					}
+				}
+			}
+		case "SET_COLOR":
+			return {
+				...state,
+				options: {
+					...state.options,
+					plotOptions: {
+						...state.options.plotOptions,
+						area: {
+							...state.options.plotOptions.area,
+							color: action.color
+						}
+					}
+				}
+			}
+		case "SET_GRAPH_DATA":
+			const { points } = action
+			return {
+				...state,
+				options: {
+					...state.options,
+					series: [
+						{
+							...state.options.series[0],
+							data: points,
+							fillOpacity: 0.1,
+							turboThreshold: 2000
+						}
+					]
+				}
+			}
+		case "SET_X_AXIS_FORMAT":
+			const { duration } = action
+			let format = "{value:%a %l %p}"
 
-            if (duration === "1Y" || duration === "ALL") {
-                format = "{value:%b %Y}"
-            }
+			if (duration === "1M" || duration === "3M") {
+				format = "{value:%b %e}"
+			}
 
-            return {
-                ...state,
-                options: {
-                    ...state.options,
-                    xAxis: {
-                        ...state.options.xAxis,
-                        labels: {
-                            ...state.options.xAxis.labels,
-                            format
-                        }
-                    }
-                }
-            }
-        case "TOGGLE_INVERTED":
-            const newColor = action.inverted ? darkColor : lightColor
-            const newAreaColor = action.inverted ? darkAreaColor : lightAreaColor
+			if (duration === "1Y" || duration === "ALL") {
+				format = "{value:%b %Y}"
+			}
 
-            return {
-                ...state,
-                options: {
-                    ...state.options,
-                    chart: {
-                        ...state.options.chart,
-                        backgroundColor: newColor
-                    },
-                    plotOptions: {
-                        ...state.options.plotOptions,
-                        area: {
-                            ...state.options.plotOptions.area,
-                            color: newAreaColor
-                        }
-                    }
-                }
-            }
-        case "TOGGLE_X_AXIS":
-            return {
-                ...state,
-                options: {
-                    ...state.options,
-                    xAxis: {
-                        ...state.options.xAxis,
-                        labels: {
-                            ...state.options.xAxis.labels,
-                            enabled: !state.options.xAxis.labels.enabled
-                        }
-                    }
-                }
-            }
-        case "TOGGLE_Y_AXIS":
-            return {
-                ...state,
-                options: {
-                    ...state.options,
-                    yAxis: {
-                        ...state.options.yAxis,
-                        labels: {
-                            ...state.options.yAxis.labels,
-                            enabled: !state.options.yAxis.labels.enabled
-                        }
-                    }
-                }
-            }
-        default:
-            throw new Error()
-    }
+			return {
+				...state,
+				options: {
+					...state.options,
+					xAxis: {
+						...state.options.xAxis,
+						labels: {
+							...state.options.xAxis.labels,
+							format
+						}
+					}
+				}
+			}
+		case "TOGGLE_INVERTED":
+			const newColor = action.inverted ? darkColor : lightColor
+			const newAreaColor = action.inverted ? darkAreaColor : lightAreaColor
+
+			return {
+				...state,
+				options: {
+					...state.options,
+					chart: {
+						...state.options.chart,
+						backgroundColor: newColor
+					},
+					plotOptions: {
+						...state.options.plotOptions,
+						area: {
+							...state.options.plotOptions.area,
+							color: newAreaColor
+						}
+					}
+				}
+			}
+		case "TOGGLE_X_AXIS":
+			return {
+				...state,
+				options: {
+					...state.options,
+					xAxis: {
+						...state.options.xAxis,
+						labels: {
+							...state.options.xAxis.labels,
+							enabled: !state.options.xAxis.labels.enabled
+						}
+					}
+				}
+			}
+		case "TOGGLE_Y_AXIS":
+			return {
+				...state,
+				options: {
+					...state.options,
+					yAxis: {
+						...state.options.yAxis,
+						labels: {
+							...state.options.yAxis.labels,
+							enabled: !state.options.yAxis.labels.enabled
+						}
+					}
+				}
+			}
+		default:
+			throw new Error()
+	}
 }
 
 export default reducer

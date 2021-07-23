@@ -16,3 +16,15 @@
 @brown          : #a5673f;
 @grey           : #767676;
 @black          : #1b1c1d;
+
+@fontName          : 'Ubuntu Mono';
+@fontSmoothing     : antialiased;
+@googleFontFamily  : 'Anton';
+
+@googleFontName    : 'Ubuntu+Mono';
+@importGoogleFonts : true;
+@googleFontSizes   : '';
+@googleDisplay     : 'swap';
+
+@googleProtocol    : 'https://';
+@googleFontRequest : '@{googleFontName}&display=@{googleSubset}';

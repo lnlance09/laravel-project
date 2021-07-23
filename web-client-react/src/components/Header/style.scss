@@ -1,5 +1,6 @@
 @import "../../scss/_colors.scss";
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
+
+$logoHeight: 54px;
 
 .pageHeaderComponent {
     height: 76px;
@@ -17,10 +18,25 @@
     }
 
     .simpleLogo {
-        cursor: pointer;
-        height: 64px;
-        margin-top: 8px;
-        width: 64px;
+        display: inline-block;
+        height: $logoHeight;
+        width: $logoHeight;
+
+        svg {
+            cursor: pointer;
+            fill: $green;
+            height: $logoHeight;
+            width: $logoHeight;
+        }
+    }
+
+    .basicHeaderContainer {
+        padding: 10px 0;
+
+        svg {
+            height: 64px;
+            width: 64px;
+        }
     }
 
     .ui.borderless.fluid.top.fixed.menu {
@@ -32,6 +48,8 @@
                 font-weight: bold;
             }
         }
+
+        box-shadow: none !important;
 
         &.inverted {
             background: $invertedBackgroundColor;
@@ -49,18 +67,11 @@
             .item.logoItem {
                 h1.header {
                     cursor: pointer;
-                    font-family: 'Lexend Deca', sans-serif;
+                    font-family: 'Ubuntu Mono', sans-serif;
                     font-size: 36px;
-                    line-height: 60px;
-
-                    img.headerLogo {
-                        cursor: pointer;
-                        flex: 1 1;
-                        height: 54px;
-                        top: -7px;
-                        vertical-align: middle;
-                        width: 54px;
-                    }
+                    line-height: 9px;
+                    margin-left: 12px;
+                    margin-top: 0;
                 }
             }
 

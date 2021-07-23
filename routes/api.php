@@ -31,6 +31,7 @@ Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/all', [UserController::class, 'all']);
 Route::get('/users/{username}', [UserController::class, 'show']);
 Route::get('/users/{username}/followers', [UserController::class, 'followers']);
+Route::post('/users/apply', [UserController::class, 'apply']);
 Route::post('/users/create', [UserController::class, 'create']);
 Route::post('/users/follow', [UserController::class, 'follow']);
 Route::post('/users/forgot', [UserController::class, 'forgot']);

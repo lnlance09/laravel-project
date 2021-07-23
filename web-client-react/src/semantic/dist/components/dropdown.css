@@ -1795,7 +1795,7 @@ select.ui.dropdown {
 /* Selection */
 .ui.inverted.selection.dropdown {
   border: 1px solid rgba(255, 255, 255, 0.15);
-  background: #1b1c1d;
+  background: #090127;
   color: rgba(255, 255, 255, 0.8);
 }
 .ui.inverted.selection.dropdown:hover {
@@ -1845,16 +1845,16 @@ select.ui.dropdown {
 
 /* Labels */
 .ui.inverted.multiple.dropdown > .label {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: #2185d0;
   background-image: none;
-  color: #000000;
+  color: #fff;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0) inset;
 }
 .ui.inverted.multiple.dropdown > .label:hover {
   background-color: rgba(255, 255, 255, 0.9);
   border-color: rgba(255, 255, 255, 0.9);
   background-image: none;
-  color: #000000;
+  color: #fff;
 }
 .ui.inverted.multiple.dropdown > .label > .close.icon,
 .ui.inverted.multiple.dropdown > .label > .delete.icon {

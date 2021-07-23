@@ -10,10 +10,11 @@ import {
 	Menu,
 	Sidebar
 } from "semantic-ui-react"
+import { ReactSVG } from "react-svg"
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import defaultImg from "images/images/image.png"
-import Logo from "images/logos/predictive.svg"
+import Logo from "images/logos/blockchain.svg"
 import NumberFormat from "react-number-format"
 import PropTypes from "prop-types"
 import ThemeContext from "themeContext"
@@ -90,22 +91,19 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 	return (
 		<div className="pageHeaderComponent">
 			{simple ? (
-				<Container fluid textAlign="center">
-					<Image
-						className="simpleLogo"
-						inline
-						onClick={() => history.push("/")}
-						onError={(i) => (i.target.src = defaultImg)}
-						rounded
-						src={Logo}
-					/>
+				<Container className="basicHeaderContainer" fluid textAlign="center">
+					<ReactSVG className="simpleLogo" onClick={() => history.push("/")} src={Logo} />
 				</Container>
 			) : (
 				<Menu borderless fixed="top" fluid inverted={inverted}>
 					<Container className="desktop">
 						<Menu.Item className="logoItem">
+							<ReactSVG
+								className="simpleLogo"
+								onClick={() => history.push("/")}
+								src={Logo}
+							/>
 							<Header as="h1" inverted={inverted} onClick={() => history.push("/")}>
-								<Image className="headerLogo" rounded src={Logo} />
 								Preditc
 							</Header>
 						</Menu.Item>
@@ -129,7 +127,7 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 						>
 							Traders{" "}
 							{memberCount > 0 && (
-								<Label color="pink">
+								<Label className={inverted ? "inverted" : null} color="olive">
 									<NumberFormat
 										displayType={"text"}
 										thousandSeparator
@@ -141,7 +139,7 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 						<Menu.Item position="right">
 							<Button
 								circular
-								color="purple"
+								color={inverted ? "yellow" : "purple"}
 								className="moonButton"
 								icon
 								onClick={() => {
@@ -153,7 +151,11 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 									dispatch({ type: "TOGGLE_INVERTED" })
 								}}
 							>
-								<Icon inverted={inverted} name="moon" size="large" />
+								<Icon
+									inverted={inverted}
+									name={inverted ? "sun" : "moon"}
+									size="large"
+								/>
 							</Button>
 							{auth ? (
 								<>{ProfileDropdown}</>
@@ -166,9 +168,9 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 										size="large"
 									/>
 									<Button
+										color="green"
 										content="Sign Up"
 										onClick={() => history.push("/login?type=join")}
-										primary
 										size="large"
 									/>
 								</>
@@ -178,9 +180,11 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 
 					<Container className="mobile">
 						<Menu.Item className="logoItem">
-							<Header as="h1" inverted={inverted} onClick={() => history.push("/")}>
-								<Image className="headerLogo" rounded src={Logo} />
-							</Header>
+							<ReactSVG
+								className="simpleLogo"
+								onClick={() => history.push("/")}
+								src={Logo}
+							/>
 						</Menu.Item>
 						<Menu.Item position="right">
 							<Icon

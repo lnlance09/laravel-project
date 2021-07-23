@@ -1,4 +1,6 @@
 import {
+	Button,
+	Container,
 	Divider,
 	Grid,
 	Header,
@@ -7,13 +9,14 @@ import {
 	List,
 	Loader,
 	Segment,
+	Transition,
 	Visibility
 } from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
-import { ethers } from "ethers"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
+import Application from "components/Application"
 import axios from "axios"
 import DefaultLayout from "layouts/default"
 import ImageUpload from "components/ImageUpload"
@@ -24,7 +27,6 @@ import PredictionList from "components/PredictionList"
 import PropTypes from "prop-types"
 import reducer from "reducers/trader"
 import ThemeContext from "themeContext"
-import Web3 from "web3"
 
 const toastConfig = getConfig()
 toast.configure(toastConfig)
@@ -41,6 +43,7 @@ const Trader = ({ history, match }) => {
 	const { loaded, predictions, trader } = internalState
 
 	const [activeItem, setActiveItem] = useState(null)
+	const [applicationVisible, setApplicationVisible] = useState(false)
 	const [hasMore, setHasMore] = useState(false)
 	const [imageLoaded, setImageLoaded] = useState(false)
 	const [loadingMore, setLoadingMore] = useState(false)
@@ -48,28 +51,6 @@ const Trader = ({ history, match }) => {
 
 	useEffect(() => {
 		const getTrader = async (user) => {
-			/*
-			if (typeof window.web3 !== "undefined") {
-				const provider = new ethers.providers.Web3Provider(window.ethereum)
-				const signer = provider.getSigner()
-				console.log("signer", signer)
-				console.log(await provider.getBlockNumber())
-				const balance = await provider.getBalance(
-					"0xddfabcdc4d8ffc6d5beaf154f18b778f892a0740"
-				)
-				console.log("balance", ethers.utils.formatEther(balance))
-
-				try {
-					const tx = signer.sendTransaction({
-						to: "0xddfabcdc4d8ffc6d5beaf154f18b778f892a0740",
-						value: ethers.utils.parseEther("1.0")
-					})
-				} catch (e) {
-					console.log("tx", e)
-				}
-			}
-            */
-
 			await axios
 				.get(`${process.env.REACT_APP_BASE_URL}users/${username}`)
 				.then(async (response) => {
@@ -199,120 +180,171 @@ const Trader = ({ history, match }) => {
 			<DisplayMetaTags page="trader" state={internalState} />
 			{loaded ? (
 				<>
-					<Grid stackable>
-						<Grid.Row>
-							<Grid.Column className="imgColumn" width={4}>
-								<Segment circular style={{ height: "150px", width: "150px" }}>
-									{ProfilePic()}
-								</Segment>
-							</Grid.Column>
-							<Grid.Column width={12}>
-								<Header as="h1" inverted={inverted}>
-									<Header.Content>
-										{trader.name}
-										<Header.Subheader>@{trader.username}</Header.Subheader>
-									</Header.Content>
-									<Label
-										basic
-										className={inverted ? "inverted" : null}
-										color="pink"
-									>
-										{trader.accuracy.toFixed(2)} % accurate
-									</Label>
-								</Header>
-								<Header as="p" inverted={inverted} size="small">
-									{trader.bio}
-								</Header>
-								<List horizontal inverted={inverted} size="large">
-									<List.Item
-										as="a"
-										className={activeItem === null ? "active" : null}
-										onClick={() => {
-											setActiveItem(null)
-											getPredictions(trader.id, null)
-										}}
-									>
-										<List.Content>
-											<List.Header>
-												{trader.predictionsCount} predictions
-											</List.Header>
-										</List.Content>
-									</List.Item>
-									<List.Item
-										as="a"
-										className={activeItem === "Correct" ? "active" : null}
-										onClick={() => {
-											setActiveItem("Correct")
-											getPredictions(trader.id, "Correct")
-										}}
-									>
-										<List.Content>
-											<List.Header>
-												<span className="green">
-													{trader.correctPredictionsCount}
-												</span>{" "}
-												correct
-											</List.Header>
-										</List.Content>
-									</List.Item>
-									<List.Item
-										as="a"
-										className={activeItem === "Incorrect" ? "active" : null}
-										onClick={() => {
-											setActiveItem("Incorrect")
-											getPredictions(trader.id, "Incorrect")
-										}}
-									>
-										<List.Content>
-											<List.Header>
-												<span className="red">
-													{trader.incorrectPredictionsCount}
-												</span>{" "}
-												wrong
-											</List.Header>
-										</List.Content>
-									</List.Item>
-									<List.Item
-										as="a"
-										className={activeItem === "Pending" ? "active" : null}
-										onClick={() => {
-											setActiveItem("Pending")
-											getPredictions(trader.id, "Pending")
-										}}
-									>
-										<List.Content>
-											<List.Header>
-												<span className="orange">
-													{trader.pendingPredictionsCount}
-												</span>{" "}
-												pending
-											</List.Header>
-										</List.Content>
-									</List.Item>
-								</List>
-							</Grid.Column>
-						</Grid.Row>
-					</Grid>
+					{!applicationVisible && (
+						<>
+							<Grid stackable>
+								<Grid.Row>
+									<Grid.Column className="imgColumn" width={4}>
+										<Segment
+											circular
+											style={{ height: "150px", width: "150px" }}
+										>
+											{ProfilePic()}
+										</Segment>
+									</Grid.Column>
+									<Grid.Column width={12}>
+										<Header as="h1" inverted={inverted}>
+											<Header.Content>
+												{trader.name}
+												<Header.Subheader>
+													@{trader.username}
+												</Header.Subheader>
+											</Header.Content>
+											<Label
+												basic
+												className={inverted ? "inverted" : null}
+												color="blue"
+											>
+												{trader.accuracy.toFixed(2)} %
+											</Label>
+										</Header>
+										<Header as="p" inverted={inverted} size="small">
+											{trader.bio}
+										</Header>
+										<Button
+											className="getPredictionBtn"
+											color={
+												trader.predictionsReserved === 1 ? "pink" : "blue"
+											}
+											compact
+											content="Get a prediction"
+											icon="arrow right"
+											onClick={() => setApplicationVisible(true)}
+											style={{ display: "block" }}
+										/>
+										<List horizontal inverted={inverted} size="large">
+											<List.Item
+												as="a"
+												className={activeItem === null ? "active" : null}
+												onClick={() => {
+													setActiveItem(null)
+													getPredictions(trader.id, null)
+												}}
+											>
+												<List.Content>
+													<List.Header>
+														{trader.predictionsCount} total
+													</List.Header>
+												</List.Content>
+											</List.Item>
+											<List.Item
+												as="a"
+												className={
+													activeItem === "Correct" ? "active" : null
+												}
+												onClick={() => {
+													setActiveItem("Correct")
+													getPredictions(trader.id, "Correct")
+												}}
+											>
+												<List.Content>
+													<List.Header>
+														<span className="green">
+															{trader.correctPredictionsCount}
+														</span>{" "}
+														correct
+													</List.Header>
+												</List.Content>
+											</List.Item>
+											<List.Item
+												as="a"
+												className={
+													activeItem === "Incorrect" ? "active" : null
+												}
+												onClick={() => {
+													setActiveItem("Incorrect")
+													getPredictions(trader.id, "Incorrect")
+												}}
+											>
+												<List.Content>
+													<List.Header>
+														<span className="red">
+															{trader.incorrectPredictionsCount}
+														</span>{" "}
+														wrong
+													</List.Header>
+												</List.Content>
+											</List.Item>
+											<List.Item
+												as="a"
+												className={
+													activeItem === "Pending" ? "active" : null
+												}
+												onClick={() => {
+													setActiveItem("Pending")
+													getPredictions(trader.id, "Pending")
+												}}
+											>
+												<List.Content>
+													<List.Header>
+														<span className="orange">
+															{trader.pendingPredictionsCount}
+														</span>{" "}
+														pending
+													</List.Header>
+												</List.Content>
+											</List.Item>
+										</List>
+									</Grid.Column>
+								</Grid.Row>
+							</Grid>
 
-					<Divider className="traderPageDivider" hidden section />
+							<Divider className="traderPageDivider" hidden section />
 
-					<Visibility
-						continuous
-						offset={[50, 50]}
-						onBottomVisible={() => {
-							if (!predictions.loading && !loadingMore && hasMore) {
-								getPredictions(trader.id, activeItem, "created_at", "desc", page)
-							}
-						}}
-					>
-						<PredictionList
-							inverted={inverted}
-							loading={predictions.loading}
-							loadingMore={loadingMore}
-							predictions={predictions.data}
-							onClickPrediction={onClickPrediction}
-						/>
-					</Visibility>
+							<Visibility
+								continuous
+								offset={[50, 50]}
+								onBottomVisible={() => {
+									if (!predictions.loading && !loadingMore && hasMore) {
+										getPredictions(
+											trader.id,
+											activeItem,
+											"created_at",
+											"desc",
+											page
+										)
+									}
+								}}
+							>
+								<PredictionList
+									inverted={inverted}
+									loading={predictions.loading}
+									loadingMore={loadingMore}
+									predictions={predictions.data}
+									onClickPrediction={onClickPrediction}
+								/>
+							</Visibility>
+						</>
+					)}
+
+					<Transition animation="scale" duration={500} visible={applicationVisible}>
+						<Container text>
+							<Segment inverted={inverted} raised>
+								<Application
+									auth={auth}
+									close={() => setApplicationVisible(false)}
+									inverted={inverted}
+									user={{
+										id: trader.id,
+										img: trader.img,
+										name: trader.name,
+										predictionsReserved: trader.predictionsReserved,
+										username: trader.username
+									}}
+								/>
+							</Segment>
+						</Container>
+					</Transition>
 				</>
 			) : (
 				<>

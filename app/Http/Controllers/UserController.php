@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\User as UserResource;
 use App\Http\Resources\UserCollection;
 use App\Mail\ForgotPassword;
+use App\Models\Application;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -22,6 +23,7 @@ class UserController extends Controller
     const PROTECTED_USERNAMES = [
         'all',
         'about',
+        'apply',
         'coin',
         'coins',
         'contact',
@@ -93,6 +95,40 @@ class UserController extends Controller
         return response([
             'count' => $count
         ]);
+    }
+
+    public function apply(Request $request)
+    {
+        $request->validate([
+            'coin' => 'bail|required|exists:coins,id',
+            'email' => 'bail|required|email',
+            'name' => 'bail|required|min:3|max:30|alpha',
+            'time' => 'bail|required',
+            'tx' => 'bail|required',
+            'user' => 'bail|required|exists:users,id',
+        ]);
+
+        $cash = $request->input('cash');
+        $coinId = $request->input('coin');
+        $email = $request->input('email');
+        $name = $request->input('name');
+        $portfolio = $request->input('portfolio');
+        $time = $request->input('time');
+        $tx = $request->input('tx');
+        $userId = $request->input('user');
+        $years = $request->input('years');
+
+        $application = Application::create([
+            'cash' => $cash,
+            'coin_id' => $coinId,
+            'email' => $email,
+            'name' => $name,
+            'time' => $time,
+            'tx' => $tx,
+            'user_id' => $userId,
+            'years' => $years
+        ]);
+        $application->refresh();
     }
 
     public function changeProfilePic(Request $request)
