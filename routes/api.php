@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CoinController;
 use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\UserController;
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth:api');
 
 Route::get('/coins', [CoinController::class, 'index']);
 Route::get('/coins/graph', [CoinController::class, 'graph']);

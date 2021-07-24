@@ -87,8 +87,6 @@ const Prediction = ({ history, match }) => {
 			containerClassName="predictionPage"
 			history={history}
 			inverted={inverted}
-			textAlign="center"
-			useGrid={false}
 		>
 			<DisplayMetaTags page="predictions" state={internalState} />
 			{loaded ? (
@@ -147,24 +145,14 @@ const Prediction = ({ history, match }) => {
 									title={title}
 									url={`${window.location.origin}/predictions/${slug}`}
 								>
-									<Icon
-										className="twitterIcon"
-										color="twitter"
-										name="twitter"
-										size="large"
-									/>
+									<Icon className="twitterIcon" name="twitter" size="large" />
 								</TwitterShareButton>
 							</span>
 							<span className="left floated">
 								<RedditShareButton
 									url={`${window.location.origin}/predictions/${slug}`}
 								>
-									<Icon
-										className="redditIcon"
-										color="reddit"
-										name="reddit"
-										size="large"
-									/>
+									<Icon className="redditIcon" name="reddit" size="large" />
 								</RedditShareButton>
 							</span>
 						</Card.Content>

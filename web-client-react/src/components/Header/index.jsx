@@ -14,20 +14,46 @@ import { ReactSVG } from "react-svg"
 import { useContext, useEffect, useState } from "react"
 import axios from "axios"
 import defaultImg from "images/images/image.png"
+import Echo from "laravel-echo"
 import Logo from "images/logos/blockchain.svg"
 import NumberFormat from "react-number-format"
 import PropTypes from "prop-types"
 import ThemeContext from "themeContext"
 
+window.Pusher = require("pusher-js")
+
 const PageHeader = ({ activeItem, history, q, simple }) => {
 	const { state, dispatch } = useContext(ThemeContext)
-	const { auth, inverted, memberCount, user } = state
+	const { auth, bearer, inverted, memberCount, unreadCount, user } = state
 	const [sidebarVisible, setSidebarVisible] = useState(false)
 
 	useEffect(() => {
+		if (typeof window.Echo === "undefined") {
+			window.Echo = new Echo({
+				auth: {
+					headers: {
+						Authorization: `Bearer ${bearer}`
+					}
+				},
+				authEndpoint: "http://localhost/broadcasting/auth",
+				broadcaster: "pusher",
+				cluster: process.env.REACT_APP_PUSHER_APP_CLUSTER,
+				key: process.env.REACT_APP_PUSHER_APP_KEY,
+				forceTLS: true
+			})
+
+			window.Echo.private(`users.${user.id}`).listen("ApplicationSent", (e) => {
+				console.log("application", e)
+				dispatch({
+					type: "INCREMENT_UNREAD_COUNT"
+				})
+			})
+		}
+
 		getMemberCount()
+		getUnreadCount()
 		// eslint-disable-next-line
-	}, [])
+	}, [unreadCount])
 
 	const getMemberCount = async () => {
 		return axios
@@ -40,7 +66,31 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 				})
 			})
 			.catch(() => {
-				console.error("Last price could not be fetched")
+				console.error("Error fetching member count")
+			})
+	}
+
+	const getUnreadCount = async () => {
+		return axios
+			.get(`${process.env.REACT_APP_BASE_URL}applications`, {
+				params: {
+					justCount: 1,
+					unread: 1,
+					userId: user.id
+				},
+				headers: {
+					Authorization: `Bearer ${bearer}`
+				}
+			})
+			.then(async (response) => {
+				const { count } = response.data
+				dispatch({
+					type: "SET_UNREAD_COUNT",
+					count
+				})
+			})
+			.catch(() => {
+				console.error("Error fetching unread count")
 			})
 	}
 
@@ -137,11 +187,11 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 							)}
 						</Menu.Item>
 						<Menu.Item position="right">
-							<Button
+							<Icon
 								circular
-								color={inverted ? "yellow" : "purple"}
 								className="moonButton"
-								icon
+								color={inverted ? "orange" : "purple"}
+								name={inverted ? "sun" : "moon"}
 								onClick={() => {
 									const inverted = localStorage.getItem("inverted")
 									localStorage.setItem(
@@ -150,13 +200,18 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 									)
 									dispatch({ type: "TOGGLE_INVERTED" })
 								}}
+								size="large"
+							/>
+							<div
+								className="item"
+								style={{ cursor: "pointer", margin: "0 20px 0 5px", padding: 0 }}
 							>
-								<Icon
-									inverted={inverted}
-									name={inverted ? "sun" : "moon"}
-									size="large"
-								/>
-							</Button>
+								<Icon circular color="yellow" name="bell" size="large" />
+								{unreadCount > 0 && (
+									<div className="top floating ui red label">{unreadCount}</div>
+								)}
+							</div>
+
 							{auth ? (
 								<>{ProfileDropdown}</>
 							) : (

@@ -29,8 +29,8 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 	const [cash, setCash] = useState(0)
 	const [coinId, setCoinId] = useState(1)
 	const [coinOptions, setCoinOptions] = useState([])
-	const [email, setEmail] = useState("")
-	const [name, setName] = useState("")
+	const [email, setEmail] = useState(user.email)
+	const [name, setName] = useState(auth ? user.name : "")
 	const [page, setPage] = useState(1)
 	const [portfolio, setPortfolio] = useState([])
 	const [timeFrame, setTimeFrame] = useState("short")
@@ -38,13 +38,6 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 	const [yearsInCrypto, setYearsInCrypto] = useState(0)
 
 	useEffect(() => {
-		window.addEventListener("error", function (event) {
-			if (event.error.hasBeenCaught !== undefined) {
-				return false
-			}
-			event.error.hasBeenCaught = true
-		})
-
 		const loadPage = async () => {
 			const coins = await getCoins()
 			setCoinOptions(coins)
@@ -236,7 +229,6 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 						}
 					}}
 					size="large"
-					type="submit"
 				/>
 			</Form>
 		</>
@@ -283,7 +275,6 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 						setPage(3)
 					}}
 					size="large"
-					type="submit"
 				/>
 			</Form>
 		</>
@@ -319,7 +310,6 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 					inverted={inverted}
 					onClick={sendApplication}
 					size="large"
-					type="submit"
 				/>
 			</Form>
 		</>
@@ -340,8 +330,18 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 					onClick={() => {
 						if (page === 1) {
 							close()
-						} else {
+						}
+
+						if (page === 2) {
 							setPage(page - 1)
+						}
+
+						if (page === 3) {
+							if (auth) {
+								setPage(1)
+							} else {
+								setPage(2)
+							}
 						}
 					}}
 					size="small"
@@ -367,6 +367,7 @@ Application.propTypes = {
 	history: PropTypes.object,
 	inverted: PropTypes.bool,
 	user: PropTypes.shape({
+		email: PropTypes.string,
 		id: PropTypes.number,
 		img: PropTypes.string,
 		name: PropTypes.string,

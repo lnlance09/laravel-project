@@ -175,7 +175,6 @@ const Trader = ({ history, match }) => {
 			history={history}
 			inverted={inverted}
 			textAlign="center"
-			useGrid={false}
 		>
 			<DisplayMetaTags page="trader" state={internalState} />
 			{loaded ? (
@@ -335,6 +334,7 @@ const Trader = ({ history, match }) => {
 									close={() => setApplicationVisible(false)}
 									inverted={inverted}
 									user={{
+										email: auth ? user.email : "",
 										id: trader.id,
 										img: trader.img,
 										name: trader.name,

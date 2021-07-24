@@ -26,6 +26,7 @@ class Application extends Model
         'portfolio',
         'time',
         'tx',
+        'unread',
         'user_id',
         'years'
     ];

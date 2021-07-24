@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ApplicationSent;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Application as ApplicationResource;
 use App\Http\Resources\User as UserResource;
 use App\Http\Resources\UserCollection;
 use App\Mail\ForgotPassword;
+use App\Mail\VerificationCode;
 use App\Models\Application;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -102,7 +105,7 @@ class UserController extends Controller
         $request->validate([
             'coin' => 'bail|required|exists:coins,id',
             'email' => 'bail|required|email',
-            'name' => 'bail|required|min:3|max:30|alpha',
+            'name' => 'bail|required|min:3|max:30|regex:/^[a-zA-Z\s]*$/',
             'time' => 'bail|required',
             'tx' => 'bail|required',
             'user' => 'bail|required|exists:users,id',
@@ -112,7 +115,6 @@ class UserController extends Controller
         $coinId = $request->input('coin');
         $email = $request->input('email');
         $name = $request->input('name');
-        $portfolio = $request->input('portfolio');
         $time = $request->input('time');
         $tx = $request->input('tx');
         $userId = $request->input('user');
@@ -129,6 +131,11 @@ class UserController extends Controller
             'years' => $years
         ]);
         $application->refresh();
+        $application = Application::with(['coin', 'user'])
+            ->where('id', $application->id)
+            ->first();
+
+        ApplicationSent::dispatch(new ApplicationResource($application));
     }
 
     public function changeProfilePic(Request $request)
@@ -173,12 +180,16 @@ class UserController extends Controller
     {
         $request->validate([
             'email' => 'bail|required|email|unique:users',
-            'name' => 'bail|required|min:3|max:30|alpha',
+            'name' => 'bail|required|min:3|max:30|regex:/^[a-zA-Z\s]*$/',
             'password' => ['bail', 'required', Password::min(8)],
             'username' => 'bail|required|max:20|unique:users,username|alpha_dash'
         ]);
 
+        $email = $request->input('email');
+        $name = $request->input('name');
+        $password = $request->input('password');
         $username = $request->input('username');
+
         if (in_array(strtolower($username), self::PROTECTED_USERNAMES)) {
             return response([
                 'errors' => [
@@ -191,14 +202,16 @@ class UserController extends Controller
 
         $user = User::create([
             'api_token' => Str::random(60),
-            'email' => $request->input('email'),
-            'name' => $request->input('name'),
-            'password' => $request->input('password'),
+            'email' => $email,
+            'name' => $name,
+            'password' => $password,
             'remember_token' => Str::random(10),
             'username' => $username,
             'verification_code' => mt_rand(1000, 9999)
         ]);
         $user->refresh();
+
+        Mail::to($email)->send(new VerificationCode($user));
 
         return response()->json([
             'bearer' => $user->api_token,

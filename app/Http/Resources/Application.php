@@ -6,7 +6,7 @@ use App\Http\Resources\Coin as CoinResource;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Prediction extends JsonResource
+class Application extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,15 +18,8 @@ class Prediction extends JsonResource
     {
         return [
             'id' => $this->id,
-            'actualPrice' => $this->actual_price,
             'coin' => new CoinResource($this->coin),
-            'createdAt' => $this->created_at,
-            'currentPrice' => (float) $this->current_price,
-            'explanation' => $this->explanation === null ? 'No explanation given...' : $this->explanation,
-            'margin' => $this->margin,
-            'predictionPrice' => (float) $this->prediction_price,
-            'status' => $this->status,
-            'targetDate' => $this->target_date,
+            'time' => $this->time,
             'user' => new UserResource($this->user)
         ];
     }
