@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        if (env('SEED_WITH_IMPORTS', false)) {
+        if (env('SEED_WITH_IMPORTS', 0) == 1) {
             DB::unprepared(file_get_contents(__DIR__ . '/imports/users.sql'));
             return;
         }

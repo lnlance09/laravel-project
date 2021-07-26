@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PredictionCreated;
 use App\Http\Controllers\CoinController;
 use App\Http\Resources\Prediction as PredictionResource;
 use App\Http\Resources\PredictionCollection;
@@ -18,7 +19,6 @@ class PredictionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api')->only('create');
     }
 
     /**
@@ -32,7 +32,7 @@ class PredictionController extends Controller
         $coinId = $request->input('coinId', null);
         $status = $request->input('status', null);
         $sort = $request->input('sort', 'id');
-        $dir = $request->input('dir', 'asc');
+        $dir = $request->input('dir', 'desc');
 
         $where = [];
         if ($coinId) {
@@ -91,6 +91,8 @@ class PredictionController extends Controller
             'user_id' => $user->id
         ]);
         $prediction->refresh();
+
+        PredictionCreated::dispatch(new PredictionResource($prediction));
 
         return new PredictionResource($prediction);
     }

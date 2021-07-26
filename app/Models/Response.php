@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class Application extends Model
+class Response extends Model
 {
     use HasFactory, Notifiable;
 
@@ -19,15 +19,8 @@ class Application extends Model
      * @var array
      */
     protected $fillable = [
-        'cash',
-        'coin_id',
-        'email',
-        'name',
-        'time',
-        'tx',
-        'unread',
-        'user_id',
-        'years'
+        'application_id',
+        'response'
     ];
 
     /**
@@ -44,23 +37,8 @@ class Application extends Model
      */
     protected $casts = [];
 
-    public function coin()
+    public function application()
     {
-        return $this->hasOne(Coin::class, 'id', 'coin_id');
-    }
-
-    public function portfolio()
-    {
-        return $this->hasMany(Portfolio::class);
-    }
-
-    public function responses()
-    {
-        return $this->hasMany(Response::class);
-    }
-
-    public function user()
-    {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->hasOne(Application::class, 'id', 'application_id');
     }
 }

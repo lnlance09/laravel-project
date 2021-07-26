@@ -11,52 +11,100 @@ import {
 	Sidebar
 } from "semantic-ui-react"
 import { ReactSVG } from "react-svg"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useReducer, useState } from "react"
 import axios from "axios"
 import defaultImg from "images/images/image.png"
 import Echo from "laravel-echo"
+import initialState from "./state"
+import logger from "use-reducer-logger"
 import Logo from "images/logos/blockchain.svg"
+import moment from "moment"
 import NumberFormat from "react-number-format"
 import PropTypes from "prop-types"
+import reducer from "./reducer"
 import ThemeContext from "themeContext"
 
 window.Pusher = require("pusher-js")
 
 const PageHeader = ({ activeItem, history, q, simple }) => {
 	const { state, dispatch } = useContext(ThemeContext)
-	const { auth, bearer, inverted, memberCount, unreadCount, user } = state
+	const { auth, bearer, inverted, memberCount, notifications, unreadCount, user } = state
+
+	const [internalState, dispatchInternal] = useReducer(
+		process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
+		initialState
+	)
+	const { messages } = internalState
+
 	const [sidebarVisible, setSidebarVisible] = useState(false)
 
 	useEffect(() => {
 		if (typeof window.Echo === "undefined") {
-			window.Echo = new Echo({
-				auth: {
-					headers: {
-						Authorization: `Bearer ${bearer}`
-					}
-				},
-				authEndpoint: "http://localhost/broadcasting/auth",
-				broadcaster: "pusher",
-				cluster: process.env.REACT_APP_PUSHER_APP_CLUSTER,
-				key: process.env.REACT_APP_PUSHER_APP_KEY,
-				forceTLS: true
-			})
-
-			window.Echo.private(`users.${user.id}`).listen("ApplicationSent", (e) => {
-				console.log("application", e)
-				dispatch({
-					type: "INCREMENT_UNREAD_COUNT"
+			if (auth) {
+				window.Echo = new Echo({
+					auth: {
+						headers: {
+							Authorization: `Bearer ${bearer}`
+						}
+					},
+					authEndpoint: "http://localhost/broadcasting/auth",
+					broadcaster: "pusher",
+					cluster: process.env.REACT_APP_PUSHER_APP_CLUSTER,
+					key: process.env.REACT_APP_PUSHER_APP_KEY,
+					forceTLS: true
 				})
+
+				window.Echo.private(`users.${user.id}`).listen("ApplicationSent", (e) => {
+					console.log("application", e)
+					incrementNotification()
+				})
+			} else {
+				window.Echo = new Echo({
+					broadcaster: "pusher",
+					cluster: process.env.REACT_APP_PUSHER_APP_CLUSTER,
+					key: process.env.REACT_APP_PUSHER_APP_KEY,
+					forceTLS: true
+				})
+			}
+
+			window.Echo.channel("publicPredictions").listen("PredictionCreated", (e) => {
+				console.log("prediction", e)
+				const { prediction } = e
+				addNotification(prediction)
 			})
 		}
 
 		getMemberCount()
-		getUnreadCount()
+
+		if (auth) {
+			getUnreadCount()
+			getMessages()
+		}
 		// eslint-disable-next-line
-	}, [unreadCount])
+	}, [])
+
+	const addNotification = (prediction) => {
+		dispatch({
+			type: "SET_NOTIFICATIONS",
+			prediction
+		})
+	}
+
+	const clearAllNotifications = () => {
+		localStorage.removeItem("notifications")
+		dispatch({
+			type: "CLEAR_ALL_NOTIFICATIONS"
+		})
+	}
+
+	const incrementNotification = () => {
+		dispatch({
+			type: "INCREMENT_UNREAD_COUNT"
+		})
+	}
 
 	const getMemberCount = async () => {
-		return axios
+		axios
 			.get(`${process.env.REACT_APP_BASE_URL}users/all`)
 			.then(async (response) => {
 				const { count } = response.data
@@ -70,13 +118,34 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 			})
 	}
 
+	const getMessages = async () => {
+		axios
+			.get(`${process.env.REACT_APP_BASE_URL}applications`, {
+				params: {
+					perPage: 5
+				},
+				headers: {
+					Authorization: `Bearer ${bearer}`
+				}
+			})
+			.then(async (response) => {
+				const { data } = response.data
+				dispatchInternal({
+					type: "SET_MESSAGES",
+					messages: data
+				})
+			})
+			.catch(() => {
+				console.error("Error fetching messages")
+			})
+	}
+
 	const getUnreadCount = async () => {
-		return axios
+		axios
 			.get(`${process.env.REACT_APP_BASE_URL}applications`, {
 				params: {
 					justCount: 1,
-					unread: 1,
-					userId: user.id
+					unread: 1
 				},
 				headers: {
 					Authorization: `Bearer ${bearer}`
@@ -95,37 +164,164 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 	}
 
 	const logout = () => {
-		localStorage.setItem("auth", false)
-		localStorage.setItem("bearer", null)
-		localStorage.setItem("user", null)
-		localStorage.setItem("verify", false)
+		localStorage.removeItem("auth")
+		localStorage.removeItem("bearer")
+		localStorage.removeItem("unreadCount")
+		localStorage.removeItem("user")
+		localStorage.removeItem("verify")
+		window.Echo.leave(`users.${user.id}`)
 		dispatch({
 			type: "LOGOUT"
 		})
 	}
 
-	const trigger = (
-		<>
-			{user && (
-				<>
-					<span style={{ marginLeft: "12px", marginRight: "12px" }}>{user.name}</span>
-					<Image
-						avatar
-						bordered
-						onError={(i) => (i.target.src = defaultImg)}
-						src={user.img}
-					/>
-				</>
-			)}
-		</>
+	const BellDropdown = (
+		<Dropdown
+			className={`bellDropdown ${inverted ? "inverted" : null}`}
+			direction="left"
+			icon={false}
+			pointing="top"
+			trigger={
+				<div className="trigger item">
+					<Icon circular color="yellow" name="bell" size="large" />
+					{notifications.length > 0 && (
+						<div className="top floating ui red label">{notifications.length}</div>
+					)}
+				</div>
+			}
+		>
+			<Dropdown.Menu>
+				{notifications.length === 0 ? (
+					<>
+						<Dropdown.Item>
+							<Dropdown.Header>You're all up to date!</Dropdown.Header>
+						</Dropdown.Item>
+					</>
+				) : (
+					<>
+						{notifications.map((item) => {
+							const text = `${item.user.name} predicted ${item.coin.symbol} at $${
+								item.predictionPrice
+							} on ${moment(item.targetDate).format("MMM D")}`
+							return (
+								<Dropdown.Item
+									className="paddedDropdownItem"
+									image={{ avatar: true, src: item.user.img }}
+									key={item.id}
+									onClick={() => history.push(`/predictions/${item.id}?clear=1`)}
+									text={text}
+									value={item.id}
+								/>
+							)
+						})}
+						<>
+							<Dropdown.Divider />
+							<Dropdown.Header>
+								<Button
+									color="red"
+									compact
+									content="Clear all"
+									onClick={clearAllNotifications}
+								/>
+							</Dropdown.Header>
+						</>
+					</>
+				)}
+			</Dropdown.Menu>
+		</Dropdown>
+	)
+
+	const MessageDropdown = (
+		<Dropdown
+			className={inverted ? "inverted" : null}
+			direction="left"
+			icon={false}
+			pointing="top"
+			trigger={
+				<div className="trigger item">
+					<Icon circular color="green" name="usd" size="large" />
+					{unreadCount > 0 && (
+						<div className="top floating ui red label">{unreadCount}</div>
+					)}
+				</div>
+			}
+		>
+			<Dropdown.Menu>
+				{auth ? (
+					<>
+						{messages.map((item) => {
+							const text = `${item.name} has requested a ${item.time} term review of ${item.coin.symbol}`
+							return (
+								<Dropdown.Item
+									className="paddedDropdownItem"
+									image={{ avatar: true, src: item.coin.logo }}
+									key={item.id}
+									onClick={() => history.push(`/applications/${item.id}`)}
+									text={text}
+									value={item.id}
+								/>
+							)
+						})}
+						{messages.length > 0 ? (
+							<>
+								<Dropdown.Divider />
+								<Dropdown.Header>
+									<Button
+										color="green"
+										compact
+										content="View all messages"
+										onClick={() => history.push("/applications")}
+									/>
+								</Dropdown.Header>
+							</>
+						) : (
+							<Header content="No messages" inverted={inverted} size="small" />
+						)}
+					</>
+				) : (
+					<>
+						<Dropdown.Item>
+							<Dropdown.Header>
+								Sign in to start getting paid for your predictions
+							</Dropdown.Header>
+						</Dropdown.Item>
+						<Dropdown.Divider />
+						<Dropdown.Header>
+							<Button
+								color="blue"
+								compact
+								content="Sign In"
+								onClick={() => history.push("/login")}
+							/>
+						</Dropdown.Header>
+					</>
+				)}
+			</Dropdown.Menu>
+		</Dropdown>
 	)
 
 	const ProfileDropdown = (
 		<Dropdown
-			className={inverted ? "inverted" : null}
+			className={`profileDropdown ${inverted ? "inverted" : null}`}
 			icon={false}
 			pointing="top"
-			trigger={trigger}
+			trigger={
+				<>
+					{user && (
+						<>
+							<span style={{ marginLeft: "12px", marginRight: "12px" }}>
+								{user.name}
+							</span>
+							<Image
+								avatar
+								bordered
+								onError={(i) => (i.target.src = defaultImg)}
+								src={user.img}
+							/>
+						</>
+					)}
+				</>
+			}
 		>
 			<Dropdown.Menu>
 				<Dropdown.Item onClick={() => history.push(`/${user.username}`)}>
@@ -202,15 +398,10 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 								}}
 								size="large"
 							/>
-							<div
-								className="item"
-								style={{ cursor: "pointer", margin: "0 20px 0 5px", padding: 0 }}
-							>
-								<Icon circular color="yellow" name="bell" size="large" />
-								{unreadCount > 0 && (
-									<div className="top floating ui red label">{unreadCount}</div>
-								)}
-							</div>
+
+							{BellDropdown}
+
+							{MessageDropdown}
 
 							{auth ? (
 								<>{ProfileDropdown}</>

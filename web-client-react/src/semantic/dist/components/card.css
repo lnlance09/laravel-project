@@ -559,7 +559,7 @@ a.ui.card:hover,
   z-index: 5;
   background: #FFFFFF;
   border: none;
-  box-shadow: 0 1px 3px 0 rgba(66, 66, 66, 0.9), 0 0 0 1px rgba(66, 66, 66, 0.9);
+  box-shadow: 0 1px 3px 0 #BCBDBD, 0 0 0 1px #D4D4D5;
   transform: translateY(-3px);
 }
 

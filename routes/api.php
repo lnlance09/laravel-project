@@ -4,7 +4,6 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CoinController;
 use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth:api');
+Route::get('/applications', [ApplicationController::class, 'index'])->middleware(['auth:api', 'verified']);
+Route::post('/applications/{id}/respond', [ApplicationController::class, 'respond'])->middleware(['auth:api', 'verified']);
+Route::post('/applications/{id}/update', [ApplicationController::class, 'update'])->middleware(['auth:api', 'verified']);
 
 Route::get('/coins', [CoinController::class, 'index']);
 Route::get('/coins/graph', [CoinController::class, 'graph']);
@@ -27,7 +28,7 @@ Route::get('/coins/topTraders', [CoinController::class, 'topTraders']);
 Route::get('/coins/{slug}', [CoinController::class, 'show']);
 
 Route::get('/predictions', [PredictionController::class, 'index']);
-Route::post('/predictions/create', [PredictionController::class, 'create'])->middleware('verified');
+Route::post('/predictions/create', [PredictionController::class, 'create'])->middleware(['auth:api', 'verified']);
 Route::get('/predictions/{id}', [PredictionController::class, 'show']);
 
 Route::get('/users', [UserController::class, 'index']);

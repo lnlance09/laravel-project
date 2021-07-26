@@ -1427,7 +1427,7 @@ Floated Menu / Item
 /*--- Active ---*/
 
 .ui.inverted.menu .active.item {
-  background: #3D3E3F;
+  background: rgba(255, 255, 255, 0.15);
   color: #ffffff !important;
 }
 .ui.inverted.vertical.menu .item .menu .active.item {
@@ -1444,7 +1444,7 @@ Floated Menu / Item
 /*--- Active Hover ---*/
 
 .ui.inverted.menu .active.item:hover {
-  background: #3D3E3F;
+  background: rgba(255, 255, 255, 0.15);
   color: #FFFFFF !important;
 }
 .ui.inverted.pointing.menu .active.item:hover:after {

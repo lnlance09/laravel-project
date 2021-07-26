@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('users.{id}', function ($user, $id) {
     return $user->id == $id;
 });
+
+Broadcast::channel('publicPredictions', function () {
+    return true;
+});

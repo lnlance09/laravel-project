@@ -62,7 +62,7 @@ const DefaultLayout = ({
 						)}
 					</Container>
 
-					{showFooter && <PageFooter inverted={inverted} />}
+					{showFooter && <PageFooter history={history} inverted={inverted} />}
 				</>
 			)}
 		</div>

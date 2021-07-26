@@ -6,8 +6,8 @@
 # https://github.com/Sequel-Ace/Sequel-Ace
 #
 # Host: 127.0.0.1 (MySQL 8.0.23)
-# Database: blather_laravel
-# Generation Time: 2021-07-08 18:14:17 +0000
+# Database: preditc
+# Generation Time: 2021-07-25 16:48:10 +0000
 # ************************************************************
 
 
@@ -26,33 +26,36 @@ SET NAMES utf8mb4;
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 
-INSERT INTO `users` (`id`, `bio`, `email`, `email_verified_at`, `gender`, `img`, `name`, `password`, `username`, `remember_token`, `created_at`, `updated_at`)
+INSERT INTO `users` (`id`, `api_token`, `bio`, `email`, `email_verified_at`, `gender`, `has_api_access`, `img`, `name`, `password`, `remember_token`, `username`, `verification_code`, `created_at`, `updated_at`)
 VALUES
-	(1,'','alvina.marvin@example.org','2021-02-07 11:15:17','male','users/ZXNMbsFEQq5otEClT5e9iO0z.jpg','Sammie Schumm','BHvmfvukfbr','neha.schultz','xBzWPL9RnB','2020-11-27 08:47:18','2021-07-08 17:22:25'),
-	(2,'','iwyman@example.net','2021-06-15 22:21:53','female','users/8g1cnBx45SxJMYl8cDoPrblt.jpg','Sister Jones','yPZ3JK6JklqstdW10eq0','gibson.laurence','ZhfscNxrPC','2021-03-05 07:18:02','2021-07-08 17:22:25'),
-	(3,'','flavie23@example.net','2021-02-21 17:41:56','male','users/XroPY0qXpJhF7WXwstSZCtVn.jpg','Hayley Kulas','OyzUO57r','earnestine59','H292ocnPid','2021-01-19 07:37:09','2021-07-08 17:22:25'),
-	(4,'','axel.bergnaum@example.net','2021-06-30 21:01:32','male','users/4Ak24Oza9TBIUcO4jxYiQVVA.jpg','Neal Bergnaum','o7PwY5WfHb','oda.reichert','zuCIpwr7it','2021-06-18 02:27:29','2021-07-08 17:22:25'),
-	(5,'','lshanahan@example.org','2021-02-17 19:05:33','female','users/7zZxoUF4alUDFFhLgZITIOrT.jpg','Delia Kuvalis','7bkpAJA0cVyBIhS','rosetta92','bNgjq0iAPH','2020-11-24 05:09:06','2021-07-08 17:22:25'),
-	(6,'','zreilly@example.net','2021-04-03 16:39:13','male','users/whhypJUxk9oXgoGQshEJ2ddT.jpg','Raheem Torp','r5Lbo7nHVCXlkswxix','ucasper','jXqWbdrhmm','2020-10-29 03:15:24','2021-07-08 17:22:25'),
-	(7,'','jeanette.vonrueden@example.net','2021-06-30 06:50:57','male','users/yprAlX2KiXtypfYDCJpucLEt.jpg','Price Bosco','xMvNDEebBIaoB2','chelsie.stoltenberg','OlG6zRcXNa','2021-06-28 16:53:04','2021-07-08 17:22:25'),
-	(8,'','mark22@example.org','2020-11-24 15:28:36','male','users/5Ug1w04IXO05U3fzxa70t1in.jpg','Al Morissette','pyTrl6u7WpjbtI3Lh7Md60zY','kevin.crona','1weaW3kG69','2020-09-22 13:23:31','2021-07-08 17:22:25'),
-	(9,'','davon.kilback@example.net','2021-06-30 15:09:08','male','users/qSo0EgSvELZhNa9Z5ERqvZDE.jpg','Filiberto Wilderman','cwK2fBgrtp5IMVAdHSrmClM','bbahringer','MpRZeEh5Fc','2021-05-21 20:08:01','2021-07-08 17:22:25'),
-	(10,'','donato10@example.org','2020-06-16 20:23:08','female','users/IvJcnSPlViNRVhjalxUgqXef.jpg','Agustina Reinger','w8v5OmvwFAIRXNt','pmcglynn','Xe01AGJgaL','2020-05-28 08:50:10','2021-07-08 17:22:25'),
-	(11,'','ursula.stark@example.com','2020-10-05 01:05:51','female','users/hc03Ue82yvBhW0pamiAcvzlP.jpg','Ludie Romaguera','IqT5N0gzg','hharvey','goT08prg79','2020-06-13 13:02:43','2021-07-08 17:22:25'),
-	(12,'','ywyman@example.com','2021-07-08 05:02:01','male','users/TX2Hj06bUA0IKYSxI4aGlWOU.jpg','Rico Runolfsdottir','MnipX6Nw9zs','dach.bulah','sSsAcmarYz','2021-06-12 13:44:39','2021-07-08 17:22:25'),
-	(13,'','eichmann.cassandre@example.org','2020-09-07 19:43:54','female','users/nqMiJdmbEowowBdKlUl6qTXg.jpg','Kiera Olson','E3OXATj50b','lbernier','qy6FzQf09r','2020-05-10 17:20:17','2021-07-08 17:22:25'),
-	(14,'','braun.antonina@example.net','2021-06-20 18:46:45','male','users/CG33HxkhggX2mKsgybDb6est.jpg','Pietro Jast','sms1k8hJWIOK','gaylord37','TLJxEWcnfp','2021-04-16 09:27:32','2021-07-08 17:22:25'),
-	(15,'','damian.langworth@example.org','2021-06-10 06:28:28','female','users/lalHTOivZeVW2fElqdSN2sIb.jpg','Angelica Bode','veuF8M8OkcmMjRGWEw3ezjt','amir56','ClryarKRYk','2021-03-14 02:23:47','2021-07-08 17:22:25'),
-	(16,'','howard33@example.org','2021-06-18 14:52:23','male','users/LgeUgayBXR7qttFXsQRblg5u.jpg','Ryder Kirlin','3mih7YnLu8','eino06','sSSpTKwqrs','2021-06-17 13:56:02','2021-07-08 17:22:25'),
-	(17,'','mathew.willms@example.org','2021-01-03 22:37:54','female','users/htAZkmRbj7DlyWrle6Pw8jSt.jpg','Janis Steuber','OWS5wEC8wfPf1','belle.zboncak','OoMCfWbecI','2020-11-12 10:25:55','2021-07-08 17:22:25'),
-	(18,'','lindsay.crooks@example.com','2021-04-12 21:14:58','female','users/ai3heGtm0N1INFYwEt2HUzRh.jpg','Laurine Rodriguez','VwwLrqBSOdspqASYP6','lpouros','mC10XQ9qwK','2020-07-23 22:34:46','2021-07-08 17:22:25'),
-	(19,'','christelle22@example.org','2021-05-29 05:19:05','female','users/YGChT9Zn31Z5cyqDQm8qhXpe.jpg','Imogene Lakin','jLWUbUXyPgsnjn','dorothea68','tmbBPE9flU','2020-06-27 12:38:11','2021-07-08 17:22:25'),
-	(20,'','schowalter.everett@example.org','2021-05-09 12:44:20','male','users/UihWrahMDY9NfqWhNjrAetso.jpg','Frederick Kuhlman','GE5DgkMeVnzaWNdn4nB9aXLW','atrantow','xkb0vvOl8F','2021-05-02 10:09:12','2021-07-08 17:22:25'),
-	(21,'','jrodriguez@example.net','2021-06-12 11:39:27','female','users/rR9ZvWyn1MD4B2RpWHV7N4Vg.jpg','Destiney Simonis','47KSZ3Wcu2slZwcz6jLAIR3','jairo97','KYSzG1LHLa','2021-05-29 06:11:01','2021-07-08 17:22:25'),
-	(22,'','beryl.bartoletti@example.com','2021-05-16 07:57:06','female','users/wKcnY3bH3gmzQHnkhvLVAwzb.jpg','Wava Homenick','iEmh3m1eUAoG4yVL','krajcik.lauren','IwUET3IsI3','2021-02-07 21:11:50','2021-07-08 17:22:25'),
-	(23,'','blindgren@example.org','2021-05-08 18:13:51','female','users/KZ2GvVQSzpPB6yOndaKgFLtz.jpg','Sonya Nolan','Sah6W9iSDQDeDjTII','doyle.alycia','86hcbH4iLH','2020-05-08 21:04:08','2021-07-08 17:22:25'),
-	(24,'','hettie67@example.net','2020-08-26 10:57:17','male','users/bX8KNT43ti56DovHcSW6tXh9.jpg','Deshaun Becker','lK9f0S6Qmy92WzaC2','anais83','CfalteOcCD','2020-05-15 13:21:29','2021-07-08 17:22:25'),
-	(25,'','rohan.leif@example.com','2021-04-19 15:17:03','male','users/cgg9KsuBBWwVA0AX19xnmmHH.jpg','Cameron Carter','3hmp8WkwW16C1','xchamplin','Xk7038znQ5','2021-04-07 14:40:00','2021-07-08 17:22:25');
+	(1,NULL,'','sawayn.zena@example.com','2021-04-22 10:00:21','male',1,'users/6x9yaoQiCnpGrntaG10Dbs1L.jpg','Camron Treutel','qEbeyxH5gNBiZYQ',NULL,'camron.treutel8365',NULL,'2021-01-16 01:27:22','2021-07-21 20:26:12'),
+	(2,NULL,'','gutkowski.bell@example.org','2021-06-12 02:59:16','male',1,'users/5FLp3EogCBPi01fXSUTnWkPw.jpg','Bartholome Moore','EtcvPUU7',NULL,'bartholome-moore3248',NULL,'2021-04-12 10:53:21','2021-07-21 20:26:12'),
+	(3,NULL,'','cjenkins@example.org','2020-08-24 00:34:19','male',1,'users/wRGA1AB5lJnjVOg2GKy99ELl.jpg','Lincoln Kiehn','VRzFIikiZqCR9S3lekc9MUy',NULL,'lincoln_kiehn1236',NULL,'2020-06-23 02:58:24','2021-07-21 20:26:12'),
+	(4,NULL,'','adolph77@example.com','2020-10-29 15:40:38','male',1,'users/kbjN3lXhoScAH0yrLjTrEYE7.jpg','Ellsworth Pagac','0jQGWKfXApj',NULL,'ellsworth_pagac4569',NULL,'2020-07-10 11:04:22','2021-07-21 20:26:12'),
+	(5,NULL,'','jconroy@example.net','2021-02-28 05:56:36','male',1,'users/RJQBY7jZhT7vYWFDunU11JJF.jpg','Noel Rohan','XuBD2pSW2iGege',NULL,'noel-rohan9154',NULL,'2020-10-25 18:38:42','2021-07-21 20:26:12'),
+	(6,NULL,'','madisen16@example.com','2020-09-11 22:28:43','female',1,'users/JE0ZT3ydORVyJM0qauVKlI9q.jpg','Kasandra Walsh','7sKLKX7KrNfs8',NULL,'kasandra-walsh8356',NULL,'2020-07-08 22:52:12','2021-07-21 20:26:12'),
+	(7,NULL,'','emmerich.morton@example.com','2020-08-20 18:02:43','male',1,'users/Ga8F7yNItlOL9M1WhcZQDzkB.jpg','Derek Thiel','oIiDYOSGFgeAb8',NULL,'derek-thiel1679',NULL,'2020-06-30 15:12:13','2021-07-21 20:26:12'),
+	(8,NULL,'','peggie.runolfsson@example.org','2021-02-09 05:57:10','male',1,'users/f61RXJz65hiyDa6vkStBanKJ.jpg','Olen Roberts','ALMhvyaD6b2jKOcQmaM',NULL,'olen_roberts7043',NULL,'2020-06-16 11:32:22','2021-07-21 20:26:12'),
+	(9,NULL,'','mreichel@example.net','2020-12-07 19:46:52','male',1,'users/gu4Wsc4hXhV5OM5mg6JBjEZM.jpg','Blair Ledner','2DJJn1gupZ6uimOJ',NULL,'blair-ledner4359',NULL,'2020-07-07 17:12:57','2021-07-21 20:26:12'),
+	(10,NULL,'','buckridge.keely@example.org','2021-06-14 06:19:14','male',1,'users/M5VZGUalpxlXRLT4x4drRyJO.jpg','Deontae White','IEU2r5DNRqrUP35XPo5DR2',NULL,'deontae-white7816',NULL,'2021-03-22 19:41:30','2021-07-21 20:26:12'),
+	(11,NULL,'','aarmstrong@example.org','2021-07-07 11:27:19','male',1,'users/cL0RTV7ByKPNRYhjkNmMw8mD.jpg','Scot Walker','okRSsXMj5s',NULL,'scot_walker7388',NULL,'2021-02-08 10:28:17','2021-07-21 20:26:12'),
+	(12,NULL,'','tito.adams@example.com','2021-05-20 10:18:00','female',1,'users/obz7WuWPDLIzD9Joq67oB2ld.jpg','Mayra Haag','asGhXefpRm58jZdnNFp',NULL,'mayra.haag3281',NULL,'2021-02-27 23:27:21','2021-07-21 20:26:12'),
+	(13,NULL,'','tobin91@example.org','2021-01-13 09:38:00','female',1,'users/0aVeYQKfOT4XR1uTSWMd9YKG.jpg','Marian Bernier','3GAacJYSGlnch',NULL,'marian-bernier8853',NULL,'2020-08-17 16:24:39','2021-07-21 20:26:12'),
+	(14,NULL,'','jay.ledner@example.org','2021-06-28 23:23:18','female',1,'users/FIa114GdhK2RxNIkvcFOKstM.jpg','Catharine Vandervort','HlCrgu5GtFIupdBzGNA',NULL,'catharine.vandervort6757',NULL,'2021-06-27 20:22:53','2021-07-21 20:26:12'),
+	(15,NULL,'','jewell31@example.net','2021-05-29 07:59:59','male',1,'users/2vvDwE5vfCzlCcYegz2UnmwH.jpg','Joaquin Schaden','qybxmH83OxD0beDzuWzeD',NULL,'joaquin_schaden3905',NULL,'2021-04-16 12:27:16','2021-07-21 20:26:12'),
+	(16,NULL,'','elyssa.hahn@example.com','2021-07-06 04:49:34','male',1,'users/ErSufdKqErOv0IEO1JhM35vd.jpg','Vinnie O\'Hara','Ee1Ix2ImOmvXt983ANOeY',NULL,'vinnie.o\'hara2748',NULL,'2021-04-25 15:06:27','2021-07-21 20:26:12'),
+	(17,NULL,'','mertz.garfield@example.net','2021-07-03 19:25:12','male',1,'users/eJRpDjQyMbBPUJqXIlAF0MvB.jpg','Hector Grant','GOvUUsQSZaJwAhbjA',NULL,'hector-grant3058',NULL,'2020-08-28 01:41:26','2021-07-21 20:26:12'),
+	(18,NULL,'','senger.madeline@example.com','2021-02-28 04:49:11','male',1,'users/ddci6YXPoYBRHYe4jvtOoGCT.jpg','Domenick Davis','XS1l25yCbaCah',NULL,'domenick_davis4315',NULL,'2021-01-09 18:05:23','2021-07-21 20:26:12'),
+	(19,NULL,'','otha.brekke@example.net','2021-07-15 21:31:56','female',1,'users/CtOSZ3p7UCFcKILWPqPHAcRb.jpg','Minerva Sporer','uiEJBCSU3YdiZslaVm',NULL,'minerva_sporer4134',NULL,'2021-06-28 09:58:27','2021-07-21 20:26:12'),
+	(20,NULL,'','ava60@example.com','2020-11-30 15:50:50','male',1,'users/1oD9uNPo5w0pnrwNrQuQb9rj.jpg','Garnet White','BnoAP2OrHc1htcmjVQM',NULL,'garnet.white442',NULL,'2020-08-14 20:07:51','2021-07-21 20:26:12'),
+	(21,NULL,'','nfadel@example.com','2021-05-25 11:17:38','male',1,'users/4kCiuNrsFIbGxjuHLHnPTO1v.jpg','Edward Kuhic','Yow0viAVyEg6zA',NULL,'edward.kuhic163',NULL,'2021-05-19 22:00:56','2021-07-21 20:26:12'),
+	(22,NULL,'','blanda.theresa@example.org','2021-03-18 13:53:56','male',1,'users/EcNfg7WHKnOEyxjq4NMebRBh.jpg','Santa Russel','Al6pj09NbfBikSk1buZJ0Ogi',NULL,'santa_russel5517',NULL,'2021-01-20 02:18:02','2021-07-21 20:26:12'),
+	(23,NULL,'','hickle.marlen@example.net','2021-07-07 10:55:12','female',1,'users/1BeBrS44shO8zKKRvPdfnmBC.jpg','Jenifer Senger','nyaBb4h52pd8gE',NULL,'jenifer_senger2041',NULL,'2020-10-05 16:00:01','2021-07-21 20:26:12'),
+	(24,NULL,'','josianne.franecki@example.org','2020-11-13 22:26:14','male',1,'users/cnNTHoL2zcMyfEfOgMa0VuWZ.jpg','Jamir Beer','eSq79dL4Tohm5eIMD5WPpl2',NULL,'jamir_beer6514',NULL,'2020-11-03 21:06:42','2021-07-21 20:26:12'),
+	(25,NULL,'','bahringer.grant@example.com','2021-06-29 11:14:22','male',1,'users/yCMJWCbJVnVFu8hqzeRNduXz.jpg','Jared Ryan','D7TGcwx8ofLLf7uTKiLBC',NULL,'jared-ryan9388',NULL,'2021-04-18 03:19:53','2021-07-21 20:26:12'),
+	(28,'BfrOCiiM95vOLWLSqBMAMfMkVYQR8qy7rNiNzuJNEVgRT22USfqu9g5SzVfR',NULL,'lnlance09@gmail.com','2021-07-25 16:34:49','male',NULL,'avatar/large/chris.jpg','wwwsr pp','logicandtruth1',NULL,'lnlance09','4318','2021-07-23 19:25:46','2021-07-25 16:34:49'),
+	(29,'xjCICyXhlpeYRVIGzA9NOPw3h7LTIdKRUY5bTbcRspX1oNB1RQnjl0c84kvq',NULL,'lnlance0922@gmail.com',NULL,'male',NULL,'avatar/large/chris.jpg','lance','logicandtruth1',NULL,'coinx','6539','2021-07-25 14:40:41','2021-07-25 14:40:41'),
+	(30,'1iw7BBrWg3QN02Ie4LTzsPvyQnDBJMpljkGcLes6UwauzHkCJai0k4Pt8hbG',NULL,'lnlance09eee@gmail.com',NULL,'male',NULL,'avatar/large/chris.jpg','lance','logicandtruth1',NULL,'coinxxx','9436','2021-07-25 14:46:52','2021-07-25 14:46:52');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

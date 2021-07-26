@@ -88,7 +88,7 @@ const Coin = ({ history, match }) => {
 			inverted={inverted}
 		>
 			<DisplayMetaTags page="coin" state={internalState} />
-			{loaded ? (
+			{loaded && traders.loaded ? (
 				<>
 					<Header as="h1" inverted={inverted}>
 						<Image

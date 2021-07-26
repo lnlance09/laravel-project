@@ -9,28 +9,6 @@ import logger from "use-reducer-logger"
 import PropTypes from "prop-types"
 import reducer from "./reducer"
 
-let predictionPoint = {
-	dataLabels: {
-		align: "right",
-		crop: false,
-		enabled: true,
-		format: "{y}",
-		overflow: true,
-		style: {
-			color: "white",
-			fontSize: "16px"
-		},
-		verticalAlign: "text-top",
-		x: 0,
-		y: -30
-	},
-	marker: {
-		enabled: true,
-		fillColor: "#fff",
-		radius: 4
-	}
-}
-
 const Chart = ({
 	addSeries = false,
 	coin,
@@ -50,6 +28,33 @@ const Chart = ({
 	)
 	const [loaded, setLoaded] = useState(false)
 	const [timeframe, setTimeframe] = useState(duration)
+
+	let predictionPoint = {
+		dataLabels: {
+			align: "right",
+			allowOverlap: true,
+			crop: true,
+			enabled: true,
+			formatter: function () {
+				return this.y.toFixed(4)
+			},
+			overflow: true,
+			shadow: false,
+			style: {
+				color: "white",
+				fontFamily: "Ubuntu Mono",
+				fontSize: "16px"
+			},
+			verticalAlign: "text-top",
+			x: 0,
+			y: -30
+		},
+		marker: {
+			enabled: true,
+			fillColor: inverted ? "#fff" : "#2185d0",
+			radius: 4
+		}
+	}
 
 	useEffect(() => {
 		getGraphData(coin.cmcId, timeframe)
@@ -100,15 +105,12 @@ const Chart = ({
 
 					if (startDate ? x > startDate * 1000 : false) {
 						points.pop()
-
 						points.push({
 							...predictionPoint,
 							x: startDate * 1000,
 							y: parseFloat(prediction.currentPrice)
 						})
-
 						points.push({ x, y })
-
 						points.push({
 							...predictionPoint,
 							x: prediction.date * 1000,
@@ -135,8 +137,14 @@ const Chart = ({
 						}
 
 						if (x > prediction.date * 1000) {
+							series.pop()
 							series.push({
 								...predictionPoint,
+								dataLabels: {
+									...predictionPoint.dataLabels,
+									x: 0,
+									y: 10
+								},
 								x,
 								y
 							})
@@ -156,7 +164,7 @@ const Chart = ({
 						series: {
 							color: "#54c8ff",
 							data: series,
-							fillOpacity: 0.1,
+							fillOpacity: 0.2,
 							turboThreshold: 2000
 						}
 					})
@@ -203,11 +211,9 @@ const Chart = ({
 					options={state.options}
 				/>
 			) : (
-				<>
-					<div className="centeredLoader">
-						<Loader active inverted={inverted} size="big" />
-					</div>
-				</>
+				<div className="centeredLoader">
+					<Loader active inverted={inverted} size="big" />
+				</div>
 			)}
 		</div>
 	)

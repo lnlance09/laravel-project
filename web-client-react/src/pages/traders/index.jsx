@@ -328,7 +328,7 @@ const Trader = ({ history, match }) => {
 
 					<Transition animation="scale" duration={500} visible={applicationVisible}>
 						<Container text>
-							<Segment inverted={inverted} raised>
+							<Segment basic inverted={inverted}>
 								<Application
 									auth={auth}
 									close={() => setApplicationVisible(false)}

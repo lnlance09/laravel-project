@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\ApplicationSent;
+use App\Events\PredictionCreated;
 use App\Listeners\SendApplicationNotification;
+use App\Listeners\SendPredictionNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -31,11 +33,9 @@ class EventServiceProvider extends ServiceProvider
     {
         Event::listen(
             ApplicationSent::class,
-            [SendApplicationNotification::class, 'handle']
+            [SendApplicationNotification::class, 'handle'],
+            PredictionCreated::class,
+            [SendPredictionNotification::class, 'handle']
         );
-
-        Event::listen(function (ApplicationSent $event) {
-            //
-        });
     }
 }

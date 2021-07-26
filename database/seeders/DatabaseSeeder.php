@@ -13,10 +13,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            CoinSeeder::class,
-            UserSeeder::class,
-            // PredictionSeeder::class,
-        ]);
+        if (env('SEED_WITH_IMPORTS', 0) == 1) {
+            $seeders = [
+                CoinSeeder::class,
+                UserSeeder::class,
+                PredictionSeeder::class
+            ];
+        } else {
+            $seeders = [
+                CoinSeeder::class,
+                UserSeeder::class
+            ];
+        }
+
+        $this->call($seeders);
     }
 }

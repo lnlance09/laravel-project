@@ -3,3 +3,4 @@
 *******************************/
 @invertedBackground: #090127;
 @invertedTextColor: #ffffff;
+@invertedActiveBackground: rgba(255, 255, 255, 0.15);

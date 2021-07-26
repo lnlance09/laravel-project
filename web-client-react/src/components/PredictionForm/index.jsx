@@ -66,7 +66,7 @@ const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inv
 				const { status } = error.response
 				const { errors } = error.response.data
 
-				if (status === 401) {
+				if (status === 401 || status === 403) {
 					errorMsg = error.response.data.message
 				} else {
 					if (typeof errors.targetDate !== "undefined") {

@@ -2,16 +2,15 @@
 
 namespace App\Events;
 
-use App\Http\Resources\Application as ApplicationResource;
+use App\Http\Resources\Prediction as PredictionResource;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ApplicationSent implements ShouldBroadcast
+class PredictionCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,17 +19,17 @@ class ApplicationSent implements ShouldBroadcast
      *
      * @var ApplicationResource
      */
-    public $application;
+    public $prediction;
 
     /**
      * Create a new event instance.
      *
-     * @param  ApplicationResource  $application
+     * @param  \App\Models\Application  $application
      * @return void
      */
-    public function __construct(ApplicationResource $application)
+    public function __construct(PredictionResource $prediction)
     {
-        $this->application = $application;
+        $this->prediction = $prediction;
     }
 
     /**
@@ -40,6 +39,6 @@ class ApplicationSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('users.' . $this->application->user->id);
+        return new Channel('publicPredictions');
     }
 }

@@ -16,7 +16,7 @@ import { RedditShareButton, TwitterShareButton } from "react-share"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
 import { dateDiff } from "utils/dateFunctions"
-import { setIconColor } from "utils/textFunctions"
+import { setIconColor, setIconName } from "utils/textFunctions"
 import axios from "axios"
 import Chart from "components/Chart"
 import DefaultLayout from "layouts/default"
@@ -35,11 +35,13 @@ const toastConfig = getConfig()
 toast.configure(toastConfig)
 
 const Prediction = ({ history, match }) => {
-	const { state } = useContext(ThemeContext)
+	const { dispatch, state } = useContext(ThemeContext)
 	const { inverted } = state
 	const { slug } = match.params
+	const params = new URLSearchParams(window.location.search)
+	const clear = params.get("clear")
 
-	const [internalState, dispatch] = useReducer(
+	const [internalState, dispatchInternal] = useReducer(
 		process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
 		initialState
 	)
@@ -51,7 +53,7 @@ const Prediction = ({ history, match }) => {
 				.get(`${process.env.REACT_APP_BASE_URL}predictions/${slug}`)
 				.then(async (response) => {
 					const prediction = response.data.data
-					dispatch({
+					dispatchInternal({
 						type: "GET_PREDICTION",
 						prediction
 					})
@@ -61,8 +63,19 @@ const Prediction = ({ history, match }) => {
 				})
 		}
 
+		if (clear === "1") {
+			clearNotification(slug)
+		}
+
 		getPrediction(slug)
 	}, [slug])
+
+	const clearNotification = (slug) => {
+		dispatch({
+			type: "CLEAR_NOTIFICATION",
+			id: parseInt(slug, 10)
+		})
+	}
 
 	const getDuration = () => {
 		const { createdAt, targetDate } = prediction
@@ -165,7 +178,7 @@ const Prediction = ({ history, match }) => {
 					<Segment basic inverted={inverted} style={{ paddingLeft: 0, paddingRight: 0 }}>
 						<List divided inverted={inverted} relaxed="very" size="big">
 							<List.Item>
-								Status{" "}
+								Status
 								<Label
 									basic
 									className={inverted ? "inverted" : ""}
@@ -173,11 +186,12 @@ const Prediction = ({ history, match }) => {
 									horizontal
 									size="large"
 								>
+									<Icon name={setIconName(status)} />
 									{status}
 								</Label>
 							</List.Item>
 							<List.Item>
-								Target Date{" "}
+								Target Date
 								<Label
 									basic
 									className={inverted ? "inverted" : ""}
@@ -189,7 +203,7 @@ const Prediction = ({ history, match }) => {
 								</Label>
 							</List.Item>
 							<List.Item>
-								Original Price{" "}
+								Original Price
 								<Label
 									basic
 									className={inverted ? "inverted" : ""}
@@ -201,7 +215,7 @@ const Prediction = ({ history, match }) => {
 								</Label>
 							</List.Item>
 							<List.Item>
-								Prediction Price{" "}
+								Prediction Price
 								<Label
 									basic
 									className={inverted ? "inverted" : ""}
@@ -214,38 +228,30 @@ const Prediction = ({ history, match }) => {
 							</List.Item>
 							<List.Item>
 								Actual price
-								{status === "Pending" ? (
-									<span style={{ float: "right" }}>N/A</span>
-								) : (
-									<Label
-										basic
-										className={inverted ? "inverted" : ""}
-										color="violet"
-										horizontal
-										size="large"
-									>
-										${prediction.actualPrice}
-									</Label>
-								)}
+								<Label
+									basic
+									className={inverted ? "inverted" : ""}
+									color="violet"
+									horizontal
+									size="large"
+								>
+									{status === "Pending" ? "N/A" : prediction.actualPrice}
+								</Label>
 							</List.Item>
 							<List.Item>
-								Margin of error{" "}
-								{status === "Pending" ? (
-									<span style={{ float: "right" }}>N/A</span>
-								) : (
-									<Label
-										basic
-										className={inverted ? "inverted" : ""}
-										color="teal"
-										horizontal
-										size="large"
-									>
-										{prediction.margin}%
-									</Label>
-								)}
+								Margin of error
+								<Label
+									basic
+									className={inverted ? "inverted" : ""}
+									color="teal"
+									horizontal
+									size="large"
+								>
+									{status === "Pending" ? "N/A" : `${prediction.margin}%`}
+								</Label>
 							</List.Item>
 							<List.Item>
-								Prediction length{" "}
+								Prediction length
 								<Label
 									basic
 									className={inverted ? "inverted" : ""}

@@ -10,9 +10,35 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
+
+    const PROTECTED_USERNAMES = [
+        'about',
+        'all',
+        'applications',
+        'apply',
+        'coin',
+        'coins',
+        'contact',
+        'create',
+        'follow',
+        'forgot',
+        'login',
+        'options',
+        'prediction',
+        'predictions',
+        'privacy',
+        'profilePic',
+        'rules',
+        'sitemap',
+        'terms',
+        'trader',
+        'traders',
+        'unfollow',
+        'verify'
+    ];
 
     protected $accuracy = 0;
 
@@ -30,6 +56,7 @@ class User extends Authenticatable
         'bio',
         'name',
         'email',
+        // 'email_verified_at',
         'gender',
         'img',
         'password',
@@ -43,7 +70,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        // 'email_verified_at',
+        'email_verified_at',
         'gender',
         'password',
         'remember_token',

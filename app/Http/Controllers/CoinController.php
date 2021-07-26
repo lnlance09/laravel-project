@@ -10,7 +10,6 @@ use App\Http\Resources\UserCollection;
 use App\Models\Coin;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class CoinController extends Controller
 {

@@ -150,22 +150,28 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 			})
 			.catch((error) => {
 				let errorMsg = ""
+
+				const { status } = error.response
 				const { errors } = error.response.data
 
-				if (typeof errors.username !== "undefined") {
-					errorMsg = errors.username[0]
-				}
+				if (status === 401) {
+					errorMsg = error.response.data.message
+				} else {
+					if (typeof errors.username !== "undefined") {
+						errorMsg = errors.username[0]
+					}
 
-				if (typeof errors.name !== "undefined") {
-					errorMsg = errors.name[0]
-				}
+					if (typeof errors.name !== "undefined") {
+						errorMsg = errors.name[0]
+					}
 
-				if (typeof errors.password !== "undefined") {
-					errorMsg = errors.password[0]
-				}
+					if (typeof errors.password !== "undefined") {
+						errorMsg = errors.password[0]
+					}
 
-				if (typeof errors.email !== "undefined") {
-					errorMsg = errors.email[0]
+					if (typeof errors.email !== "undefined") {
+						errorMsg = errors.email[0]
+					}
 				}
 
 				setLoadingRegistration(false)
@@ -255,8 +261,8 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 				<Transition animation="scale" duration={500} visible={passwordReset}>
 					<Header inverted={inverted} size="large" textAlign="center">
 						<Header.Content>
-							<Icon color="green" inverted={inverted} name="check mark" /> An email
-							has been sent to you
+							<Icon color="green" inverted={inverted} name="checkmark" /> An email has
+							been sent to you
 						</Header.Content>
 					</Header>
 				</Transition>

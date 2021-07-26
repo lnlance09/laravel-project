@@ -30,7 +30,6 @@ class User extends JsonResource
         }
 
         return [
-            // 'accuracy' => $this->accuracy,
             'accuracy' => $activeCount === 0 ? 0 : ($correctCount / $activeCount) * 100,
             'bio' => empty($this->bio) ? 'Apparently, this trader prefers to keep an air of mystery about them.' : $this->bio,
             'correctPredictionsCount' => $correctCount,

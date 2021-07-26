@@ -23,29 +23,6 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
-    const PROTECTED_USERNAMES = [
-        'all',
-        'about',
-        'apply',
-        'coin',
-        'coins',
-        'contact',
-        'create',
-        'follow',
-        'forgot',
-        'login',
-        'options',
-        'prediction',
-        'predictions',
-        'privacy',
-        'profilePic',
-        'terms',
-        'trader',
-        'traders',
-        'unfollow',
-        'verify'
-    ];
-
     /**
      * Instantiate a new controller instance.
      *
@@ -115,6 +92,7 @@ class UserController extends Controller
         $coinId = $request->input('coin');
         $email = $request->input('email');
         $name = $request->input('name');
+        $portfolio = $request->input('portfolio');
         $time = $request->input('time');
         $tx = $request->input('tx');
         $userId = $request->input('user');
@@ -131,9 +109,16 @@ class UserController extends Controller
             'years' => $years
         ]);
         $application->refresh();
-        $application = Application::with(['coin', 'user'])
+        $application = Application::with(['coin', 'portfolio', 'user'])
             ->where('id', $application->id)
             ->first();
+
+        for ($i = 0; $i < count($portfolio); $i++) {
+            $application->portfolio()->create([
+                'coin_id' => $portfolio[$i]
+            ]);
+            $application->refresh();
+        }
 
         ApplicationSent::dispatch(new ApplicationResource($application));
     }
@@ -190,7 +175,7 @@ class UserController extends Controller
         $password = $request->input('password');
         $username = $request->input('username');
 
-        if (in_array(strtolower($username), self::PROTECTED_USERNAMES)) {
+        if (in_array(strtolower($username), User::PROTECTED_USERNAMES)) {
             return response([
                 'errors' => [
                     'username' => [
@@ -211,7 +196,13 @@ class UserController extends Controller
         ]);
         $user->refresh();
 
-        Mail::to($email)->send(new VerificationCode($user));
+        try {
+            Mail::to($email)->send(new VerificationCode($user));
+        } catch (\Exception $e) {
+            return response([
+                'message' => 'Error sending confirmation email'
+            ], 401);
+        }
 
         return response()->json([
             'bearer' => $user->api_token,
@@ -257,21 +248,28 @@ class UserController extends Controller
         $email = $request->input('email');
         $user = User::where('email', $email)->first();
 
-        if ($user) {
-            $rememberToken = Str::random(10);
-            $user->remember_token = $rememberToken;
-            $user->save();
-            $user->refresh();
-
-            Mail::to($email)->send(new ForgotPassword($user));
+        if (empty($user)) {
             return response([
-                'message' => 'Success'
-            ]);
+                'message' => 'No user found'
+            ], 401);
+        }
+
+        $rememberToken = Str::random(10);
+        $user->remember_token = $rememberToken;
+        $user->save();
+        $user->refresh();
+
+        try {
+            Mail::to($email)->send(new ForgotPassword($user));
+        } catch (\Exception $e) {
+            return response([
+                'message' => 'Error sending recovery email'
+            ], 401);
         }
 
         return response([
-            'message' => 'No user found'
-        ], 401);
+            'message' => 'Success'
+        ]);
     }
 
     /**
@@ -304,6 +302,10 @@ class UserController extends Controller
                 'message' => 'Incorrect password'
             ], 401);
         }
+
+        $user->api_token = Str::random(60);
+        $user->save();
+        $user->refresh();
 
         return response()->json([
             'bearer' => $user->api_token,
@@ -373,17 +375,19 @@ class UserController extends Controller
         ]);
 
         $user = $request->user();
+        $code = $request->input('code');
 
-        if ($user->verification_code === $request->input('code')) {
-            $user->email_verified_at = now();
-            $user->save();
-            return response()->json([
-                'verify' => false
-            ]);
+        if ($user->verification_code != $code) {
+            return response([
+                'message' => 'That code is incorrect'
+            ], 401);
         }
 
-        return response([
-            'message' => 'That code is incorrect'
-        ], 401);
+        $user->email_verified_at = now();
+        $user->save();
+
+        return response()->json([
+            'verify' => false
+        ]);
     }
 }

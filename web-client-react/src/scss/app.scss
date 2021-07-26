@@ -111,6 +111,53 @@ body {
 			width: 100% !important;
 		}
 
+		&.applicationsPage {
+			.messagesContainer {
+				&.inverted {
+					border: solid 1px rgba(55, 55, 55, 0.65);
+				}
+
+				.ui.list.divided {
+					.item {
+						.label {
+							float: right;
+						}
+					}
+				}
+
+				.centeredMsg {
+					align-items: center;
+					display: flex;
+					justify-content: center;;
+					min-height: 300px;
+				}
+
+				.items {
+					.item {
+						cursor: pointer;
+						padding: 21px 12px !important;
+
+						&:hover {
+							background: rgba(140, 140, 140, 0.1);
+						}
+
+						&.selected {
+							background: rgba(150, 150, 150, 0.1);
+						}
+					}
+				}
+
+				textarea.inverted {
+					background: $invertedBackgroundColor;
+					border: solid 1px rgba(255, 255, 255, 0.15) !important;
+					box-shadow: none !important;
+					caret-color: $white !important;
+					color: $white;
+					-webkit-box-shadow: 0 0 0 50px $invertedBackgroundColor inset !important;
+				}
+			}
+		}
+
 		.centeredLoader {
 			min-height: 300px;
 			position: relative;

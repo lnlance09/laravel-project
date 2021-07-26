@@ -1,4 +1,4 @@
-export const cashOptions = [
+let _cashOptions = [
 	{
 		key: "lessThan50k",
 		name: "lessThan50k",
@@ -31,7 +31,14 @@ export const cashOptions = [
 	}
 ]
 
-export const timeOptions = [
+export const cashOptions = _cashOptions
+
+export const getCashText = (value) => {
+	const options = _cashOptions.filter((item) => item.value === parseInt(value, 10))
+	return options.length === 0 ? null : options[0].text
+}
+
+let _timeOptions = [
 	{
 		key: "shortTerm",
 		name: "shortTerm",
@@ -52,7 +59,14 @@ export const timeOptions = [
 	}
 ]
 
-export const yearsOptions = [
+export const timeOptions = _timeOptions
+
+export const getTimeText = (value) => {
+	const options = _timeOptions.filter((item) => item.value === value)
+	return options.length === 0 ? null : options[0].text
+}
+
+export const _yearsOptions = [
 	{
 		key: "lessThanYear",
 		name: "lessThanYear",
@@ -78,3 +92,10 @@ export const yearsOptions = [
 		value: 3
 	}
 ]
+
+export const yearsOptions = _yearsOptions
+
+export const getYearsText = (value) => {
+	const options = _yearsOptions.filter((item) => item.value === parseInt(value, 10))
+	return options.length === 0 ? null : options[0].text
+}
