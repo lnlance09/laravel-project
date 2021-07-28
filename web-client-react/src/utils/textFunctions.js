@@ -17,6 +17,10 @@ export const formatPlural = (count, term) => {
 	return parseInt(count, 10) === 1 ? term : `${term}s`
 }
 
+export const formatExponent = (exp, precision = 8) => {
+	return parseFloat(Number(exp).toFixed(20), 20)
+}
+
 export const setIcon = (value) => {
 	return value === "asc" ? "arrow up" : value === "desc" ? "arrow down" : false
 }

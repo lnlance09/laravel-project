@@ -14,9 +14,8 @@ import Prediction from "pages/predictions"
 import Predictions from "pages/predictions/show"
 import Rules from "pages/rules"
 import ScrollToTop from "react-router-scroll-top"
+import Settings from "pages/settings"
 import Sitemap from "pages/sitemap"
-import SoundFile from "./sound.mp3"
-import SoundFileAlt from "./sound.ogg"
 import ThemeProvider from "components/ThemeProvider"
 import Trader from "pages/traders"
 import Traders from "pages/traders/show"
@@ -84,6 +83,8 @@ const App = () => {
 
 							<Route component={Rules} exact path="/rules" />
 
+							<Route component={Settings} exact path="/settings" />
+
 							<Route component={Sitemap} exact path="/sitemap" />
 
 							<Route
@@ -107,12 +108,6 @@ const App = () => {
 					</ScrollToTop>
 				</ThemeProvider>
 			</Router>
-
-			<audio id="sound" preload="auto">
-				<source src={SoundFile} type="audio/mpeg" />
-				<source src={SoundFileAlt} type="audio/ogg" />
-				<embed autostart="false" hidden loop={false} src={SoundFile} />
-			</audio>
 		</div>
 	)
 }

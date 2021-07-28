@@ -14,7 +14,7 @@ class AddCoinPercentageChangesColumns extends Migration
     public function up()
     {
         Schema::table('coins', function (Blueprint $table) {
-            $table->decimal('last_price', 16, 4)->after('max_supply')
+            $table->decimal('last_price', 16, 8)->after('max_supply')
                 ->nullable()
                 ->default(null);
             $table->decimal('percent_change_1h')->after('name')

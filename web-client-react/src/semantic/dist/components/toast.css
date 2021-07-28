@@ -145,10 +145,10 @@
   background: #cf9b0d;
 }
 .ui.toast-container .toast-box > .attached.progress.success .bar.bar.bar {
-  background: #15792d;
+  background: #157d46;
 }
 .ui.toast-container .toast-box > .attached.progress.error .bar.bar.bar {
-  background: #9c1a1a;
+  background: #c51433;
 }
 .ui.toast-container .toast-box > .attached.progress.neutral .bar.bar.bar {
   background: #d9d9d9;
@@ -399,11 +399,11 @@
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.toast.success {
-  background-color: #21ba45;
+  background-color: #20bf6b;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.toast.error {
-  background-color: #db2828;
+  background-color: #eb3b5a;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.toast.neutral {
@@ -525,11 +525,11 @@
 }
 .ui.inverted.primary.toast,
 .ui.toast-container .toast-box > .inverted.primary.attached.progress .bar {
-  background-color: #54C8FF;
+  background-color: #4b7bec;
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.secondary.toast {
-  background-color: #2185d0;
+  background-color: #3867d6;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.secondary.toast,
@@ -538,66 +538,66 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.red.toast {
-  background-color: #db2828;
+  background-color: #eb3b5a;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.red.toast,
 .ui.toast-container .toast-box > .inverted.red.attached.progress .bar {
-  background-color: #FF695E;
+  background-color: #fc5c65;
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.orange.toast {
-  background-color: #f2711c;
+  background-color: #fa8231;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.orange.toast,
 .ui.toast-container .toast-box > .inverted.orange.attached.progress .bar {
-  background-color: #FF851B;
+  background-color: #fd9644;
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.yellow.toast {
-  background-color: #fbbd08;
+  background-color: #f7b731;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.yellow.toast,
 .ui.toast-container .toast-box > .inverted.yellow.attached.progress .bar {
-  background-color: #FFE21F;
+  background-color: #fed330;
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.olive.toast {
-  background-color: #b5cc18;
+  background-color: #6ab04c;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.olive.toast,
 .ui.toast-container .toast-box > .inverted.olive.attached.progress .bar {
-  background-color: #D9E778;
+  background-color: #badc58;
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.green.toast {
-  background-color: #21ba45;
+  background-color: #20bf6b;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.green.toast,
 .ui.toast-container .toast-box > .inverted.green.attached.progress .bar {
-  background-color: #2ECC40;
+  background-color: #26de81;
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.teal.toast {
-  background-color: #00b5ad;
+  background-color: #0fb9b1;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.teal.toast,
 .ui.toast-container .toast-box > .inverted.teal.attached.progress .bar {
-  background-color: #6DFFFF;
+  background-color: #2bcbba;
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.blue.toast {
-  background-color: #2185d0;
+  background-color: #3867d6;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.blue.toast,
 .ui.toast-container .toast-box > .inverted.blue.attached.progress .bar {
-  background-color: #54C8FF;
+  background-color: #4b7bec;
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.violet.toast {
@@ -610,12 +610,12 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.purple.toast {
-  background-color: #a333c8;
+  background-color: #8854d0;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.purple.toast,
 .ui.toast-container .toast-box > .inverted.purple.attached.progress .bar {
-  background-color: #DC73FF;
+  background-color: #a55eea;
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.pink.toast {
@@ -637,12 +637,12 @@
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.grey.toast {
-  background-color: #767676;
+  background-color: #a5b1c2;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.grey.toast,
 .ui.toast-container .toast-box > .inverted.grey.attached.progress .bar {
-  background-color: #DCDDDE;
+  background-color: #d1d8e0;
   color: rgba(0, 0, 0, 0.87);
 }
 .ui.black.toast {

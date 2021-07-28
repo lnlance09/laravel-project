@@ -17,11 +17,31 @@
 @grey           : #767676;
 @black          : #1b1c1d;
 
-@fontName          : 'Ubuntu Mono';
+@blue: #3867d6;
+@green: #20bf6b;
+@orange: #fa8231;
+@yellow: #f7b731;
+@red: #eb3b5a;
+@purple: #8854d0;
+@teal: #0fb9b1;
+@olive: #6ab04c;
+@grey: #a5b1c2;
+
+@lightBlue: #4b7bec;
+@lightGreen: #26de81;
+@lightOrange: #fd9644;
+@lightYellow: #fed330;
+@lightRed: #fc5c65;
+@lightPurple: #a55eea;
+@lightTeal: #2bcbba;
+@lightOlive: #badc58;
+@lightGrey: #d1d8e0;
+
+@fontName          : 'JetBrains Mono';
 @fontSmoothing     : antialiased;
 @googleFontFamily  : 'Anton';
 
-@googleFontName    : 'Ubuntu+Mono';
+@googleFontName    : 'JetBrains+Mono';
 @importGoogleFonts : true;
 @googleFontSizes   : '';
 @googleDisplay     : 'swap';

@@ -97,9 +97,9 @@ const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inv
 				<Form.Group widths="equal">
 					<Form.Field>
 						<div className={`ui labeled input ${inverted ? "inverted" : ""}`}>
-							<div className="ui basic label label">$</div>
+							<div className="ui basic label">$</div>
 							<NumberFormat
-								decimalScale={2}
+								decimalScale={price > 1 ? 2 : 8}
 								onValueChange={(values) => {
 									const { value } = values
 									setPrice(value)
@@ -178,7 +178,6 @@ const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inv
 				content="Predict"
 				disabled={!formIsValid}
 				fluid
-				inverted={inverted}
 				loading={loading}
 				onClick={() => {
 					if (auth) {

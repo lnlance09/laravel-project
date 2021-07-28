@@ -229,18 +229,15 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 
 	return (
 		<div className="authComponent">
-			<Header as="h1" inverted={inverted} size="huge">
-				{headerText}
-			</Header>
+			<Header as="h1" className="massive" content={headerText} inverted={inverted} />
 
 			<Segment basic className="authSegment" inverted={inverted}>
 				{forgot && (
 					<Form inverted={inverted} onSubmit={submitForgotPassword} size={size}>
 						<Form.Field>
 							<Input
-								icon="mail"
-								iconPosition="left"
 								inverted={inverted}
+								label="email"
 								onChange={(e, { value }) => setForgotEmail(value)}
 								placeholder="Enter your email"
 								value={forgotEmail}
@@ -272,6 +269,7 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 						<Form.Field>
 							<Input
 								inverted={inverted}
+								label="code"
 								maxLength={4}
 								onChange={(e, { value }) => setVerificationCode(value)}
 								placeholder="Verification code"
@@ -294,6 +292,7 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 						<Form.Field>
 							<Input
 								inverted={inverted}
+								label="email"
 								onChange={(e, { value }) => {
 									setEmail(value)
 								}}
@@ -304,6 +303,7 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 						<Form.Field>
 							<Input
 								inverted={inverted}
+								label="pass"
 								onChange={(e, { value }) => {
 									setPassword(value)
 								}}
@@ -332,6 +332,7 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 							<Form.Field>
 								<Input
 									inverted={inverted}
+									label="email"
 									onChange={(e, { value }) => {
 										setRegEmail(value)
 									}}
@@ -342,6 +343,7 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 							<Form.Field>
 								<Input
 									inverted={inverted}
+									label="pass"
 									onChange={(e, { value }) => {
 										setRegPassword(value)
 									}}
@@ -354,6 +356,7 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 								<Input
 									autoComplete="off"
 									inverted={inverted}
+									label="name"
 									onChange={(e, { value }) => {
 										setName(value)
 									}}
@@ -364,6 +367,7 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 							<Form.Field>
 								<Input
 									inverted={inverted}
+									label="@"
 									onChange={(e, { value }) => {
 										setUsername(value)
 									}}

@@ -27,13 +27,29 @@ class PredictionFactory extends Factory
         $coin = current(Coin::all()->random(1)->toArray());
         $user = current(User::all()->random(1)->toArray());
 
+        $createdAt = $faker->dateTimeBetween('-35 minutes', '-5 minutes');
+        $currentPrice = (float) Coin::getPriceAtTimeCMC($coin['cmc_id'], $createdAt->getTimestamp());
+        $targetDate = $faker->dateTimeBetween('+14 days', '+30 months');
+
+        $margin = mt_rand(51, 5000) / 10;
+        if (mt_rand(1, 10) > 7) {
+            $margin = mt_rand(-900, -50) / 10;
+        }
+
+        // TODO: find out default values
+        if ($margin > 0) {
+            $predictionPrice = '';
+        }
+
         return [
+            'actual_price' => null,
             'coin_id' => $coin['id'],
-            'current_price' => $faker->numberBetween(1000000, 9999999999),
-            'margin' => rand(1, 4000) / 10,
-            'prediction_price' => $faker->numberBetween(1000000, 9999999999),
-            'status' => 'Completed',
-            'target_date' => $faker->dateTimeBetween('-6 months', '-7 days'),
+            'created_at' => $createdAt,
+            'current_price' => $currentPrice,
+            'margin' => null,
+            // 'prediction_price' => $predictionPrice,
+            'status' => 'Pending',
+            'target_date' => $targetDate,
             'user_id' => $user['id']
         ];
     }

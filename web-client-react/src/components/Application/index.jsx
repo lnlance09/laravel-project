@@ -131,9 +131,7 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 	const BasicQuestions = (
 		<Form inverted={inverted} size="large">
 			<Form.Field>
-				<Header as="p" inverted={inverted} size="small">
-					What coin would you like me to review?
-				</Header>
+				<label>What coin would you like me to review?</label>
 				<Dropdown
 					className={inverted ? "inverted" : null}
 					fluid
@@ -145,9 +143,7 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 				/>
 			</Form.Field>
 			<Form.Field>
-				<Header as="p" inverted={inverted} size="small">
-					What time frame?
-				</Header>
+				<label>What time frame?</label>
 				<Dropdown
 					className={inverted ? "inverted" : null}
 					fluid
@@ -173,9 +169,7 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 			<Form inverted={inverted} size="large">
 				<Form.Group widths="equal">
 					<Form.Field>
-						<Header as="p" inverted={inverted} size="small">
-							How long have you been in crypto?
-						</Header>
+						<label>How long have you been in crypto?</label>
 						<Dropdown
 							className={inverted ? "inverted" : null}
 							fluid
@@ -187,9 +181,7 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 						/>
 					</Form.Field>
 					<Form.Field>
-						<Header as="p" inverted={inverted} size="small">
-							How much have you made in crypto?
-						</Header>
+						<label>How much have you made in crypto?</label>
 						<Dropdown
 							className={inverted ? "inverted" : null}
 							fluid
@@ -202,9 +194,7 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 					</Form.Field>
 				</Form.Group>
 				<Form.Field>
-					<Header as="p" inverted={inverted} size="small">
-						What other coins do you like for your portfolio?
-					</Header>
+					<label>What other coins do you like for your portfolio?</label>
 					<Dropdown
 						className={inverted ? "inverted" : null}
 						fluid
@@ -217,10 +207,9 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 					/>
 				</Form.Field>
 				<Button
+					animated
 					color="blue"
-					content="Next"
 					fluid
-					inverted={inverted}
 					onClick={() => {
 						if (auth) {
 							setPage(3)
@@ -229,7 +218,12 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 						}
 					}}
 					size="large"
-				/>
+				>
+					<Button.Content visible>Next</Button.Content>
+					<Button.Content hidden>
+						<Icon name="arrow right" />
+					</Button.Content>
+				</Button>
 			</Form>
 		</>
 	)
@@ -257,10 +251,9 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 					/>
 				</Form.Field>
 				<Button
+					animated
 					color="blue"
-					content="Next"
 					fluid
-					inverted={inverted}
 					onClick={() => {
 						if (name.length < 3) {
 							toast.error("Name is not long enough")
@@ -275,7 +268,12 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 						setPage(3)
 					}}
 					size="large"
-				/>
+				>
+					<Button.Content visible>Next</Button.Content>
+					<Button.Content hidden>
+						<Icon name="arrow right" />
+					</Button.Content>
+				</Button>
 			</Form>
 		</>
 	)
@@ -307,7 +305,6 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 					content="Complete"
 					disabled={!isValidTxCode(txCode)}
 					fluid
-					inverted={inverted}
 					onClick={sendApplication}
 					size="large"
 				/>

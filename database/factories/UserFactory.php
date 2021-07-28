@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Coin;
 use App\Models\Prediction;
 use App\Models\User;
+use App\Models\Wallet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +29,14 @@ class UserFactory extends Factory
     {
         return $this->afterMaking(function (User $user) {
         })->afterCreating(function (User $user) {
-            $totalCount = mt_rand(5, 30);
+            // Create wallet
+            Wallet::factory()->create([
+                'primary' => true,
+                'user_id' => $user->id
+            ]);
+
+            // Create predictions
+            $totalCount = mt_rand(3, 12);
             $percentCorrect = mt_rand(20, 80) / 100;
             $correctCount = $totalCount * $percentCorrect;
             $incorrectCount = $totalCount - $correctCount;
@@ -67,14 +75,12 @@ class UserFactory extends Factory
 
             // price at target date
             $actualPrice = (float) Coin::getPriceAtTimeCMC($coinId, $targetDate);
-            if (!$actualPrice) {
+            // dump($actualPrice);
+            if (!$actualPrice || $actualPrice === 0) {
                 continue;
             }
 
             $predictionPrice = $actualPrice * (1 + ($margin / 100));
-            if ($margin < 0) {
-                // $predictionPrice = $actualPrice - ($actualPrice * abs($margin / 100));
-            }
 
             Prediction::factory()->create([
                 'actual_price' => $actualPrice,

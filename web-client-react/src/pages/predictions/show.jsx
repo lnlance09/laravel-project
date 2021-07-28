@@ -213,7 +213,7 @@ const Predictions = ({ history }) => {
 				<Grid.Column width={3}>
 					<Button
 						color="green"
-						content="Target Date"
+						content="Date"
 						fluid
 						icon={activeItem === "target_date" && setIcon(targetDate)}
 						inverted={inverted}
@@ -223,7 +223,7 @@ const Predictions = ({ history }) => {
 				</Grid.Column>
 				<Grid.Column width={3}>
 					<Button
-						color="violet"
+						color="purple"
 						content="Margin"
 						fluid
 						icon={activeItem === "margin" && setIcon(margin)}

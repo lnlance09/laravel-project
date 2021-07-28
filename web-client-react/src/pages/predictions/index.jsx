@@ -115,7 +115,7 @@ const Prediction = ({ history, match }) => {
 						<Header.Content>
 							{coin.symbol} to{" "}
 							<NumberFormat
-								decimalScale={2}
+								decimalScale={predictionPrice > 1 ? 2 : 8}
 								displayType={"text"}
 								prefix={"$"}
 								thousandSeparator
@@ -131,7 +131,6 @@ const Prediction = ({ history, match }) => {
 					<Chart
 						addSeries
 						coin={coin}
-						color="#2185d0"
 						containerProps={{ style: { height: "250px" } }}
 						duration={getDuration()}
 						hideYAxis
@@ -186,8 +185,7 @@ const Prediction = ({ history, match }) => {
 									horizontal
 									size="large"
 								>
-									<Icon name={setIconName(status)} />
-									{status}
+									<Icon name={setIconName(status)} /> {status}
 								</Label>
 							</List.Item>
 							<List.Item>

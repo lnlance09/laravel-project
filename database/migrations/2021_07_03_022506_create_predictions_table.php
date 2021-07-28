@@ -15,11 +15,11 @@ class CreatePredictionsTable extends Migration
     {
         Schema::create('predictions', function (Blueprint $table) {
             $table->id();
-            $table->decimal('actual_price', 16, 4)->nullable()->default(null);
+            $table->decimal('actual_price', 16, 8)->nullable()->default(null);
             $table->unsignedBigInteger('coin_id');
-            $table->decimal('current_price', 16, 4);
+            $table->decimal('current_price', 16, 8);
             $table->decimal('margin');
-            $table->decimal('prediction_price', 16, 4);
+            $table->decimal('prediction_price', 16, 8);
             $table->string('status')->default('Pending');
             $table->datetime('target_date');
             $table->unsignedBigInteger('user_id');

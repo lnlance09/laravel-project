@@ -71,6 +71,13 @@ export const DisplayMetaTags = ({ page, state }) => {
 				title: `Rules - ${siteName}`
 			}
 			break
+		case "settings":
+			metaTags = {
+				description,
+				img,
+				title: `Settings - ${siteName}`
+			}
+			break
 		case "signin":
 			metaTags = {
 				description,

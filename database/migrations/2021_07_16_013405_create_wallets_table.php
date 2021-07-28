@@ -16,8 +16,9 @@ class CreateWalletsTable extends Migration
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
             $table->string('address');
-            $table->string('secret');
-            $table->boolean('is_active')->default(true);
+            $table->boolean('primary')->default(false);
+            $table->string('private_key')->nullable()->default(null);
+            $table->string('public_key')->nullable()->default(null);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

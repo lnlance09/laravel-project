@@ -1,8 +1,8 @@
 const darkColor = "#090127"
 const lightColor = "#fff"
 
-const darkAreaColor = "#54c8ff"
-const lightAreaColor = "#2185d0"
+const darkAreaColor = "#4b7bec"
+const lightAreaColor = "#3867d6"
 
 const reducer = (state, action) => {
 	switch (action.type) {
@@ -15,7 +15,6 @@ const reducer = (state, action) => {
 					series: newSeries
 				}
 			}
-
 		case "HIDE_X_AXIS":
 			return {
 				...state,
@@ -69,7 +68,7 @@ const reducer = (state, action) => {
 							...state.options.series[0],
 							data: points,
 							fillOpacity: 0.1,
-							turboThreshold: 2000
+							turboThreshold: 4000
 						}
 					]
 				}
@@ -116,34 +115,6 @@ const reducer = (state, action) => {
 						area: {
 							...state.options.plotOptions.area,
 							color: newAreaColor
-						}
-					}
-				}
-			}
-		case "TOGGLE_X_AXIS":
-			return {
-				...state,
-				options: {
-					...state.options,
-					xAxis: {
-						...state.options.xAxis,
-						labels: {
-							...state.options.xAxis.labels,
-							enabled: !state.options.xAxis.labels.enabled
-						}
-					}
-				}
-			}
-		case "TOGGLE_Y_AXIS":
-			return {
-				...state,
-				options: {
-					...state.options,
-					yAxis: {
-						...state.options.yAxis,
-						labels: {
-							...state.options.yAxis.labels,
-							enabled: !state.options.yAxis.labels.enabled
 						}
 					}
 				}

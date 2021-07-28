@@ -1,6 +1,7 @@
 import "./style.scss"
 import { useEffect, useReducer, useState } from "react"
 import { Loader, Menu } from "semantic-ui-react"
+import { formatExponent } from "utils/textFunctions"
 import axios from "axios"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
@@ -36,13 +37,13 @@ const Chart = ({
 			crop: true,
 			enabled: true,
 			formatter: function () {
-				return this.y.toFixed(4)
+				return this.y > 1 ? this.y.toFixed(2) : this.y.toFixed(8)
 			},
 			overflow: true,
 			shadow: false,
 			style: {
 				color: "white",
-				fontFamily: "Ubuntu Mono",
+				fontFamily: "JetBrains Mono",
 				fontSize: "16px"
 			},
 			verticalAlign: "text-top",
@@ -51,7 +52,7 @@ const Chart = ({
 		},
 		marker: {
 			enabled: true,
-			fillColor: inverted ? "#fff" : "#2185d0",
+			fillColor: inverted ? "#fff" : "#3867d6",
 			radius: 4
 		}
 	}
@@ -100,7 +101,7 @@ const Chart = ({
 
 				for (let key in data) {
 					const x = key * 1000
-					const y = data[key]["v"][0]
+					const y = formatExponent(data[key]["v"][0])
 					points.push({ x, y })
 
 					if (startDate ? x > startDate * 1000 : false) {
@@ -108,8 +109,9 @@ const Chart = ({
 						points.push({
 							...predictionPoint,
 							x: startDate * 1000,
-							y: parseFloat(prediction.currentPrice)
+							y: prediction.currentPrice
 						})
+
 						points.push({ x, y })
 						points.push({
 							...predictionPoint,
@@ -131,7 +133,7 @@ const Chart = ({
 				if (addSeries) {
 					for (let key in data) {
 						const x = key * 1000
-						const y = data[key]["v"][0]
+						const y = formatExponent(data[key]["v"][0])
 						if (x > startDate * 1000 && x < prediction.date * 1000) {
 							series.push({ x, y })
 						}
@@ -142,6 +144,10 @@ const Chart = ({
 								...predictionPoint,
 								dataLabels: {
 									...predictionPoint.dataLabels,
+									marker: {
+										...predictionPoint.dataLabels.marker,
+										fillColor: "#fff"
+									},
 									x: 0,
 									y: 10
 								},
@@ -162,10 +168,9 @@ const Chart = ({
 					dispatch({
 						type: "ADD_SERIES",
 						series: {
-							color: "#54c8ff",
+							color: "#4b7bec",
 							data: series,
-							fillOpacity: 0.2,
-							turboThreshold: 2000
+							turboThreshold: 4000
 						}
 					})
 				}

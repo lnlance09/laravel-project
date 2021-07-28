@@ -40,7 +40,7 @@
 /* Header */
 .ui.message .header {
   display: block;
-  font-family: 'Ubuntu Mono', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: 'JetBrains Mono', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: bold;
   margin: -0.14285714em 0 0 0;
 }
@@ -396,41 +396,41 @@
 }
 .ui.secondary.message,
 .ui.attached.secondary.message {
-  box-shadow: 0 0 0 1px #2185d0 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #3867d6 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.secondary.message {
-  box-shadow: 0 0 0 1px #2185d0 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #3867d6 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.secondary.message .header {
   color: rgba(242, 242, 242, 0.9);
 }
 .ui.red.message {
   background-color: #FFE8E6;
-  color: #db2828;
+  color: #eb3b5a;
 }
 .ui.red.message,
 .ui.attached.red.message {
-  box-shadow: 0 0 0 1px #db2828 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #eb3b5a inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.red.message {
-  box-shadow: 0 0 0 1px #db2828 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #eb3b5a inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.red.message .header {
-  color: #c82121;
+  color: #e92447;
 }
 .ui.orange.message {
   background-color: #FFEDDE;
-  color: #f2711c;
+  color: #fa8231;
 }
 .ui.orange.message,
 .ui.attached.orange.message {
-  box-shadow: 0 0 0 1px #f2711c inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #fa8231 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.orange.message {
-  box-shadow: 0 0 0 1px #f2711c inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #fa8231 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.orange.message .header {
-  color: #e7640d;
+  color: #f97318;
 }
 .ui.yellow.message {
   background-color: #FFF8DB;
@@ -490,17 +490,17 @@
 }
 .ui.blue.message {
   background-color: #DFF0FF;
-  color: #2185d0;
+  color: #3867d6;
 }
 .ui.blue.message,
 .ui.attached.blue.message {
-  box-shadow: 0 0 0 1px #2185d0 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #3867d6 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.blue.message {
-  box-shadow: 0 0 0 1px #2185d0 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #3867d6 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.blue.message .header {
-  color: #1e77ba;
+  color: #2a5acb;
 }
 .ui.violet.message {
   background-color: #EAE7FF;
@@ -518,17 +518,17 @@
 }
 .ui.purple.message {
   background-color: #F6E7FF;
-  color: #a333c8;
+  color: #8854d0;
 }
 .ui.purple.message,
 .ui.attached.purple.message {
-  box-shadow: 0 0 0 1px #a333c8 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #8854d0 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.purple.message {
-  box-shadow: 0 0 0 1px #a333c8 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #8854d0 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.purple.message .header {
-  color: #922eb4;
+  color: #7a40cb;
 }
 .ui.pink.message {
   background-color: #FFE3FB;
@@ -560,17 +560,17 @@
 }
 .ui.grey.message {
   background-color: #F4F4F4;
-  color: #767676;
+  color: #a5b1c2;
 }
 .ui.grey.message,
 .ui.attached.grey.message {
-  box-shadow: 0 0 0 1px #767676 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #a5b1c2 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.grey.message {
-  box-shadow: 0 0 0 1px #767676 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #a5b1c2 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.grey.message .header {
-  color: #696969;
+  color: #96a4b8;
 }
 .ui.black.message {
   background-color: #1b1c1d;

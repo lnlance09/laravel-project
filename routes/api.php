@@ -4,6 +4,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CoinController;
 use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,13 +34,18 @@ Route::get('/predictions/{id}', [PredictionController::class, 'show']);
 
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/all', [UserController::class, 'all']);
+Route::get('/users/wallets', [WalletController::class, 'all'])->middleware(['auth:api', 'verified']);
 Route::get('/users/{username}', [UserController::class, 'show']);
-Route::get('/users/{username}/followers', [UserController::class, 'followers']);
 Route::post('/users/apply', [UserController::class, 'apply']);
+Route::post('/users/changePassword', [UserController::class, 'changePassword'])->middleware(['auth:api', 'verified']);
+Route::post('/users/checkUsername', [UserController::class, 'checkUsername'])->middleware(['auth:api', 'verified']);
 Route::post('/users/create', [UserController::class, 'create']);
-Route::post('/users/follow', [UserController::class, 'follow']);
 Route::post('/users/forgot', [UserController::class, 'forgot']);
 Route::post('/users/login', [UserController::class, 'login']);
-Route::post('/users/profilePic', [UserController::class, 'changeProfilePic'])->middleware('verified');
-Route::post('/users/unfollow', [UserController::class, 'unfollow']);
+Route::post('/users/profilePic', [UserController::class, 'changeProfilePic'])->middleware(['auth:api', 'verified']);
+Route::post('/users/update', [UserController::class, 'update'])->middleware(['auth:api', 'verified']);
 Route::post('/users/verify', [UserController::class, 'verify'])->middleware('auth:api');
+Route::post('/users/wallet', [WalletController::class, 'addWallet'])->middleware(['auth:api', 'verified']);
+
+Route::post('/wallet/create', [WalletController::class, 'create']);
+Route::post('/wallet/primary', [WalletController::class, 'primary'])->middleware(['auth:api', 'verified']);

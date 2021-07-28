@@ -408,12 +408,14 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 							) : (
 								<>
 									<Button
+										compact
 										content="Log In"
 										onClick={() => history.push("/login")}
 										secondary
 										size="large"
 									/>
 									<Button
+										compact
 										color="green"
 										content="Sign Up"
 										onClick={() => history.push("/login?type=join")}

@@ -125,7 +125,7 @@ const Traders = ({ history }) => {
 					</Grid.Column>
 					<Grid.Column width={3}>
 						<Button
-							color="orange"
+							color="green"
 							content="Accuracy"
 							fluid
 							icon={activeItem === "accuracy" && setIcon(accuracy)}

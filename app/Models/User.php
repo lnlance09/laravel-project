@@ -19,6 +19,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'all',
         'applications',
         'apply',
+        'changePassword',
+        'checkUsername',
         'coin',
         'coins',
         'contact',
@@ -32,12 +34,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'privacy',
         'profilePic',
         'rules',
+        'settings',
         'sitemap',
         'terms',
         'trader',
         'traders',
         'unfollow',
-        'verify'
+        'update',
+        'verify',
+        'wallet',
+        'wallets'
     ];
 
     protected $accuracy = 0;
@@ -56,7 +62,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'bio',
         'name',
         'email',
-        // 'email_verified_at',
+        'email_verified_at',
         'gender',
         'img',
         'password',
@@ -120,5 +126,15 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return $this->accuracy = ($correct / $total) * 100;
+    }
+
+    public function wallets()
+    {
+        return $this->hasMany(Wallet::class)->orderBy('primary', 'desc');
+    }
+
+    public function primaryWallet()
+    {
+        return $this->hasMany(Wallet::class)->where('primary', 1);
     }
 }

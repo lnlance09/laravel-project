@@ -123,6 +123,31 @@ class UserController extends Controller
         ApplicationSent::dispatch(new ApplicationResource($application));
     }
 
+    /**
+     * Login
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'currentPassword' => 'current_password:api',
+            'newPassword' => ['bail', 'required', Password::min(8)],
+            'confirmPassword' => ['bail', 'required', 'same:newPassword', Password::min(8)]
+        ]);
+
+        $password = $request->input('password');
+        $user = $request->user();
+        $user->password = $password;
+        $user->save();
+        $user->refresh();
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
     public function changeProfilePic(Request $request)
     {
         $request->validate([
@@ -153,6 +178,17 @@ class UserController extends Controller
             ->first();
 
         return new UserResource($user);
+    }
+
+    public function checkUsername(Request $request)
+    {
+        $request->validate([
+            'username' => 'bail|required|max:20|unique:users,username|alpha_dash'
+        ]);
+
+        return response()->json([
+            'available' => true
+        ]);
     }
 
     /**
@@ -359,7 +395,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user = $request->user();
+        $input = $request->all();
+        $user->fill($input)->save();
+
+        return response()->json([
+            'success' => true
+        ]);
     }
 
     /**

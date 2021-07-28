@@ -101,7 +101,7 @@ const Coin = ({ history, match }) => {
 							{coin.name}
 							<Header.Subheader>
 								<NumberFormat
-									decimalScale={2}
+									decimalScale={coin.lastPrice > 1 ? 2 : 8}
 									displayType={"text"}
 									prefix={"$"}
 									thousandSeparator
@@ -294,7 +294,6 @@ const Coin = ({ history, match }) => {
 											<>
 												<Image
 													centered
-													circular
 													className="topTraderImg"
 													data-for={`topTrader${i}`}
 													data-tip={tooltip}
@@ -303,6 +302,7 @@ const Coin = ({ history, match }) => {
 														history.push(`/${trader.username}`)
 													}
 													onError={(i) => (i.target.src = PlaceholderPic)}
+													rounded
 													src={trader.img}
 												/>
 												<ReactTooltip
@@ -331,11 +331,9 @@ const Coin = ({ history, match }) => {
 					<Divider hidden section />
 				</>
 			) : (
-				<>
-					<div className="centeredLoader">
-						<Loader active inverted={inverted} size="big" />
-					</div>
-				</>
+				<div className="centeredLoader">
+					<Loader active inverted={inverted} size="big" />
+				</div>
 			)}
 		</DefaultLayout>
 	)

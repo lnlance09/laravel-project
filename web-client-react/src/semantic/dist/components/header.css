@@ -19,7 +19,7 @@
   border: none;
   margin: calc(2rem - 0.1428571428571429em) 0 1rem;
   padding: 0 0;
-  font-family: 'Ubuntu Mono', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: 'JetBrains Mono', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: bold;
   line-height: 1.28571429em;
   text-transform: none;
@@ -357,22 +357,22 @@ a.ui.primary.header:hover {
   border-bottom: 2px solid #e03997;
 }
 .ui.inverted.primary.header.header.header {
-  color: #54C8FF;
+  color: #4b7bec;
 }
 a.ui.inverted.primary.header.header.header:hover {
-  color: #21b8ff;
+  color: #1355f1;
 }
 .ui.inverted.primary.dividing.header {
-  border-bottom: 2px solid #54C8FF;
+  border-bottom: 2px solid #4b7bec;
 }
 .ui.secondary.header {
-  color: #2185d0;
+  color: #3867d6;
 }
 a.ui.secondary.header:hover {
-  color: #2493e6;
+  color: #4674e1;
 }
 .ui.secondary.dividing.header {
-  border-bottom: 2px solid #2185d0;
+  border-bottom: 2px solid #3867d6;
 }
 .ui.inverted.secondary.header.header.header {
   color: #545454;
@@ -384,130 +384,130 @@ a.ui.inverted.secondary.header.header.header:hover {
   border-bottom: 2px solid #545454;
 }
 .ui.red.header {
-  color: #db2828;
+  color: #eb3b5a;
 }
 a.ui.red.header:hover {
-  color: #d01919;
+  color: #f21a40;
 }
 .ui.red.dividing.header {
-  border-bottom: 2px solid #db2828;
+  border-bottom: 2px solid #eb3b5a;
 }
 .ui.inverted.red.header.header.header {
-  color: #FF695E;
+  color: #fc5c65;
 }
 a.ui.inverted.red.header.header.header:hover {
-  color: #ff392b;
+  color: #ff2632;
 }
 .ui.inverted.red.dividing.header {
-  border-bottom: 2px solid #FF695E;
+  border-bottom: 2px solid #fc5c65;
 }
 .ui.orange.header {
-  color: #f2711c;
+  color: #fa8231;
 }
 a.ui.orange.header:hover {
-  color: #f26202;
+  color: #ff7213;
 }
 .ui.orange.dividing.header {
-  border-bottom: 2px solid #f2711c;
+  border-bottom: 2px solid #fa8231;
 }
 .ui.inverted.orange.header.header.header {
-  color: #FF851B;
+  color: #fd9644;
 }
 a.ui.inverted.orange.header.header.header:hover {
-  color: #e76b00;
+  color: #ff790f;
 }
 .ui.inverted.orange.dividing.header {
-  border-bottom: 2px solid #FF851B;
+  border-bottom: 2px solid #fd9644;
 }
 .ui.yellow.header {
-  color: #fbbd08;
+  color: #f7b731;
 }
 a.ui.yellow.header:hover {
-  color: #eaae00;
+  color: #ffb210;
 }
 .ui.yellow.dividing.header {
-  border-bottom: 2px solid #fbbd08;
+  border-bottom: 2px solid #f7b731;
 }
 .ui.inverted.yellow.header.header.header {
-  color: #FFE21F;
+  color: #fed330;
 }
 a.ui.inverted.yellow.header.header.header:hover {
-  color: #ebcd00;
+  color: #fbc700;
 }
 .ui.inverted.yellow.dividing.header {
-  border-bottom: 2px solid #FFE21F;
+  border-bottom: 2px solid #fed330;
 }
 .ui.olive.header {
-  color: #b5cc18;
+  color: #6ab04c;
 }
 a.ui.olive.header:hover {
-  color: #a7bd0d;
+  color: #5da340;
 }
 .ui.olive.dividing.header {
-  border-bottom: 2px solid #b5cc18;
+  border-bottom: 2px solid #6ab04c;
 }
 .ui.inverted.olive.header.header.header {
-  color: #D9E778;
+  color: #badc58;
 }
 a.ui.inverted.olive.header.header.header:hover {
-  color: #d2e745;
+  color: #addb26;
 }
 .ui.inverted.olive.dividing.header {
-  border-bottom: 2px solid #D9E778;
+  border-bottom: 2px solid #badc58;
 }
 .ui.green.header {
-  color: #21ba45;
+  color: #20bf6b;
 }
 a.ui.green.header:hover {
-  color: #16ab39;
+  color: #15b05e;
 }
 .ui.green.dividing.header {
-  border-bottom: 2px solid #21ba45;
+  border-bottom: 2px solid #20bf6b;
 }
 .ui.inverted.green.header.header.header {
-  color: #2ECC40;
+  color: #26de81;
 }
 a.ui.inverted.green.header.header.header:hover {
-  color: #1ea92e;
+  color: #14bd68;
 }
 .ui.inverted.green.dividing.header {
-  border-bottom: 2px solid #2ECC40;
+  border-bottom: 2px solid #26de81;
 }
 .ui.teal.header {
-  color: #00b5ad;
+  color: #0fb9b1;
 }
 a.ui.teal.header:hover {
-  color: #009c95;
+  color: #06a9a1;
 }
 .ui.teal.dividing.header {
-  border-bottom: 2px solid #00b5ad;
+  border-bottom: 2px solid #0fb9b1;
 }
 .ui.inverted.teal.header.header.header {
-  color: #6DFFFF;
+  color: #2bcbba;
 }
 a.ui.inverted.teal.header.header.header:hover {
-  color: #3affff;
+  color: #1ca798;
 }
 .ui.inverted.teal.dividing.header {
-  border-bottom: 2px solid #6DFFFF;
+  border-bottom: 2px solid #2bcbba;
 }
 .ui.blue.header {
-  color: #2185d0;
+  color: #3867d6;
 }
 a.ui.blue.header:hover {
-  color: #1678c2;
+  color: #2256d3;
 }
 .ui.blue.dividing.header {
-  border-bottom: 2px solid #2185d0;
+  border-bottom: 2px solid #3867d6;
 }
 .ui.inverted.blue.header.header.header {
-  color: #54C8FF;
+  color: #4b7bec;
 }
 a.ui.inverted.blue.header.header.header:hover {
-  color: #21b8ff;
+  color: #1355f1;
 }
 .ui.inverted.blue.dividing.header {
-  border-bottom: 2px solid #54C8FF;
+  border-bottom: 2px solid #4b7bec;
 }
 .ui.violet.header {
   color: #6435c9;
@@ -528,22 +528,22 @@ a.ui.inverted.violet.header.header.header:hover {
   border-bottom: 2px solid #A291FB;
 }
 .ui.purple.header {
-  color: #a333c8;
+  color: #8854d0;
 }
 a.ui.purple.header:hover {
-  color: #9627ba;
+  color: #7939d1;
 }
 .ui.purple.dividing.header {
-  border-bottom: 2px solid #a333c8;
+  border-bottom: 2px solid #8854d0;
 }
 .ui.inverted.purple.header.header.header {
-  color: #DC73FF;
+  color: #a55eea;
 }
 a.ui.inverted.purple.header.header.header:hover {
-  color: #cf40ff;
+  color: #8c28ed;
 }
 .ui.inverted.purple.dividing.header {
-  border-bottom: 2px solid #DC73FF;
+  border-bottom: 2px solid #a55eea;
 }
 .ui.pink.header {
   color: #e03997;
@@ -582,22 +582,22 @@ a.ui.inverted.brown.header.header.header:hover {
   border-bottom: 2px solid #D67C1C;
 }
 .ui.grey.header {
-  color: #767676;
+  color: #a5b1c2;
 }
 a.ui.grey.header:hover {
-  color: #838383;
+  color: #b4becc;
 }
 .ui.grey.dividing.header {
-  border-bottom: 2px solid #767676;
+  border-bottom: 2px solid #a5b1c2;
 }
 .ui.inverted.grey.header.header.header {
-  color: #DCDDDE;
+  color: #d1d8e0;
 }
 a.ui.inverted.grey.header.header.header:hover {
-  color: #c2c4c5;
+  color: #b1becd;
 }
 .ui.inverted.grey.dividing.header {
-  border-bottom: 2px solid #DCDDDE;
+  border-bottom: 2px solid #d1d8e0;
 }
 .ui.black.header {
   color: #1b1c1d;

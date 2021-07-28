@@ -1272,49 +1272,49 @@
 .ui.grid > .secondary.row,
 .ui.grid > .secondary.column,
 .ui.grid > .row > .secondary.column {
-  background-color: #2185d0;
+  background-color: #3867d6;
   color: #FFFFFF;
 }
 .ui.grid > .red.row,
 .ui.grid > .red.column,
 .ui.grid > .row > .red.column {
-  background-color: #db2828;
+  background-color: #eb3b5a;
   color: #FFFFFF;
 }
 .ui.grid > .orange.row,
 .ui.grid > .orange.column,
 .ui.grid > .row > .orange.column {
-  background-color: #f2711c;
+  background-color: #fa8231;
   color: #FFFFFF;
 }
 .ui.grid > .yellow.row,
 .ui.grid > .yellow.column,
 .ui.grid > .row > .yellow.column {
-  background-color: #fbbd08;
+  background-color: #f7b731;
   color: #FFFFFF;
 }
 .ui.grid > .olive.row,
 .ui.grid > .olive.column,
 .ui.grid > .row > .olive.column {
-  background-color: #b5cc18;
+  background-color: #6ab04c;
   color: #FFFFFF;
 }
 .ui.grid > .green.row,
 .ui.grid > .green.column,
 .ui.grid > .row > .green.column {
-  background-color: #21ba45;
+  background-color: #20bf6b;
   color: #FFFFFF;
 }
 .ui.grid > .teal.row,
 .ui.grid > .teal.column,
 .ui.grid > .row > .teal.column {
-  background-color: #00b5ad;
+  background-color: #0fb9b1;
   color: #FFFFFF;
 }
 .ui.grid > .blue.row,
 .ui.grid > .blue.column,
 .ui.grid > .row > .blue.column {
-  background-color: #2185d0;
+  background-color: #3867d6;
   color: #FFFFFF;
 }
 .ui.grid > .violet.row,
@@ -1326,7 +1326,7 @@
 .ui.grid > .purple.row,
 .ui.grid > .purple.column,
 .ui.grid > .row > .purple.column {
-  background-color: #a333c8;
+  background-color: #8854d0;
   color: #FFFFFF;
 }
 .ui.grid > .pink.row,
@@ -1344,7 +1344,7 @@
 .ui.grid > .grey.row,
 .ui.grid > .grey.column,
 .ui.grid > .row > .grey.column {
-  background-color: #767676;
+  background-color: #a5b1c2;
   color: #FFFFFF;
 }
 .ui.grid > .black.row,
