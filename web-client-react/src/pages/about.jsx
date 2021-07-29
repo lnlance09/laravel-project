@@ -1,4 +1,3 @@
-import { Button } from "semantic-ui-react"
 import { useContext } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import DefaultLayout from "layouts/default"

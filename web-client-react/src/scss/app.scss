@@ -215,6 +215,14 @@ body {
 					}
 				}
 			}
+
+			.centeredMsg {
+				align-items: center;
+				background:rgba(135, 135, 135, 0.15);
+				display: flex;
+				justify-content: center;;
+				min-height: 300px;
+			}
 		}
 
 		&.notFoundPage {
@@ -283,17 +291,17 @@ body {
 					padding-left: 0 !important;
 					padding-right: 0 !important;
 				}
+			}
 
-				.ui.list {
-					.item {
+			.ui.list {
+				.item {
+					.makePrimary {
+						display: none;
+					}
+
+					&:hover {
 						.makePrimary {
-							display: none;
-						}
-
-						&:hover {
-							.makePrimary {
-								display: block;
-							}
+							display: block;
 						}
 					}
 				}

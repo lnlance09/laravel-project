@@ -144,6 +144,8 @@ const Trader = ({ history, match }) => {
 			})
 	}
 
+	const isMyProfile = auth ? trader.id === user.id : false
+
 	const ProfilePic = () => {
 		if (auth && trader.id === user.id) {
 			return (
@@ -210,17 +212,21 @@ const Trader = ({ history, match }) => {
 										<Header as="p" inverted={inverted} size="small">
 											{trader.bio}
 										</Header>
-										<Button
-											className="getPredictionBtn"
-											color={
-												trader.predictionsReserved === 1 ? "pink" : "blue"
-											}
-											compact
-											content="Get a prediction"
-											icon="arrow right"
-											onClick={() => setApplicationVisible(true)}
-											style={{ display: "block" }}
-										/>
+										{!isMyProfile ? (
+											<Button
+												className="getPredictionBtn"
+												color={
+													trader.predictionsReserved === 1
+														? "pink"
+														: "blue"
+												}
+												compact
+												content="Get a prediction"
+												icon="arrow right"
+												onClick={() => setApplicationVisible(true)}
+												style={{ display: "block" }}
+											/>
+										) : null}
 										<List horizontal inverted={inverted} size="large">
 											<List.Item
 												as="a"
@@ -339,6 +345,7 @@ const Trader = ({ history, match }) => {
 										img: trader.img,
 										name: trader.name,
 										predictionsReserved: trader.predictionsReserved,
+										primaryWallet: trader.primaryWallet,
 										username: trader.username
 									}}
 								/>

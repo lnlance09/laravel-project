@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\Wallet as WalletResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class User extends JsonResource
@@ -42,7 +41,7 @@ class User extends JsonResource
             'pendingPredictionsCount' => $pendingCount,
             'predictionsCount' => $totalCount,
             'predictionsReserved' => $predictionsReserved,
-            'primaryWallet' => count($this->primaryWallet) === 0 ? null : new WalletResource($this->primaryWallet[0]),
+            'primaryWallet' => count($this->primaryWallet) === 0 ? null : $this->primaryWallet[0]->address,
             'username' => $this->username
         ];
     }

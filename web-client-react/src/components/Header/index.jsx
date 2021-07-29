@@ -328,6 +328,9 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 					Profile
 				</Dropdown.Item>
 				<Dropdown.Item onClick={() => history.push("/settings")}>Settings</Dropdown.Item>
+				<Dropdown.Item onClick={() => history.push("/settings?tab=wallets")}>
+					Wallets
+				</Dropdown.Item>
 				<Dropdown.Divider />
 				<Dropdown.Item onClick={logout}>Sign Out</Dropdown.Item>
 			</Dropdown.Menu>

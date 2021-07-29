@@ -11,6 +11,7 @@ use App\Mail\ForgotPassword;
 use App\Mail\VerificationCode;
 use App\Models\Application;
 use App\Models\User;
+use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -132,12 +133,12 @@ class UserController extends Controller
     public function changePassword(Request $request)
     {
         $request->validate([
-            'currentPassword' => 'current_password:api',
-            'newPassword' => ['bail', 'required', Password::min(8)],
-            'confirmPassword' => ['bail', 'required', 'same:newPassword', Password::min(8)]
+            'currentPassword' => ['required', new MatchOldPassword],
+            'newPassword' => ['required', Password::min(8)],
+            'confirmPassword' => ['same:newPassword']
         ]);
 
-        $password = $request->input('password');
+        $password = $request->input('newPassword');
         $user = $request->user();
         $user->password = $password;
         $user->save();
@@ -182,6 +183,15 @@ class UserController extends Controller
 
     public function checkUsername(Request $request)
     {
+        $username = $request->input('username', null);
+        $user = $request->user();
+
+        if ($username == $user->username) {
+            return response()->json([
+                'available' => true
+            ]);
+        }
+
         $request->validate([
             'username' => 'bail|required|max:20|unique:users,username|alpha_dash'
         ]);
@@ -397,6 +407,14 @@ class UserController extends Controller
     {
         $user = $request->user();
         $input = $request->all();
+
+        $username = $request->input('username', null);
+        if ($username ? $username != $user->username : false) {
+            $request->validate([
+                'username' => 'bail|required|max:20|unique:users,username|alpha_dash'
+            ]);
+        }
+
         $user->fill($input)->save();
 
         return response()->json([

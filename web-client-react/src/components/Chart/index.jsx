@@ -10,6 +10,9 @@ import logger from "use-reducer-logger"
 import PropTypes from "prop-types"
 import reducer from "./reducer"
 
+const red = "#eb3b5a"
+const green = "#20bf6b"
+
 const Chart = ({
 	addSeries = false,
 	coin,
@@ -78,6 +81,14 @@ const Chart = ({
 		})
 
 		if (color) {
+			dispatch({
+				type: "SET_COLOR",
+				color
+			})
+		}
+
+		if (includeRanges) {
+			const color = coin.percentages["24h"] > 0 ? green : red
 			dispatch({
 				type: "SET_COLOR",
 				color
@@ -168,8 +179,9 @@ const Chart = ({
 					dispatch({
 						type: "ADD_SERIES",
 						series: {
-							color: "#4b7bec",
+							color: "#26de81",
 							data: series,
+							fillOpacity: 0.7,
 							turboThreshold: 4000
 						}
 					})
@@ -190,6 +202,29 @@ const Chart = ({
 	const handleTimeChange = (e, { name }) => {
 		setTimeframe(name)
 		getGraphData(coin.cmcId, name)
+
+		let color = green
+
+		if (name === "1D") {
+			color = coin.percentages["24h"] > 0 ? green : red
+		}
+
+		if (name === "7D") {
+			color = coin.percentages["7d"] > 0 ? green : red
+		}
+
+		if (name === "1M") {
+			color = coin.percentages["30d"] > 0 ? green : red
+		}
+
+		if (name === "3M") {
+			color = coin.percentages["90d"] > 0 ? green : red
+		}
+
+		dispatch({
+			type: "SET_COLOR",
+			color
+		})
 	}
 
 	return (

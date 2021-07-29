@@ -211,11 +211,8 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 					color="blue"
 					fluid
 					onClick={() => {
-						if (auth) {
-							setPage(3)
-						} else {
-							setPage(2)
-						}
+						const page = auth ? 3 : 2
+						setPage(page)
 					}}
 					size="large"
 				>
@@ -284,7 +281,14 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 				<Header.Content>Transaction Info</Header.Content>
 			</Header>
 			<Header as="p" inverted={inverted} size="small">
-				Send ETH to:
+				Send ETH to:{" "}
+				<a
+					href={`https://etherscan.io/address/${user.primaryWallet}`}
+					target="_blank"
+					rel="noreferrer"
+				>
+					{user.primaryWallet}
+				</a>
 			</Header>
 			<Segment inverted={inverted} textAlign="center">
 				<div className="qrWrapper">
@@ -334,11 +338,8 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 						}
 
 						if (page === 3) {
-							if (auth) {
-								setPage(1)
-							} else {
-								setPage(2)
-							}
+							const newPage = auth ? 1 : 2
+							setPage(newPage)
 						}
 					}}
 					size="small"
@@ -369,6 +370,7 @@ Application.propTypes = {
 		img: PropTypes.string,
 		name: PropTypes.string,
 		predictionsReserved: PropTypes.number,
+		primaryWallet: PropTypes.string,
 		username: PropTypes.string
 	})
 }

@@ -67,7 +67,7 @@ const reducer = (state, action) => {
 						{
 							...state.options.series[0],
 							data: points,
-							fillOpacity: 0.1,
+							fillOpacity: 0.7,
 							turboThreshold: 4000
 						}
 					]

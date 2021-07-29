@@ -6,9 +6,10 @@ import {
 	Loader,
 	Placeholder,
 	Segment,
-	Statistic
+	Statistic,
+	Visibility
 } from "semantic-ui-react"
-import { useContext, useEffect, useReducer } from "react"
+import { useContext, useEffect, useReducer, useState } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import { formatNumber } from "utils/textFunctions"
 import { getConfig } from "options/toast"
@@ -22,6 +23,7 @@ import logger from "use-reducer-logger"
 import NumberFormat from "react-number-format"
 import PlaceholderPic from "images/images/image-square.png"
 import PredictionForm from "components/PredictionForm"
+import PredictionList from "components/PredictionList"
 import PropTypes from "prop-types"
 import ReactTooltip from "react-tooltip"
 import reducer from "reducers/coin"
@@ -41,6 +43,11 @@ const Coin = ({ history, match }) => {
 	)
 	const { coin, loaded, traders } = internalState
 
+	const [hasMore, setHasMore] = useState(false)
+	const [loading, setLoading] = useState(true)
+	const [loadingMore, setLoadingMore] = useState(false)
+	const [page, setPage] = useState(1)
+
 	useEffect(() => {
 		const getCoin = async (slug) => {
 			await axios
@@ -52,6 +59,7 @@ const Coin = ({ history, match }) => {
 						coin
 					})
 					getTraders(coin.id)
+					getPredictions(coin.id)
 				})
 				.catch(() => {
 					toast.error("There was an error")
@@ -60,6 +68,40 @@ const Coin = ({ history, match }) => {
 
 		getCoin(slug)
 	}, [slug])
+
+	const getPredictions = async (coinId, page = 1) => {
+		if (page === 1) {
+			setLoading(true)
+		} else {
+			setLoadingMore(true)
+		}
+
+		await axios
+			.get(`${process.env.REACT_APP_BASE_URL}predictions`, {
+				params: {
+					coinId,
+					page
+				}
+			})
+			.then((response) => {
+				const { data, meta } = response.data
+				dispatch({
+					type: "GET_PREDICTIONS",
+					predictions: data,
+					page
+				})
+				setPage(page + 1)
+				setHasMore(meta.current_page < meta.last_page)
+				if (page === 1) {
+					setLoading(false)
+				} else {
+					setLoadingMore(false)
+				}
+			})
+			.catch(() => {
+				toast.error("There was an error")
+			})
+	}
 
 	const getTraders = async (id) => {
 		await axios
@@ -78,6 +120,10 @@ const Coin = ({ history, match }) => {
 			.catch(() => {
 				console.error("Last price could not be fetched")
 			})
+	}
+
+	const onClickPrediction = (id) => {
+		history.push(`/predictions/${id}`)
 	}
 
 	return (
@@ -318,7 +364,7 @@ const Coin = ({ history, match }) => {
 							})}
 						</Grid>
 					) : (
-						<Segment inverted={inverted} placeholder>
+						<Segment className="centeredMsg" inverted={inverted}>
 							<Header
 								content="No predictions yet..."
 								inverted={inverted}
@@ -328,6 +374,31 @@ const Coin = ({ history, match }) => {
 						</Segment>
 					)}
 
+					<Divider hidden />
+
+					<Header as="h2" className="dividerHeader" inverted={inverted} size="huge">
+						Predictions
+					</Header>
+
+					<Divider hidden />
+
+					<Visibility
+						continuous
+						offset={[50, 50]}
+						onBottomVisible={() => {
+							if (!loading && !loadingMore && hasMore) {
+								getPredictions(coin.id, page)
+							}
+						}}
+					>
+						<PredictionList
+							inverted={inverted}
+							loading={loading}
+							loadingMore={loadingMore}
+							predictions={internalState.predictions}
+							onClickPrediction={onClickPrediction}
+						/>
+					</Visibility>
 					<Divider hidden section />
 				</>
 			) : (

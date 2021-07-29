@@ -68,6 +68,7 @@ const Prediction = ({ history, match }) => {
 		}
 
 		getPrediction(slug)
+		// eslint-disable-next-line
 	}, [slug])
 
 	const clearNotification = (slug) => {

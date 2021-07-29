@@ -6,7 +6,6 @@ import {
 	Header,
 	Icon,
 	Image,
-	Input,
 	Item,
 	Label,
 	List,
@@ -58,7 +57,8 @@ const Applications = ({ history }) => {
 
 		getMessages({ unread: 1 })
 		getMsgCount()
-	}, [])
+		// eslint-disable-next-line
+	}, [auth])
 
 	const getMsgCount = async () => {
 		const noReply = await getMessages({ justCount: 1, responses: "empty" }, false)
@@ -318,7 +318,11 @@ const Applications = ({ history }) => {
 									</Header.Subheader>
 								</Header>
 
-								<Header inverted={inverted} size="medium">
+								<Header
+									inverted={inverted}
+									size="medium"
+									style={{ wordBreak: "break-all" }}
+								>
 									Tx:{" "}
 									<a
 										href={`https://etherscan.io/tx/${msg.tx}`}
@@ -384,7 +388,7 @@ const Applications = ({ history }) => {
 
 								<Header content="Portfolio" inverted={inverted} />
 
-								<Label.Group color="blue" inverted={inverted} size="large">
+								<Label.Group color="blue" size="large">
 									{msg.portfolio.data.map((item) => (
 										<Label
 											as="a"
@@ -439,6 +443,7 @@ const Applications = ({ history }) => {
 												{msg.responses.data[0].response}
 											</Linkify>
 										</Header>
+										<Divider hidden section />
 									</>
 								)}
 							</>

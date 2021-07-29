@@ -4,10 +4,12 @@ import {
 	Form,
 	Grid,
 	Header,
+	Icon,
 	Input,
 	Label,
 	List,
 	Menu,
+	Message,
 	Segment,
 	TextArea
 } from "semantic-ui-react"
@@ -30,9 +32,11 @@ import validator from "validator"
 const toastConfig = getConfig()
 toast.configure(toastConfig)
 
+const defaultBio = "Apparently, this trader prefers to keep an air of mystery about them."
+
 const Settings = ({ history }) => {
 	const { state } = useContext(ThemeContext)
-	const { bearer, inverted, user } = state
+	const { auth, bearer, inverted, user } = state
 
 	const [internalState, dispatchInternal] = useReducer(
 		process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
@@ -46,23 +50,32 @@ const Settings = ({ history }) => {
 
 	const [activeItem, setActiveItem] = useState(!tabs.includes(tab) ? "profile_info" : tab)
 	const [address, setAddress] = useState("")
-	const [bio, setBio] = useState(user.bio)
+	const [bio, setBio] = useState(user.bio === defaultBio ? "" : user.bio)
 	const [confirmPassword, setConfirmPassword] = useState("")
 	const [createMode, setCreateMode] = useState(false)
 	const [currentPassword, setCurrentPassword] = useState("")
 	const [newPassword, setNewPassword] = useState("")
 	const [useDisabled, setUseDisabled] = useState(false)
-	const [username, setUsername] = useState("")
+	const [username, setUsername] = useState(user.username)
+	const [usernameAvailable, setUsernameAvailable] = useState(true)
+	const [usernameErrorMsg, setUsernameErrorMsg] = useState("That username is available")
 	const [walletAddress, setWalletAddress] = useState("")
 	const [walletPrivateKey, setWalletPrivateKey] = useState("")
 	const [walletPublicKey, setWalletPublicKey] = useState("")
 
 	useEffect(() => {
+		if (!auth) {
+			history.push("/")
+			return
+		}
+
 		getWallets()
-	}, [])
+		// eslint-disable-next-line
+	}, [auth])
 
 	useEffect(() => {
 		setActiveItem(!tabs.includes(tab) ? "profile_info" : tab)
+		// eslint-disable-next-line
 	}, [tab])
 
 	const addWallet = async (address) => {
@@ -96,6 +109,43 @@ const Settings = ({ history }) => {
 			})
 	}
 
+	const changePassword = () => {
+		axios
+			.post(
+				`${process.env.REACT_APP_BASE_URL}users/changePassword`,
+				{ currentPassword, newPassword, confirmPassword },
+				{
+					headers: {
+						Authorization: `Bearer ${bearer}`
+					}
+				}
+			)
+			.then(async (response) => {
+				toast.success("Password changed!")
+				setCurrentPassword("")
+				setNewPassword("")
+				setConfirmPassword("")
+			})
+			.catch((error) => {
+				let errorMsg = ""
+				const { errors } = error.response.data
+
+				if (typeof errors.currentPassword !== "undefined") {
+					errorMsg = errors.currentPassword[0]
+				}
+
+				if (typeof errors.newPassword !== "undefined") {
+					errorMsg = errors.newPassword[0]
+				}
+
+				if (typeof errors.confirmPassword !== "undefined") {
+					errorMsg = errors.confirmPassword[0]
+				}
+
+				toast.error(errorMsg)
+			})
+	}
+
 	const checkUsername = (username) => {
 		axios
 			.post(
@@ -108,7 +158,8 @@ const Settings = ({ history }) => {
 				}
 			)
 			.then(() => {
-				toast.success("That username is available")
+				setUsernameAvailable(true)
+				setUsernameErrorMsg("That username is available")
 			})
 			.catch((error) => {
 				let errorMsg = ""
@@ -117,7 +168,8 @@ const Settings = ({ history }) => {
 					errorMsg = errors.username[0]
 				}
 
-				toast.error(errorMsg)
+				setUsernameErrorMsg(errorMsg)
+				setUsernameAvailable(false)
 			})
 	}
 
@@ -201,7 +253,7 @@ const Settings = ({ history }) => {
 					errorMsg = error.response.data.message
 				} else {
 					if (typeof errors.username !== "undefined") {
-						errorMsg = errors.code[0]
+						errorMsg = errors.username[0]
 					}
 				}
 
@@ -311,10 +363,10 @@ const Settings = ({ history }) => {
 													inverted ? "inverted" : ""
 												}`}
 											>
-												<div className={`ui basic label label`}>@</div>
+												<div className={`ui basic label`}>@</div>
 												<DebounceInput
-													debounceTimeout={400}
-													minLength={2}
+													debounceTimeout={800}
+													minLength={1}
 													onChange={onChangeUsername}
 													placeholder="Pick a username"
 													value={username}
@@ -325,12 +377,31 @@ const Settings = ({ history }) => {
 											<Button
 												color="blue"
 												content="Change"
+												disabled={!usernameAvailable || username === ""}
 												fluid
+												onClick={() =>
+													updateUser({ username }, "Username updated")
+												}
 												size="large"
 											/>
 										</Form.Field>
 									</Form.Group>
 								</Form>
+
+								<Message
+									className={inverted ? "inverted" : ""}
+									error={!usernameAvailable}
+									icon
+									success={usernameAvailable}
+								>
+									<Icon
+										name={usernameAvailable ? "checkmark" : "warning sign"}
+										style={{ fontSize: 28 }}
+									/>
+									<Message.Content>
+										<Message.Header>{usernameErrorMsg}</Message.Header>
+									</Message.Content>
+								</Message>
 							</>
 						)}
 
@@ -345,6 +416,7 @@ const Settings = ({ history }) => {
 											inverted={inverted}
 											onChange={onChangeCurrentPassword}
 											placeholder="Current password"
+											type="password"
 											value={currentPassword}
 										/>
 									</Form.Field>
@@ -355,6 +427,7 @@ const Settings = ({ history }) => {
 											inverted={inverted}
 											onChange={onChangeNewPassword}
 											placeholder="New password"
+											type="password"
 											value={newPassword}
 										/>
 									</Form.Field>
@@ -365,11 +438,18 @@ const Settings = ({ history }) => {
 											inverted={inverted}
 											onChange={onChangeConfirmPassword}
 											placeholder="Retype new password"
+											type="password"
 											value={confirmPassword}
 										/>
 									</Form.Field>
 									<Form.Field>
-										<Button color="blue" content="Change" fluid size="large" />
+										<Button
+											color="blue"
+											content="Change"
+											fluid
+											onClick={() => changePassword()}
+											size="large"
+										/>
 									</Form.Field>
 								</Form>
 							</>
