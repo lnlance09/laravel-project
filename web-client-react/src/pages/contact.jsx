@@ -24,6 +24,8 @@ const Contact = ({ history }) => {
 			textAlign="center"
 		>
 			<DisplayMetaTags page="contact" />
+
+			<Button color="blue" content="Send" />
 		</DefaultLayout>
 	)
 }
