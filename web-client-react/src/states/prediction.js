@@ -1,8 +1,8 @@
 const initialState = {
-    loaded: false,
-    prediction: {
-        name: ""
-    }
+	loaded: false,
+	prediction: {
+		user: {}
+	}
 }
 
 export default initialState

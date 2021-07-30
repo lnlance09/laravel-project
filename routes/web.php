@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Coin;
+use App\Models\Prediction;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -17,17 +20,145 @@ use Illuminate\Support\Facades\URL;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+$awsUrl = env('AWS_URL', 'https://preditc.s3.us-west-2.amazonaws.com/');
+$baseUrl = env('APP_URL', 'https://preditc.com/');
+$siteName = env('APP_NAME', 'Preditc');
+$twitterHandle = env('TWITTER_HANDLE', '@preditcapp');
+
+$seo = [
+    'author' => null,
+    'authorUrl' => null,
+    'awsUrl' => $awsUrl,
+    'baseUrl' => $baseUrl,
+    'description' => $siteName . ' is a social network that is used to share ideas and opinions about cryptocurrencies and their future performances',
+    'img' => [
+        'height' => 313,
+        'width' => 313,
+        'src' => $awsUrl . 'public/blockchain.png'
+    ],
+    'keywords' => 'cryptocurrency,coins,tokens,predictions,bitcoin,ethereum,influencers,technical analysis,wall street',
+    'schema' => '',
+    'siteName' => $siteName,
+    'title' => $siteName,
+    'twitterHandle' => $twitterHandle,
+    'url' => $baseUrl
+];
+
+Route::get('/', function () use ($seo) {
+    $seo['title'] = 'Home - ' . $seo['siteName'];
+    return view('index', $seo);
 });
 
-Route::get('sitemap', function () {
+Route::get('/about', function () use ($seo) {
+    $seo['title'] = 'About - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'about';
+    return view('index', $seo);
+});
+
+Route::get('/applications', function () use ($seo) {
+    $seo['title'] = 'Applications - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'applications';
+    return view('index', $seo);
+});
+
+Route::get('/coins/{slug}', function ($slug) use ($seo) {
+    $coin = Coin::where('slug', $slug)->first();
+
+    if (empty($coin)) {
+        return view('index', $seo);
+    }
+
+    $img = $seo['awsUrl'] . $coin->logo;
+    $imgData = getimagesize($img);
+    $width = $imgData[0];
+    $height = $imgData[1];
+
+    $seo['description'] = $coin->description;
+    $seo['img'] = [
+        'height' => $height,
+        'src' => $img,
+        'width' => $width
+    ];
+    $seo['title'] = $coin->name . ' - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'coins/' . $slug;
+
+    return view('index', $seo);
+});
+
+Route::get('/coins', function () use ($seo) {
+    $seo['description'] = 'Browse cryptocurrencies, tokens and coins on preditc.com';
+    $seo['title'] = 'Coins - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'coins';
+    return view('index', $seo);
+});
+
+Route::get('/contact', function () use ($seo) {
+    $seo['title'] = 'Contact - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'contact';
+    return view('index', $seo);
+});
+
+Route::get('/predictions/{id}', function ($id) use ($seo) {
+    $prediction = Prediction::where('id', $id)->with(['coin', 'user'])->first();
+
+    if (empty($prediction)) {
+        return view('index', $seo);
+    }
+
+    $user = $prediction->user;
+    $coin = $prediction->coin;
+    $price = $prediction->prediction_price;
+    $date = date_format($prediction->target_date, 'M d, Y');
+
+    $img = $seo['awsUrl'] . $user->img;
+    $imgData = getimagesize($img);
+    $width = $imgData[0];
+    $height = $imgData[1];
+
+    $seo['description'] = $prediction->explanation;
+    $seo['img'] = [
+        'height' => $height,
+        'src' => $img,
+        'width' => $width
+    ];
+    $seo['title'] = $coin->name . ' to ' . $price . ' on ' . $date . ' - ' . $user->name . ' - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'predictions/' . $id;
+
+    return view('index', $seo);
+});
+
+Route::get('/predictions', function () use ($seo) {
+    $seo['description'] = 'Browse cryptocurrency predictions on preditc.com';
+    $seo['title'] = 'Predictions - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'predictions';
+    return view('index', $seo);
+});
+
+Route::get('/rules', function () use ($seo) {
+    $seo['title'] = 'Rules - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'rules';
+    return view('index', $seo);
+});
+
+Route::get('/settings', function () use ($seo) {
+    $seo['title'] = 'Settings - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'settings';
+    return view('index', $seo);
+});
+
+Route::get('/sitemap', function () use ($seo) {
+    $seo['title'] = 'Sitemap - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'sitemap';
+    return view('index', $seo);
+});
+
+Route::get('sitemap.pages', function () {
     $sitemap = App::make('sitemap');
     $sitemap->setCache('laravel.sitemap', 60);
 
     if (!$sitemap->isCached()) {
         // home page
-        $sitemap->add(URL::to('/'), '2012-08-25T20:10:00+02:00', '1.0', 'daily');
+        $sitemap->add(URL::to('/'), Carbon::now()->subMinutes(52), '1.0', 'daily');
 
         // predictions
         $predictions = DB::table('predictions')->orderBy('id', 'asc')->get();
@@ -58,4 +189,43 @@ Route::get('sitemap', function () {
     }
 
     return $sitemap->render('xml');
+});
+
+Route::get('/traders', function () use ($seo) {
+    $seo['description'] = 'Browse some of the best cryptocurrency traders on preditc.com';
+    $seo['title'] = 'Traders - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'traders';
+    return view('index', $seo);
+});
+
+Route::get('/{username}', function ($username) use ($seo) {
+    $user = User::where('username', $username)->withCount([
+        'predictions',
+        'incorrectPredictions',
+        'correctPredictions'
+    ])->first();
+
+    if (empty($user)) {
+        return view('index', $seo);
+    }
+
+    $img = $seo['awsUrl'] . $user->img;
+    $imgData = getimagesize($img);
+    $width = $imgData[0];
+    $height = $imgData[1];
+
+    $total = $user->predictions_count;
+    $correct = $user->correct_predictions_count;
+    $incorrect = $user->incorrect_predictions_count;
+    $defaultBio = $user->name . ' has ' . $total . ' predictions. ' . $correct . ' correct. ' . $incorrect . ' incorrect';
+    $seo['description'] = empty($user->bio) ? $defaultBio : $user->bio;
+    $seo['img'] = [
+        'height' => $height,
+        'src' => $img,
+        'width' => $width
+    ];
+    $seo['title'] = $user->name . ' - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl']  . $username;
+
+    return view('index', $seo);
 });

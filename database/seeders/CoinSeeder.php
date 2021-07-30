@@ -81,7 +81,7 @@ class CoinSeeder extends Seeder
             $circulatingSupply = $extendedData['circulating_supply'];
             $cmcId = $data['id'];
             $description = $data['description'];
-            $logo = $data['logo'];
+            $logo = str_replace('64x64', '128x128', $data['logo']);
             $maxSupply = $extendedData['max_supply'];
             $name = $data['name'];
             $slug = $data['slug'];
@@ -89,6 +89,7 @@ class CoinSeeder extends Seeder
             $tags = $data['tags'];
             $totalSupply = $extendedData['total_supply'];
 
+            dump($logo);
             // don't store stablecoins
             if (
                 is_array($tags) &&

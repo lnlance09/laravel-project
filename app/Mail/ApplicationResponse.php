@@ -38,6 +38,6 @@ class ApplicationResponse extends Mailable
     public function build()
     {
         return $this->from('noreply@preditc.com')
-            ->view('applicationResponse');
+            ->view('mail/applicationResponse');
     }
 }

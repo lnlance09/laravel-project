@@ -102,7 +102,7 @@ const Prediction = ({ history, match }) => {
 			history={history}
 			inverted={inverted}
 		>
-			<DisplayMetaTags page="predictions" state={internalState} />
+			<DisplayMetaTags page="prediction" state={internalState} />
 			{loaded ? (
 				<>
 					<Header as="h1" className="predictionHeader" inverted={inverted}>

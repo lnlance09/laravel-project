@@ -1,20 +1,15 @@
-import React from "react"
 import MetaTags from "react-meta-tags"
+import moment from "moment"
 
 export const DisplayMetaTags = ({ page, state }) => {
+	const twitterHandle = "preditc"
+	const baseUrl = "https://preditc.com"
 	const siteName = "Preditc"
 	const description = `${siteName} is a social network that is used to share ideas and opinions about cryptocurrencies and their future performances`
 	const img = ""
 	let metaTags = {}
 
 	switch (page) {
-		case "":
-			metaTags = {
-				description,
-				img,
-				title: siteName
-			}
-			break
 		case "about":
 			metaTags = {
 				description,
@@ -51,10 +46,16 @@ export const DisplayMetaTags = ({ page, state }) => {
 			}
 			break
 		case "prediction":
+			const { prediction } = state
+			const pUser = prediction.user
+			const pDate = moment(prediction.targetDate).format("MMM D, YYYY")
+			const pTitle = state.loaded
+				? `${pUser.name} to ${prediction.predictionPrice} on ${pDate} - ${pUser.name} - ${siteName}`
+				: null
 			metaTags = {
-				description: state.predition.bio,
-				img: state.prediction.img,
-				title: state.loaded ? `${state.trader.name} - ${siteName}` : siteName
+				description: prediction.explanation,
+				img: pUser.img,
+				title: state.loaded ? pTitle : siteName
 			}
 			break
 		case "predictions":
@@ -110,15 +111,52 @@ export const DisplayMetaTags = ({ page, state }) => {
 			metaTags = {
 				description,
 				img,
-				title: ""
+				title: siteName
 			}
 	}
 
 	return (
 		<MetaTags>
-			<title>{metaTags.title}</title>
-			<meta name="description" content={metaTags.description} />
+			<meta charset="utf8mb4" />
+			<meta name="viewport" content="width=device-width, user-scalable=0" />
+			<meta name="theme-color" content="#090127" />
+
+			<meta property="og:description" content={metaTags.description} />
 			<meta property="og:image" content={metaTags.img} />
+			<meta property="og:site_name" content={siteName} />
+			<meta property="og:title" content={metaTags.title} />
+			<meta property="og:type" content="website" />
+			<meta property="og:url" content={window.location.href} />
+
+			<meta name="twitter:card" content="summary_large_image" />
+			<meta name="twitter:site" content={`@${twitterHandle}`} />
+			<meta name="twitter:creator" content={`@${twitterHandle}`} />
+			<meta name="twitter:title" content={metaTags.title} />
+			<meta name="twitter:description" content={metaTags.description} />
+			<meta name="twitter:image" content={metaTags.img} />
+
+			<meta name="description" content={metaTags.description} />
+			<meta
+				name="keywords"
+				content="cryptocurrency,coins,tokens,predictions,bitcoin,ethereum,influencers,technical analysis,wall street"
+			/>
+			<meta name="title" content={metaTags.title} />
+
+			{page === "prediction" && (
+				<>
+					<meta property="article:publisher" content={siteName} />
+					<meta property="article:author" content={state.prediction.user.name} />
+					<meta name="author" content={state.prediction.user.name} />
+
+					<link rel="publisher" href={baseUrl} />
+					<link rel="author" href={`${baseUrl}/${state.prediction.user.username}`} />
+				</>
+			)}
+
+			<link rel="canonical" href={window.location.href} />
+			<link rel="home" href={baseUrl} />
+
+			<title>{metaTags.title}</title>
 		</MetaTags>
 	)
 }
