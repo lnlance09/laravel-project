@@ -210,7 +210,13 @@ const Prediction = ({ history, match }) => {
 									horizontal
 									size="large"
 								>
-									${prediction.currentPrice}
+									<NumberFormat
+										decimalScale={prediction.currentPrice > 1 ? 2 : 8}
+										displayType={"text"}
+										prefix={"$"}
+										thousandSeparator
+										value={prediction.currentPrice}
+									/>
 								</Label>
 							</List.Item>
 							<List.Item>
@@ -222,7 +228,13 @@ const Prediction = ({ history, match }) => {
 									horizontal
 									size="large"
 								>
-									${predictionPrice}
+									<NumberFormat
+										decimalScale={predictionPrice > 1 ? 2 : 8}
+										displayType={"text"}
+										prefix={"$"}
+										thousandSeparator
+										value={predictionPrice}
+									/>
 								</Label>
 							</List.Item>
 							<List.Item>
@@ -234,7 +246,17 @@ const Prediction = ({ history, match }) => {
 									horizontal
 									size="large"
 								>
-									{status === "Pending" ? "N/A" : prediction.actualPrice}
+									{status === "Pending" ? (
+										"N/A"
+									) : (
+										<NumberFormat
+											decimalScale={prediction.actualPrice > 1 ? 2 : 8}
+											displayType={"text"}
+											prefix={"$"}
+											thousandSeparator
+											value={prediction.actualPrice}
+										/>
+									)}
 								</Label>
 							</List.Item>
 							<List.Item>
