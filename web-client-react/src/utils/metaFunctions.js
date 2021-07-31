@@ -117,10 +117,6 @@ export const DisplayMetaTags = ({ page, state }) => {
 
 	return (
 		<MetaTags>
-			<meta charset="utf8mb4" />
-			<meta name="viewport" content="width=device-width, user-scalable=0" />
-			<meta name="theme-color" content="#090127" />
-
 			<meta property="og:description" content={metaTags.description} />
 			<meta property="og:image" content={metaTags.img} />
 			<meta property="og:site_name" content={siteName} />

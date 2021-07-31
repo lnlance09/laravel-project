@@ -11,7 +11,7 @@ body {
 
 .Toastify__toast-container--bottom-left .Toastify__toast-body {
 	color: $white;
-	font-family: 'Space Mono', sans-serif;
+	font-family: 'Asap', sans-serif;
 	font-size: 16px;
     text-align: center;
 }
@@ -280,6 +280,11 @@ body {
 				.item {
 					.label {
 						float: right;
+
+						.icon.close {
+							margin-left: 0;
+							margin-right: 4px;
+						}
 					}
 				}
 			}

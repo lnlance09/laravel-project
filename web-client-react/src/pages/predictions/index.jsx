@@ -270,15 +270,10 @@ const Prediction = ({ history, match }) => {
 
 					<Card className={`${inverted ? "inverted" : null}`}>
 						<Image
-							label={
-								status === "Correct"
-									? { as: "a", color: "green", corner: "left", icon: "checkmark" }
-									: null
-							}
+							as="a"
+							onClick={() => history.push(`/${user.username}`)}
 							onError={(i) => (i.target.src = UserPic)}
 							src={user.img}
-							ui={false}
-							wrapped
 						/>
 						<Card.Content>
 							<Card.Header>{user.name}</Card.Header>

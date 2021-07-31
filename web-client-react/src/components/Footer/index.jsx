@@ -10,7 +10,10 @@ const Footer = ({ history, inverted }) => {
 					<Grid divided inverted={inverted} stackable>
 						<Grid.Row>
 							<Grid.Column width={3}>
-								<Header as="h4" content="About" inverted={inverted} />
+								<Header as="h4" inverted={inverted}>
+									<span>👀</span>
+									<span className="emojiMarginLeft">About</span>
+								</Header>
 								<List inverted={inverted} link relaxed>
 									<List.Item as="a" onClick={() => history.push("/sitemap")}>
 										Sitemap
@@ -27,7 +30,10 @@ const Footer = ({ history, inverted }) => {
 								</List>
 							</Grid.Column>
 							<Grid.Column width={3}>
-								<Header as="h4" content="Follow Us" inverted={inverted} />
+								<Header as="h4" inverted={inverted}>
+									<span>👍</span>{" "}
+									<span className="emojiMarginLeft">Follow Us</span>
+								</Header>
 								<List inverted={inverted} link relaxed>
 									<List.Item as="a">Twitter</List.Item>
 									<List.Item as="a">Instagram</List.Item>
@@ -35,7 +41,8 @@ const Footer = ({ history, inverted }) => {
 							</Grid.Column>
 							<Grid.Column width={7}>
 								<Header as="h4" inverted={inverted}>
-									🎉 Support Us
+									<span>🎉</span>{" "}
+									<span className="emojiMarginLeft">Support Us</span>
 								</Header>
 								<p>Address:</p>
 							</Grid.Column>
