@@ -122,8 +122,12 @@ const Coin = ({ history, match }) => {
 			})
 	}
 
-	const onClickPrediction = (id) => {
-		history.push(`/predictions/${id}`)
+	const onClickPrediction = (e, id) => {
+		if (!e.metaKey) {
+			history.push(`/predictions/${id}`)
+		} else {
+			window.open(`/predictions/${id}`, "_blank").focus()
+		}
 	}
 
 	return (
@@ -344,9 +348,14 @@ const Coin = ({ history, match }) => {
 													data-for={`topTrader${i}`}
 													data-tip={tooltip}
 													data-iscapture="true"
-													onClick={() =>
-														history.push(`/${trader.username}`)
-													}
+													onClick={(e) => {
+														const url = `/${trader.username}`
+														if (!e.metaKey) {
+															history.push(url)
+														} else {
+															window.open(url, "_blank").focus()
+														}
+													}}
 													onError={(i) => (i.target.src = PlaceholderPic)}
 													rounded
 													src={trader.img}
