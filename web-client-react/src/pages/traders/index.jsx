@@ -223,7 +223,10 @@ const Trader = ({ history, match }) => {
 												compact
 												content="Get a prediction"
 												icon="arrow right"
-												onClick={() => setApplicationVisible(true)}
+												onClick={() => {
+													setApplicationVisible(true)
+													window.scroll({ top: 0, behavior: "smooth" })
+												}}
 												style={{ display: "block" }}
 											/>
 										) : null}

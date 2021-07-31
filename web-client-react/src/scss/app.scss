@@ -348,6 +348,13 @@ body {
 					}
 				}
 			}
+
+			.ui.text.container {
+				@media only screen and (max-width: 1025px) {
+					margin-left: 0;
+					margin-right: 0;
+				}
+			}
 		}
 
 		&.signInPage {

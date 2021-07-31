@@ -213,6 +213,7 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 					onClick={() => {
 						const page = auth ? 3 : 2
 						setPage(page)
+						window.scroll({ top: 0, behavior: "smooth" })
 					}}
 					size="large"
 				>
@@ -263,6 +264,7 @@ const Application = ({ auth, close = () => null, history, inverted, user = {} })
 						}
 
 						setPage(3)
+						window.scroll({ top: 0, behavior: "smooth" })
 					}}
 					size="large"
 				>

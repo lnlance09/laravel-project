@@ -401,11 +401,8 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 								}}
 								size="large"
 							/>
-
 							{BellDropdown}
-
 							{MessageDropdown}
-
 							{auth ? (
 								<>{ProfileDropdown}</>
 							) : (
@@ -439,7 +436,6 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 						</Menu.Item>
 						<Menu.Item position="right">
 							{BellDropdown}
-
 							{MessageDropdown}
 							<Icon
 								color={sidebarVisible ? "green" : null}
@@ -465,21 +461,21 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 				visible={sidebarVisible}
 			>
 				<Menu.Item as="a" onClick={() => history.push("/predictions")}>
-					Predictions
+					🔮 Predictions
 				</Menu.Item>
 				<Menu.Item as="a" onClick={() => history.push("/traders")}>
-					Traders
+					📈 Traders
 				</Menu.Item>
 				<Menu.Item as="a" onClick={() => history.push("/coins")}>
-					Coins
+					🪙 Coins
 				</Menu.Item>
 				{auth ? (
 					<Menu.Item as="a" onClick={() => history.push(`/${user.username}`)}>
-						Profile
+						🌞 Profile
 					</Menu.Item>
 				) : (
 					<Menu.Item as="a" onClick={() => history.push("/login")}>
-						Sign In
+						👉 Sign In
 					</Menu.Item>
 				)}
 			</Sidebar>
