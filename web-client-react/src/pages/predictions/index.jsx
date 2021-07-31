@@ -268,7 +268,7 @@ const Prediction = ({ history, match }) => {
 						Predicter
 					</Header>
 
-					<Card className={`${inverted ? "inverted" : null}`}>
+					<Card className={`${inverted ? "inverted" : null}`} fluid>
 						<Image
 							label={
 								status === "Correct"
@@ -301,11 +301,9 @@ const Prediction = ({ history, match }) => {
 					<Divider hidden section />
 				</>
 			) : (
-				<>
-					<div className="centeredLoader">
-						<Loader active inverted={inverted} size="big" />
-					</div>
-				</>
+				<div className="centeredLoader">
+					<Loader active inverted={inverted} size="big" />
+				</div>
 			)}
 		</DefaultLayout>
 	)
