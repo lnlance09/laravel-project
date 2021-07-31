@@ -94,7 +94,7 @@ const Coins = ({ history }) => {
 		>
 			<DisplayMetaTags page="coins" state={internalState} />
 			<Header as="h1" className="massive" inverted={inverted}>
-				Browse coins
+				Coins
 			</Header>
 			<Grid stackable>
 				<Grid.Column width={10}>

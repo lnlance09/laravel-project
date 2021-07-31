@@ -2,6 +2,7 @@ import "./style.scss"
 import { Item, Label, Placeholder } from "semantic-ui-react"
 import { setIconColor, setIconName } from "utils/textFunctions"
 import Moment from "react-moment"
+import NumberFormat from "react-number-format"
 import PlaceholderPic from "images/images/image.png"
 import PropTypes from "prop-types"
 
@@ -51,7 +52,14 @@ const PredictionList = ({ inverted, loading, loadingMore, onClickPrediction, pre
 									/>
 									<Item.Content>
 										<Item.Header>
-											{coin.name} to ${predictionPrice}
+											{coin.name} to{" "}
+											<NumberFormat
+												decimalScale={predictionPrice > 1 ? 2 : 8}
+												displayType={"text"}
+												prefix={"$"}
+												thousandSeparator
+												value={predictionPrice}
+											/>
 										</Item.Header>
 										<Item.Meta>
 											On <Moment date={targetDate} format="MMM D, YYYY" />•{" "}

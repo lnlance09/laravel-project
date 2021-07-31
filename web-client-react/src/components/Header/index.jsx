@@ -438,8 +438,11 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 							/>
 						</Menu.Item>
 						<Menu.Item position="right">
+							{BellDropdown}
+
+							{MessageDropdown}
 							<Icon
-								color={sidebarVisible ? "blue" : null}
+								color={sidebarVisible ? "green" : null}
 								inverted
 								name="ellipsis horizontal"
 								onClick={() => setSidebarVisible(!sidebarVisible)}

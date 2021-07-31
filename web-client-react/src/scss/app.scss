@@ -1,5 +1,5 @@
 @import "./_colors.scss";
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 $header-height: "76px";
 
@@ -11,7 +11,7 @@ body {
 
 .Toastify__toast-container--bottom-left .Toastify__toast-body {
 	color: $white;
-	font-family: 'JetBrains Mono', sans-serif;
+	font-family: 'Space Mono', sans-serif;
 	font-size: 16px;
     text-align: center;
 }
@@ -194,6 +194,14 @@ body {
 						padding-bottom: 7px;
 						padding-top: 7px;
 					}
+				}
+			}
+		}
+
+		&.coinsPage {
+			.coinList {
+				@media only screen and (max-width: 1025px) {
+					margin-top: 30px;
 				}
 			}
 		}
