@@ -2,6 +2,8 @@ import "./style.scss"
 import { Container, Grid, Header, List, Segment } from "semantic-ui-react"
 import PropTypes from "prop-types"
 
+const etherAddress = "0xce8247d7e3a194ea46c1c5eac2dc151b6a0b4d9a"
+
 const Footer = ({ history, inverted }) => {
 	return (
 		<div className="pageFooterComponent">
@@ -44,7 +46,21 @@ const Footer = ({ history, inverted }) => {
 									<span>🎉</span>{" "}
 									<span className="emojiMarginLeft">Support Us</span>
 								</Header>
-								<p>Address:</p>
+								<List inverted={inverted} link relaxed>
+									<List.Item>
+										<List.Icon color="blue" name="ethereum" />
+										<List.Content>
+											<a
+												className="etherLink"
+												href={`https://etherscan.io/address/${etherAddress}`}
+												target="_blank"
+												rel="noreferrer"
+											>
+												{etherAddress}
+											</a>
+										</List.Content>
+									</List.Item>
+								</List>
 							</Grid.Column>
 						</Grid.Row>
 					</Grid>
