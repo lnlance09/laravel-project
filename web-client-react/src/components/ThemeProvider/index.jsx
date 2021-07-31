@@ -14,7 +14,7 @@ let verify = localStorage.getItem("verify")
 const initialState = {
 	auth: auth === null || auth === "false" ? false : true,
 	bearer,
-	inverted: inverted === null || inverted === "false" ? false : true,
+	inverted: inverted === "false" ? false : true,
 	memberCount,
 	notifications: notifications === null ? [] : JSON.parse(notifications),
 	unreadCount,
