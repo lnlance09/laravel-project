@@ -28,7 +28,7 @@ const TraderList = ({ inverted, loading, loadingMore, onClickTrader, traders }) 
 				{traders.map((trader, i) => {
 					const { accuracy, bio, img, name, predictionsCount, username } = trader
 					return (
-						<Item key={`trader${i}`} onClick={() => onClickTrader(username)}>
+						<Item key={`trader${i}`} onClick={(e) => onClickTrader(e, username)}>
 							{loading ? (
 								<>{PlaceholderSegment}</>
 							) : (

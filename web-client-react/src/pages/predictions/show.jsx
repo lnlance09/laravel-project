@@ -108,8 +108,12 @@ const Predictions = ({ history }) => {
 		getPredictions(value, status, activeItem, direction)
 	}
 
-	const onClickPrediction = (id) => {
-		history.push(`/predictions/${id}`)
+	const onClickPrediction = (e, id) => {
+		if (!e.metaKey) {
+			history.push(`/predictions/${id}`)
+		} else {
+			window.open(`/predictions/${id}`, "_blank").focus()
+		}
 	}
 
 	const toggleCreatedAt = () => {

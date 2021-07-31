@@ -39,7 +39,7 @@ const PredictionList = ({ inverted, loading, loadingMore, onClickPrediction, pre
 						targetDate
 					} = prediction
 					return (
-						<Item key={`prediction${i}`} onClick={() => onClickPrediction(id)}>
+						<Item key={`prediction${i}`} onClick={(e) => onClickPrediction(e, id)}>
 							{loading ? (
 								<>{PlaceholderSegment}</>
 							) : (

@@ -268,7 +268,7 @@ const Prediction = ({ history, match }) => {
 						Predicter
 					</Header>
 
-					<Card className={`${inverted ? "inverted" : null}`} fluid>
+					<Card className={`${inverted ? "inverted" : null}`}>
 						<Image
 							label={
 								status === "Correct"

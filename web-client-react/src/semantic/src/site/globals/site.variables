@@ -37,11 +37,11 @@
 @lightOlive: #badc58;
 @lightGrey: #d1d8e0;
 
-@fontName          : 'Space Mono';
+@fontName          : 'Asap';
 @fontSmoothing     : antialiased;
 @googleFontFamily  : 'Anton';
 
-@googleFontName    : 'Space+Mono';
+@googleFontName    : 'Asap';
 @importGoogleFonts : true;
 @googleFontSizes   : '';
 @googleDisplay     : 'swap';

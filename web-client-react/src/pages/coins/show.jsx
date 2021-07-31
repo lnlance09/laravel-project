@@ -65,8 +65,12 @@ const Coins = ({ history }) => {
 		await getCoins(q, activeItem, direction)
 	}
 
-	const onClickCoin = (slug) => {
-		history.push(`/coins/${slug}`)
+	const onClickCoin = (e, slug) => {
+		if (!e.metaKey) {
+			history.push(`/coins/${slug}`)
+		} else {
+			window.open(`/coins/${slug}`, "_blank").focus()
+		}
 	}
 
 	const toggleMarketCap = () => {
