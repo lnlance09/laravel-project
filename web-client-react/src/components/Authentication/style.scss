@@ -24,12 +24,17 @@
         border: none !important;
         margin: 0 auto;
 
-        .error.message {
-            margin-bottom: 14px;
-        }
-
         .divider {
             margin-bottom: 16px;
+        }
+
+        .ui.form {
+            .ui.labeled.input {
+                .ui.label {
+                    text-align: center;
+                    width: 65px;
+                }
+            }
         }
     }
 

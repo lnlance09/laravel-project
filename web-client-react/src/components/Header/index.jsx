@@ -386,21 +386,6 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 							)}
 						</Menu.Item>
 						<Menu.Item position="right">
-							<Icon
-								circular
-								className="moonButton"
-								color={inverted ? "orange" : "purple"}
-								name={inverted ? "sun" : "moon"}
-								onClick={() => {
-									const inverted = localStorage.getItem("inverted")
-									localStorage.setItem(
-										"inverted",
-										inverted === "false" ? "true" : "false"
-									)
-									dispatch({ type: "TOGGLE_INVERTED" })
-								}}
-								size="large"
-							/>
 							{BellDropdown}
 							{MessageDropdown}
 							{auth ? (

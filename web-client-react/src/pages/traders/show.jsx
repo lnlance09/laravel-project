@@ -79,8 +79,12 @@ const Traders = ({ history }) => {
 		setSearchTerm(e.target.value)
 	}
 
-	const onClickTrader = (username) => {
-		history.push(`/${username}`)
+	const onClickTrader = (e, username) => {
+		if (!e.metaKey) {
+			history.push(`/${username}`)
+		} else {
+			window.open(`/${username}`, "_blank").focus()
+		}
 	}
 
 	const toggleAccuracy = () => {

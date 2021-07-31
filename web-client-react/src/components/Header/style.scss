@@ -54,7 +54,10 @@ $logoHeight: 54px;
 
         &.inverted {
             background: $invertedBackgroundColor;
-            // border-bottom: solid 1px rgba(44, 44, 44, 0.7);
+
+            @media only screen and (max-width: 1025px) {
+                border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+            }
 
             a.item.active {
                 background: $invertedBackgroundColor;
