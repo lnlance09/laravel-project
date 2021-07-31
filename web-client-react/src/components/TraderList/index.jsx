@@ -34,8 +34,8 @@ const TraderList = ({ inverted, loading, loadingMore, onClickTrader, traders }) 
 							) : (
 								<>
 									<Item.Image
-										circular
 										onError={(i) => (i.target.src = PlaceholderPic)}
+										rounded
 										size="small"
 										src={img}
 									/>

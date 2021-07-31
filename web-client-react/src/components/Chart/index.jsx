@@ -46,7 +46,7 @@ const Chart = ({
 			shadow: false,
 			style: {
 				color: "white",
-				fontFamily: "JetBrains Mono",
+				fontFamily: "Space Mono",
 				fontSize: "16px"
 			},
 			verticalAlign: "text-top",

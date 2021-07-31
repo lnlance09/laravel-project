@@ -37,11 +37,11 @@
 @lightOlive: #badc58;
 @lightGrey: #d1d8e0;
 
-@fontName          : 'JetBrains Mono';
+@fontName          : 'Space Mono';
 @fontSmoothing     : antialiased;
 @googleFontFamily  : 'Anton';
 
-@googleFontName    : 'JetBrains+Mono';
+@googleFontName    : 'Space+Mono';
 @importGoogleFonts : true;
 @googleFontSizes   : '';
 @googleDisplay     : 'swap';

@@ -145,7 +145,7 @@ const Predictions = ({ history }) => {
 		>
 			<DisplayMetaTags page="predictions" state={internalState} />
 			<Header as="h1" className="massive" inverted={inverted}>
-				Browse predictions
+				Predictions
 			</Header>
 			<Grid stackable>
 				<Grid.Column width={4}>
