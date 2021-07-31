@@ -95,18 +95,6 @@ $logoHeight: 54px;
                 }
             }
 
-            &.mobile {
-                .item.trigger {
-                    margin: 0 12px 0 0;
-                }
-
-                .menu.transition.visible {
-                    margin-left: 60px;
-                    width: 100px;
-                }
-            }
-
-
             .bellDropdown {
                 .item.trigger {
                     margin: 0 10px 0 1px;
@@ -130,11 +118,37 @@ $logoHeight: 54px;
                     padding: 18px 10px !important;
                 }
 
+                .dropdown.bellDropdown {
+                    .menu.transition.visible {
+                        right: -140px;
+                        width: 400px;
+                    }
+                }
+
                 .dropdown.profileDropdown {
                     .menu.transition.visible {
                         left: -50px;
                         top: 36px;
                         width: 160px;
+                    }
+                }
+            }
+
+            &.mobile {
+                .item.trigger {
+                    margin: 0 12px 0 0;
+                }
+
+                .dropdown.bellDropdown {
+                    .menu.transition.visible {
+                        right: -140px;
+                        width: 400px;
+                    }
+                }
+
+                .dropdown.msgDropdown {
+                    .menu.transition.visible {
+                        right: 0;
                     }
                 }
             }

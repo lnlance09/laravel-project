@@ -178,7 +178,7 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 	const BellDropdown = (
 		<Dropdown
 			className={`bellDropdown ${inverted ? "inverted" : null}`}
-			direction="left"
+			direction="right"
 			icon={false}
 			pointing="top"
 			trigger={
@@ -200,18 +200,24 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 				) : (
 					<>
 						{notifications.map((item) => {
-							const text = `${item.user.name} predicted ${item.coin.symbol} at $${
-								item.predictionPrice
-							} on ${moment(item.targetDate).format("MMM D")}`
 							return (
 								<Dropdown.Item
 									className="paddedDropdownItem"
-									image={{ avatar: true, src: item.user.img }}
 									key={item.id}
 									onClick={() => history.push(`/predictions/${item.id}?clear=1`)}
-									text={text}
 									value={item.id}
-								/>
+								>
+									<Image avatar src={item.user.img} />
+									{item.user.name} predicted ${item.coin.symbol} at{" "}
+									<NumberFormat
+										decimalScale={item.predictionPrice > 1 ? 2 : 8}
+										displayType={"text"}
+										prefix={"$"}
+										thousandSeparator
+										value={item.predictionPrice}
+									/>{" "}
+									on {moment(item.targetDate).format("MMM D")}
+								</Dropdown.Item>
 							)
 						})}
 						<>
@@ -233,7 +239,7 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 
 	const MessageDropdown = (
 		<Dropdown
-			className={inverted ? "inverted" : null}
+			className={`msgDropdown ${inverted ? "inverted" : null}`}
 			direction="left"
 			icon={false}
 			pointing="top"
