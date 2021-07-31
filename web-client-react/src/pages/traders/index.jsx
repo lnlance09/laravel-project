@@ -33,7 +33,7 @@ toast.configure(toastConfig)
 
 const Trader = ({ history, match }) => {
 	const { state } = useContext(ThemeContext)
-	const { auth, inverted, user } = state
+	const { auth, bearer, inverted, user } = state
 	const { username } = match.params
 
 	const [internalState, dispatch] = useReducer(
@@ -117,7 +117,7 @@ const Trader = ({ history, match }) => {
 		await axios
 			.post(`${process.env.REACT_APP_BASE_URL}users/profilePic`, formData, {
 				headers: {
-					Authorization: `Bearer ${localStorage.getItem("bearer")}`,
+					Authorization: `Bearer ${bearer}`,
 					"Content-Type": "multipart/form-data",
 					enctype: "multipart/form-data"
 				}
