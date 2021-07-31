@@ -57,6 +57,7 @@ return [
             // 'url' => '',
             'host' => 'aaddk0hgxedf0i.cni5l9jtlymn.us-west-2.rds.amazonaws.com',
             'port' => '3306',
+            'database' => 'preditc',
             'username' => 'sail',
             'password' => 'rD4bH7wS0uB3cH6kK5dP8lU0mO7aH5xJ',
 
