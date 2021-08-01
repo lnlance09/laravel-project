@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\PredictionCreated;
 use App\Http\Controllers\CoinController;
 use App\Http\Resources\Prediction as PredictionResource;
 use App\Http\Resources\PredictionCollection;
@@ -90,8 +89,6 @@ class PredictionController extends Controller
             'user_id' => $user->id
         ]);
         $prediction->refresh();
-
-        PredictionCreated::dispatch(new PredictionResource($prediction));
 
         return new PredictionResource($prediction);
     }

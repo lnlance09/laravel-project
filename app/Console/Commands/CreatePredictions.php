@@ -40,7 +40,7 @@ class CreatePredictions extends Command
     public function handle()
     {
         $allCount = User::all()->count();
-        $percent = mt_rand(4, 12);
+        $percent = mt_rand(2, 5);
         $count = ceil($allCount * ($percent / 100));
         $users = User::where('has_api_access', 1)
             ->with(['predictionsLastTwoDays'])

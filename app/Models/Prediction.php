@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\PredictionCreated;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
@@ -10,6 +11,15 @@ use Illuminate\Support\Facades\Log;
 class Prediction extends Model
 {
     use HasFactory, Notifiable;
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => PredictionCreated::class
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -42,7 +52,7 @@ class Prediction extends Model
      * @var array
      */
     protected $casts = [
-        'target_date' => 'datetime:Y-m-d h:i:s'
+        'target_date' => 'datetime'
     ];
 
     public function coin()
