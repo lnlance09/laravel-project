@@ -69,7 +69,7 @@
     <script src="https://www.statcounter.com/counter/counter.js" async></script>
 
     <!-- React build JS -->
-    <script src="/static/js/2.9af2e941.chunk.js"></script>
-    <script src="/static/js/main.08a0cccd.chunk.js"></script>
+    <script src="/static/js/2.db62a8e0.chunk.js"></script>
+    <script src="/static/js/main.b43d4710.chunk.js"></script>
     <script src="/static/js/runtime-main.e1b51eb3.js"></script>
 </html>
