@@ -115,7 +115,19 @@ $logoHeight: 54px;
                 }
 
                 .paddedDropdownItem {
+                    border-top: solid 1px rgba(255, 255, 255, 0.15);
+                    cursor: pointer;
+                    display: block;
                     padding: 18px 10px !important;
+
+                    &:first-of-type {
+                        border-top: none;
+                    }
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.08);
+                        transition: 0.2s;
+                    }
                 }
 
                 .dropdown.bellDropdown {

@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Http\Resources\Prediction as PredictionResource;
+use App\Models\Prediction;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -24,12 +25,12 @@ class PredictionCreated implements ShouldBroadcast
     /**
      * Create a new event instance.
      *
-     * @param  \App\Models\Application  $application
+     * @param  \App\Models\Prediction $prediction
      * @return void
      */
-    public function __construct(PredictionResource $prediction)
+    public function __construct(Prediction $prediction)
     {
-        $this->prediction = $prediction;
+        $this->prediction = new PredictionResource($prediction);
     }
 
     /**

@@ -199,27 +199,33 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 					</>
 				) : (
 					<>
-						{notifications.map((item) => {
-							return (
-								<Dropdown.Item
-									className="paddedDropdownItem"
-									key={item.id}
-									onClick={() => history.push(`/predictions/${item.id}?clear=1`)}
-									value={item.id}
-								>
-									<Image avatar src={item.user.img} />
-									{item.user.name} predicted ${item.coin.symbol} at{" "}
-									<NumberFormat
-										decimalScale={item.predictionPrice > 1 ? 2 : 8}
-										displayType={"text"}
-										prefix={"$"}
-										thousandSeparator
-										value={item.predictionPrice}
-									/>{" "}
-									on {moment(item.targetDate).format("MMM D")}
-								</Dropdown.Item>
-							)
-						})}
+						<div style={{ maxHeight: 360, overflowY: "scroll" }}>
+							{notifications.map((item) => {
+								return (
+									<Dropdown.Item
+										className="paddedDropdownItem"
+										key={item.id}
+										onClick={() =>
+											history.push(`/predictions/${item.id}?clear=1`)
+										}
+										value={item.id}
+									>
+										<Image avatar src={item.coin.logo} />
+										<div style={{ marginLeft: 8, display: "inline-block" }}>
+											{item.user.username} predicted ${item.coin.symbol} at{" "}
+											<NumberFormat
+												decimalScale={item.predictionPrice > 1 ? 2 : 8}
+												displayType={"text"}
+												prefix={"$"}
+												thousandSeparator
+												value={item.predictionPrice}
+											/>{" "}
+											on {moment(item.targetDate).format("MMM D")}
+										</div>
+									</Dropdown.Item>
+								)
+							})}
+						</div>
 						<>
 							<Dropdown.Divider />
 							<Dropdown.Header>
@@ -228,6 +234,7 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 									compact
 									content="Clear all"
 									onClick={clearAllNotifications}
+									style={{ marginBottom: 7 }}
 								/>
 							</Dropdown.Header>
 						</>
@@ -460,10 +467,18 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 				<Menu.Item as="a" onClick={() => history.push("/coins")}>
 					🪙 Coins
 				</Menu.Item>
+				<Menu.Item as="a" onClick={() => history.push("/settings?tab=wallets")}>
+					💰 Wallet
+				</Menu.Item>
 				{auth ? (
-					<Menu.Item as="a" onClick={() => history.push(`/${user.username}`)}>
-						🌞 Profile
-					</Menu.Item>
+					<>
+						<Menu.Item as="a" onClick={() => history.push(`/${user.username}`)}>
+							🌞 Profile
+						</Menu.Item>
+						<Menu.Item as="a" onClick={() => history.push("/settings")}>
+							⚙️ Settings
+						</Menu.Item>
+					</>
 				) : (
 					<Menu.Item as="a" onClick={() => history.push("/login")}>
 						👉 Sign In

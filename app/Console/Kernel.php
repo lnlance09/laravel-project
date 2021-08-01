@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
             ->everySixHours();
 
         $schedule->command('predictions:create')
-            ->everyFourHours();
+            ->everyFifteenMinutes();
 
         $schedule->command('users:create')
             ->everyThirtyMinutes()
