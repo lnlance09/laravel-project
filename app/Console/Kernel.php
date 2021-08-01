@@ -2,8 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\CorrectPredictions;
-use App\Console\Commands\CreateUsers;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -26,8 +24,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(CorrectPredictions::class)->everyMinute();
-        $schedule->command(CreateUsers::class)->everyMinute();
+        $schedule->command('predictions:correct')
+            ->everySixHours();
+
+        $schedule->command('predictions:create')
+            ->everyFourHours();
+
+        $schedule->command('users:create')
+            ->everyThirtyMinutes()
+            ->between('6:30', '17:00')
+            ->timezone('America/New_York');
     }
 
     /**

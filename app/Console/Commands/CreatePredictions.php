@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Prediction;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class CreatePredictions extends Command
@@ -37,6 +39,20 @@ class CreatePredictions extends Command
      */
     public function handle()
     {
-        return 0;
+        $allCount = User::all()->count();
+        $percent = mt_rand(4, 12);
+        $count = ceil($allCount * ($percent / 100));
+        $users = User::where('has_api_access', 1)
+            ->with(['predictionsLastTwoDays'])
+            ->has('predictionsLastTwoDays', '=', 0)
+            ->get()
+            ->random($count);
+
+        foreach ($users as $user) {
+            $count = mt_rand(1, 3);
+            Prediction::factory()->count($count)->create([
+                'user_id' => $user->id
+            ]);
+        }
     }
 }

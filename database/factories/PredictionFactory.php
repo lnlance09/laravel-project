@@ -36,19 +36,14 @@ class PredictionFactory extends Factory
             $margin = mt_rand(-900, -50) / 10;
         }
 
-        // TODO: find out default values
-        if ($margin > 0) {
-            $predictionPrice = '';
-        }
+        $predictionPrice = $currentPrice + ($currentPrice * ($margin / 100));
 
         return [
-            'actual_price' => null,
             'coin_id' => $coin['id'],
             'created_at' => $createdAt,
             'current_price' => $currentPrice,
-            'margin' => null,
-            // 'prediction_price' => $predictionPrice,
-            'status' => 'Pending',
+            'margin' => 0,
+            'prediction_price' => $predictionPrice,
             'target_date' => $targetDate,
             'user_id' => $user['id']
         ];

@@ -12,6 +12,7 @@
     "fomantic-ui-css": "^2.8.8",
     "highcharts": "^9.1.1",
     "highcharts-react-official": "^3.0.0",
+    "js-file-download": "^0.4.12",
     "keythereum": "^1.2.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",

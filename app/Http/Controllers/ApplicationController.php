@@ -139,6 +139,31 @@ class ApplicationController extends Controller
         return new ApplicationResource($app);
     }
 
+    public function sendMsg(Request $request)
+    {
+        $request->validate([
+            'msg' => 'bail|required',
+        ]);
+
+        $msg = $request->input('msg');
+
+        try {
+            Mail::raw($msg, function ($message) {
+                $message->from('noreply@preditc.com', 'Preditc');
+                $message->to('lnlance09@gmail.com');
+                $message->subject('Someone from Preditc has contacted you');
+            });
+        } catch (\Exception $e) {
+            return response([
+                'message' => 'Error sending email'
+            ], 401);
+        }
+
+        return response([
+            'success' => true
+        ]);
+    }
+
     /**
      * Display the specified resource.
      *

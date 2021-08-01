@@ -79,13 +79,12 @@ class PredictionController extends Controller
         $coin = $coinController->setLatestCoinInfo($coin);
         $currentPrice = $coin->last_price;
         $priceDiff = $predictionPrice - $currentPrice;
-        $margin = ($priceDiff / $currentPrice) * 100;
 
         $prediction = Prediction::create([
             'coin_id' => $coinId,
             'current_price' => $currentPrice,
             'explanation' => $explanation,
-            'margin' => $margin,
+            'margin' => 0,
             'prediction_price' => $predictionPrice,
             'target_date' => $targetDate,
             'user_id' => $user->id

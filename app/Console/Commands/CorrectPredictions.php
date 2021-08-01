@@ -42,7 +42,24 @@ class CorrectPredictions extends Command
     public function handle()
     {
         $now = Carbon::now();
-        $predictions = Prediction::whereBetween('target_date', [$now, $now->addHours(1)])->get();
-        Log::alert($predictions);
+        $nowFormat = $now->format('Y-m-d h:i:s');
+        $thenFormat = $now->addHours(6)->format('Y-m-d h:i:s');
+        $predictions = Prediction::with(['coin'])
+            ->where('status', 'Pending')
+            ->whereBetween('target_date', [$nowFormat, $thenFormat])
+            ->get();
+
+        foreach ($predictions as $p) {
+            $coinId = $p->coin->cmc_id;
+            $predictionPrice = $p->prediction_price;
+            $currentPrice = (float) Coin::getPriceAtTimeCMC($coinId, $now->timestamp);
+            $margin = 100 - ($predictionPrice / $currentPrice) * 100;
+            $status = abs($margin) > 5 ? 'Incorrect' : 'Correct';
+
+            $p->actual_price = $currentPrice;
+            $p->margin = $margin;
+            $p->status = $status;
+            $p->save();
+        }
     }
 }

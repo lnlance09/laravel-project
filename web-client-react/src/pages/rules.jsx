@@ -1,3 +1,4 @@
+import { Header } from "semantic-ui-react"
 import { useContext } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import DefaultLayout from "layouts/default"
@@ -17,6 +18,12 @@ const Rules = ({ history }) => {
 			textAlign="center"
 		>
 			<DisplayMetaTags page="rules" />
+
+			<Header as="h1" content="Rules" inverted={inverted} />
+
+			<Header as="p" inverted={inverted} style={{ fontWeight: "normal" }}>
+				Preditc is a
+			</Header>
 		</DefaultLayout>
 	)
 }

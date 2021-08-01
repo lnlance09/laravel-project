@@ -4,25 +4,25 @@ import DefaultLayout from "layouts/default"
 import PropTypes from "prop-types"
 import ThemeContext from "themeContext"
 
-const Sitemap = ({ history }) => {
+const Privacy = ({ history }) => {
 	const { state } = useContext(ThemeContext)
 	const { inverted } = state
 
 	return (
 		<DefaultLayout
-			activeItem="sitemap"
-			containerClassName="sitemapPage"
+			activeItem="privacy"
+			containerClassName="privacyPage"
 			history={history}
 			inverted={inverted}
 			textAlign="center"
 		>
-			<DisplayMetaTags page="sitemap" />
+			<DisplayMetaTags page="privacy" />
 		</DefaultLayout>
 	)
 }
 
-Sitemap.propTypes = {
+Privacy.propTypes = {
 	history: PropTypes.object
 }
 
-export default Sitemap
+export default Privacy

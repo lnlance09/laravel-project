@@ -42,7 +42,7 @@ class Prediction extends Model
      * @var array
      */
     protected $casts = [
-        'target_date' => 'datetime'
+        'target_date' => 'datetime:Y-m-d h:i:s'
     ];
 
     public function coin()

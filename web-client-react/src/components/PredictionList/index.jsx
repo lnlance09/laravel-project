@@ -65,7 +65,9 @@ const PredictionList = ({ inverted, loading, loadingMore, onClickPrediction, pre
 											On <Moment date={targetDate} format="MMM D, YYYY" />•{" "}
 											Predicted <Moment date={createdAt} fromNow />
 										</Item.Meta>
-										<Item.Meta>{margin}% margin</Item.Meta>
+										{status !== "Pending" && (
+											<Item.Meta>{margin}% margin</Item.Meta>
+										)}
 										<Item.Description>{explanation}</Item.Description>
 										<Item.Extra>
 											<Label
