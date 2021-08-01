@@ -33,7 +33,7 @@ class User extends JsonResource
             'accuracy' => $activeCount === 0 ? 0 : ($correctCount / $activeCount) * 100,
             'bio' => empty($this->bio) ? 'Apparently, this trader prefers to keep an air of mystery about them.' : $this->bio,
             'correctPredictionsCount' => $correctCount,
-            'email' => $this->email,
+            // 'email' => $this->email,
             'id' => $this->id,
             'img' => env('AWS_URL', 'https://preditc.s3.us-west-2.amazonaws.com/') . $this->img,
             'incorrectPredictionsCount' => $incorrectCount,

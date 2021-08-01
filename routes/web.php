@@ -134,6 +134,12 @@ Route::get('/predictions', function () use ($seo) {
     return view('index', $seo);
 });
 
+Route::get('/privacy', function () use ($seo) {
+    $seo['title'] = 'Privacy - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'sitemap';
+    return view('index', $seo);
+});
+
 Route::get('/rules', function () use ($seo) {
     $seo['title'] = 'Rules - ' . $seo['siteName'];
     $seo['url'] = $seo['baseUrl'] . 'rules';
@@ -146,13 +152,7 @@ Route::get('/settings', function () use ($seo) {
     return view('index', $seo);
 });
 
-Route::get('/sitemap', function () use ($seo) {
-    $seo['title'] = 'Sitemap - ' . $seo['siteName'];
-    $seo['url'] = $seo['baseUrl'] . 'sitemap';
-    return view('index', $seo);
-});
-
-Route::get('sitemap.pages', function () {
+Route::get('sitemap', function () {
     $sitemap = App::make('sitemap');
     $sitemap->setCache('laravel.sitemap', 60);
 
@@ -185,7 +185,7 @@ Route::get('sitemap.pages', function () {
         $sitemap->add(URL::to('/contact'), null, '0.4', 'monthly');
         $sitemap->add(URL::to('/rules'), null, '0.4', 'monthly');
         $sitemap->add(URL::to('/about'), null, '0.4', 'monthly');
-        $sitemap->add(URL::to('/sitemap'), null, '0.4', 'monthly');
+        $sitemap->add(URL::to('/privacy'), null, '0.4', 'monthly');
     }
 
     return $sitemap->render('xml');

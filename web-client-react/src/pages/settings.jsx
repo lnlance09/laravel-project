@@ -21,6 +21,7 @@ import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
 import axios from "axios"
 import DefaultLayout from "layouts/default"
+import fileDownload from "js-file-download"
 import initialState from "states/settings"
 import logger from "use-reducer-logger"
 import Moment from "react-moment"
@@ -181,7 +182,10 @@ const Settings = ({ history }) => {
 				setWalletAddress(address)
 				setWalletPrivateKey(privateKey)
 				setWalletPublicKey(publicKey)
-				// createKeyStore(privateKey)
+
+				const content = `address: ${address} \npublic key: ${publicKey} \nprivate key: ${privateKey}`
+				fileDownload(content, `ether-wallet-${address}-recovery.txt`)
+
 				toast.success("Wallet successfully created!")
 			})
 			.catch((error) => {

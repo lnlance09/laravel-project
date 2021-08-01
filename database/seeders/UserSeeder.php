@@ -8,7 +8,17 @@ use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
-    const USER_COUNT = 25;
+    public $userCount = 25;
+
+    /**
+     * Instantiate a new  instance.
+     *
+     * @return void
+     */
+    public function __construct($count = 25)
+    {
+        $this->userCount = $count;
+    }
 
     /**
      * Run the database seeds.
@@ -22,6 +32,6 @@ class UserSeeder extends Seeder
             return;
         }
 
-        User::factory()->count(self::USER_COUNT)->create();
+        User::factory()->count($this->userCount)->create();
     }
 }

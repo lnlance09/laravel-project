@@ -55,7 +55,7 @@ class UserFactory extends Factory
             $coin = current(Coin::all()->random(1)->toArray());
             $coinId = $coin['cmc_id'];
 
-            $target = $this->faker->dateTimeBetween('-6 months', '-7 days');
+            $target = $this->faker->dateTimeBetween('-40 days', '-4 days');
             $targetDate = $target->getTimestamp();
 
             $minsBefore = mt_rand(7200, 72000);
@@ -75,7 +75,6 @@ class UserFactory extends Factory
 
             // price at target date
             $actualPrice = (float) Coin::getPriceAtTimeCMC($coinId, $targetDate);
-            // dump($actualPrice);
             if (!$actualPrice || $actualPrice === 0) {
                 continue;
             }
@@ -106,7 +105,7 @@ class UserFactory extends Factory
         ])->get('https://api.generated.photos/api/frontend/v1/images', [
             'age' => $age,
             'gender' => $gender,
-            'hair_length' => 'long',
+            'hair_length' => $gender === 'female' ? 'long' : 'short',
             'order_by' => $order_by,
             'page' => $page,
             'per_page' => $perPage
@@ -129,7 +128,8 @@ class UserFactory extends Factory
     public function definition()
     {
         $faker = $this->faker;
-        $gender = mt_rand(1, 20) > 13 ? 'female' : 'male';
+        // 75% female
+        $gender = mt_rand(1, 20) > 15 ? 'female' : 'male';
         $separator = $faker->randomElement(['-', '_', '.']);
         $createdAt = $faker->dateTimeBetween('-14 months', 'now');
         $verifiedAt = $faker->dateTimeBetween($createdAt, '+35 minutes');
@@ -139,14 +139,8 @@ class UserFactory extends Factory
         $username = $firstName . $separator . $lastName . '' . mt_rand(10, 9999);
         $password = Str::random(mt_rand(8, 24));
 
-
-        if ($gender === 'male') {
-            $contents = file_get_contents('https://thispersondoesnotexist.com/image');
-        } else {
-            $profilePic = $this->getImage('young-adult', 'female', 1, mt_rand(1, 550000));
-            $contents = file_get_contents($profilePic);
-        }
-
+        $profilePic = $this->getImage('young-adult', $gender, 1, mt_rand(1, 250000));
+        $contents = file_get_contents($profilePic);
         $img = 'users/' . Str::random(24) . '.jpg';
         Storage::disk('s3')->put($img, $contents);
 

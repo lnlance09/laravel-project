@@ -22,6 +22,8 @@ Route::get('/applications', [ApplicationController::class, 'index'])->middleware
 Route::post('/applications/{id}/respond', [ApplicationController::class, 'respond'])->middleware(['auth:api', 'verified']);
 Route::post('/applications/{id}/update', [ApplicationController::class, 'update'])->middleware(['auth:api', 'verified']);
 
+Route::post('/contact', [ApplicationController::class, 'sendMsg']);
+
 Route::get('/coins', [CoinController::class, 'index']);
 Route::get('/coins/graph', [CoinController::class, 'graph']);
 Route::get('/coins/options', [CoinController::class, 'showOptions']);

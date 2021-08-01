@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -115,6 +116,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function pendingPredictions()
     {
         return $this->hasMany(Prediction::class)->where('status', '=', 'Pending');
+    }
+
+    public function predictionsLastTwoDays()
+    {
+        $ago = Carbon::now()->subDays(2)->format('Y-m-d h:i:s');
+        return $this->hasMany(Prediction::class)->where('created_at', '>=', $ago);
     }
 
     public function getAccuracyAttribute()
