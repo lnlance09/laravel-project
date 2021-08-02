@@ -300,8 +300,8 @@ class UserController extends Controller
             ], 401);
         }
 
-        $rememberToken = Str::random(10);
-        $user->remember_token = $rememberToken;
+        $forgotCode = Str::random(12);
+        $user->forgot_code = $forgotCode;
         $user->save();
         $user->refresh();
 
@@ -357,6 +357,34 @@ class UserController extends Controller
             'bearer' => $user->api_token,
             'user' => new UserResource($user),
             'verify' => $user->email_verified_at === null
+        ]);
+    }
+
+    public function recoverPassword(Request $request)
+    {
+        $request->validate([
+            'reset' => 'required',
+            'newPassword' => ['required', Password::min(8)],
+            'confirmPassword' => ['same:newPassword']
+        ]);
+
+        $password = $request->input('newPassword');
+        $reset = $request->input('reset');
+
+        $user = User::where('forgot_code', $reset)->first();
+        if (empty($user)) {
+            return response([
+                'message' => 'Incorrect token'
+            ], 401);
+        }
+
+        $user->password = $password;
+        $user->forgot_code = null;
+        $user->save();
+        $user->refresh();
+
+        return response()->json([
+            'success' => true
         ]);
     }
 
@@ -448,6 +476,26 @@ class UserController extends Controller
 
         return response()->json([
             'verify' => false
+        ]);
+    }
+
+    public function verifyForgotCode(Request $request)
+    {
+        $request->validate([
+            'code' => 'required',
+        ]);
+
+        $code = $request->input('code');
+        $user = User::where('forgot_code', $code)->first();
+
+        if (empty($user)) {
+            return response([
+                'message' => 'Invalid code'
+            ], 401);
+        }
+
+        return response([
+            'message' => 'Success'
         ]);
     }
 }

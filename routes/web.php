@@ -160,6 +160,9 @@ Route::get('sitemap', function () {
         // home page
         $sitemap->add(URL::to('/'), Carbon::now()->subMinutes(52), '1.0', 'daily');
 
+        // create a wallet
+        $sitemap->add(URL::to('/wallet/create'), null, '0.9', 'monthly');
+
         // predictions
         $predictions = DB::table('predictions')->orderBy('id', 'asc')->get();
         foreach ($predictions as $p) {
@@ -227,5 +230,11 @@ Route::get('/{username}', function ($username) use ($seo) {
     $seo['title'] = $user->name . ' - ' . $seo['siteName'];
     $seo['url'] = $seo['baseUrl']  . $username;
 
+    return view('index', $seo);
+});
+
+Route::get('/wallet/create', function () use ($seo) {
+    $seo['title'] = 'Create a Wallet - ' . $seo['siteName'];
+    $seo['url'] = $seo['baseUrl'] . 'wallet/create';
     return view('index', $seo);
 });

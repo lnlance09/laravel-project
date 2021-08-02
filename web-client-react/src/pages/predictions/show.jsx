@@ -25,11 +25,11 @@ const Predictions = ({ history }) => {
 		process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
 		initialState
 	)
-	const [activeItem, setActiveItem] = useState(null)
+	const [activeItem, setActiveItem] = useState("created_at")
 	const [coinId, setCoinId] = useState(null)
 	const [coinName, setCoinName] = useState("")
 	const [coinOptions, setCoinOptions] = useState([])
-	const [createdAt, setCreatedAt] = useState(null)
+	const [createdAt, setCreatedAt] = useState("desc")
 	const [direction, setDirection] = useState(null)
 	const [hasMore, setHasMore] = useState(false)
 	const [loading, setLoading] = useState(true)
@@ -105,7 +105,8 @@ const Predictions = ({ history }) => {
 		setCoinId(value)
 		const name = await coinOptions.filter((coin) => coin.value === value)
 		setCoinName(name[0].name)
-		getPredictions(value, status, activeItem, direction)
+		const sort = activeItem === "coin" ? null : activeItem
+		getPredictions(value, status, sort, direction)
 	}
 
 	const onClickPrediction = (e, id) => {
@@ -162,10 +163,12 @@ const Predictions = ({ history }) => {
 						scrolling
 						trigger={
 							<Button
+								active={activeItem === "coin"}
 								color="teal"
 								fluid
 								icon={coinId ? true : false}
 								inverted={inverted}
+								onClick={() => setActiveItem("coin")}
 								size="big"
 							>
 								{coinId ? coinName : "Coin"}
@@ -194,10 +197,12 @@ const Predictions = ({ history }) => {
 						options={statusOptions}
 						trigger={
 							<Button
+								active={activeItem === "status"}
 								color="red"
 								content="Status"
 								fluid
 								inverted={inverted}
+								onClick={() => setActiveItem("status")}
 								size="big"
 							/>
 						}
@@ -205,6 +210,7 @@ const Predictions = ({ history }) => {
 				</Grid.Column>
 				<Grid.Column width={3}>
 					<Button
+						active={activeItem === "created_at"}
 						color="orange"
 						content="Created At"
 						fluid
@@ -216,6 +222,7 @@ const Predictions = ({ history }) => {
 				</Grid.Column>
 				<Grid.Column width={3}>
 					<Button
+						active={activeItem === "target_date"}
 						color="green"
 						content="Date"
 						fluid
@@ -227,6 +234,7 @@ const Predictions = ({ history }) => {
 				</Grid.Column>
 				<Grid.Column width={3}>
 					<Button
+						active={activeItem === "margin"}
 						color="purple"
 						content="Margin"
 						fluid

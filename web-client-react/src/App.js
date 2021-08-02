@@ -7,6 +7,8 @@ import Applications from "pages/applications"
 import Coin from "pages/coins"
 import Coins from "pages/coins/show"
 import Contact from "pages/contact"
+import CreateWallet from "pages/createWallet"
+import Forgot from "pages/forgot"
 import history from "history.js"
 import Login from "pages/login"
 import NotFound from "pages/notFound"
@@ -63,6 +65,14 @@ const App = () => {
 
 							<Route component={Contact} exact path="/contact" />
 
+							<Route
+								exact
+								path="/forgot"
+								render={(props) => (
+									<Forgot key={window.location.pathname} {...props} />
+								)}
+							/>
+
 							<Route component={Login} exact path="/login" />
 
 							<Route
@@ -92,6 +102,14 @@ const App = () => {
 								path="/traders"
 								render={(props) => (
 									<Traders key={window.location.pathname} {...props} />
+								)}
+							/>
+
+							<Route
+								exact
+								path="/wallet/create"
+								render={(props) => (
+									<CreateWallet key={window.location.pathname} {...props} />
 								)}
 							/>
 

@@ -45,6 +45,20 @@ export const DisplayMetaTags = ({ page, state }) => {
 				title: `Contact Us - ${siteName}`
 			}
 			break
+		case "createWallet":
+			metaTags = {
+				description: "Create an ethereum wallet quickly and securely",
+				img,
+				title: `Create a Wallet - ${siteName}`
+			}
+			break
+		case "forgot":
+			metaTags = {
+				description: "Reset your password",
+				img,
+				title: `Reset Your Password - ${siteName}`
+			}
+			break
 		case "prediction":
 			const { prediction } = state
 			const pUser = prediction.user
