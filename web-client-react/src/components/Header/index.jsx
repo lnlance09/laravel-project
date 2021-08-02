@@ -55,7 +55,6 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 				})
 
 				window.Echo.private(`users.${user.id}`).listen("ApplicationSent", (e) => {
-					console.log("application", e)
 					incrementNotification()
 				})
 			} else {
@@ -68,7 +67,6 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 			}
 
 			window.Echo.channel("publicPredictions").listen("PredictionCreated", (e) => {
-				console.log("prediction", e)
 				const { prediction } = e
 				addNotification(prediction)
 			})
