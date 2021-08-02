@@ -162,7 +162,7 @@ const Predictions = ({ history }) => {
 						trigger={
 							<Button
 								active={activeItem === "coin"}
-								color="olive"
+								color="blue"
 								fluid
 								icon={coinId ? true : false}
 								inverted={inverted}
@@ -196,7 +196,7 @@ const Predictions = ({ history }) => {
 						trigger={
 							<Button
 								active={activeItem === "status"}
-								color="green"
+								color="blue"
 								content="Status"
 								fluid
 								inverted={inverted}
@@ -221,7 +221,7 @@ const Predictions = ({ history }) => {
 				<Grid.Column width={3}>
 					<Button
 						active={activeItem === "target_date"}
-						color="teal"
+						color="blue"
 						content="Date"
 						fluid
 						icon={activeItem === "target_date" && setIcon(targetDate)}
@@ -233,7 +233,7 @@ const Predictions = ({ history }) => {
 				<Grid.Column width={3}>
 					<Button
 						active={activeItem === "margin"}
-						color="violet"
+						color="blue"
 						content="Margin"
 						fluid
 						icon={activeItem === "margin" && setIcon(margin)}
