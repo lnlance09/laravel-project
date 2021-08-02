@@ -23,9 +23,6 @@ const Footer = ({ history, inverted }) => {
 									<List.Item as="a" onClick={() => history.push("/rules")}>
 										Rules
 									</List.Item>
-									<List.Item as="a" onClick={() => history.push("/privacy")}>
-										Privacy
-									</List.Item>
 									<List.Item as="a" onClick={() => history.push("/contact")}>
 										Contact
 									</List.Item>

@@ -49,7 +49,7 @@ const About = ({ history }) => {
 		>
 			<DisplayMetaTags page="about" />
 
-			<Header as="h1" className="massive" content="About" inverted={inverted} />
+			<Header as="h1" content="About" inverted={inverted} />
 
 			<Header as="p" inverted={inverted}>
 				Preditc is a social network for abmitous cryptocurrency traders looking to make
@@ -62,20 +62,28 @@ const About = ({ history }) => {
 
 			<Header as="h2" content="Supported Coins" inverted={inverted} />
 
-			<Header as="p" inverted={inverted}>
-				Predictions about the following <Link to="/coins">{coins.length}</Link> coins are
-				supported on Preditc.
-			</Header>
+			{coins.length > 0 && (
+				<>
+					<Header as="p" inverted={inverted}>
+						Predictions about the following{" "}
+						<Link to="/coins">{coins.length === 0}</Link> coins are supported on
+						Preditc.
+					</Header>
 
-			<List bulleted inverted={inverted} relaxed size="big">
-				{coins.map((coin) => (
-					<List.Item onClick={() => history.push(`/coins/${coin.slug}`)} value="*">
-						<List.Content>
-							<List.Header>{coin.name}</List.Header>
-						</List.Content>
-					</List.Item>
-				))}
-			</List>
+					<List bulleted inverted={inverted} relaxed size="big">
+						{coins.map((coin) => (
+							<List.Item
+								onClick={() => history.push(`/coins/${coin.slug}`)}
+								value="*"
+							>
+								<List.Content>
+									<List.Header>{coin.name}</List.Header>
+								</List.Content>
+							</List.Item>
+						))}
+					</List>
+				</>
+			)}
 
 			<Divider hidden />
 		</DefaultLayout>
