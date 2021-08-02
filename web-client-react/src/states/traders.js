@@ -1,3 +1,3 @@
-const initialState = { traders: [{}, {}, {}, {}] }
+const initialState = { traders: [{}, {}, {}, {}, {}, {}] }
 
 export default initialState
