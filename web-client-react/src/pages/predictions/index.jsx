@@ -14,6 +14,7 @@ import { useContext, useEffect, useReducer } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import { RedditShareButton, TwitterShareButton } from "react-share"
 import { getConfig } from "options/toast"
+import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 import { dateDiff } from "utils/dateFunctions"
 import { setIconColor, setIconName } from "utils/textFunctions"
@@ -107,6 +108,7 @@ const Prediction = ({ history, match }) => {
 				<>
 					<Header as="h1" className="predictionHeader" inverted={inverted}>
 						<Image
+							bordered
 							circular
 							onClick={() => history.push(`/coins/${coin.slug}`)}
 							onError={(i) => (i.target.src = PlaceholderPic)}
@@ -114,7 +116,7 @@ const Prediction = ({ history, match }) => {
 							src={coin.logo}
 						/>
 						<Header.Content>
-							{coin.symbol} to{" "}
+							<Link to={`/coins/${coin.slug}`}>{coin.symbol}</Link> to{" "}
 							<NumberFormat
 								decimalScale={predictionPrice > 1 ? 2 : 8}
 								displayType={"text"}

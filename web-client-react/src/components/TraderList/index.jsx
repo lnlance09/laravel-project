@@ -1,5 +1,5 @@
 import "./style.scss"
-import { Card, Image, Label, Placeholder } from "semantic-ui-react"
+import { Card, Image, Placeholder } from "semantic-ui-react"
 import { formatPlural } from "utils/textFunctions"
 import PlaceholderPic from "images/avatar/large/steve.jpg"
 import PropTypes from "prop-types"
