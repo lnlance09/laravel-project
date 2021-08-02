@@ -43,13 +43,13 @@ const TraderList = ({ inverted, loading, loadingMore, onClickTrader, traders }) 
 									</Card.Content>
 									<Card.Content extra>
 										<p>
-											<b>{accuracy.toFixed(2)}%</b> accurate
+											<b>{predictionsCount}</b>{" "}
+											{formatPlural(predictionsCount, "prediction")}
 										</p>
 									</Card.Content>
 									<Card.Content extra>
-										<p>
-											<b>{predictionsCount}</b>{" "}
-											{formatPlural(predictionsCount, "prediction")}
+										<p className={accuracy >= 50 ? "green" : "red"}>
+											<b>{accuracy.toFixed(2)}%</b> accurate
 										</p>
 									</Card.Content>
 								</>
