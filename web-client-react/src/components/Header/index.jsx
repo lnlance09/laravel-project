@@ -408,7 +408,8 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 								<>
 									<Button
 										compact
-										content="Log In"
+										content="Sign In"
+										icon="sign in"
 										onClick={() => history.push("/login")}
 										secondary
 										size="large"
@@ -416,8 +417,9 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 									<Button
 										compact
 										color="green"
-										content="Sign Up"
-										onClick={() => history.push("/login?type=join")}
+										content="Create Wallet"
+										icon="plus"
+										onClick={() => history.push("/wallet/create")}
 										size="large"
 									/>
 								</>
@@ -468,7 +470,7 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 				<Menu.Item as="a" onClick={() => history.push("/coins")}>
 					🪙 Coins
 				</Menu.Item>
-				<Menu.Item as="a" onClick={() => history.push("/settings?tab=wallets")}>
+				<Menu.Item as="a" onClick={() => history.push("/wallet/create")}>
 					💰 Wallet
 				</Menu.Item>
 				{auth ? (

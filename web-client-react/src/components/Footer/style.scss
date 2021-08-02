@@ -20,6 +20,7 @@
         .etherLink {
             color: $white;
             text-decoration: underline;
+            word-break: break-all;
         }
     }
 }

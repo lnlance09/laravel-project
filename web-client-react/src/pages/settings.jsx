@@ -1,5 +1,6 @@
 import {
 	Button,
+	Card,
 	Divider,
 	Form,
 	Grid,
@@ -339,58 +340,71 @@ const Settings = ({ history }) => {
 						{activeItem === "profile_info" && (
 							<>
 								<Header content="Update bio" inverted={inverted} />
-								<Form inverted={inverted} size="large">
-									<Form.Field>
-										<TextArea
-											onChange={onChangeBio}
-											placeholder="Tell us about yourself..."
-											value={bio}
-										/>
-									</Form.Field>
-									<Button
-										color="blue"
-										content="Update"
-										fluid
-										onClick={() =>
-											updateUser({ bio }, "Your bio has been updated")
-										}
-										size="large"
-									/>
-								</Form>
-
-								<Header content="Change username" inverted={inverted} />
-								<Form inverted={inverted} size="large">
-									<Form.Group>
-										<Form.Field width={12}>
-											<div
-												className={`ui labeled input fluid ${
-													inverted ? "inverted" : ""
-												}`}
-											>
-												<div className={`ui basic label`}>@</div>
-												<DebounceInput
-													debounceTimeout={800}
-													minLength={1}
-													onChange={onChangeUsername}
-													placeholder="Pick a username"
-													value={username}
+								<Card className={inverted ? "inverted" : null} fluid>
+									<Card.Content>
+										<Form inverted={inverted} size="large">
+											<Form.Field>
+												<TextArea
+													onChange={onChangeBio}
+													placeholder="Tell us about yourself..."
+													value={bio}
 												/>
-											</div>
-										</Form.Field>
-										<Form.Field width={4}>
+											</Form.Field>
 											<Button
 												color="blue"
-												content="Change"
-												disabled={!usernameAvailable || username === ""}
+												content="Update"
 												fluid
 												onClick={() =>
-													updateUser({ username }, "Username updated")
+													updateUser({ bio }, "Your bio has been updated")
 												}
 												size="large"
 											/>
-										</Form.Field>
-									</Form.Group>
-								</Form>
+										</Form>
+									</Card.Content>
+								</Card>
+
+								<Header content="Change username" inverted={inverted} />
+								<Card className={inverted ? "inverted" : null} fluid>
+									<Card.Content>
+										<Form inverted={inverted} size="large">
+											<Form.Group style={{ marginBottom: 0 }}>
+												<Form.Field width={12}>
+													<div
+														className={`ui labeled input fluid ${
+															inverted ? "inverted" : ""
+														}`}
+													>
+														<div className={`ui basic label`}>@</div>
+														<DebounceInput
+															debounceTimeout={800}
+															minLength={1}
+															onChange={onChangeUsername}
+															placeholder="Pick a username"
+															value={username}
+														/>
+													</div>
+												</Form.Field>
+												<Form.Field width={4}>
+													<Button
+														color="blue"
+														content="Change"
+														disabled={
+															!usernameAvailable || username === ""
+														}
+														fluid
+														onClick={() =>
+															updateUser(
+																{ username },
+																"Username updated"
+															)
+														}
+														size="large"
+													/>
+												</Form.Field>
+											</Form.Group>
+										</Form>
+									</Card.Content>
+								</Card>
 
 								<Message
 									className={inverted ? "inverted" : ""}
@@ -412,178 +426,194 @@ const Settings = ({ history }) => {
 						{activeItem === "password" && (
 							<>
 								<Header content="Change password" inverted={inverted} />
-								<Form inverted={inverted} size="large">
-									<Form.Field>
-										<label>Current password</label>
-										<Input
-											fluid
-											inverted={inverted}
-											onChange={onChangeCurrentPassword}
-											placeholder="Current password"
-											type="password"
-											value={currentPassword}
-										/>
-									</Form.Field>
-									<Form.Field>
-										<label>New password</label>
-										<Input
-											fluid
-											inverted={inverted}
-											onChange={onChangeNewPassword}
-											placeholder="New password"
-											type="password"
-											value={newPassword}
-										/>
-									</Form.Field>
-									<Form.Field>
-										<label>Confirm password</label>
-										<Input
-											fluid
-											inverted={inverted}
-											onChange={onChangeConfirmPassword}
-											placeholder="Retype new password"
-											type="password"
-											value={confirmPassword}
-										/>
-									</Form.Field>
-									<Form.Field>
-										<Button
-											color="blue"
-											content="Change"
-											fluid
-											onClick={() => changePassword()}
-											size="large"
-										/>
-									</Form.Field>
-								</Form>
+								<Card className={inverted ? "inverted" : null} fluid>
+									<Card.Content>
+										<Form inverted={inverted} size="large">
+											<Form.Field>
+												<label>Current password</label>
+												<Input
+													fluid
+													inverted={inverted}
+													onChange={onChangeCurrentPassword}
+													placeholder="Current password"
+													type="password"
+													value={currentPassword}
+												/>
+											</Form.Field>
+											<Form.Field>
+												<label>New password</label>
+												<Input
+													fluid
+													inverted={inverted}
+													onChange={onChangeNewPassword}
+													placeholder="New password"
+													type="password"
+													value={newPassword}
+												/>
+											</Form.Field>
+											<Form.Field>
+												<label>Confirm password</label>
+												<Input
+													fluid
+													inverted={inverted}
+													onChange={onChangeConfirmPassword}
+													placeholder="Retype new password"
+													type="password"
+													value={confirmPassword}
+												/>
+											</Form.Field>
+											<Form.Field>
+												<Button
+													color="blue"
+													content="Change"
+													fluid
+													onClick={() => changePassword()}
+													size="large"
+												/>
+											</Form.Field>
+										</Form>
+									</Card.Content>
+								</Card>
 							</>
 						)}
 
 						{activeItem === "wallets" && (
 							<>
 								<Header inverted={inverted}>Add an existing wallet</Header>
-								<Form inverted={inverted} size="large">
-									<Form.Group>
-										<Form.Field width={12}>
-											<Input
-												fluid
-												icon="ethereum"
-												iconPosition="left"
-												onChange={onChangeAddress}
-												placeholder="Enter an Ethereum address"
-												value={address}
-											/>
-										</Form.Field>
-										<Form.Field width={4}>
-											<Button
-												color="green"
-												content="Add"
-												disabled={!validator.isEthereumAddress(address)}
-												fluid
-												icon="plus"
-												onClick={async () => {
-													const add = await addWallet(address)
-													console.log("add", add)
-													if (add) {
-														setAddress("")
-													}
-												}}
-												size="large"
-											/>
-										</Form.Field>
-									</Form.Group>
+								<Card className={inverted ? "inverted" : null} fluid>
+									<Card.Content>
+										<Form inverted={inverted} size="large">
+											<Form.Group style={{ marginBottom: 0 }}>
+												<Form.Field width={12}>
+													<Input
+														fluid
+														icon="ethereum"
+														iconPosition="left"
+														onChange={onChangeAddress}
+														placeholder="Enter an Ethereum address"
+														value={address}
+													/>
+												</Form.Field>
+												<Form.Field width={4}>
+													<Button
+														color="green"
+														content="Add"
+														disabled={
+															!validator.isEthereumAddress(address)
+														}
+														fluid
+														icon="plus"
+														onClick={async () => {
+															const add = await addWallet(address)
+															console.log("add", add)
+															if (add) {
+																setAddress("")
+															}
+														}}
+														size="large"
+													/>
+												</Form.Field>
+											</Form.Group>
+										</Form>
+									</Card.Content>
+								</Card>
 
-									<Divider hidden />
+								<Divider hidden />
 
-									<Header inverted={inverted}>Create a new wallet</Header>
-									<Form.Field className="newWallet">
-										<label>Address</label>
-										<CopyToClipboard
-											text={walletAddress}
-											onCopy={() => toast.warn("Copied to clipboard")}
-										>
-											<Input
-												disabled={!createMode}
-												fluid
-												icon="paperclip"
-												iconPosition="left"
-												readOnly
-												value={walletAddress}
-											/>
-										</CopyToClipboard>
-									</Form.Field>
-									<Form.Field className="newWallet">
-										<label>Public key</label>
-										<CopyToClipboard
-											text={walletAddress}
-											onCopy={() => toast.warn("Copied to clipboard")}
-										>
-											<Input
-												disabled={!createMode}
-												fluid
-												icon="paperclip"
-												iconPosition="left"
-												readOnly
-												value={walletPublicKey}
-											/>
-										</CopyToClipboard>
-									</Form.Field>
-									<Form.Field className="newWallet">
-										<label>Private key</label>
-										<CopyToClipboard
-											text={walletAddress}
-											onCopy={() => toast.warn("Copied to clipboard")}
-										>
-											<Input
-												disabled={!createMode}
-												fluid
-												icon="paperclip"
-												iconPosition="left"
-												readOnly
-												value={walletPrivateKey}
-											/>
-										</CopyToClipboard>
-									</Form.Field>
-									<Form.Field>
-										{createMode ? (
-											<Button.Group fluid size="large">
-												<Button
-													color="green"
-													content="Use this wallet"
-													disabled={useDisabled}
-													icon="checkmark"
-													onClick={() => {
-														addWallet(walletAddress)
-														setUseDisabled(true)
-													}}
-												/>
-												<Button.Or />
-												<Button
-													color="blue"
-													content="Create another"
-													icon="plus"
-													onClick={() => {
-														createWallet()
-														setUseDisabled(false)
-													}}
-												/>
-											</Button.Group>
-										) : (
-											<Button
-												color="blue"
-												content="Create a wallet"
-												fluid
-												icon="ethereum"
-												onClick={() => {
-													createWallet()
-													setCreateMode(true)
-													setUseDisabled(false)
-												}}
-												size="large"
-											/>
-										)}
-									</Form.Field>
-								</Form>
+								<Header inverted={inverted}>Create a new wallet</Header>
+								<Card className={inverted ? "inverted" : null} fluid>
+									<Card.Content>
+										<Form inverted={inverted} size="large">
+											<Form.Field className="newWallet">
+												<label>Address</label>
+												<CopyToClipboard
+													text={walletAddress}
+													onCopy={() => toast.warn("Copied to clipboard")}
+												>
+													<Input
+														disabled={!createMode}
+														fluid
+														icon="paperclip"
+														iconPosition="left"
+														readOnly
+														value={walletAddress}
+													/>
+												</CopyToClipboard>
+											</Form.Field>
+											<Form.Field className="newWallet">
+												<label>Public key</label>
+												<CopyToClipboard
+													text={walletAddress}
+													onCopy={() => toast.warn("Copied to clipboard")}
+												>
+													<Input
+														disabled={!createMode}
+														fluid
+														icon="paperclip"
+														iconPosition="left"
+														readOnly
+														value={walletPublicKey}
+													/>
+												</CopyToClipboard>
+											</Form.Field>
+											<Form.Field className="newWallet">
+												<label>Private key</label>
+												<CopyToClipboard
+													text={walletAddress}
+													onCopy={() => toast.warn("Copied to clipboard")}
+												>
+													<Input
+														disabled={!createMode}
+														fluid
+														icon="paperclip"
+														iconPosition="left"
+														readOnly
+														value={walletPrivateKey}
+													/>
+												</CopyToClipboard>
+											</Form.Field>
+											<Form.Field>
+												{createMode ? (
+													<Button.Group fluid size="large">
+														<Button
+															color="green"
+															content="Use this wallet"
+															disabled={useDisabled}
+															icon="checkmark"
+															onClick={() => {
+																addWallet(walletAddress)
+																setUseDisabled(true)
+															}}
+														/>
+														<Button.Or />
+														<Button
+															color="blue"
+															content="Create another"
+															icon="plus"
+															onClick={() => {
+																createWallet()
+																setUseDisabled(false)
+															}}
+														/>
+													</Button.Group>
+												) : (
+													<Button
+														color="blue"
+														content="Create a wallet"
+														fluid
+														icon="ethereum"
+														onClick={() => {
+															createWallet()
+															setCreateMode(true)
+															setUseDisabled(false)
+														}}
+														size="large"
+													/>
+												)}
+											</Form.Field>
+										</Form>
+									</Card.Content>
+								</Card>
 
 								<Divider hidden section />
 

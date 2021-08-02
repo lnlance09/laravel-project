@@ -116,6 +116,27 @@ body {
 			width: 100% !important;
 		}
 
+		&.aboutPage, &.privacyPage, &.rulesPage {
+			p.header {
+				font-weight: normal;
+			}
+
+			.ui.list.bulleted.inverted {
+				.item {
+					.header {
+						color: $lightBlue !important;
+						cursor: pointer;
+						font-weight: normal;
+					}
+
+					&::before {
+						color: $white;
+					}
+				}
+
+			}
+		}
+
 		&.applicationsPage {
 			.messagesContainer {
 				&.inverted {
@@ -222,6 +243,13 @@ body {
 			}
 		}
 
+		&.createWalletPage {
+			@media only screen and (max-width: 1025px) {
+				margin-left: 0 !important;
+				margin-right: 0 !important;
+			}
+		}
+
 		&.notFoundPage {
 			h1.notFoundHeader {
 				left: 50%;
@@ -301,6 +329,10 @@ body {
 
 			.ui.list {
 				.item {
+					.header {
+						word-break: break-all;
+					}
+
 					.makePrimary {
 						display: none;
 					}

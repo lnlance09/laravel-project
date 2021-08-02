@@ -151,9 +151,6 @@ const Prediction = ({ history, match }) => {
 						</Card.Content>
 						<Card.Content extra>
 							<span className="left floated">
-								<Icon color="pink" name="heart" size="large" />
-							</span>
-							<span className="left floated">
 								<TwitterShareButton
 									title={title}
 									url={`${window.location.origin}/predictions/${slug}`}

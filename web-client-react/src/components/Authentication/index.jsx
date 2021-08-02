@@ -1,5 +1,15 @@
 import "./style.scss"
-import { Button, Divider, Form, Header, Icon, Input, Segment, Transition } from "semantic-ui-react"
+import {
+	Button,
+	Card,
+	Divider,
+	Form,
+	Header,
+	Icon,
+	Input,
+	Segment,
+	Transition
+} from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
@@ -47,6 +57,7 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 	const [loadingForgot, setLoadingForgot] = useState(false)
 	const [loadingLogin, setLoadingLogin] = useState(false)
 	const [loadingRegistration, setLoadingRegistration] = useState(false)
+	const [loadingVerify, setLoadingVerify] = useState(false)
 	const [name, setName] = useState("")
 	const [password, setPassword] = useState("")
 	const [regEmail, setRegEmail] = useState("")
@@ -181,6 +192,7 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 
 	const submitVerificationForm = () => {
 		if (verificationCode.length === 4) {
+			setLoadingVerify(true)
 			axios
 				.post(
 					`${process.env.REACT_APP_BASE_URL}users/verify`,
@@ -199,6 +211,7 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 						type: "VERIFY_EMAIL"
 					})
 
+					setLoadingVerify(false)
 					localStorage.setItem("verify", data.verify)
 					history.push("/")
 				})
@@ -216,6 +229,7 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 					}
 
 					toast.error(errorMsg)
+					setLoadingVerify(false)
 				})
 		}
 	}
@@ -233,26 +247,30 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 
 			<Segment basic className="authSegment" inverted={inverted}>
 				{forgot && (
-					<Form inverted={inverted} onSubmit={submitForgotPassword} size={size}>
-						<Form.Field>
-							<Input
-								inverted={inverted}
-								label="email"
-								onChange={(e, { value }) => setForgotEmail(value)}
-								placeholder="Enter your email"
-								value={forgotEmail}
-							/>
-						</Form.Field>
-						<Button
-							color="blue"
-							content="Send Instructions"
-							disabled={!validator.isEmail(forgotEmail)}
-							fluid
-							loading={loadingForgot}
-							size={size}
-							type="submit"
-						/>
-					</Form>
+					<Card className={inverted ? "inverted" : null} fluid>
+						<Card.Content>
+							<Form inverted={inverted} onSubmit={submitForgotPassword} size={size}>
+								<Form.Field>
+									<Input
+										inverted={inverted}
+										label="email"
+										onChange={(e, { value }) => setForgotEmail(value)}
+										placeholder="Enter your email"
+										value={forgotEmail}
+									/>
+								</Form.Field>
+								<Button
+									color="blue"
+									content="Send Instructions"
+									disabled={!validator.isEmail(forgotEmail)}
+									fluid
+									loading={loadingForgot}
+									size={size}
+									type="submit"
+								/>
+							</Form>
+						</Card.Content>
+					</Card>
 				)}
 
 				<Transition animation="scale" duration={500} visible={passwordReset}>
@@ -265,127 +283,138 @@ const Authentication = ({ history, inverted, showLogin = true, size }) => {
 				</Transition>
 
 				<Transition animation="scale" duration={500} visible={state.verify}>
-					<Form inverted={inverted} onSubmit={submitVerificationForm} size={size}>
-						<Form.Field>
-							<Input
-								inverted={inverted}
-								label="code"
-								maxLength={4}
-								onChange={(e, { value }) => setVerificationCode(value)}
-								placeholder="Verification code"
-								value={verificationCode}
-							/>
-						</Form.Field>
-						<Button
-							color="blue"
-							content="Verify"
-							disabled={verificationCode.length !== 4}
-							fluid
-							size={size}
-							type="submit"
-						/>
-					</Form>
+					<Card className={inverted ? "inverted" : null} fluid>
+						<Card.Content>
+							<Form inverted={inverted} onSubmit={submitVerificationForm} size={size}>
+								<Form.Field>
+									<Input
+										inverted={inverted}
+										label="code"
+										maxLength={4}
+										onChange={(e, { value }) => setVerificationCode(value)}
+										placeholder="Verification code"
+										value={verificationCode}
+									/>
+								</Form.Field>
+								<Button
+									color="blue"
+									content="Verify"
+									disabled={verificationCode.length !== 4}
+									fluid
+									loading={loadingVerify}
+									size={size}
+									type="submit"
+								/>
+							</Form>
+						</Card.Content>
+					</Card>
 				</Transition>
 
 				{login && !state.verify ? (
-					<Form inverted={inverted} size={size}>
-						<Form.Field>
-							<Input
-								inverted={inverted}
-								label="email"
-								onChange={(e, { value }) => {
-									setEmail(value)
-								}}
-								placeholder="Email or username"
-								value={email}
-							/>
-						</Form.Field>
-						<Form.Field>
-							<Input
-								inverted={inverted}
-								label="pass"
-								onChange={(e, { value }) => {
-									setPassword(value)
-								}}
-								placeholder="Password"
-								type="password"
-								value={password}
-							/>
-						</Form.Field>
-						<Form.Field>
-							<Button
-								color="blue"
-								content="Sign in"
-								fluid
-								loading={loadingLogin}
-								onClick={submitLoginForm}
-								size={size}
-								type="submit"
-							/>
-						</Form.Field>
-					</Form>
+					<Card className={inverted ? "inverted" : null} fluid>
+						<Card.Content>
+							<Form inverted={inverted} size={size}>
+								<Form.Field>
+									<Input
+										inverted={inverted}
+										label="email"
+										onChange={(e, { value }) => {
+											setEmail(value)
+										}}
+										placeholder="Email or username"
+										value={email}
+									/>
+								</Form.Field>
+								<Form.Field>
+									<Input
+										inverted={inverted}
+										label="pass"
+										onChange={(e, { value }) => {
+											setPassword(value)
+										}}
+										placeholder="Password"
+										type="password"
+										value={password}
+									/>
+								</Form.Field>
+								<Form.Field>
+									<Button
+										color="blue"
+										content="Sign in"
+										fluid
+										loading={loadingLogin}
+										onClick={submitLoginForm}
+										size={size}
+										type="submit"
+									/>
+								</Form.Field>
+							</Form>
+						</Card.Content>
+					</Card>
 				) : null}
 
 				{register && !state.verify ? (
-					<>
-						<Form inverted={inverted} size={size}>
-							<Form.Field>
-								<Input
-									inverted={inverted}
-									label="email"
-									onChange={(e, { value }) => {
-										setRegEmail(value)
-									}}
-									placeholder="Email"
-									value={regEmail}
-								/>
-							</Form.Field>
-							<Form.Field>
-								<Input
-									inverted={inverted}
-									label="pass"
-									onChange={(e, { value }) => {
-										setRegPassword(value)
-									}}
-									value={regPassword}
-									placeholder="Password"
-									type="password"
-								/>
-							</Form.Field>
-							<Form.Field>
-								<Input
-									autoComplete="off"
-									inverted={inverted}
-									label="name"
-									onChange={(e, { value }) => {
-										setName(value)
-									}}
-									placeholder="Full name"
-									value={name}
-								/>
-							</Form.Field>
-							<Form.Field>
-								<Input
-									inverted={inverted}
-									label="@"
-									onChange={(e, { value }) => {
-										setUsername(value)
-									}}
-									placeholder="Username"
-									value={username}
-								/>
-							</Form.Field>
-						</Form>
-						<Divider inverted={inverted} />
-						<Button
-							color="blue"
-							content="Create an account"
-							fluid
-							loading={loadingRegistration}
-							onClick={submitRegistrationForm}
-							size={size}
-						/>
-					</>
+					<Card className={inverted ? "inverted" : null} fluid>
+						<Card.Content>
+							<Form inverted={inverted} size={size}>
+								<Form.Field>
+									<Input
+										inverted={inverted}
+										label="email"
+										onChange={(e, { value }) => {
+											setRegEmail(value)
+										}}
+										placeholder="Email"
+										value={regEmail}
+									/>
+								</Form.Field>
+								<Form.Field>
+									<Input
+										inverted={inverted}
+										label="pass"
+										onChange={(e, { value }) => {
+											setRegPassword(value)
+										}}
+										value={regPassword}
+										placeholder="Password"
+										type="password"
+									/>
+								</Form.Field>
+								<Form.Field>
+									<Input
+										autoComplete="off"
+										inverted={inverted}
+										label="name"
+										onChange={(e, { value }) => {
+											setName(value)
+										}}
+										placeholder="Full name"
+										value={name}
+									/>
+								</Form.Field>
+								<Form.Field>
+									<Input
+										inverted={inverted}
+										label="@"
+										onChange={(e, { value }) => {
+											setUsername(value)
+										}}
+										placeholder="Username"
+										value={username}
+									/>
+								</Form.Field>
+							</Form>
+							<Divider inverted={inverted} />
+							<Button
+								color="blue"
+								content="Create an account"
+								fluid
+								loading={loadingRegistration}
+								onClick={submitRegistrationForm}
+								size={size}
+							/>
+						</Card.Content>
+					</Card>
 				) : null}
 			</Segment>
 

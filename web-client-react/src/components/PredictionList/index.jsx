@@ -1,5 +1,5 @@
 import "./style.scss"
-import { Item, Label, Placeholder } from "semantic-ui-react"
+import { Image, Item, Label, Placeholder } from "semantic-ui-react"
 import { setIconColor, setIconName } from "utils/textFunctions"
 import Moment from "react-moment"
 import NumberFormat from "react-number-format"
@@ -59,6 +59,12 @@ const PredictionList = ({ inverted, loading, loadingMore, onClickPrediction, pre
 												prefix={"$"}
 												thousandSeparator
 												value={predictionPrice}
+											/>
+											<Image
+												avatar
+												floated="right"
+												src={coin.logo}
+												style={{ bottom: 8 }}
 											/>
 										</Item.Header>
 										<Item.Meta>

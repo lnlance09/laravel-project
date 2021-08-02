@@ -17,17 +17,17 @@ const Footer = ({ history, inverted }) => {
 									<span className="emojiMarginLeft">About</span>
 								</Header>
 								<List inverted={inverted} link relaxed>
-									<List.Item as="a" onClick={() => history.push("/rules")}>
-										Rules
-									</List.Item>
 									<List.Item as="a" onClick={() => history.push("/about")}>
 										About
 									</List.Item>
-									<List.Item as="a" onClick={() => history.push("/contact")}>
-										Contact
+									<List.Item as="a" onClick={() => history.push("/rules")}>
+										Rules
 									</List.Item>
 									<List.Item as="a" onClick={() => history.push("/privacy")}>
 										Privacy
+									</List.Item>
+									<List.Item as="a" onClick={() => history.push("/contact")}>
+										Contact
 									</List.Item>
 								</List>
 							</Grid.Column>

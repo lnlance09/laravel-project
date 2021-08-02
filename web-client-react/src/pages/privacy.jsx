@@ -1,3 +1,4 @@
+import { Header } from "semantic-ui-react"
 import { useContext } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import DefaultLayout from "layouts/default"
@@ -17,6 +18,8 @@ const Privacy = ({ history }) => {
 			textAlign="center"
 		>
 			<DisplayMetaTags page="privacy" />
+
+			<Header as="h1" className="massive" content="Privacy" inverted={inverted} />
 		</DefaultLayout>
 	)
 }

@@ -19,10 +19,26 @@ const Rules = ({ history }) => {
 		>
 			<DisplayMetaTags page="rules" />
 
-			<Header as="h1" content="Rules" inverted={inverted} />
+			<Header as="h1" className="massive" content="Rules" inverted={inverted} />
 
-			<Header as="p" inverted={inverted} style={{ fontWeight: "normal" }}>
-				Preditc is a
+			<Header as="h2" content="Edits" inverted={inverted} />
+			<Header as="p" inverted={inverted}>
+				Predictions cannot be made
+			</Header>
+
+			<Header as="h2" content="Timing" inverted={inverted} />
+			<Header as="p" inverted={inverted}>
+				Predictions cannot be made
+			</Header>
+
+			<Header as="h2" content="Margin of error" inverted={inverted} />
+			<Header as="p" inverted={inverted}>
+				Predictions cannot be made
+			</Header>
+
+			<Header as="h2" content="Wallets" inverted={inverted} />
+			<Header as="p" inverted={inverted}>
+				Predictions cannot be made
 			</Header>
 		</DefaultLayout>
 	)

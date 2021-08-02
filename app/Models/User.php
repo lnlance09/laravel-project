@@ -44,7 +44,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'update',
         'verify',
         'wallet',
-        'wallets'
+        'wallets',
+        'verifyForgotCode'
     ];
 
     protected $accuracy = 0;
@@ -64,6 +65,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'email_verified_at',
+        'forgot_code',
         'gender',
         'img',
         'password',
