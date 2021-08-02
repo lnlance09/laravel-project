@@ -13,7 +13,7 @@ const Footer = ({ history, inverted }) => {
 						<Grid.Row>
 							<Grid.Column width={3}>
 								<Header as="h4" inverted={inverted}>
-									<span>👀</span>
+									<span>🍕</span>
 									<span className="emojiMarginLeft">About</span>
 								</Header>
 								<List inverted={inverted} link relaxed>
