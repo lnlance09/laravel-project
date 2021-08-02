@@ -47,7 +47,7 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 							Authorization: `Bearer ${bearer}`
 						}
 					},
-					authEndpoint: "http://preditc.com/broadcasting/auth",
+					authEndpoint: "https://preditc.com/broadcasting/auth",
 					broadcaster: "pusher",
 					cluster: process.env.REACT_APP_PUSHER_APP_CLUSTER,
 					key: process.env.REACT_APP_PUSHER_APP_KEY,
