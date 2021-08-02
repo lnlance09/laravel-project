@@ -241,6 +241,18 @@ body {
 				justify-content: center;;
 				min-height: 300px;
 			}
+
+			.traderList {
+				@media only screen and (max-width: 1025px) {
+					margin-top: 20px;
+				}
+
+				.card {
+					.ui.image {
+						width: 100%;
+					}
+				}
+			}
 		}
 
 		&.createWalletPage {
