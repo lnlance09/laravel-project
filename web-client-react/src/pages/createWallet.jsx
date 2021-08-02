@@ -57,10 +57,9 @@ const CreateWallet = ({ history }) => {
 			<Container style={{ padding: 0 }} text>
 				<Header
 					as="h1"
-					className="massive"
 					content="Create a wallet"
 					inverted={inverted}
-					style={{ marginTop: 40 }}
+					style={{ marginTop: 20 }}
 					textAlign="center"
 				/>
 				<Card className={inverted ? "inverted" : null} fluid>
