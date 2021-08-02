@@ -319,7 +319,7 @@ const Coin = ({ history, match }) => {
 
 					{traders.data.length > 0 && traders.loaded ? (
 						<Card.Group
-							className={inverted ? "inverted" : null}
+							className={`traderList ${inverted ? "inverted" : null}`}
 							itemsPerRow={4}
 							stackable
 						>
