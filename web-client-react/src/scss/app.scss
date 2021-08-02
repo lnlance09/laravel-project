@@ -387,6 +387,14 @@ body {
 			}
 		}
 
+		&.tradersPage {
+			.traderList {
+				@media only screen and (max-width: 1025px) {
+					margin-top: 30px;
+				}
+			}
+		}
+
 		&.signInPage {
 			.ui.container.authContainer {
 				padding: 2em 0;

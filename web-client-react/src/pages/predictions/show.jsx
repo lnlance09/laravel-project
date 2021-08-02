@@ -1,4 +1,4 @@
-import { Button, Divider, Dropdown, Grid, Header, Icon, Visibility } from "semantic-ui-react"
+import { Button, Divider, Dropdown, Grid, Icon, Visibility } from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
@@ -149,10 +149,8 @@ const Predictions = ({ history }) => {
 			inverted={inverted}
 		>
 			<DisplayMetaTags page="predictions" state={internalState} />
-			<Header as="h1" className="massive" inverted={inverted}>
-				Predictions
-			</Header>
-			<Grid stackable>
+
+			<Grid stackable style={{ marginTop: 12 }}>
 				<Grid.Column width={4}>
 					<Dropdown
 						className={inverted ? "inverted" : null}
@@ -164,7 +162,7 @@ const Predictions = ({ history }) => {
 						trigger={
 							<Button
 								active={activeItem === "coin"}
-								color="teal"
+								color="olive"
 								fluid
 								icon={coinId ? true : false}
 								inverted={inverted}
@@ -198,7 +196,7 @@ const Predictions = ({ history }) => {
 						trigger={
 							<Button
 								active={activeItem === "status"}
-								color="red"
+								color="green"
 								content="Status"
 								fluid
 								inverted={inverted}
@@ -211,7 +209,7 @@ const Predictions = ({ history }) => {
 				<Grid.Column width={3}>
 					<Button
 						active={activeItem === "created_at"}
-						color="orange"
+						color="blue"
 						content="Created At"
 						fluid
 						icon={activeItem === "created_at" && setIcon(createdAt)}
@@ -223,7 +221,7 @@ const Predictions = ({ history }) => {
 				<Grid.Column width={3}>
 					<Button
 						active={activeItem === "target_date"}
-						color="green"
+						color="teal"
 						content="Date"
 						fluid
 						icon={activeItem === "target_date" && setIcon(targetDate)}
@@ -235,7 +233,7 @@ const Predictions = ({ history }) => {
 				<Grid.Column width={3}>
 					<Button
 						active={activeItem === "margin"}
-						color="purple"
+						color="violet"
 						content="Margin"
 						fluid
 						icon={activeItem === "margin" && setIcon(margin)}
