@@ -3,6 +3,18 @@
 .traderList {
     .card {
         .extra {
+            p.green {
+                b {
+                    color: $lightGreen;
+                }
+            }
+
+            p.red {
+                b {
+                    color: $lightRed;
+                }
+            }
+
             .ui.red.label {
                 .close.icon {
                     margin: 0 .75em 0 0;

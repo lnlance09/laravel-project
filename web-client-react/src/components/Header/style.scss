@@ -25,7 +25,7 @@ $logoHeight: 54px;
 
         svg {
             cursor: pointer;
-            fill: $lightGreen;
+            fill: lighten($twitter, 30%);
             height: $logoHeight;
             width: $logoHeight;
         }
