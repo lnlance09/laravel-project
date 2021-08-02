@@ -107,7 +107,7 @@ Route::get('/predictions/{id}', function ($id) use ($seo) {
 
     $user = $prediction->user;
     $coin = $prediction->coin;
-    $price = $prediction->prediction_price;
+    $price = $prediction->prediction_price > 1 ? round($prediction->prediction_price, 2) : round($prediction->prediction_price, 6);
     $date = date_format($prediction->target_date, 'M d, Y');
 
     $img = $seo['awsUrl'] . $user->img;
