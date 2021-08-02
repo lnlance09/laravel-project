@@ -102,8 +102,10 @@ $logoHeight: 54px;
             }
 
             .right.item {
-                button.secondary {
-                    margin-right: 12px;
+                padding-right: 0;
+
+                button.compact.blue {
+                    margin-left: 14px;
                 }
 
                 .menu.transition:not(.visible) {
