@@ -47,7 +47,6 @@ const Footer = ({ history, inverted }) => {
 									>
 										Twitter
 									</List.Item>
-									<List.Item as="a">Instagram</List.Item>
 								</List>
 							</Grid.Column>
 							<Grid.Column width={7}>

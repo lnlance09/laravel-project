@@ -299,19 +299,27 @@ const Coin = ({ history, match }) => {
 						Performance
 					</Header>
 
-					<Chart coin={coin} inverted={inverted} />
+					<Card className={inverted ? "inverted" : null} fluid>
+						<Card.Content>
+							<Chart coin={coin} inverted={inverted} />
+						</Card.Content>
+					</Card>
 
 					<Header as="h2" className="dividerHeader" inverted={inverted} size="huge">
 						Make a Prediction
 					</Header>
 
-					<PredictionForm
-						auth={auth}
-						coin={coin}
-						defaultPrice={coin.lastPrice * 1.8}
-						history={history}
-						inverted={inverted}
-					/>
+					<Card className={inverted ? "inverted" : null} fluid>
+						<Card.Content>
+							<PredictionForm
+								auth={auth}
+								coin={coin}
+								defaultPrice={coin.lastPrice * 1.8}
+								history={history}
+								inverted={inverted}
+							/>
+						</Card.Content>
+					</Card>
 
 					<Header as="h2" className="dividerHeader" inverted={inverted} size="huge">
 						Best {coin.symbol} Traders
