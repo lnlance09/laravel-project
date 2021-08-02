@@ -47,8 +47,7 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 							Authorization: `Bearer ${bearer}`
 						}
 					},
-					authEndpoint:
-						"http://ec2-54-188-82-232.us-west-2.compute.amazonaws.com/broadcasting/auth",
+					authEndpoint: "http://preditc.com/broadcasting/auth",
 					broadcaster: "pusher",
 					cluster: process.env.REACT_APP_PUSHER_APP_CLUSTER,
 					key: process.env.REACT_APP_PUSHER_APP_KEY,
