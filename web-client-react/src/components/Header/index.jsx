@@ -407,18 +407,18 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 								<>
 									<Button
 										compact
-										content="Sign In"
-										icon="sign in"
-										onClick={() => history.push("/login")}
-										secondary
+										color="black"
+										content="Create Wallet"
+										icon="ethereum"
+										onClick={() => history.push("/wallet/create")}
 										size="large"
 									/>
 									<Button
 										compact
-										color="green"
-										content="Create Wallet"
-										icon="plus"
-										onClick={() => history.push("/wallet/create")}
+										color="blue"
+										content="Log In"
+										icon="sign in"
+										onClick={() => history.push("/login")}
 										size="large"
 									/>
 								</>

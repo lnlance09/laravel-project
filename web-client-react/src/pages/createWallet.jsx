@@ -1,4 +1,4 @@
-import { Button, Card, Container, Divider, Form, Header, Input } from "semantic-ui-react"
+import { Button, Card, Container, Divider, Form, Header, Icon, Input } from "semantic-ui-react"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import { useContext, useState } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
@@ -57,11 +57,15 @@ const CreateWallet = ({ history }) => {
 			<Container style={{ padding: 0 }} text>
 				<Header
 					as="h1"
-					content="Create a wallet"
+					icon
 					inverted={inverted}
 					style={{ marginTop: 20 }}
 					textAlign="center"
-				/>
+				>
+					<Icon color="blue" name="ethereum" size="big" />
+					Create a wallet
+					<Header.Subheader>Quickly. Securely.</Header.Subheader>
+				</Header>
 				<Card className={inverted ? "inverted" : null} fluid>
 					<Card.Content>
 						<Form inverted={inverted} size="large">
