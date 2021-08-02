@@ -37,7 +37,16 @@ const Footer = ({ history, inverted }) => {
 									<span className="emojiMarginLeft">Follow Us</span>
 								</Header>
 								<List inverted={inverted} link relaxed>
-									<List.Item as="a">Twitter</List.Item>
+									<List.Item
+										as="a"
+										onClick={() =>
+											window
+												.open(`https://twitter.com/preditcapp`, "_blank")
+												.focus()
+										}
+									>
+										Twitter
+									</List.Item>
 									<List.Item as="a">Instagram</List.Item>
 								</List>
 							</Grid.Column>

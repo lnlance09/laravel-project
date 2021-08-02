@@ -1,30 +1,13 @@
 @import "../../scss/_colors.scss";
 
 .traderList {
-    .item {
-        @media only screen and (max-width: 1025px) {
-            .itemImg {
-                display: none !important;
-            }
-
-            .placeholderPicWrapper {
-                height: 200px;
-                margin-left: auto;
-                margin-right: auto;
-                width: 200px;
-            }
-
-            .placeholderParagraphWrapper {
-                display: none !important;
-            }
+    .card {
+        .ui.image {
+            width: 100%;
         }
-    
-        @media only screen and (min-width: 1025px) {
-            .placeholderPicWrapper {
-                height: 150px;
-                margin-right: 1em;
-                width: 150px;
-            }
+
+        .placeholderPicWrapper {
+            height: 180px;
         }
 
         .extra {

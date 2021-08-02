@@ -1,4 +1,5 @@
 import {
+	Card,
 	Divider,
 	Grid,
 	Header,
@@ -25,7 +26,6 @@ import PlaceholderPic from "images/images/image-square.png"
 import PredictionForm from "components/PredictionForm"
 import PredictionList from "components/PredictionList"
 import PropTypes from "prop-types"
-import ReactTooltip from "react-tooltip"
 import reducer from "reducers/coin"
 import ThemeContext from "themeContext"
 
@@ -318,22 +318,29 @@ const Coin = ({ history, match }) => {
 					</Header>
 
 					{traders.data.length > 0 && traders.loaded ? (
-						<Grid columns="equal" stackable>
+						<Card.Group
+							className={inverted ? "inverted" : null}
+							itemsPerRow={4}
+							stackable
+						>
 							{traders.data.map((trader, i) => {
 								let accuracy = 0
-								let tooltip = ""
-
 								if (traders.loaded) {
 									accuracy = trader.accuracy.toFixed(2)
-									tooltip = `
-                                <div>
-                                    <h3 style="margin-bottom: 2px;">${trader.name}</h3>
-                                    <p class="header">${accuracy}% accurate with ${coin.name}</p>
-                                </div>`
 								}
 
 								return (
-									<Grid.Column key={`topTrader${i}`} width={2}>
+									<Card
+										key={`topTrader${i}`}
+										onClick={(e) => {
+											const url = `/${trader.username}`
+											if (!e.metaKey) {
+												history.push(url)
+											} else {
+												window.open(url, "_blank").focus()
+											}
+										}}
+									>
 										{!traders.loaded ? (
 											<>
 												<Placeholder inverted={inverted} fluid>
@@ -343,35 +350,27 @@ const Coin = ({ history, match }) => {
 										) : (
 											<>
 												<Image
-													centered
-													className="topTraderImg"
-													data-for={`topTrader${i}`}
-													data-tip={tooltip}
-													data-iscapture="true"
-													onClick={(e) => {
-														const url = `/${trader.username}`
-														if (!e.metaKey) {
-															history.push(url)
-														} else {
-															window.open(url, "_blank").focus()
-														}
-													}}
 													onError={(i) => (i.target.src = PlaceholderPic)}
-													rounded
 													src={trader.img}
 												/>
-												<ReactTooltip
-													html={true}
-													id={`topTrader${i}`}
-													place="right"
-													type="dark"
-												/>
+												<Card.Content>
+													<Card.Header>{trader.name}</Card.Header>
+													<Card.Meta>@{trader.username}</Card.Meta>
+													<Card.Description>
+														{trader.bio}
+													</Card.Description>
+												</Card.Content>
+												<Card.Content extra>
+													<p>
+														{accuracy}% accurate with {coin.name}
+													</p>
+												</Card.Content>
 											</>
 										)}
-									</Grid.Column>
+									</Card>
 								)
 							})}
-						</Grid>
+						</Card.Group>
 					) : (
 						<Segment className="centeredMsg" inverted={inverted}>
 							<Header
