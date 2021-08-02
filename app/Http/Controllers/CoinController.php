@@ -179,7 +179,7 @@ class CoinController extends Controller
                 $query->where('coin_id', $coinId)->where('status', 'Correct');
             })
             ->orderByRaw('(correct_predictions_count / predictions_count - pending_predictions_count) desc')
-            ->limit(20)
+            ->limit(12)
             ->get();
         return new UserCollection($users);
     }

@@ -64,7 +64,14 @@ const TraderList = ({ inverted, loading, loadingMore, onClickTrader, traders }) 
 						</Card>
 					)
 				})}
-				{loadingMore && <Card>{PlaceholderSegment}</Card>}
+				{loadingMore && (
+					<>
+						<Card>{PlaceholderSegment}</Card>
+						<Card>{PlaceholderSegment}</Card>
+						<Card>{PlaceholderSegment}</Card>
+						<Card>{PlaceholderSegment}</Card>
+					</>
+				)}
 			</Card.Group>
 		</div>
 	)
