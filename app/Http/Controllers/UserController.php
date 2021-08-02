@@ -66,7 +66,7 @@ class UserController extends Controller
             $users = $users->orderByRaw('predictions_count ' . $dir);
         }
 
-        $users = $users->paginate(16);
+        $users = $users->paginate(12);
         return new UserCollection($users);
     }
 

@@ -7,9 +7,6 @@ import PropTypes from "prop-types"
 const TraderList = ({ inverted, loading, loadingMore, onClickTrader, traders }) => {
 	const PlaceholderSegment = (
 		<>
-			<Placeholder className="placeholderPicWrapper" inverted={inverted} fluid>
-				<Placeholder.Image />
-			</Placeholder>
 			<Card.Content>
 				<Placeholder className="placeholderParagraphWrapper" inverted={inverted} fluid>
 					<Placeholder.Paragraph>
@@ -24,7 +21,7 @@ const TraderList = ({ inverted, loading, loadingMore, onClickTrader, traders }) 
 
 	return (
 		<div className="traderList">
-			<Card.Group className={inverted ? "inverted" : ""} itemsPerRow={4} stackable>
+			<Card.Group className={inverted ? "inverted" : ""} itemsPerRow={3} stackable>
 				{traders.map((trader, i) => {
 					const { accuracy, bio, img, name, predictionsCount, username } = trader
 					return (
@@ -33,31 +30,27 @@ const TraderList = ({ inverted, loading, loadingMore, onClickTrader, traders }) 
 								<>{PlaceholderSegment}</>
 							) : (
 								<>
-									<Image
-										onError={(i) => (i.target.src = PlaceholderPic)}
-										src={img}
-									/>
 									<Card.Content>
+										<Image
+											avatar
+											floated="right"
+											onError={(i) => (i.target.src = PlaceholderPic)}
+											src={img}
+										/>
 										<Card.Header>{name}</Card.Header>
 										<Card.Meta>@{username}</Card.Meta>
 										<Card.Description>{bio}</Card.Description>
 									</Card.Content>
 									<Card.Content extra>
-										<Label
-											basic
-											className={inverted ? "inverted" : ""}
-											color="green"
-										>
-											{accuracy.toFixed(2)}% accurate
-										</Label>
-										<Label
-											basic
-											className={inverted ? "inverted" : ""}
-											color="blue"
-										>
-											{predictionsCount}{" "}
+										<p>
+											<b>{accuracy.toFixed(2)}%</b> accurate
+										</p>
+									</Card.Content>
+									<Card.Content extra>
+										<p>
+											<b>{predictionsCount}</b>{" "}
 											{formatPlural(predictionsCount, "prediction")}
-										</Label>
+										</p>
 									</Card.Content>
 								</>
 							)}
@@ -66,7 +59,6 @@ const TraderList = ({ inverted, loading, loadingMore, onClickTrader, traders }) 
 				})}
 				{loadingMore && (
 					<>
-						<Card>{PlaceholderSegment}</Card>
 						<Card>{PlaceholderSegment}</Card>
 						<Card>{PlaceholderSegment}</Card>
 						<Card>{PlaceholderSegment}</Card>
