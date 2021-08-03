@@ -9,7 +9,7 @@ const Footer = ({ history, inverted }) => {
 		<div className="pageFooterComponent">
 			<Segment inverted={inverted} vertical>
 				<Container>
-					<Grid divided inverted={inverted} stackable>
+					<Grid inverted={inverted} stackable>
 						<Grid.Row>
 							<Grid.Column width={3}>
 								<Header as="h4" inverted={inverted}>

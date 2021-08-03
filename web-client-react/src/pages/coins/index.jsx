@@ -299,11 +299,7 @@ const Coin = ({ history, match }) => {
 						Performance
 					</Header>
 
-					<Card className={inverted ? "inverted" : null} fluid>
-						<Card.Content>
-							<Chart coin={coin} inverted={inverted} />
-						</Card.Content>
-					</Card>
+					<Chart coin={coin} color="#4b7bec" inverted={inverted} />
 
 					<Header as="h2" className="dividerHeader" inverted={inverted} size="huge">
 						Make a Prediction

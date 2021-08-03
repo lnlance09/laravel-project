@@ -3,11 +3,12 @@
 .pageFooterComponent {
     .ui.segment {
         border-top: solid 1px $midWhite;
-        padding: 3em 0em;
+        padding: 3.4em 0em;
         
         &.inverted {
-            background: rgba(255, 255, 255, 0.05) !important;
+            background: transparentize(lighten($invertedBackgroundColor, 3%), 0.05);
             border-top: solid 1px rgba(255, 255, 255, 0.1);
+            // border-top: none;
         }
 
         .emojiMarginLeft {

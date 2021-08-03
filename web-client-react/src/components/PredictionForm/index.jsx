@@ -164,7 +164,7 @@ const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inv
 											name="explanation"
 											placeholder="What's your reasoning for this opinion? (Optional)"
 											ref={explanation}
-											rows={4}
+											rows={8}
 										/>
 									</Segment>
 								</Grid.Column>
