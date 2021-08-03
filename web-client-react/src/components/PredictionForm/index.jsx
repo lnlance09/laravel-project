@@ -99,7 +99,7 @@ const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inv
 						<div className={`ui labeled input ${inverted ? "inverted" : ""}`}>
 							<div className="ui basic label">$</div>
 							<NumberFormat
-								decimalScale={price > 1 ? 2 : 8}
+								decimalScale={price > 1 ? 2 : 6}
 								onValueChange={(values) => {
 									const { value } = values
 									setPrice(value)

@@ -151,7 +151,7 @@ const Coin = ({ history, match }) => {
 							{coin.name}
 							<Header.Subheader>
 								<NumberFormat
-									decimalScale={coin.lastPrice > 1 ? 2 : 8}
+									decimalScale={coin.lastPrice > 1 ? 2 : 6}
 									displayType={"text"}
 									prefix={"$"}
 									thousandSeparator

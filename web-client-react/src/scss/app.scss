@@ -1,5 +1,5 @@
 @import "./_colors.scss";
-@import url('https://fonts.googleapis.com/css2?family=Asap&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
 
 $header-height: "76px";
 
@@ -12,7 +12,7 @@ body {
 
 .Toastify__toast-container--bottom-left .Toastify__toast-body {
 	color: $white;
-	font-family: 'Asap', sans-serif;
+	font-family: 'Merriweather Sans', sans-serif;
 	font-size: 16px;
     text-align: center;
 }

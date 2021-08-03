@@ -54,7 +54,7 @@ const PredictionList = ({ inverted, loading, loadingMore, onClickPrediction, pre
 										<Item.Header>
 											{coin.name} to{" "}
 											<NumberFormat
-												decimalScale={predictionPrice > 1 ? 2 : 8}
+												decimalScale={predictionPrice > 1 ? 2 : 6}
 												displayType={"text"}
 												prefix={"$"}
 												thousandSeparator

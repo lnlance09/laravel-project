@@ -37,11 +37,11 @@
 @lightOlive: #badc58;
 @lightGrey: #d1d8e0;
 
-@fontName          : 'Asap';
+@fontName          : 'Merriweather Sans';
 @fontSmoothing     : antialiased;
 @googleFontFamily  : 'Anton';
 
-@googleFontName    : 'Asap';
+@googleFontName    : 'Merriweather+Sans';
 @importGoogleFonts : true;
 @googleFontSizes   : '';
 @googleDisplay     : 'swap';
