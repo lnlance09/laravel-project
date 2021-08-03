@@ -178,6 +178,7 @@ class CoinController extends Controller
             ->whereHas('predictions', function ($query) use ($coinId) {
                 $query->where('coin_id', $coinId)->where('status', 'Correct');
             })
+            ->where('gender', 'female')
             ->orderByRaw('(correct_predictions_count / predictions_count - pending_predictions_count) desc')
             ->limit(12)
             ->get();
