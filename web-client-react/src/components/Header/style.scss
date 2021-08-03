@@ -19,6 +19,7 @@ $logoHeight: 54px;
     }
 
     .simpleLogo {
+        background: $invertedBackgroundColor;
         display: inline-block;
         height: $logoHeight;
         width: $logoHeight;
@@ -54,7 +55,8 @@ $logoHeight: 54px;
         }
 
         &.inverted {
-            background: $invertedBackgroundColor;
+            // background: rgba(255, 255, 255, 0.05) !important;
+            background: transparentize(lighten($invertedBackgroundColor, 3%), 0.05);
 
             a.item.active {
                 background: $invertedBackgroundColor;
