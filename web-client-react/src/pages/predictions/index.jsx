@@ -119,7 +119,7 @@ const Prediction = ({ history, match }) => {
 						<Header.Content>
 							<Link to={`/coins/${coin.slug}`}>{coin.symbol}</Link> to{" "}
 							<NumberFormat
-								decimalScale={predictionPrice > 1 ? 2 : 8}
+								decimalScale={predictionPrice > 1 ? 2 : 6}
 								displayType={"text"}
 								prefix={"$"}
 								thousandSeparator
@@ -215,7 +215,7 @@ const Prediction = ({ history, match }) => {
 									size="large"
 								>
 									<NumberFormat
-										decimalScale={prediction.currentPrice > 1 ? 2 : 8}
+										decimalScale={prediction.currentPrice > 1 ? 2 : 6}
 										displayType={"text"}
 										prefix={"$"}
 										thousandSeparator
@@ -233,7 +233,7 @@ const Prediction = ({ history, match }) => {
 									size="large"
 								>
 									<NumberFormat
-										decimalScale={predictionPrice > 1 ? 2 : 8}
+										decimalScale={predictionPrice > 1 ? 2 : 6}
 										displayType={"text"}
 										prefix={"$"}
 										thousandSeparator
@@ -254,7 +254,7 @@ const Prediction = ({ history, match }) => {
 										"N/A"
 									) : (
 										<NumberFormat
-											decimalScale={prediction.actualPrice > 1 ? 2 : 8}
+											decimalScale={prediction.actualPrice > 1 ? 2 : 6}
 											displayType={"text"}
 											prefix={"$"}
 											thousandSeparator

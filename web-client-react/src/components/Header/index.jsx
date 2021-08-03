@@ -18,7 +18,6 @@ import Echo from "laravel-echo"
 import initialState from "./state"
 import logger from "use-reducer-logger"
 import Logo from "images/logos/blockchain.svg"
-import moment from "moment"
 import NumberFormat from "react-number-format"
 import PropTypes from "prop-types"
 import reducer from "./reducer"
@@ -212,13 +211,12 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 										<div style={{ marginLeft: 8, display: "inline-block" }}>
 											{item.user.username} predicted ${item.coin.symbol} at{" "}
 											<NumberFormat
-												decimalScale={item.predictionPrice > 1 ? 2 : 8}
+												decimalScale={item.predictionPrice > 1 ? 2 : 6}
 												displayType={"text"}
 												prefix={"$"}
 												thousandSeparator
 												value={item.predictionPrice}
-											/>{" "}
-											on {moment(item.targetDate).format("MMM D")}
+											/>
 										</div>
 									</Dropdown.Item>
 								)
@@ -303,6 +301,7 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 								compact
 								content="Sign In"
 								onClick={() => history.push("/login")}
+								style={{ marginLeft: 0 }}
 							/>
 						</Dropdown.Header>
 					</>
