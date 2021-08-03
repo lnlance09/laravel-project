@@ -43,6 +43,12 @@ const Rules = ({ history }) => {
 				given date are deemed accurate or correct.
 			</Header>
 
+			<Header as="h2" content="Stablecoins" inverted={inverted} />
+			<Header as="p" inverted={inverted}>
+				For reasons that should be fairly obvious, predictions about stablecoins cannot be
+				made.
+			</Header>
+
 			<Header as="h2" content="Wallets" inverted={inverted} />
 			<Header as="p" inverted={inverted}>
 				You can use your own wallet address or create a new{" "}
