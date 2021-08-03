@@ -13,6 +13,7 @@ import {
 	Visibility
 } from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
+import { CopyToClipboard } from "react-copy-to-clipboard"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
@@ -168,7 +169,10 @@ const Trader = ({ history, match }) => {
 				className={`inverted smooth-image image-${imageLoaded ? "visible" : "hidden"}`}
 				onError={(i) => (i.target.src = PlaceholderPic)}
 				onLoad={() => setImageLoaded(true)}
-				size="small"
+				style={{
+					height: 175,
+					width: 175
+				}}
 				src={trader.img}
 			/>
 		)
@@ -190,12 +194,7 @@ const Trader = ({ history, match }) => {
 							<Grid stackable>
 								<Grid.Row>
 									<Grid.Column className="imgColumn" width={4}>
-										<Segment
-											circular
-											style={{ height: "150px", width: "150px" }}
-										>
-											{ProfilePic()}
-										</Segment>
+										<Segment circular>{ProfilePic()}</Segment>
 									</Grid.Column>
 									<Grid.Column width={12}>
 										<Header as="h1" inverted={inverted}>
@@ -213,9 +212,33 @@ const Trader = ({ history, match }) => {
 												{trader.accuracy.toFixed(2)} %
 											</Label>
 										</Header>
-										<Header as="p" inverted={inverted} size="small">
-											{trader.bio}
+										<Header
+											as="p"
+											inverted={inverted}
+											size="small"
+											style={{ marginTop: 0 }}
+										>
+											ETH:{" "}
+											<CopyToClipboard
+												text={trader.primaryWallet}
+												onCopy={() => toast.warn("Copied to clipboard")}
+											>
+												<span className="primaryWallet blue">
+													{trader.primaryWallet}
+												</span>
+											</CopyToClipboard>
 										</Header>
+										{trader.bio !==
+										"Apparently, this trader prefers to keep an air of mystery about them." ? (
+											<Header
+												as="p"
+												inverted={inverted}
+												size="small"
+												style={{ marginTop: 0 }}
+											>
+												{trader.bio}
+											</Header>
+										) : null}
 										{!isMyProfile ? (
 											<Button
 												className="getPredictionBtn"
