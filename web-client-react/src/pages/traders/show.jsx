@@ -25,9 +25,9 @@ const Traders = ({ history }) => {
 		process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
 		initialState
 	)
-	const [accuracy, setAccuracy] = useState(null)
-	const [activeItem, setActiveItem] = useState(null)
-	const [direction, setDirection] = useState(null)
+	const [accuracy, setAccuracy] = useState("desc")
+	const [activeItem, setActiveItem] = useState("accuracy")
+	const [direction, setDirection] = useState("desc")
 	const [hasMore, setHasMore] = useState(false)
 	const [loading, setLoading] = useState(true)
 	const [loadingMore, setLoadingMore] = useState(false)
@@ -36,8 +36,8 @@ const Traders = ({ history }) => {
 	const [searchTerm, setSearchTerm] = useState("")
 
 	useEffect(() => {
-		getTraders(searchTerm, null, null)
-	}, [searchTerm])
+		getTraders(searchTerm, activeItem, direction)
+	}, [searchTerm, activeItem, direction])
 
 	const getTraders = async (q, sort, dir, page = 1) => {
 		if (page === 1) {
@@ -92,7 +92,6 @@ const Traders = ({ history }) => {
 		setAccuracy(newVal)
 		setActiveItem("accuracy")
 		setDirection(newVal)
-		getTraders(searchTerm, "accuracy", newVal)
 	}
 
 	const togglePredictions = () => {
@@ -100,7 +99,6 @@ const Traders = ({ history }) => {
 		setPredictions(newVal)
 		setActiveItem("predictions")
 		setDirection(newVal)
-		getTraders(searchTerm, "predictions", newVal)
 	}
 
 	return (
@@ -129,6 +127,7 @@ const Traders = ({ history }) => {
 					</Grid.Column>
 					<Grid.Column width={3}>
 						<Button
+							active={activeItem === "accuracy"}
 							color="green"
 							content="Accuracy"
 							fluid
@@ -140,6 +139,7 @@ const Traders = ({ history }) => {
 					</Grid.Column>
 					<Grid.Column width={3}>
 						<Button
+							active={activeItem === "predictions"}
 							color="blue"
 							content="Predictions"
 							fluid

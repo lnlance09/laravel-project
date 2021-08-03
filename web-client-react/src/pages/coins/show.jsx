@@ -25,16 +25,16 @@ const Coins = ({ history }) => {
 		process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
 		initialState
 	)
-	const [activeItem, setActiveItem] = useState(null)
-	const [direction, setDirection] = useState(null)
+	const [activeItem, setActiveItem] = useState("predictions_count")
+	const [direction, setDirection] = useState("desc")
 	const [loading, setLoading] = useState(false)
 	const [marketCap, setMarketCap] = useState(null)
-	const [predictions, setPredictions] = useState(null)
+	const [predictions, setPredictions] = useState("desc")
 	const [searchTerm, setSearchTerm] = useState("")
 
 	useEffect(() => {
-		getCoins(null, null, null)
-	}, [])
+		getCoins(searchTerm, activeItem, direction)
+	}, [searchTerm, activeItem, direction])
 
 	const getCoins = async (q, sort, dir) => {
 		setLoading(true)
@@ -62,7 +62,6 @@ const Coins = ({ history }) => {
 	const onChangeText = async (e) => {
 		const q = e.target.value
 		setSearchTerm(q)
-		await getCoins(q, activeItem, direction)
 	}
 
 	const onClickCoin = (e, slug) => {
@@ -78,7 +77,6 @@ const Coins = ({ history }) => {
 		setMarketCap(newVal)
 		setActiveItem("market_cap")
 		setDirection(newVal)
-		getCoins(searchTerm, "market_cap", newVal)
 	}
 
 	const togglePredictions = () => {
@@ -86,7 +84,6 @@ const Coins = ({ history }) => {
 		setPredictions(newVal)
 		setActiveItem("predictions_count")
 		setDirection(newVal)
-		getCoins(searchTerm, "predictions_count", newVal)
 	}
 
 	return (
@@ -114,6 +111,7 @@ const Coins = ({ history }) => {
 				</Grid.Column>
 				<Grid.Column width={3}>
 					<Button
+						active={activeItem === "predictions_count"}
 						color="blue"
 						content="Predictions"
 						fluid
@@ -125,6 +123,7 @@ const Coins = ({ history }) => {
 				</Grid.Column>
 				<Grid.Column width={3}>
 					<Button
+						active={activeItem === "market_cap"}
 						color="purple"
 						content="Market Cap"
 						fluid

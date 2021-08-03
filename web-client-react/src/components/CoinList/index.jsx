@@ -1,6 +1,7 @@
 import "./style.scss"
 import { Card, Image, Placeholder } from "semantic-ui-react"
 import { formatPlural } from "utils/textFunctions"
+import NumberFormat from "react-number-format"
 import PlaceholderPic from "images/images/image-square.png"
 import PropTypes from "prop-types"
 import Truncate from "react-truncate"
@@ -9,7 +10,7 @@ const CoinList = ({ coins, inverted, loading, onClickCoin }) => (
 	<div className="coinList">
 		<Card.Group className={inverted ? "inverted" : ""} itemsPerRow={3} stackable>
 			{coins.map((coin, i) => {
-				const { description, logo, name, slug, symbol } = coin
+				const { description, logo, marketCap, name, slug, symbol } = coin
 				return (
 					<Card key={`coin${i}`} onClick={(e) => onClickCoin(e, slug)}>
 						{loading ? (
@@ -42,6 +43,14 @@ const CoinList = ({ coins, inverted, loading, onClickCoin }) => (
 											{coin.percentages["24h"] > 0 ? "+" : ""}
 											{coin.percentages["24h"]}%
 										</span>
+									</Card.Meta>
+									<Card.Meta>
+										<NumberFormat
+											displayType={"text"}
+											prefix={"$"}
+											thousandSeparator
+											value={marketCap}
+										/>
 									</Card.Meta>
 									<Card.Description>
 										<Truncate ellipsis={<span>...</span>} lines={4}>
