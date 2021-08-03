@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('users:create')
             ->everyThirtyMinutes()
-            ->between('6:30', '17:00')
+            // ->between('6:30', '17:00')
             ->timezone('America/New_York');
     }
 

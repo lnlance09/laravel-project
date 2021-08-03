@@ -45,8 +45,7 @@ class CreatePredictions extends Command
         $users = User::where('has_api_access', 1)
             ->with(['predictionsLastTwoDays'])
             ->has('predictionsLastTwoDays', '=', 0)
-            ->get()
-            ->random($count);
+            ->get($count);
 
         foreach ($users as $user) {
             $count = mt_rand(1, 3);
