@@ -79,6 +79,10 @@ $logoHeight: 54px;
                 }
             }
 
+            .item.active {
+                background: transparentize(lighten($invertedBackgroundColor, 3%), 0.05) !important;
+            }
+
             &.desktop {
                 .item.logoItem {
                     padding-left: 0;

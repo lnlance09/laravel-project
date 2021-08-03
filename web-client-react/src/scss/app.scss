@@ -377,8 +377,13 @@ body {
 					padding-right: 0;
 
 					.ui.segment {
-						background: $purple;
+						background: $twitter;
+						// border: solid 2px $lightBlue;
 						padding: 3px;
+
+						img {
+							border: solid 3px $white;
+						}
 					}
 				}
 

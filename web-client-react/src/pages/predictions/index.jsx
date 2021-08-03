@@ -296,16 +296,17 @@ const Prediction = ({ history, match }) => {
 
 					<Card
 						className={`${inverted ? "inverted" : null}`}
+						onClick={() => history.push(`/${user.username}`)}
 						style={{ width: showCardPic ? null : 500 }}
 					>
-						{showCardPic && (
+						{showCardPic ? (
 							<Image
 								as="a"
 								onClick={() => history.push(`/${user.username}`)}
 								onError={(i) => (i.target.src = UserPic)}
 								src={user.img}
 							/>
-						)}
+						) : null}
 						<Card.Content>
 							{!showCardPic && (
 								<Image
@@ -321,15 +322,19 @@ const Prediction = ({ history, match }) => {
 							</Card.Meta>
 							<Card.Description>{user.bio}</Card.Description>
 						</Card.Content>
-						<Button
-							animated="fade"
-							attached="bottom"
-							color={user.predictionsReserved === 1 ? "pink" : "blue"}
-							onClick={() => history.push(`/${user.username}`)}
-						>
-							<Button.Content visible>Get a prediction</Button.Content>
-							<Button.Content hidden>Ask {user.name.split(" ")[0]}</Button.Content>
-						</Button>
+						{showCardPic ? (
+							<Button
+								animated="fade"
+								attached="bottom"
+								color={user.predictionsReserved === 1 ? "pink" : "blue"}
+								onClick={() => history.push(`/${user.username}`)}
+							>
+								<Button.Content visible>Get a prediction</Button.Content>
+								<Button.Content hidden>
+									Ask {user.name.split(" ")[0]}
+								</Button.Content>
+							</Button>
+						) : null}
 					</Card>
 
 					<Divider hidden section />
