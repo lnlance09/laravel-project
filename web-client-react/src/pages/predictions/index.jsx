@@ -92,6 +92,7 @@ const Prediction = ({ history, match }) => {
 	}
 
 	const { coin, createdAt, currentPrice, predictionPrice, status, targetDate, user } = prediction
+	const showCardPic = status === "Correct" && user.predictionsReserved
 	const title = loaded
 		? `${coin.symbol} to ${predictionPrice} on ${moment(targetDate).format("MMM D, YYYY")}`
 		: ""
@@ -293,14 +294,27 @@ const Prediction = ({ history, match }) => {
 						Predicter
 					</Header>
 
-					<Card className={`${inverted ? "inverted" : null}`}>
-						<Image
-							as="a"
-							onClick={() => history.push(`/${user.username}`)}
-							onError={(i) => (i.target.src = UserPic)}
-							src={user.img}
-						/>
+					<Card
+						className={`${inverted ? "inverted" : null}`}
+						style={{ width: showCardPic ? null : 500 }}
+					>
+						{showCardPic && (
+							<Image
+								as="a"
+								onClick={() => history.push(`/${user.username}`)}
+								onError={(i) => (i.target.src = UserPic)}
+								src={user.img}
+							/>
+						)}
 						<Card.Content>
+							{!showCardPic && (
+								<Image
+									avatar
+									floated="right"
+									onError={(i) => (i.target.src = UserPic)}
+									src={user.img}
+								/>
+							)}
 							<Card.Header>{user.name}</Card.Header>
 							<Card.Meta>
 								<span className="date">@{user.username}</span>
