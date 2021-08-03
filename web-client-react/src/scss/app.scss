@@ -371,10 +371,13 @@ body {
 
 			.ui.grid {
 				.imgColumn {
+					align-items: center;
+					display: flex;
 					padding-left: 4em;
 					padding-right: 0;
 
 					.ui.segment {
+						background: $purple;
 						padding: 3px;
 					}
 				}
@@ -389,6 +392,15 @@ body {
 					.item.active {
 						border-bottom: solid 1px $offWhite;
 						padding-bottom: 5px;
+					}
+				}
+
+				.primaryWallet {
+					cursor: pointer;
+
+					&:hover {
+						color: lighten($lightBlue, 4%);
+						transition: 0.3s;
 					}
 				}
 			}
