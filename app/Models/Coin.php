@@ -8,6 +8,10 @@ class Coin extends PublicApi
 {
     use HasFactory;
 
+    // Coins that should be excluded when creatings predictions in crons
+    // shiba inu
+    public static $excludedCoins = [38];
+
     /**
      * The attributes that are mass assignable.
      *

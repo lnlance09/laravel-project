@@ -51,8 +51,9 @@ class UserFactory extends Factory
 
     private function createPredictions($user, $amount, $correct = true)
     {
+        $exclude = Coin::$excludedCoins;
         for ($i = 0; $i < $amount; $i++) {
-            $coin = current(Coin::all()->random(1)->toArray());
+            $coin = current(Coin::all()->except($exclude)->random(1)->toArray());
             $coinId = $coin['cmc_id'];
 
             $target = $this->faker->dateTimeBetween('-40 days', '-4 days');
