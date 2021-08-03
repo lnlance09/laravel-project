@@ -38,7 +38,7 @@ class CreateUsers extends Command
      */
     public function handle()
     {
-        $count = mt_rand(3, 12);
+        $count = mt_rand(1, 3);
         User::factory()->count($count)->create();
     }
 }
