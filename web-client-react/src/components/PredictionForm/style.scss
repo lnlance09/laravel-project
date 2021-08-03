@@ -21,7 +21,12 @@
                 }
 
                 textarea {
+                    background: $invertedBackgroundColor;
                     border: solid 2px $lightBlue;
+					box-shadow: none !important;
+					caret-color: $white !important;
+					color: $white;
+					-webkit-box-shadow: 0 0 0 50px $invertedBackgroundColor inset !important;
                 }
             }
         }

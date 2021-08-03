@@ -1,4 +1,4 @@
-import { Header } from "semantic-ui-react"
+import { Divider, Header } from "semantic-ui-react"
 import { useContext } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import { Link } from "react-router-dom"
@@ -55,6 +55,8 @@ const Rules = ({ history }) => {
 				<Link to="/wallet/create">Ethereum wallet</Link> to start getting paid for your
 				crypto analysis.
 			</Header>
+
+			<Divider hidden />
 		</DefaultLayout>
 	)
 }

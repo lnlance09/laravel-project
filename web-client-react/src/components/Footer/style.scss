@@ -3,9 +3,10 @@
 .pageFooterComponent {
     .ui.segment {
         border-top: solid 1px $midWhite;
-        padding: 4em 0em;
+        padding: 3em 0em;
         
         &.inverted {
+            background: rgba(255, 255, 255, 0.05) !important;
             border-top: solid 1px rgba(255, 255, 255, 0.1);
         }
 
