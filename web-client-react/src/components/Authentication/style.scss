@@ -23,7 +23,7 @@
     .authSegment {
         border: none !important;
         margin: 0 auto;
-        padding: 1em 0;
+        padding: 1em 0 0 0;
 
         .divider {
             margin-bottom: 16px;
@@ -40,7 +40,10 @@
     }
 
     .footerText {
-        margin-top: 4px;
+        font-size: 16px !important;
+        font-weight: normal;
+        margin-bottom: 11px;
+        margin-top: 9px;
 
         .footerLink {
             border-bottom: solid 1px $blue;
@@ -51,11 +54,11 @@
 
     .forgotText {
         cursor: pointer;
+        font-size: 14px !important;
         font-weight: normal !important;
-        margin-top: 4px;
 
         .icon.arrow {
-            font-size: 18px !important;
+            font-size: 14px !important;
             margin-right: 4px !important;
         }
     }

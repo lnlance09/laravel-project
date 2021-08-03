@@ -20,6 +20,7 @@ $logoHeight: 54px;
 
     .simpleLogo {
         background: $invertedBackgroundColor;
+        border-radius: 4px !important;
         display: inline-block;
         height: $logoHeight;
         width: $logoHeight;
@@ -36,8 +37,8 @@ $logoHeight: 54px;
         padding: 10px 0;
 
         svg {
-            height: 64px;
-            width: 64px;
+            height: $logoHeight;
+            width: $logoHeight;
         }
     }
 
