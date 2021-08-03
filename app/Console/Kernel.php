@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
             ->everySixHours();
 
         $schedule->command('predictions:create')
-            ->everyFifteenMinutes()
+            ->everyThirtyMinutes()
             ->between('10:00', '14:00')
             ->timezone('America/New_York');
 
