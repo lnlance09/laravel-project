@@ -3,7 +3,7 @@
 .pageFooterComponent {
     .ui.segment {
         border-top: solid 1px $midWhite;
-        padding: 3.4em 0em;
+        padding: 5em 0em;
         
         &.inverted {
             background: transparentize(lighten($invertedBackgroundColor, 3%), 0.05);
