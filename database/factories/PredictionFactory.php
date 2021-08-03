@@ -24,7 +24,9 @@ class PredictionFactory extends Factory
     public function definition()
     {
         $faker = $this->faker;
-        $coin = current(Coin::all()->random(1)->toArray());
+        $exclude = Coin::$excludedCoins;
+        $coins = Coin::all()->except($exclude)->random(1);
+        $coin = current($coins->toArray());
         $user = current(User::all()->random(1)->toArray());
 
         $createdAt = $faker->dateTimeBetween('-35 minutes', '-5 minutes');
