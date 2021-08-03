@@ -239,8 +239,12 @@ body {
 				align-items: center;
 				background:rgba(135, 135, 135, 0.15);
 				display: flex;
-				justify-content: center;;
-				min-height: 300px;
+				justify-content: center;
+				min-height: 240px;
+
+				@media only screen and (max-width: 1025px) {
+					min-height: 120px;
+				}
 			}
 
 			.traderList {

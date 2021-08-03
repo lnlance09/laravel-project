@@ -359,6 +359,8 @@ const Trader = ({ history, match }) => {
 									onClickPrediction={onClickPrediction}
 								/>
 							</Visibility>
+
+							<Divider hidden />
 						</>
 					)}
 

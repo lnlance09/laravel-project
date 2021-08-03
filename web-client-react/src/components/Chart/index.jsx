@@ -87,7 +87,7 @@ const Chart = ({
 			})
 		}
 
-		if (includeRanges) {
+		if (includeRanges && !color) {
 			const color = coin.percentages["24h"] > 0 ? green : red
 			dispatch({
 				type: "SET_COLOR",
@@ -204,7 +204,6 @@ const Chart = ({
 		getGraphData(coin.cmcId, name)
 
 		let color = green
-
 		if (name === "1D") {
 			color = coin.percentages["24h"] > 0 ? green : red
 		}
