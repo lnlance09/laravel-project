@@ -28,14 +28,14 @@ class Kernel extends ConsoleKernel
             ->everySixHours();
 
         $schedule->command('predictions:create')
-            ->everyFifteenMinutes()
-            // ->between('6:00', '10:00')
-            ->timezone('America/New_York');
+            ->everyMinute();
+        // ->between('6:00', '10:00')
+        // ->timezone('America/New_York');
 
         $schedule->command('users:create')
-            ->everyThirtyMinutes()
-            // ->between('6:30', '17:00')
-            ->timezone('America/New_York');
+            ->everyMinute();
+        // ->between('6:30', '17:00')
+        // ->timezone('America/New_York');
     }
 
     /**
