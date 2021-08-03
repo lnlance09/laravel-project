@@ -6,11 +6,7 @@
         padding: 4em 0em;
         
         &.inverted {
-            border-top: none;
-
-            @media only screen and (max-width: 1025px) {
-                border-top: solid 1px rgba(255, 255, 255, 0.1);
-            }
+            border-top: solid 1px rgba(255, 255, 255, 0.1);
         }
 
         .emojiMarginLeft {

@@ -41,6 +41,7 @@ $logoHeight: 54px;
     }
 
     .ui.borderless.fluid.top.fixed.menu {
+        border-bottom: solid 1px rgba(255, 255, 255, 0.1);
         box-shadow: none !important;
 
         a.item {
@@ -54,10 +55,6 @@ $logoHeight: 54px;
 
         &.inverted {
             background: $invertedBackgroundColor;
-
-            @media only screen and (max-width: 1025px) {
-                border-bottom: solid 1px rgba(255, 255, 255, 0.1);
-            }
 
             a.item.active {
                 background: $invertedBackgroundColor;

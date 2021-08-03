@@ -3,7 +3,7 @@ import { useContext, useEffect, useReducer, useState } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
-import { setIcon } from "utils/textFunctions"
+import { setIcon, setIconColor } from "utils/textFunctions"
 import { statusOptions } from "options/status"
 import axios from "axios"
 import PredictionList from "components/PredictionList"
@@ -26,8 +26,8 @@ const Predictions = ({ history }) => {
 		initialState
 	)
 	const [activeItem, setActiveItem] = useState("created_at")
-	const [coinId, setCoinId] = useState(null)
-	const [coinName, setCoinName] = useState("")
+	const [coinId, setCoinId] = useState(2)
+	const [coinName, setCoinName] = useState("Ethereum")
 	const [coinOptions, setCoinOptions] = useState([])
 	const [createdAt, setCreatedAt] = useState("desc")
 	const [direction, setDirection] = useState(null)
@@ -36,12 +36,15 @@ const Predictions = ({ history }) => {
 	const [loadingMore, setLoadingMore] = useState(false)
 	const [margin, setMargin] = useState(null)
 	const [page, setPage] = useState(1)
-	const [status, setStatus] = useState(null)
+	const [status, setStatus] = useState("Correct")
 	const [targetDate, setTargetDate] = useState(null)
 
 	useEffect(() => {
+		getPredictions(coinId, status, activeItem, direction)
+	}, [coinId, status, activeItem, direction])
+
+	useEffect(() => {
 		const loadPage = async () => {
-			getPredictions(null, null, null, null)
 			const coins = await getCoins()
 			setCoinOptions(coins)
 		}
@@ -98,15 +101,12 @@ const Predictions = ({ history }) => {
 
 	const onChangeStatus = (e, { value }) => {
 		setStatus(value)
-		getPredictions(coinId, value, activeItem, direction)
 	}
 
 	const onChangeCoin = async (e, { value }) => {
 		setCoinId(value)
 		const name = await coinOptions.filter((coin) => coin.value === value)
 		setCoinName(name[0].name)
-		const sort = activeItem === "coin" ? null : activeItem
-		getPredictions(value, status, sort, direction)
 	}
 
 	const onClickPrediction = (e, id) => {
@@ -122,7 +122,6 @@ const Predictions = ({ history }) => {
 		setCreatedAt(newVal)
 		setActiveItem("created_at")
 		setDirection(newVal)
-		getPredictions(coinId, status, "created_at", newVal)
 	}
 
 	const toggleMargin = () => {
@@ -130,7 +129,6 @@ const Predictions = ({ history }) => {
 		setMargin(newVal)
 		setActiveItem("margin")
 		setDirection(newVal)
-		getPredictions(coinId, status, "margin", newVal)
 	}
 
 	const toggleTargetDate = () => {
@@ -138,7 +136,6 @@ const Predictions = ({ history }) => {
 		setTargetDate(newVal)
 		setActiveItem("target_date")
 		setDirection(newVal)
-		getPredictions(coinId, status, "target_date", newVal)
 	}
 
 	return (
@@ -160,15 +157,7 @@ const Predictions = ({ history }) => {
 						options={coinOptions}
 						scrolling
 						trigger={
-							<Button
-								active={activeItem === "coin"}
-								color="blue"
-								fluid
-								icon={coinId ? true : false}
-								inverted={inverted}
-								onClick={() => setActiveItem("coin")}
-								size="big"
-							>
+							<Button color="black" fluid icon={coinId ? true : false} size="big">
 								{coinId ? coinName : "Coin"}
 								{coinId && (
 									<Icon
@@ -195,12 +184,9 @@ const Predictions = ({ history }) => {
 						options={statusOptions}
 						trigger={
 							<Button
-								active={activeItem === "status"}
-								color="blue"
-								content="Status"
+								color={setIconColor(status)}
+								content={status}
 								fluid
-								inverted={inverted}
-								onClick={() => setActiveItem("status")}
 								size="big"
 							/>
 						}
