@@ -59,7 +59,7 @@ class UserController extends Controller
             ]);
 
         if ($sort === 'accuracy') {
-            $users = $users->orderByRaw('(correct_predictions_count / predictions_count - pending_predictions_count) ' . $dir);
+            $users = $users->orderByRaw('(correct_predictions_count / (correct_predictions_count + incorrect_predictions_count)) ' . $dir);
         }
 
         if ($sort === 'predictions') {
