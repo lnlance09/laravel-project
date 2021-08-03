@@ -99,7 +99,9 @@ $logoHeight: 54px;
             }
 
             .right.item {
-                padding-right: 0;
+                @media only screen and (min-width: 1025px) {
+                    padding-right: 0;
+                }
 
                 button.compact.blue {
                     margin-left: 14px;
