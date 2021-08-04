@@ -269,6 +269,16 @@ body {
 			.ui.form input {
 				cursor: pointer;
 			}
+
+			.footerText {
+				color: $white;
+				text-align: center;
+	
+				.header {
+					display: inline-block;
+					font-weight: normal;
+				}
+			}
 		}
 
 		&.notFoundPage {
