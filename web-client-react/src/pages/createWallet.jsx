@@ -55,7 +55,7 @@ const CreateWallet = ({ history }) => {
 			<DisplayMetaTags page="createWallet" />
 
 			<Header as="h1" inverted={inverted} style={{ marginTop: 20 }}>
-				<Icon color="blue" name="ethereum" size="big" />
+				<Icon color="blue" name="ethereum" />
 				<Header.Content>
 					Create a wallet
 					<Header.Subheader>Quickly. Securely.</Header.Subheader>
