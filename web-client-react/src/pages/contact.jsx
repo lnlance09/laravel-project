@@ -94,14 +94,6 @@ const Contact = ({ history }) => {
 							<List.Icon className="twitterIcon" name="twitter" />
 							<List.Content>Twitter</List.Content>
 						</List.Item>
-						<List.Item
-							onClick={() =>
-								window.open(`https://instagram.com/preditcapp`, "_blank").focus()
-							}
-						>
-							<List.Icon className="orange" name="instagram" />
-							<List.Content>Instagram</List.Content>
-						</List.Item>
 					</List>
 				</Grid.Column>
 			</Grid>
