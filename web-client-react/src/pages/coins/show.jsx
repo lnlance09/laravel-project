@@ -124,7 +124,7 @@ const Coins = ({ history }) => {
 				<Grid.Column width={3}>
 					<Button
 						active={activeItem === "market_cap"}
-						color="purple"
+						color="green"
 						content="Market Cap"
 						fluid
 						icon={activeItem === "market_cap" && setIcon(marketCap)}

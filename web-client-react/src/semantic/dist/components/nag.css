@@ -164,91 +164,91 @@ a.ui.nag {
 -------------- */
 
 .ui.primary.nag {
-  background-color: #e03997;
+  background-color: #2185D0;
 }
 .ui.inverted.primary.nag {
-  background-color: #4b7bec;
+  background-color: #54C8FF;
 }
 .ui.secondary.nag {
-  background-color: #3867d6;
+  background-color: #1B1C1D;
 }
 .ui.inverted.secondary.nag {
   background-color: #545454;
 }
 .ui.red.nag {
-  background-color: #eb3b5a;
+  background-color: #DB2828;
 }
 .ui.inverted.red.nag {
-  background-color: #fc5c65;
+  background-color: #FF695E;
 }
 .ui.orange.nag {
-  background-color: #fa8231;
+  background-color: #F2711C;
 }
 .ui.inverted.orange.nag {
-  background-color: #fd9644;
+  background-color: #FF851B;
 }
 .ui.yellow.nag {
-  background-color: #f7b731;
+  background-color: #FBBD08;
 }
 .ui.inverted.yellow.nag {
-  background-color: #fed330;
+  background-color: #FFE21F;
 }
 .ui.olive.nag {
-  background-color: #6ab04c;
+  background-color: #B5CC18;
 }
 .ui.inverted.olive.nag {
-  background-color: #badc58;
+  background-color: #D9E778;
 }
 .ui.green.nag {
-  background-color: #20bf6b;
+  background-color: #21BA45;
 }
 .ui.inverted.green.nag {
-  background-color: #26de81;
+  background-color: #2ECC40;
 }
 .ui.teal.nag {
-  background-color: #0fb9b1;
+  background-color: #00B5AD;
 }
 .ui.inverted.teal.nag {
-  background-color: #2bcbba;
+  background-color: #6DFFFF;
 }
 .ui.blue.nag {
-  background-color: #3867d6;
+  background-color: #2185D0;
 }
 .ui.inverted.blue.nag {
-  background-color: #4b7bec;
+  background-color: #54C8FF;
 }
 .ui.violet.nag {
-  background-color: #6435c9;
+  background-color: #6435C9;
 }
 .ui.inverted.violet.nag {
   background-color: #A291FB;
 }
 .ui.purple.nag {
-  background-color: #8854d0;
+  background-color: #A333C8;
 }
 .ui.inverted.purple.nag {
-  background-color: #a55eea;
+  background-color: #DC73FF;
 }
 .ui.pink.nag {
-  background-color: #e03997;
+  background-color: #E03997;
 }
 .ui.inverted.pink.nag {
   background-color: #FF8EDF;
 }
 .ui.brown.nag {
-  background-color: #a5673f;
+  background-color: #A5673F;
 }
 .ui.inverted.brown.nag {
   background-color: #D67C1C;
 }
 .ui.grey.nag {
-  background-color: #a5b1c2;
+  background-color: #767676;
 }
 .ui.inverted.grey.nag {
-  background-color: #d1d8e0;
+  background-color: #DCDDDE;
 }
 .ui.black.nag {
-  background-color: #1b1c1d;
+  background-color: #1B1C1D;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.inverted.black.nag {

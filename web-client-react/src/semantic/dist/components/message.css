@@ -40,7 +40,7 @@
 /* Header */
 .ui.message .header {
   display: block;
-  font-family: 'Merriweather Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: bold;
   margin: -0.14285714em 0 0 0;
 }
@@ -382,10 +382,10 @@
 }
 .ui.primary.message,
 .ui.attached.primary.message {
-  box-shadow: 0 0 0 1px #e03997 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #2185D0 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.primary.message {
-  box-shadow: 0 0 0 1px #e03997 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #2185D0 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.primary.message .header {
   color: rgba(242, 242, 242, 0.9);
@@ -396,41 +396,41 @@
 }
 .ui.secondary.message,
 .ui.attached.secondary.message {
-  box-shadow: 0 0 0 1px #3867d6 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #1B1C1D inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.secondary.message {
-  box-shadow: 0 0 0 1px #3867d6 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #1B1C1D inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.secondary.message .header {
   color: rgba(242, 242, 242, 0.9);
 }
 .ui.red.message {
   background-color: #FFE8E6;
-  color: #eb3b5a;
+  color: #DB2828;
 }
 .ui.red.message,
 .ui.attached.red.message {
-  box-shadow: 0 0 0 1px #eb3b5a inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #DB2828 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.red.message {
-  box-shadow: 0 0 0 1px #eb3b5a inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #DB2828 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.red.message .header {
-  color: #e92447;
+  color: #c82121;
 }
 .ui.orange.message {
   background-color: #FFEDDE;
-  color: #fa8231;
+  color: #F2711C;
 }
 .ui.orange.message,
 .ui.attached.orange.message {
-  box-shadow: 0 0 0 1px #fa8231 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #F2711C inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.orange.message {
-  box-shadow: 0 0 0 1px #fa8231 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #F2711C inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.orange.message .header {
-  color: #f97318;
+  color: #e7640d;
 }
 .ui.yellow.message {
   background-color: #FFF8DB;
@@ -490,90 +490,90 @@
 }
 .ui.blue.message {
   background-color: #DFF0FF;
-  color: #3867d6;
+  color: #2185D0;
 }
 .ui.blue.message,
 .ui.attached.blue.message {
-  box-shadow: 0 0 0 1px #3867d6 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #2185D0 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.blue.message {
-  box-shadow: 0 0 0 1px #3867d6 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #2185D0 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.blue.message .header {
-  color: #2a5acb;
+  color: #1e77ba;
 }
 .ui.violet.message {
   background-color: #EAE7FF;
-  color: #6435c9;
+  color: #6435C9;
 }
 .ui.violet.message,
 .ui.attached.violet.message {
-  box-shadow: 0 0 0 1px #6435c9 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #6435C9 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.violet.message {
-  box-shadow: 0 0 0 1px #6435c9 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #6435C9 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.violet.message .header {
   color: #5a30b5;
 }
 .ui.purple.message {
   background-color: #F6E7FF;
-  color: #8854d0;
+  color: #A333C8;
 }
 .ui.purple.message,
 .ui.attached.purple.message {
-  box-shadow: 0 0 0 1px #8854d0 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #A333C8 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.purple.message {
-  box-shadow: 0 0 0 1px #8854d0 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #A333C8 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.purple.message .header {
-  color: #7a40cb;
+  color: #922eb4;
 }
 .ui.pink.message {
   background-color: #FFE3FB;
-  color: #e03997;
+  color: #E03997;
 }
 .ui.pink.message,
 .ui.attached.pink.message {
-  box-shadow: 0 0 0 1px #e03997 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #E03997 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.pink.message {
-  box-shadow: 0 0 0 1px #e03997 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #E03997 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.pink.message .header {
   color: #dd238b;
 }
 .ui.brown.message {
   background-color: #F1E2D3;
-  color: #a5673f;
+  color: #A5673F;
 }
 .ui.brown.message,
 .ui.attached.brown.message {
-  box-shadow: 0 0 0 1px #a5673f inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #A5673F inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.brown.message {
-  box-shadow: 0 0 0 1px #a5673f inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #A5673F inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.brown.message .header {
   color: #935b38;
 }
 .ui.grey.message {
   background-color: #F4F4F4;
-  color: #a5b1c2;
+  color: #767676;
 }
 .ui.grey.message,
 .ui.attached.grey.message {
-  box-shadow: 0 0 0 1px #a5b1c2 inset, 0 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 1px #767676 inset, 0 0 0 0 rgba(0, 0, 0, 0);
 }
 .ui.floating.grey.message {
-  box-shadow: 0 0 0 1px #a5b1c2 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0 0 0 1px #767676 inset, 0 2px 4px 0 rgba(34, 36, 38, 0.12), 0 2px 10px 0 rgba(34, 36, 38, 0.15);
 }
 .ui.grey.message .header {
-  color: #96a4b8;
+  color: #696969;
 }
 .ui.black.message {
-  background-color: #1b1c1d;
+  background-color: #1B1C1D;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.black.message .header {

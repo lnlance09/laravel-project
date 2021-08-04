@@ -386,7 +386,7 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 						>
 							Traders{" "}
 							{memberCount > 0 && (
-								<Label className={inverted ? "inverted" : null} color="olive">
+								<Label className={inverted ? "inverted" : null} color="blue">
 									<NumberFormat
 										displayType={"text"}
 										thousandSeparator

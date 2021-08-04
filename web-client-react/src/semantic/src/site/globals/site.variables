@@ -17,31 +17,27 @@
 @grey           : #767676;
 @black          : #1b1c1d;
 
-@blue: #3867d6;
-@green: #20bf6b;
-@orange: #fa8231;
-@yellow: #f7b731;
-@red: #eb3b5a;
-@purple: #8854d0;
-@teal: #0fb9b1;
-@olive: #6ab04c;
-@grey: #a5b1c2;
+@blue: #0097e6;
+@green: #44bd32;
+@yellow: #e1b12c;
+@red: #c23616;
+@purple: #8c7ae6;
+@grey: #718093;
+$black: #2f3640;
 
-@lightBlue: #4b7bec;
-@lightGreen: #26de81;
-@lightOrange: #fd9644;
-@lightYellow: #fed330;
-@lightRed: #fc5c65;
-@lightPurple: #a55eea;
-@lightTeal: #2bcbba;
-@lightOlive: #badc58;
-@lightGrey: #d1d8e0;
+@lightBlue: #00a8ff;
+@lightGreen: #4cd137;
+@lightYellow: #fbc531;
+@lightRed: #e84118;
+@lightPurple: #9c88ff;
+@lightGrey: #7f8fa6;
+$lightBlack: #353b48;
 
-@fontName          : 'Merriweather Sans';
+@fontName          : 'Overpass';
 @fontSmoothing     : antialiased;
 @googleFontFamily  : 'Anton';
 
-@googleFontName    : 'Merriweather+Sans';
+@googleFontName    : 'Overpass';
 @importGoogleFonts : true;
 @googleFontSizes   : '';
 @googleDisplay     : 'swap';
