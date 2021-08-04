@@ -121,7 +121,7 @@ Route::get('/predictions/{id}', function ($id) use ($seo) {
         'src' => $img,
         'width' => $width
     ];
-    $seo['title'] = $coin->name . ' to ' . $price . ' on ' . $date . ' - ' . $user->name . ' - ' . $seo['siteName'];
+    $seo['title'] = $coin->name . ' to $' . $price . ' on ' . $date . ' - ' . $user->name . ' - ' . $seo['siteName'];
     $seo['url'] = $seo['baseUrl'] . 'predictions/' . $id;
 
     return view('index', $seo);
