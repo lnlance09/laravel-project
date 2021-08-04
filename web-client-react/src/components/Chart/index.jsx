@@ -179,7 +179,7 @@ const Chart = ({
 					dispatch({
 						type: "ADD_SERIES",
 						series: {
-							color: "#26de81",
+							color: "#44bd32",
 							data: series,
 							fillOpacity: 0.7,
 							turboThreshold: 4000
