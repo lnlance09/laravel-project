@@ -299,7 +299,7 @@ const Coin = ({ history, match }) => {
 						Performance
 					</Header>
 
-					<Chart coin={coin} color="#4b7bec" inverted={inverted} />
+					<Chart coin={coin} color="#0097e6" inverted={inverted} />
 
 					<Header as="h2" className="dividerHeader" inverted={inverted} size="huge">
 						Make a Prediction

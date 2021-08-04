@@ -506,7 +506,7 @@
   width: 3em;
   height: 3em;
   animation: loader 0.6s infinite linear;
-  border: 0.2em solid #a5b1c2;
+  border: 0.2em solid #767676;
   border-radius: 500rem;
   box-shadow: 0 0 0 1px transparent;
   visibility: visible;
@@ -547,94 +547,94 @@
 --------------------*/
 
 .ui.red.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #eb3b5a;
+  border-top: 2px solid #DB2828;
 }
 .ui.inverted.red.segment.segment.segment.segment.segment {
-  background-color: #eb3b5a;
+  background-color: #DB2828;
   color: #FFFFFF;
 }
 .ui.orange.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #fa8231;
+  border-top: 2px solid #F2711C;
 }
 .ui.inverted.orange.segment.segment.segment.segment.segment {
-  background-color: #fa8231;
+  background-color: #F2711C;
   color: #FFFFFF;
 }
 .ui.yellow.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #f7b731;
+  border-top: 2px solid #FBBD08;
 }
 .ui.inverted.yellow.segment.segment.segment.segment.segment {
-  background-color: #f7b731;
+  background-color: #FBBD08;
   color: #FFFFFF;
 }
 .ui.olive.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #6ab04c;
+  border-top: 2px solid #B5CC18;
 }
 .ui.inverted.olive.segment.segment.segment.segment.segment {
-  background-color: #6ab04c;
+  background-color: #B5CC18;
   color: #FFFFFF;
 }
 .ui.green.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #20bf6b;
+  border-top: 2px solid #21BA45;
 }
 .ui.inverted.green.segment.segment.segment.segment.segment {
-  background-color: #20bf6b;
+  background-color: #21BA45;
   color: #FFFFFF;
 }
 .ui.teal.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #0fb9b1;
+  border-top: 2px solid #00B5AD;
 }
 .ui.inverted.teal.segment.segment.segment.segment.segment {
-  background-color: #0fb9b1;
+  background-color: #00B5AD;
   color: #FFFFFF;
 }
 .ui.blue.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #3867d6;
+  border-top: 2px solid #2185D0;
 }
 .ui.inverted.blue.segment.segment.segment.segment.segment {
-  background-color: #3867d6;
+  background-color: #2185D0;
   color: #FFFFFF;
 }
 .ui.violet.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #6435c9;
+  border-top: 2px solid #6435C9;
 }
 .ui.inverted.violet.segment.segment.segment.segment.segment {
-  background-color: #6435c9;
+  background-color: #6435C9;
   color: #FFFFFF;
 }
 .ui.purple.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #8854d0;
+  border-top: 2px solid #A333C8;
 }
 .ui.inverted.purple.segment.segment.segment.segment.segment {
-  background-color: #8854d0;
+  background-color: #A333C8;
   color: #FFFFFF;
 }
 .ui.pink.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #e03997;
+  border-top: 2px solid #E03997;
 }
 .ui.inverted.pink.segment.segment.segment.segment.segment {
-  background-color: #e03997;
+  background-color: #E03997;
   color: #FFFFFF;
 }
 .ui.brown.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #a5673f;
+  border-top: 2px solid #A5673F;
 }
 .ui.inverted.brown.segment.segment.segment.segment.segment {
-  background-color: #a5673f;
+  background-color: #A5673F;
   color: #FFFFFF;
 }
 .ui.grey.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #a5b1c2;
+  border-top: 2px solid #767676;
 }
 .ui.inverted.grey.segment.segment.segment.segment.segment {
-  background-color: #a5b1c2;
+  background-color: #767676;
   color: #FFFFFF;
 }
 .ui.black.segment.segment.segment.segment.segment:not(.inverted) {
-  border-top: 2px solid #1b1c1d;
+  border-top: 2px solid #1B1C1D;
 }
 .ui.inverted.black.segment.segment.segment.segment.segment {
-  background-color: #1b1c1d;
+  background-color: #1B1C1D;
   color: #FFFFFF;
 }
 

@@ -10,8 +10,8 @@ import logger from "use-reducer-logger"
 import PropTypes from "prop-types"
 import reducer from "./reducer"
 
-const red = "#eb3b5a"
-const green = "#20bf6b"
+const red = "#c23616"
+const green = "#44bd32"
 
 const Chart = ({
 	addSeries = false,
@@ -46,7 +46,7 @@ const Chart = ({
 			shadow: false,
 			style: {
 				color: "white",
-				fontFamily: "Merriweather Sans",
+				fontFamily: "Overpass",
 				fontSize: "16px"
 			},
 			verticalAlign: "text-top",
