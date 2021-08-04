@@ -65,7 +65,7 @@ export const DisplayMetaTags = ({ page, state }) => {
 			const pUser = prediction.user
 			const pDate = moment(prediction.targetDate).format("MMM D, YYYY")
 			const pTitle = state.loaded
-				? `${pCoin.name} to ${prediction.predictionPrice} on ${pDate} - ${pUser.name} - ${siteName}`
+				? `${pCoin.name} to $${prediction.predictionPrice} on ${pDate} - ${pUser.name} - ${siteName}`
 				: null
 			metaTags = {
 				description: prediction.explanation,
