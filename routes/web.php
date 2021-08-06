@@ -234,7 +234,8 @@ Route::get('/{username}', function ($username) use ($seo) {
 });
 
 Route::get('/wallet/create', function () use ($seo) {
-    $seo['title'] = 'Create a Wallet - ' . $seo['siteName'];
+    $seo['title'] = 'Generate Ether Address Online - ' . $seo['siteName'];
+    $seo['description'] = 'Generate an ether wallet online that includes address, public key and private key. Fast. Free. Secure.';
     $seo['url'] = $seo['baseUrl'] . 'wallet/create';
     return view('index', $seo);
 });

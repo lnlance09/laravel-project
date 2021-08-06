@@ -12,7 +12,7 @@ const initialState = {
 			plotShadow: false,
 			plotBorderWidth: 0,
 			style: {
-				fontFamily: "Noto Sans, Segoe UI, Helvetica, sans-serif"
+				fontFamily: "Overpass, Segoe UI, Helvetica, sans-serif"
 			},
 			type: "area"
 		},
