@@ -47,9 +47,10 @@ export const DisplayMetaTags = ({ page, state }) => {
 			break
 		case "createWallet":
 			metaTags = {
-				description: "Create an ethereum wallet quickly and securely",
+				description:
+					"Generate an ether wallet online that includes address, public key and private key. Fast. Free. Secure.",
 				img,
-				title: `Create a Wallet - ${siteName}`
+				title: `Generate Ether Address Online - ${siteName}`
 			}
 			break
 		case "forgot":
