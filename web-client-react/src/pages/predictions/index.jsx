@@ -132,25 +132,21 @@ const Prediction = ({ history, match }) => {
 						</Header.Content>
 					</Header>
 
-					<Card className={inverted ? "inverted" : null} fluid>
-						<Card.Content>
-							<Chart
-								addSeries
-								coin={coin}
-								containerProps={{ style: { height: "250px" } }}
-								duration={getDuration()}
-								hideYAxis
-								includeRanges={false}
-								inverted={inverted}
-								prediction={{
-									currentPrice: currentPrice,
-									date: moment(targetDate).unix(),
-									price: predictionPrice
-								}}
-								startDate={moment(createdAt).unix()}
-							/>
-						</Card.Content>
-					</Card>
+					<Chart
+						addSeries
+						coin={coin}
+						containerProps={{ style: { height: "250px" } }}
+						duration={getDuration()}
+						hideYAxis
+						includeRanges={false}
+						inverted={inverted}
+						prediction={{
+							currentPrice: currentPrice,
+							date: moment(targetDate).unix(),
+							price: predictionPrice
+						}}
+						startDate={moment(createdAt).unix()}
+					/>
 
 					<Card className={`${inverted ? "inverted" : null}`} fluid>
 						<Card.Content>
@@ -174,6 +170,8 @@ const Prediction = ({ history, match }) => {
 							</span>
 						</Card.Content>
 					</Card>
+
+					<Divider hidden />
 
 					<Header as="h2" className="dividerHeader" inverted={inverted} size="huge">
 						Stats
