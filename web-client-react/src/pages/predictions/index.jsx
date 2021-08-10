@@ -198,7 +198,7 @@ const Prediction = ({ history, match }) => {
 								<Label
 									basic
 									className={inverted ? "inverted" : ""}
-									color="pink"
+									color="blue"
 									horizontal
 									size="large"
 								>
@@ -210,7 +210,7 @@ const Prediction = ({ history, match }) => {
 								<Label
 									basic
 									className={inverted ? "inverted" : ""}
-									color="orange"
+									color="blue"
 									horizontal
 									size="large"
 								>
@@ -228,7 +228,7 @@ const Prediction = ({ history, match }) => {
 								<Label
 									basic
 									className={inverted ? "inverted" : ""}
-									color="yellow"
+									color="blue"
 									horizontal
 									size="large"
 								>
@@ -246,7 +246,7 @@ const Prediction = ({ history, match }) => {
 								<Label
 									basic
 									className={inverted ? "inverted" : ""}
-									color="violet"
+									color="blue"
 									horizontal
 									size="large"
 								>
@@ -268,7 +268,7 @@ const Prediction = ({ history, match }) => {
 								<Label
 									basic
 									className={inverted ? "inverted" : ""}
-									color="teal"
+									color="blue"
 									horizontal
 									size="large"
 								>
@@ -280,7 +280,7 @@ const Prediction = ({ history, match }) => {
 								<Label
 									basic
 									className={inverted ? "inverted" : ""}
-									color="olive"
+									color="blue"
 									horizontal
 									size="large"
 								>
