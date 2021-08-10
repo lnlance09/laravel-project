@@ -162,6 +162,10 @@ Route::get('sitemap', function () {
 
         // create a wallet
         $sitemap->add(URL::to('/wallet/create'), null, '0.9', 'monthly');
+        $coins = DB::table('coins')->where('has_wallet', 1)->orderBy('id', 'asc')->get();
+        foreach ($coins as $c) {
+            $sitemap->add(URL::to('/wallet/create/' . $c->symbol), $c->updated_at, '0.9', 'd');
+        }
 
         // predictions
         $predictions = DB::table('predictions')->orderBy('id', 'asc')->get();
@@ -237,5 +241,13 @@ Route::get('/wallet/create', function () use ($seo) {
     $seo['title'] = 'Generate Ether Address Online - ' . $seo['siteName'];
     $seo['description'] = 'Generate an ether wallet online that includes address, public key and private key. Fast. Free. Secure.';
     $seo['url'] = $seo['baseUrl'] . 'wallet/create';
+    return view('index', $seo);
+});
+
+Route::get('/wallet/create/{symbol}', function ($symbol) use ($seo) {
+    $coin = Coin::where('symbol', $symbol)->first();
+    $seo['title'] = 'Generate ' . $coin->name . ' Address Online - ' . $seo['siteName'];
+    $seo['description'] = 'Generate an ' . $coin->name . ' wallet online that includes address, public key and private key. Fast. Free. Secure.';
+    $seo['url'] = $seo['baseUrl'] . 'wallet/create/' . $symbol;
     return view('index', $seo);
 });
