@@ -49,7 +49,7 @@
 
         <!-- React build CSS -->
         <link rel="stylesheet" type="text/css" href="/static/css/2.e4989b0c.chunk.css">
-        <link rel="stylesheet" type="text/css" href="/static/css/main.f713de1e.chunk.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/main.481c5a4d.chunk.css">
 
         <title>{{ $title }}</title>
     </head>
