@@ -1,7 +1,7 @@
 const darkColor = "#050505"
 const lightColor = "#fff"
 
-const darkAreaColor = "#4834d4"
+const darkAreaColor = "#686de0"
 const lightAreaColor = "#3867d6"
 
 const reducer = (state, action) => {
@@ -53,6 +53,10 @@ const reducer = (state, action) => {
 						area: {
 							...state.options.plotOptions.area,
 							color: action.color
+						},
+						line: {
+							...state.options.plotOptions.line,
+							color: action.color
 						}
 					}
 				}
@@ -67,7 +71,7 @@ const reducer = (state, action) => {
 						{
 							...state.options.series[0],
 							data: points,
-							fillOpacity: 0.7,
+							// fillOpacity: 0.7,
 							turboThreshold: 4000
 						}
 					]
@@ -114,6 +118,10 @@ const reducer = (state, action) => {
 						...state.options.plotOptions,
 						area: {
 							...state.options.plotOptions.area,
+							color: newAreaColor
+						},
+						line: {
+							...state.options.plotOptions.line,
 							color: newAreaColor
 						}
 					}

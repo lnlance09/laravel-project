@@ -14,7 +14,7 @@ const initialState = {
 			style: {
 				fontFamily: "Overpass, Segoe UI, Helvetica, sans-serif"
 			},
-			type: "area"
+			type: "line"
 		},
 		credits: {
 			enabled: false

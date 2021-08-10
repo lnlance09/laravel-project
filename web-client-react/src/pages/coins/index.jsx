@@ -185,7 +185,7 @@ const Coin = ({ history, match }) => {
 								</Statistic>
 							</Grid.Column>
 							<Grid.Column>
-								<Statistic color="blue" inverted={inverted}>
+								<Statistic color="green" inverted={inverted}>
 									<Statistic.Value>
 										{formatNumber(coin.volume24h)}
 									</Statistic.Value>
@@ -209,7 +209,7 @@ const Coin = ({ history, match }) => {
 								</Statistic>
 							</Grid.Column>
 							<Grid.Column>
-								<Statistic color="violet" inverted={inverted}>
+								<Statistic color="blue" inverted={inverted}>
 									<Statistic.Value>
 										{formatNumber(coin.maxSupply)}
 									</Statistic.Value>
