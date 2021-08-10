@@ -112,7 +112,6 @@ const CreateWallet = ({ history, match }) => {
 													`Create a new ${coin.name} wallet`,
 													`/wallet/create/${coin.symbol}`
 												)
-												// history.push(`/wallet/create/${coin.symbol}`)
 											}}
 										>
 											{coin.name}
@@ -131,6 +130,7 @@ const CreateWallet = ({ history, match }) => {
 					</Card>
 				</Grid.Column>
 			</Grid>
+			<Divider hidden />
 		</DefaultLayout>
 	)
 }
