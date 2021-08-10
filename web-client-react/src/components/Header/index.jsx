@@ -404,7 +404,7 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 								<>
 									<Button
 										compact
-										color="green"
+										color="teal"
 										content="Create Wallet"
 										onClick={() => history.push("/wallet/create")}
 										size="large"
