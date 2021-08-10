@@ -1,4 +1,4 @@
-import { Button, Divider, Grid, Header } from "semantic-ui-react"
+import { Button, Divider, Grid, Header, Message } from "semantic-ui-react"
 import { useContext, useEffect, useReducer, useState } from "react"
 import { DebounceInput } from "react-debounce-input"
 import { DisplayMetaTags } from "utils/metaFunctions"
@@ -97,6 +97,13 @@ const Coins = ({ history }) => {
 			<Header as="h1" className="massive" inverted={inverted}>
 				Coins
 			</Header>
+			<Message
+				className={`coinVsToken ${inverted ? "inverted" : null}`}
+				content="Coins are native to their own Blockchain. Tokens have been built on top of another Blockchain."
+				header="What's the difference between coins and tokens?"
+				icon="question mark"
+			/>
+			<Divider hidden />
 			<Grid stackable>
 				<Grid.Column width={10}>
 					<div className={`ui icon input big basic fluid ${inverted ? "inverted" : ""}`}>
@@ -124,7 +131,7 @@ const Coins = ({ history }) => {
 				<Grid.Column width={3}>
 					<Button
 						active={activeItem === "market_cap"}
-						color="green"
+						color="blue"
 						content="Market Cap"
 						fluid
 						icon={activeItem === "market_cap" && setIcon(marketCap)}

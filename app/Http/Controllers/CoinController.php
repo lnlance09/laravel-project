@@ -10,6 +10,7 @@ use App\Http\Resources\UserCollection;
 use App\Models\Coin;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CoinController extends Controller
 {
@@ -61,6 +62,24 @@ class CoinController extends Controller
     public function edit(Coin $coin)
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getCoinsWithWallets(Request $request)
+    {
+        $coins = DB::table('coins')
+            ->select('id', 'explorer_link', 'explorer_name', 'fork', 'fork_text', 'logo', 'name', 'symbol', 'wallet_link', 'wallet_name')
+            ->where('has_wallet', 1)
+            ->orderBy('name', 'asc')
+            ->get();
+
+        return response([
+            'data' => $coins
+        ]);
     }
 
     public function graph(Request $request)

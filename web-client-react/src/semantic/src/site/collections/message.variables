@@ -2,4 +2,5 @@
     User Variable Overrides
 *******************************/
 @invertedBackground: #090127;
+@invertedBoxShadow: 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 0 0 0 transparent;
 @errorBackgroundColor: #eb3b5a;
