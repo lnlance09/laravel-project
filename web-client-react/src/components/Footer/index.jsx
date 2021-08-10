@@ -13,8 +13,7 @@ const Footer = ({ history, inverted }) => {
 						<Grid.Row>
 							<Grid.Column width={3}>
 								<Header as="h4" inverted={inverted}>
-									<span>🍕</span>
-									<span className="emojiMarginLeft">About</span>
+									About
 								</Header>
 								<List inverted={inverted} link relaxed>
 									<List.Item as="a" onClick={() => history.push("/about")}>
@@ -30,8 +29,7 @@ const Footer = ({ history, inverted }) => {
 							</Grid.Column>
 							<Grid.Column width={3}>
 								<Header as="h4" inverted={inverted}>
-									<span>👍</span>{" "}
-									<span className="emojiMarginLeft">Follow Us</span>
+									Follow Us
 								</Header>
 								<List inverted={inverted} link relaxed>
 									<List.Item
@@ -48,8 +46,7 @@ const Footer = ({ history, inverted }) => {
 							</Grid.Column>
 							<Grid.Column width={7}>
 								<Header as="h4" inverted={inverted}>
-									<span>🎉</span>{" "}
-									<span className="emojiMarginLeft">Support Us</span>
+									Support Us
 								</Header>
 								<List inverted={inverted} link relaxed>
 									<List.Item>
