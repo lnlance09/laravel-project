@@ -48,7 +48,7 @@
         @endif
 
         <!-- React build CSS -->
-        <link rel="stylesheet" type="text/css" href="/static/css/2.3daa458e.chunk.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/2.e4989b0c.chunk.css">
         <link rel="stylesheet" type="text/css" href="/static/css/main.28117537.chunk.css">
 
         <title>{{ $title }}</title>
@@ -69,7 +69,7 @@
     <script src="https://www.statcounter.com/counter/counter.js" async></script>
 
     <!-- React build JS -->
-    <script src="/static/js/2.9bc193b3.chunk.js"></script>
-    <script src="/static/js/main.51d6e2df.chunk.js"></script>
+    <script src="/static/js/2.b2edaebf.chunk.js"></script>
+    <script src="/static/js/runtime-main.e1b51eb3.js"></script>
     <script src="/static/js/runtime-main.e1b51eb3.js"></script>
 </html>
