@@ -227,70 +227,70 @@
     box-shadow: none !important;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.primary.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #2185D0 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #e03997 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.primary.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #2185D0 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #e03997 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.primary.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #54C8FF inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #686de0 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.primary.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #54C8FF inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #686de0 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.secondary.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #1B1C1D inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #4834d4 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.secondary.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #1B1C1D inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #4834d4 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.secondary.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #545454 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #353b48 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.secondary.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #545454 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #353b48 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.red.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #DB2828 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #eb4d4b inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.red.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #DB2828 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #eb4d4b inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.red.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #FF695E inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #ff7979 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.red.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #FF695E inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #ff7979 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.orange.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #F2711C inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #f0932b inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.orange.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #F2711C inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #f0932b inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.orange.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #FF851B inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #ffbe76 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.orange.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #FF851B inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #ffbe76 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.yellow.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #FBBD08 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #f9ca24 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.yellow.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #FBBD08 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #f9ca24 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.yellow.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #FFE21F inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #f6e58d inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.yellow.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #FFE21F inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #f6e58d inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.olive.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #B5CC18 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #b5cc18 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.olive.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #B5CC18 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #b5cc18 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.olive.left {
     box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #D9E778 inset;
@@ -299,46 +299,46 @@
     box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #D9E778 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.green.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #21BA45 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #6ab04c inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.green.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #21BA45 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #6ab04c inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.green.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #2ECC40 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #badc58 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.green.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #2ECC40 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #badc58 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.teal.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #00B5AD inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #22a6b3 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.teal.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #00B5AD inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #22a6b3 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.teal.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #6DFFFF inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #7ed6df inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.teal.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #6DFFFF inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #7ed6df inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.blue.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #2185D0 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #4834d4 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.blue.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #2185D0 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #4834d4 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.blue.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #54C8FF inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #686de0 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.blue.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #54C8FF inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #686de0 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.violet.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #6435C9 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #6435c9 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.violet.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #6435C9 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #6435c9 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.violet.left {
     box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #A291FB inset;
@@ -347,22 +347,22 @@
     box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #A291FB inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.purple.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #A333C8 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #be2edd inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.purple.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #A333C8 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #be2edd inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.purple.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #DC73FF inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #e056fd inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.purple.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #DC73FF inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #e056fd inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.pink.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #E03997 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #e03997 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.pink.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #E03997 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #e03997 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.pink.left {
     box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #FF8EDF inset;
@@ -371,10 +371,10 @@
     box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #FF8EDF inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.brown.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #A5673F inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #a5673f inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.brown.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #A5673F inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #a5673f inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.brown.left {
     box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #D67C1C inset;
@@ -383,28 +383,28 @@
     box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #D67C1C inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.grey.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #767676 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #718093 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.grey.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #767676 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #718093 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.grey.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #DCDDDE inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #7f8fa6 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.grey.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #DCDDDE inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #7f8fa6 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.black.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #1B1C1D inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #2f3640 inset;
   }
   .ui.ui.ui.ui.table:not(.unstackable) tr.marked.black.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #1B1C1D inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #2f3640 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.black.left {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #545454 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #353b48 inset;
   }
   .ui.ui.ui.ui.inverted.table:not(.unstackable) tr.marked.black.right {
-    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #545454 inset;
+    box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #353b48 inset;
   }
 }
 
@@ -650,70 +650,70 @@
   }
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.primary.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #2185D0 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #e03997 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.primary.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #2185D0 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #e03997 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.primary.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #54C8FF inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #686de0 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.primary.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #54C8FF inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #686de0 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.secondary.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #1B1C1D inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #4834d4 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.secondary.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #1B1C1D inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #4834d4 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.secondary.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #545454 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #353b48 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.secondary.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #545454 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #353b48 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.red.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #DB2828 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #eb4d4b inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.red.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #DB2828 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #eb4d4b inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.red.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #FF695E inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #ff7979 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.red.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #FF695E inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #ff7979 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.orange.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #F2711C inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #f0932b inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.orange.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #F2711C inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #f0932b inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.orange.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #FF851B inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #ffbe76 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.orange.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #FF851B inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #ffbe76 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.yellow.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #FBBD08 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #f9ca24 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.yellow.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #FBBD08 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #f9ca24 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.yellow.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #FFE21F inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #f6e58d inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.yellow.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #FFE21F inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #f6e58d inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.olive.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #B5CC18 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #b5cc18 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.olive.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #B5CC18 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #b5cc18 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.olive.left {
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #D9E778 inset;
@@ -722,46 +722,46 @@
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #D9E778 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.green.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #21BA45 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #6ab04c inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.green.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #21BA45 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #6ab04c inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.green.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #2ECC40 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #badc58 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.green.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #2ECC40 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #badc58 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.teal.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #00B5AD inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #22a6b3 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.teal.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #00B5AD inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #22a6b3 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.teal.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #6DFFFF inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #7ed6df inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.teal.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #6DFFFF inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #7ed6df inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.blue.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #2185D0 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #4834d4 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.blue.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #2185D0 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #4834d4 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.blue.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #54C8FF inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #686de0 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.blue.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #54C8FF inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #686de0 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.violet.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #6435C9 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #6435c9 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.violet.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #6435C9 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #6435c9 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.violet.left {
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #A291FB inset;
@@ -770,22 +770,22 @@
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #A291FB inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.purple.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #A333C8 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #be2edd inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.purple.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #A333C8 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #be2edd inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.purple.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #DC73FF inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #e056fd inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.purple.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #DC73FF inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #e056fd inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.pink.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #E03997 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #e03997 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.pink.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #E03997 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #e03997 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.pink.left {
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #FF8EDF inset;
@@ -794,10 +794,10 @@
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #FF8EDF inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.brown.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #A5673F inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #a5673f inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.brown.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #A5673F inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #a5673f inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.brown.left {
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #D67C1C inset;
@@ -806,28 +806,28 @@
   box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #D67C1C inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.grey.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #767676 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #718093 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.grey.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #767676 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #718093 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.grey.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #DCDDDE inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #7f8fa6 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.grey.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #DCDDDE inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #7f8fa6 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.black.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #1B1C1D inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #2f3640 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].table tr.marked.black.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #1B1C1D inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #2f3640 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.black.left {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #545454 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, 0.2em 0 0 0 #353b48 inset;
 }
 .ui.ui.ui.ui[class*="tablet stackable"].inverted.table tr.marked.black.right {
-  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #545454 inset;
+  box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.1) inset, -0.2em 0 0 0 #353b48 inset;
 }
 
 /*--------------
@@ -1032,180 +1032,180 @@
 --------------------*/
 
 .ui.primary.table {
-  border-top: 0.2em solid #2185D0;
+  border-top: 0.2em solid #e03997;
 }
 .ui.inverted.primary.table {
-  background-color: #2185D0;
+  background-color: #e03997;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.primary:not(.marked),
 .ui.ui.table td.primary:not(.marked) {
-  background: #ddf4ff;
+  background: #e1e2f9;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.ui.selectable.table tr.primary:not(.marked):hover,
 .ui.table tr td.selectable.primary:not(.marked):hover,
 .ui.selectable.table tr:hover td.primary:not(.marked) {
-  background: #d3f1ff;
+  background: #d7d8f9;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.table td.marked.primary.left,
 .ui.table tr.marked.primary.left {
-  box-shadow: 0.2em 0 0 0 #2185D0 inset;
+  box-shadow: 0.2em 0 0 0 #e03997 inset;
 }
 .ui.table td.marked.primary.right,
 .ui.table tr.marked.primary.right {
-  box-shadow: -0.2em 0 0 0 #2185D0 inset;
+  box-shadow: -0.2em 0 0 0 #e03997 inset;
 }
 .ui.inverted.table td.marked.primary.left,
 .ui.inverted.table tr.marked.primary.left {
-  box-shadow: 0.2em 0 0 0 #54C8FF inset;
+  box-shadow: 0.2em 0 0 0 #686de0 inset;
 }
 .ui.inverted.table td.marked.primary.right,
 .ui.inverted.table tr.marked.primary.right {
-  box-shadow: -0.2em 0 0 0 #54C8FF inset;
+  box-shadow: -0.2em 0 0 0 #686de0 inset;
 }
 .ui.secondary.table {
-  border-top: 0.2em solid #1B1C1D;
+  border-top: 0.2em solid #4834d4;
 }
 .ui.inverted.secondary.table {
-  background-color: #1B1C1D;
+  background-color: #4834d4;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.secondary:not(.marked),
 .ui.ui.table td.secondary:not(.marked) {
-  background: #dddddd;
+  background: #d7d8da;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.ui.selectable.table tr.secondary:not(.marked):hover,
 .ui.table tr td.selectable.secondary:not(.marked):hover,
 .ui.selectable.table tr:hover td.secondary:not(.marked) {
-  background: #e2e2e2;
+  background: #dbdde1;
   color: rgba(255, 255, 255, 0.9);
 }
 .ui.table td.marked.secondary.left,
 .ui.table tr.marked.secondary.left {
-  box-shadow: 0.2em 0 0 0 #1B1C1D inset;
+  box-shadow: 0.2em 0 0 0 #4834d4 inset;
 }
 .ui.table td.marked.secondary.right,
 .ui.table tr.marked.secondary.right {
-  box-shadow: -0.2em 0 0 0 #1B1C1D inset;
+  box-shadow: -0.2em 0 0 0 #4834d4 inset;
 }
 .ui.inverted.table td.marked.secondary.left,
 .ui.inverted.table tr.marked.secondary.left {
-  box-shadow: 0.2em 0 0 0 #545454 inset;
+  box-shadow: 0.2em 0 0 0 #353b48 inset;
 }
 .ui.inverted.table td.marked.secondary.right,
 .ui.inverted.table tr.marked.secondary.right {
-  box-shadow: -0.2em 0 0 0 #545454 inset;
+  box-shadow: -0.2em 0 0 0 #353b48 inset;
 }
 .ui.red.table {
-  border-top: 0.2em solid #DB2828;
+  border-top: 0.2em solid #eb4d4b;
 }
 .ui.inverted.red.table {
-  background-color: #DB2828;
+  background-color: #eb4d4b;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.red:not(.marked),
 .ui.ui.table td.red:not(.marked) {
-  background: #ffe1df;
-  color: #DB2828;
+  background: #ffe4e4;
+  color: #eb4d4b;
 }
 .ui.ui.selectable.table tr.red:not(.marked):hover,
 .ui.table tr td.selectable.red:not(.marked):hover,
 .ui.selectable.table tr:hover td.red:not(.marked) {
-  background: #ffd7d5;
-  color: #DB2828;
+  background: #ffdada;
+  color: #eb4d4b;
 }
 .ui.table td.marked.red.left,
 .ui.table tr.marked.red.left {
-  box-shadow: 0.2em 0 0 0 #DB2828 inset;
+  box-shadow: 0.2em 0 0 0 #eb4d4b inset;
 }
 .ui.table td.marked.red.right,
 .ui.table tr.marked.red.right {
-  box-shadow: -0.2em 0 0 0 #DB2828 inset;
+  box-shadow: -0.2em 0 0 0 #eb4d4b inset;
 }
 .ui.inverted.table td.marked.red.left,
 .ui.inverted.table tr.marked.red.left {
-  box-shadow: 0.2em 0 0 0 #FF695E inset;
+  box-shadow: 0.2em 0 0 0 #ff7979 inset;
 }
 .ui.inverted.table td.marked.red.right,
 .ui.inverted.table tr.marked.red.right {
-  box-shadow: -0.2em 0 0 0 #FF695E inset;
+  box-shadow: -0.2em 0 0 0 #ff7979 inset;
 }
 .ui.orange.table {
-  border-top: 0.2em solid #F2711C;
+  border-top: 0.2em solid #f0932b;
 }
 .ui.inverted.orange.table {
-  background-color: #F2711C;
+  background-color: #f0932b;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.orange:not(.marked),
 .ui.ui.table td.orange:not(.marked) {
-  background: #ffe7d1;
-  color: #F2711C;
+  background: #fff2e4;
+  color: #f0932b;
 }
 .ui.ui.selectable.table tr.orange:not(.marked):hover,
 .ui.table tr td.selectable.orange:not(.marked):hover,
 .ui.selectable.table tr:hover td.orange:not(.marked) {
-  background: #fae1cc;
-  color: #F2711C;
+  background: #ffedd9;
+  color: #f0932b;
 }
 .ui.table td.marked.orange.left,
 .ui.table tr.marked.orange.left {
-  box-shadow: 0.2em 0 0 0 #F2711C inset;
+  box-shadow: 0.2em 0 0 0 #f0932b inset;
 }
 .ui.table td.marked.orange.right,
 .ui.table tr.marked.orange.right {
-  box-shadow: -0.2em 0 0 0 #F2711C inset;
+  box-shadow: -0.2em 0 0 0 #f0932b inset;
 }
 .ui.inverted.table td.marked.orange.left,
 .ui.inverted.table tr.marked.orange.left {
-  box-shadow: 0.2em 0 0 0 #FF851B inset;
+  box-shadow: 0.2em 0 0 0 #ffbe76 inset;
 }
 .ui.inverted.table td.marked.orange.right,
 .ui.inverted.table tr.marked.orange.right {
-  box-shadow: -0.2em 0 0 0 #FF851B inset;
+  box-shadow: -0.2em 0 0 0 #ffbe76 inset;
 }
 .ui.yellow.table {
-  border-top: 0.2em solid #FBBD08;
+  border-top: 0.2em solid #f9ca24;
 }
 .ui.inverted.yellow.table {
-  background-color: #FBBD08;
+  background-color: #f9ca24;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.yellow:not(.marked),
 .ui.ui.table td.yellow:not(.marked) {
-  background: #fff9d2;
+  background: #fdfae8;
   color: #B58105;
 }
 .ui.ui.selectable.table tr.yellow:not(.marked):hover,
 .ui.table tr td.selectable.yellow:not(.marked):hover,
 .ui.selectable.table tr:hover td.yellow:not(.marked) {
-  background: #fbf5cc;
+  background: #fef9dd;
   color: #B58105;
 }
 .ui.table td.marked.yellow.left,
 .ui.table tr.marked.yellow.left {
-  box-shadow: 0.2em 0 0 0 #FBBD08 inset;
+  box-shadow: 0.2em 0 0 0 #f9ca24 inset;
 }
 .ui.table td.marked.yellow.right,
 .ui.table tr.marked.yellow.right {
-  box-shadow: -0.2em 0 0 0 #FBBD08 inset;
+  box-shadow: -0.2em 0 0 0 #f9ca24 inset;
 }
 .ui.inverted.table td.marked.yellow.left,
 .ui.inverted.table tr.marked.yellow.left {
-  box-shadow: 0.2em 0 0 0 #FFE21F inset;
+  box-shadow: 0.2em 0 0 0 #f6e58d inset;
 }
 .ui.inverted.table td.marked.yellow.right,
 .ui.inverted.table tr.marked.yellow.right {
-  box-shadow: -0.2em 0 0 0 #FFE21F inset;
+  box-shadow: -0.2em 0 0 0 #f6e58d inset;
 }
 .ui.olive.table {
-  border-top: 0.2em solid #B5CC18;
+  border-top: 0.2em solid #b5cc18;
 }
 .ui.inverted.olive.table {
-  background-color: #B5CC18;
+  background-color: #b5cc18;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.olive:not(.marked),
@@ -1221,11 +1221,11 @@
 }
 .ui.table td.marked.olive.left,
 .ui.table tr.marked.olive.left {
-  box-shadow: 0.2em 0 0 0 #B5CC18 inset;
+  box-shadow: 0.2em 0 0 0 #b5cc18 inset;
 }
 .ui.table td.marked.olive.right,
 .ui.table tr.marked.olive.right {
-  box-shadow: -0.2em 0 0 0 #B5CC18 inset;
+  box-shadow: -0.2em 0 0 0 #b5cc18 inset;
 }
 .ui.inverted.table td.marked.olive.left,
 .ui.inverted.table tr.marked.olive.left {
@@ -1236,132 +1236,132 @@
   box-shadow: -0.2em 0 0 0 #D9E778 inset;
 }
 .ui.green.table {
-  border-top: 0.2em solid #21BA45;
+  border-top: 0.2em solid #6ab04c;
 }
 .ui.inverted.green.table {
-  background-color: #21BA45;
+  background-color: #6ab04c;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.green:not(.marked),
 .ui.ui.table td.green:not(.marked) {
-  background: #d5f5d9;
+  background: #f1f8de;
   color: #1EBC30;
 }
 .ui.ui.selectable.table tr.green:not(.marked):hover,
 .ui.table tr td.selectable.green:not(.marked):hover,
 .ui.selectable.table tr:hover td.green:not(.marked) {
-  background: #d2eed5;
+  background: #eff8d4;
   color: #1EBC30;
 }
 .ui.table td.marked.green.left,
 .ui.table tr.marked.green.left {
-  box-shadow: 0.2em 0 0 0 #21BA45 inset;
+  box-shadow: 0.2em 0 0 0 #6ab04c inset;
 }
 .ui.table td.marked.green.right,
 .ui.table tr.marked.green.right {
-  box-shadow: -0.2em 0 0 0 #21BA45 inset;
+  box-shadow: -0.2em 0 0 0 #6ab04c inset;
 }
 .ui.inverted.table td.marked.green.left,
 .ui.inverted.table tr.marked.green.left {
-  box-shadow: 0.2em 0 0 0 #2ECC40 inset;
+  box-shadow: 0.2em 0 0 0 #badc58 inset;
 }
 .ui.inverted.table td.marked.green.right,
 .ui.inverted.table tr.marked.green.right {
-  box-shadow: -0.2em 0 0 0 #2ECC40 inset;
+  box-shadow: -0.2em 0 0 0 #badc58 inset;
 }
 .ui.teal.table {
-  border-top: 0.2em solid #00B5AD;
+  border-top: 0.2em solid #22a6b3;
 }
 .ui.inverted.teal.table {
-  background-color: #00B5AD;
+  background-color: #22a6b3;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.teal:not(.marked),
 .ui.ui.table td.teal:not(.marked) {
-  background: #e2ffff;
+  background: #e5f7f9;
   color: #10A3A3;
 }
 .ui.ui.selectable.table tr.teal:not(.marked):hover,
 .ui.table tr td.selectable.teal:not(.marked):hover,
 .ui.selectable.table tr:hover td.teal:not(.marked) {
-  background: #d8ffff;
+  background: #dcf5f8;
   color: #10A3A3;
 }
 .ui.table td.marked.teal.left,
 .ui.table tr.marked.teal.left {
-  box-shadow: 0.2em 0 0 0 #00B5AD inset;
+  box-shadow: 0.2em 0 0 0 #22a6b3 inset;
 }
 .ui.table td.marked.teal.right,
 .ui.table tr.marked.teal.right {
-  box-shadow: -0.2em 0 0 0 #00B5AD inset;
+  box-shadow: -0.2em 0 0 0 #22a6b3 inset;
 }
 .ui.inverted.table td.marked.teal.left,
 .ui.inverted.table tr.marked.teal.left {
-  box-shadow: 0.2em 0 0 0 #6DFFFF inset;
+  box-shadow: 0.2em 0 0 0 #7ed6df inset;
 }
 .ui.inverted.table td.marked.teal.right,
 .ui.inverted.table tr.marked.teal.right {
-  box-shadow: -0.2em 0 0 0 #6DFFFF inset;
+  box-shadow: -0.2em 0 0 0 #7ed6df inset;
 }
 .ui.blue.table {
-  border-top: 0.2em solid #2185D0;
+  border-top: 0.2em solid #4834d4;
 }
 .ui.inverted.blue.table {
-  background-color: #2185D0;
+  background-color: #4834d4;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.blue:not(.marked),
 .ui.ui.table td.blue:not(.marked) {
-  background: #ddf4ff;
-  color: #2185D0;
+  background: #e1e2f9;
+  color: #4834d4;
 }
 .ui.ui.selectable.table tr.blue:not(.marked):hover,
 .ui.table tr td.selectable.blue:not(.marked):hover,
 .ui.selectable.table tr:hover td.blue:not(.marked) {
-  background: #d3f1ff;
-  color: #2185D0;
+  background: #d7d8f9;
+  color: #4834d4;
 }
 .ui.table td.marked.blue.left,
 .ui.table tr.marked.blue.left {
-  box-shadow: 0.2em 0 0 0 #2185D0 inset;
+  box-shadow: 0.2em 0 0 0 #4834d4 inset;
 }
 .ui.table td.marked.blue.right,
 .ui.table tr.marked.blue.right {
-  box-shadow: -0.2em 0 0 0 #2185D0 inset;
+  box-shadow: -0.2em 0 0 0 #4834d4 inset;
 }
 .ui.inverted.table td.marked.blue.left,
 .ui.inverted.table tr.marked.blue.left {
-  box-shadow: 0.2em 0 0 0 #54C8FF inset;
+  box-shadow: 0.2em 0 0 0 #686de0 inset;
 }
 .ui.inverted.table td.marked.blue.right,
 .ui.inverted.table tr.marked.blue.right {
-  box-shadow: -0.2em 0 0 0 #54C8FF inset;
+  box-shadow: -0.2em 0 0 0 #686de0 inset;
 }
 .ui.violet.table {
-  border-top: 0.2em solid #6435C9;
+  border-top: 0.2em solid #6435c9;
 }
 .ui.inverted.violet.table {
-  background-color: #6435C9;
+  background-color: #6435c9;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.violet:not(.marked),
 .ui.ui.table td.violet:not(.marked) {
   background: #ece9fe;
-  color: #6435C9;
+  color: #6435c9;
 }
 .ui.ui.selectable.table tr.violet:not(.marked):hover,
 .ui.table tr td.selectable.violet:not(.marked):hover,
 .ui.selectable.table tr:hover td.violet:not(.marked) {
   background: #e3deff;
-  color: #6435C9;
+  color: #6435c9;
 }
 .ui.table td.marked.violet.left,
 .ui.table tr.marked.violet.left {
-  box-shadow: 0.2em 0 0 0 #6435C9 inset;
+  box-shadow: 0.2em 0 0 0 #6435c9 inset;
 }
 .ui.table td.marked.violet.right,
 .ui.table tr.marked.violet.right {
-  box-shadow: -0.2em 0 0 0 #6435C9 inset;
+  box-shadow: -0.2em 0 0 0 #6435c9 inset;
 }
 .ui.inverted.table td.marked.violet.left,
 .ui.inverted.table tr.marked.violet.left {
@@ -1372,64 +1372,64 @@
   box-shadow: -0.2em 0 0 0 #A291FB inset;
 }
 .ui.purple.table {
-  border-top: 0.2em solid #A333C8;
+  border-top: 0.2em solid #be2edd;
 }
 .ui.inverted.purple.table {
-  background-color: #A333C8;
+  background-color: #be2edd;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.purple:not(.marked),
 .ui.ui.table td.purple:not(.marked) {
-  background: #f8e3ff;
-  color: #A333C8;
+  background: #f9ddff;
+  color: #be2edd;
 }
 .ui.ui.selectable.table tr.purple:not(.marked):hover,
 .ui.table tr td.selectable.purple:not(.marked):hover,
 .ui.selectable.table tr:hover td.purple:not(.marked) {
-  background: #f5d9ff;
-  color: #A333C8;
+  background: #f7d3ff;
+  color: #be2edd;
 }
 .ui.table td.marked.purple.left,
 .ui.table tr.marked.purple.left {
-  box-shadow: 0.2em 0 0 0 #A333C8 inset;
+  box-shadow: 0.2em 0 0 0 #be2edd inset;
 }
 .ui.table td.marked.purple.right,
 .ui.table tr.marked.purple.right {
-  box-shadow: -0.2em 0 0 0 #A333C8 inset;
+  box-shadow: -0.2em 0 0 0 #be2edd inset;
 }
 .ui.inverted.table td.marked.purple.left,
 .ui.inverted.table tr.marked.purple.left {
-  box-shadow: 0.2em 0 0 0 #DC73FF inset;
+  box-shadow: 0.2em 0 0 0 #e056fd inset;
 }
 .ui.inverted.table td.marked.purple.right,
 .ui.inverted.table tr.marked.purple.right {
-  box-shadow: -0.2em 0 0 0 #DC73FF inset;
+  box-shadow: -0.2em 0 0 0 #e056fd inset;
 }
 .ui.pink.table {
-  border-top: 0.2em solid #E03997;
+  border-top: 0.2em solid #e03997;
 }
 .ui.inverted.pink.table {
-  background-color: #E03997;
+  background-color: #e03997;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.pink:not(.marked),
 .ui.ui.table td.pink:not(.marked) {
   background: #ffe8f9;
-  color: #E03997;
+  color: #e03997;
 }
 .ui.ui.selectable.table tr.pink:not(.marked):hover,
 .ui.table tr td.selectable.pink:not(.marked):hover,
 .ui.selectable.table tr:hover td.pink:not(.marked) {
   background: #ffdef6;
-  color: #E03997;
+  color: #e03997;
 }
 .ui.table td.marked.pink.left,
 .ui.table tr.marked.pink.left {
-  box-shadow: 0.2em 0 0 0 #E03997 inset;
+  box-shadow: 0.2em 0 0 0 #e03997 inset;
 }
 .ui.table td.marked.pink.right,
 .ui.table tr.marked.pink.right {
-  box-shadow: -0.2em 0 0 0 #E03997 inset;
+  box-shadow: -0.2em 0 0 0 #e03997 inset;
 }
 .ui.inverted.table td.marked.pink.left,
 .ui.inverted.table tr.marked.pink.left {
@@ -1440,30 +1440,30 @@
   box-shadow: -0.2em 0 0 0 #FF8EDF inset;
 }
 .ui.brown.table {
-  border-top: 0.2em solid #A5673F;
+  border-top: 0.2em solid #a5673f;
 }
 .ui.inverted.brown.table {
-  background-color: #A5673F;
+  background-color: #a5673f;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.brown:not(.marked),
 .ui.ui.table td.brown:not(.marked) {
   background: #f7e5d2;
-  color: #A5673F;
+  color: #a5673f;
 }
 .ui.ui.selectable.table tr.brown:not(.marked):hover,
 .ui.table tr td.selectable.brown:not(.marked):hover,
 .ui.selectable.table tr:hover td.brown:not(.marked) {
   background: #efe0cf;
-  color: #A5673F;
+  color: #a5673f;
 }
 .ui.table td.marked.brown.left,
 .ui.table tr.marked.brown.left {
-  box-shadow: 0.2em 0 0 0 #A5673F inset;
+  box-shadow: 0.2em 0 0 0 #a5673f inset;
 }
 .ui.table td.marked.brown.right,
 .ui.table tr.marked.brown.right {
-  box-shadow: -0.2em 0 0 0 #A5673F inset;
+  box-shadow: -0.2em 0 0 0 #a5673f inset;
 }
 .ui.inverted.table td.marked.brown.left,
 .ui.inverted.table tr.marked.brown.left {
@@ -1474,49 +1474,49 @@
   box-shadow: -0.2em 0 0 0 #D67C1C inset;
 }
 .ui.grey.table {
-  border-top: 0.2em solid #767676;
+  border-top: 0.2em solid #718093;
 }
 .ui.inverted.grey.table {
-  background-color: #767676;
+  background-color: #718093;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.grey:not(.marked),
 .ui.ui.table td.grey:not(.marked) {
-  background: #DCDDDE;
-  color: #767676;
+  background: #7f8fa6;
+  color: #718093;
 }
 .ui.ui.selectable.table tr.grey:not(.marked):hover,
 .ui.table tr td.selectable.grey:not(.marked):hover,
 .ui.selectable.table tr:hover td.grey:not(.marked) {
-  background: #c2c4c5;
-  color: #767676;
+  background: #617591;
+  color: #718093;
 }
 .ui.table td.marked.grey.left,
 .ui.table tr.marked.grey.left {
-  box-shadow: 0.2em 0 0 0 #767676 inset;
+  box-shadow: 0.2em 0 0 0 #718093 inset;
 }
 .ui.table td.marked.grey.right,
 .ui.table tr.marked.grey.right {
-  box-shadow: -0.2em 0 0 0 #767676 inset;
+  box-shadow: -0.2em 0 0 0 #718093 inset;
 }
 .ui.inverted.table td.marked.grey.left,
 .ui.inverted.table tr.marked.grey.left {
-  box-shadow: 0.2em 0 0 0 #DCDDDE inset;
+  box-shadow: 0.2em 0 0 0 #7f8fa6 inset;
 }
 .ui.inverted.table td.marked.grey.right,
 .ui.inverted.table tr.marked.grey.right {
-  box-shadow: -0.2em 0 0 0 #DCDDDE inset;
+  box-shadow: -0.2em 0 0 0 #7f8fa6 inset;
 }
 .ui.black.table {
-  border-top: 0.2em solid #1B1C1D;
+  border-top: 0.2em solid #2f3640;
 }
 .ui.inverted.black.table {
-  background-color: #1B1C1D;
+  background-color: #2f3640;
   color: #FFFFFF;
 }
 .ui.ui.ui.ui.table tr.black:not(.marked),
 .ui.ui.table td.black:not(.marked) {
-  background: #545454;
+  background: #353b48;
   color: #FFFFFF;
 }
 .ui.ui.selectable.table tr.black:not(.marked):hover,
@@ -1527,19 +1527,19 @@
 }
 .ui.table td.marked.black.left,
 .ui.table tr.marked.black.left {
-  box-shadow: 0.2em 0 0 0 #1B1C1D inset;
+  box-shadow: 0.2em 0 0 0 #2f3640 inset;
 }
 .ui.table td.marked.black.right,
 .ui.table tr.marked.black.right {
-  box-shadow: -0.2em 0 0 0 #1B1C1D inset;
+  box-shadow: -0.2em 0 0 0 #2f3640 inset;
 }
 .ui.inverted.table td.marked.black.left,
 .ui.inverted.table tr.marked.black.left {
-  box-shadow: 0.2em 0 0 0 #545454 inset;
+  box-shadow: 0.2em 0 0 0 #353b48 inset;
 }
 .ui.inverted.table td.marked.black.right,
 .ui.inverted.table tr.marked.black.right {
-  box-shadow: -0.2em 0 0 0 #545454 inset;
+  box-shadow: -0.2em 0 0 0 #353b48 inset;
 }
 
 /*--------------

@@ -404,9 +404,8 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 								<>
 									<Button
 										compact
-										color="black"
+										color="green"
 										content="Create Wallet"
-										icon="ethereum"
 										onClick={() => history.push("/wallet/create")}
 										size="large"
 									/>
@@ -414,7 +413,6 @@ const PageHeader = ({ activeItem, history, q, simple }) => {
 										compact
 										color="blue"
 										content="Log In"
-										icon="sign in"
 										onClick={() => history.push("/login")}
 										size="large"
 									/>

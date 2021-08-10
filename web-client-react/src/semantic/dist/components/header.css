@@ -19,7 +19,7 @@
   border: none;
   margin: calc(2rem - 0.1428571428571429em) 0 1rem;
   padding: 0 0;
-  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: 'Overpass', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: bold;
   line-height: 1.28571429em;
   text-transform: none;
@@ -333,12 +333,12 @@ h6.ui.header .sub.header {
   color: rgba(255, 255, 255, 0.8);
 }
 .ui.inverted.attached.header {
-  background: #1B1C1D;
+  background: #2f3640;
   box-shadow: none;
   border-color: transparent;
 }
 .ui.inverted.block.header {
-  background: #545454 linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+  background: #353b48 linear-gradient(transparent, rgba(0, 0, 0, 0.05));
   box-shadow: none;
   border-bottom: none;
 }
@@ -348,103 +348,103 @@ h6.ui.header .sub.header {
 --------------------*/
 
 .ui.primary.header {
-  color: #2185D0;
+  color: #e03997;
 }
 a.ui.primary.header:hover {
-  color: #1678c2;
+  color: #e61a8d;
 }
 .ui.primary.dividing.header {
-  border-bottom: 2px solid #2185D0;
+  border-bottom: 2px solid #e03997;
 }
 .ui.inverted.primary.header.header.header {
-  color: #54C8FF;
+  color: #686de0;
 }
 a.ui.inverted.primary.header.header.header:hover {
-  color: #21b8ff;
+  color: #363ddf;
 }
 .ui.inverted.primary.dividing.header {
-  border-bottom: 2px solid #54C8FF;
+  border-bottom: 2px solid #686de0;
 }
 .ui.secondary.header {
-  color: #1B1C1D;
+  color: #4834d4;
 }
 a.ui.secondary.header:hover {
-  color: #27292a;
+  color: #5642e0;
 }
 .ui.secondary.dividing.header {
-  border-bottom: 2px solid #1B1C1D;
+  border-bottom: 2px solid #4834d4;
 }
 .ui.inverted.secondary.header.header.header {
-  color: #545454;
+  color: #353b48;
 }
 a.ui.inverted.secondary.header.header.header:hover {
-  color: #6e6e6e;
+  color: #495367;
 }
 .ui.inverted.secondary.dividing.header {
-  border-bottom: 2px solid #545454;
+  border-bottom: 2px solid #353b48;
 }
 .ui.red.header {
-  color: #DB2828;
+  color: #eb4d4b;
 }
 a.ui.red.header:hover {
-  color: #d01919;
+  color: #f12e2b;
 }
 .ui.red.dividing.header {
-  border-bottom: 2px solid #DB2828;
+  border-bottom: 2px solid #eb4d4b;
 }
 .ui.inverted.red.header.header.header {
-  color: #FF695E;
+  color: #ff7979;
 }
 a.ui.inverted.red.header.header.header:hover {
-  color: #ff392b;
+  color: #ff4646;
 }
 .ui.inverted.red.dividing.header {
-  border-bottom: 2px solid #FF695E;
+  border-bottom: 2px solid #ff7979;
 }
 .ui.orange.header {
-  color: #F2711C;
+  color: #f0932b;
 }
 a.ui.orange.header:hover {
-  color: #f26202;
+  color: #f98708;
 }
 .ui.orange.dividing.header {
-  border-bottom: 2px solid #F2711C;
+  border-bottom: 2px solid #f0932b;
 }
 .ui.inverted.orange.header.header.header {
-  color: #FF851B;
+  color: #ffbe76;
 }
 a.ui.inverted.orange.header.header.header:hover {
-  color: #e76b00;
+  color: #ffa643;
 }
 .ui.inverted.orange.dividing.header {
-  border-bottom: 2px solid #FF851B;
+  border-bottom: 2px solid #ffbe76;
 }
 .ui.yellow.header {
-  color: #FBBD08;
+  color: #f9ca24;
 }
 a.ui.yellow.header:hover {
-  color: #eaae00;
+  color: #ffc804;
 }
 .ui.yellow.dividing.header {
-  border-bottom: 2px solid #FBBD08;
+  border-bottom: 2px solid #f9ca24;
 }
 .ui.inverted.yellow.header.header.header {
-  color: #FFE21F;
+  color: #f6e58d;
 }
 a.ui.inverted.yellow.header.header.header:hover {
-  color: #ebcd00;
+  color: #fadf56;
 }
 .ui.inverted.yellow.dividing.header {
-  border-bottom: 2px solid #FFE21F;
+  border-bottom: 2px solid #f6e58d;
 }
 .ui.olive.header {
-  color: #B5CC18;
+  color: #b5cc18;
 }
 a.ui.olive.header:hover {
   color: #a7bd0d;
 }
 .ui.olive.dividing.header {
-  border-bottom: 2px solid #B5CC18;
+  border-bottom: 2px solid #b5cc18;
 }
 .ui.inverted.olive.header.header.header {
   color: #D9E778;
@@ -456,67 +456,67 @@ a.ui.inverted.olive.header.header.header:hover {
   border-bottom: 2px solid #D9E778;
 }
 .ui.green.header {
-  color: #21BA45;
+  color: #6ab04c;
 }
 a.ui.green.header:hover {
-  color: #16ab39;
+  color: #5da340;
 }
 .ui.green.dividing.header {
-  border-bottom: 2px solid #21BA45;
+  border-bottom: 2px solid #6ab04c;
 }
 .ui.inverted.green.header.header.header {
-  color: #2ECC40;
+  color: #badc58;
 }
 a.ui.inverted.green.header.header.header:hover {
-  color: #1ea92e;
+  color: #addb26;
 }
 .ui.inverted.green.dividing.header {
-  border-bottom: 2px solid #2ECC40;
+  border-bottom: 2px solid #badc58;
 }
 .ui.teal.header {
-  color: #00B5AD;
+  color: #22a6b3;
 }
 a.ui.teal.header:hover {
-  color: #009c95;
+  color: #1897a4;
 }
 .ui.teal.dividing.header {
-  border-bottom: 2px solid #00B5AD;
+  border-bottom: 2px solid #22a6b3;
 }
 .ui.inverted.teal.header.header.header {
-  color: #6DFFFF;
+  color: #7ed6df;
 }
 a.ui.inverted.teal.header.header.header:hover {
-  color: #3affff;
+  color: #4fcedb;
 }
 .ui.inverted.teal.dividing.header {
-  border-bottom: 2px solid #6DFFFF;
+  border-bottom: 2px solid #7ed6df;
 }
 .ui.blue.header {
-  color: #2185D0;
+  color: #4834d4;
 }
 a.ui.blue.header:hover {
-  color: #1678c2;
+  color: #3722cd;
 }
 .ui.blue.dividing.header {
-  border-bottom: 2px solid #2185D0;
+  border-bottom: 2px solid #4834d4;
 }
 .ui.inverted.blue.header.header.header {
-  color: #54C8FF;
+  color: #686de0;
 }
 a.ui.inverted.blue.header.header.header:hover {
-  color: #21b8ff;
+  color: #363ddf;
 }
 .ui.inverted.blue.dividing.header {
-  border-bottom: 2px solid #54C8FF;
+  border-bottom: 2px solid #686de0;
 }
 .ui.violet.header {
-  color: #6435C9;
+  color: #6435c9;
 }
 a.ui.violet.header:hover {
   color: #5829bb;
 }
 .ui.violet.dividing.header {
-  border-bottom: 2px solid #6435C9;
+  border-bottom: 2px solid #6435c9;
 }
 .ui.inverted.violet.header.header.header {
   color: #A291FB;
@@ -528,31 +528,31 @@ a.ui.inverted.violet.header.header.header:hover {
   border-bottom: 2px solid #A291FB;
 }
 .ui.purple.header {
-  color: #A333C8;
+  color: #be2edd;
 }
 a.ui.purple.header:hover {
-  color: #9627ba;
+  color: #b719d8;
 }
 .ui.purple.dividing.header {
-  border-bottom: 2px solid #A333C8;
+  border-bottom: 2px solid #be2edd;
 }
 .ui.inverted.purple.header.header.header {
-  color: #DC73FF;
+  color: #e056fd;
 }
 a.ui.inverted.purple.header.header.header:hover {
-  color: #cf40ff;
+  color: #d821ff;
 }
 .ui.inverted.purple.dividing.header {
-  border-bottom: 2px solid #DC73FF;
+  border-bottom: 2px solid #e056fd;
 }
 .ui.pink.header {
-  color: #E03997;
+  color: #e03997;
 }
 a.ui.pink.header:hover {
   color: #e61a8d;
 }
 .ui.pink.dividing.header {
-  border-bottom: 2px solid #E03997;
+  border-bottom: 2px solid #e03997;
 }
 .ui.inverted.pink.header.header.header {
   color: #FF8EDF;
@@ -564,13 +564,13 @@ a.ui.inverted.pink.header.header.header:hover {
   border-bottom: 2px solid #FF8EDF;
 }
 .ui.brown.header {
-  color: #A5673F;
+  color: #a5673f;
 }
 a.ui.brown.header:hover {
   color: #975b33;
 }
 .ui.brown.dividing.header {
-  border-bottom: 2px solid #A5673F;
+  border-bottom: 2px solid #a5673f;
 }
 .ui.inverted.brown.header.header.header {
   color: #D67C1C;
@@ -582,40 +582,40 @@ a.ui.inverted.brown.header.header.header:hover {
   border-bottom: 2px solid #D67C1C;
 }
 .ui.grey.header {
-  color: #767676;
+  color: #718093;
 }
 a.ui.grey.header:hover {
-  color: #838383;
+  color: #7f8d9e;
 }
 .ui.grey.dividing.header {
-  border-bottom: 2px solid #767676;
+  border-bottom: 2px solid #718093;
 }
 .ui.inverted.grey.header.header.header {
-  color: #DCDDDE;
+  color: #7f8fa6;
 }
 a.ui.inverted.grey.header.header.header:hover {
-  color: #c2c4c5;
+  color: #617591;
 }
 .ui.inverted.grey.dividing.header {
-  border-bottom: 2px solid #DCDDDE;
+  border-bottom: 2px solid #7f8fa6;
 }
 .ui.black.header {
-  color: #1B1C1D;
+  color: #2f3640;
 }
 a.ui.black.header:hover {
-  color: #27292a;
+  color: #3a424f;
 }
 .ui.black.dividing.header {
-  border-bottom: 2px solid #1B1C1D;
+  border-bottom: 2px solid #2f3640;
 }
 .ui.inverted.black.header.header.header {
-  color: #545454;
+  color: #353b48;
 }
 a.ui.inverted.black.header.header.header:hover {
   color: #000000;
 }
 .ui.inverted.black.dividing.header {
-  border-bottom: 2px solid #545454;
+  border-bottom: 2px solid #353b48;
 }
 
 /*-------------------
