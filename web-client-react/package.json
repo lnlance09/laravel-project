@@ -59,7 +59,6 @@
     "prettify": "prettier --print-width 100 --tab-width 4 --use-tabs --no-semi --trailing-comma none --jsx-bracket-same-line false --parser flow --write 'src/**/*.{js,jsx}'",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build-blind": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
