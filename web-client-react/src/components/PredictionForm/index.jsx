@@ -137,7 +137,7 @@ const PredictionForm = ({ auth, coin, days = 30, defaultPrice = "", history, inv
 								<Grid.Column width={8}>
 									<Chart
 										coin={coin}
-										color={operator === "more" ? "#44bd32" : "#c23616"}
+										color={operator === "more" ? "#6ab04c" : "#eb4d4b"}
 										containerProps={{ style: { height: "250px" } }}
 										duration="1Y"
 										hideYAxis

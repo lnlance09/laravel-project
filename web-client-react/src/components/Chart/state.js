@@ -1,4 +1,4 @@
-const areaColor = "#a291fb"
+const areaColor = "#4834d4"
 const backgroundColor = "#fff"
 const textColor = "#ccc"
 const secDay = 3600 * 24
@@ -63,7 +63,7 @@ const initialState = {
 		textColor,
 		title: false,
 		tooltip: {
-			backgroundColor: "#090127",
+			backgroundColor: "#050505",
 			borderColor: "rgba(255, 255, 255, 0.1)",
 			crosshairs: true,
 			pointFormat:

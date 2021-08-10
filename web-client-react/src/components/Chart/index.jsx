@@ -10,8 +10,8 @@ import logger from "use-reducer-logger"
 import PropTypes from "prop-types"
 import reducer from "./reducer"
 
-const red = "#c23616"
-const green = "#44bd32"
+const red = "#eb4d4b"
+const green = "#6ab04c"
 
 const Chart = ({
 	addSeries = false,
@@ -179,7 +179,7 @@ const Chart = ({
 					dispatch({
 						type: "ADD_SERIES",
 						series: {
-							color: "#44bd32",
+							color: "#6ab04c",
 							data: series,
 							fillOpacity: 0.7,
 							turboThreshold: 4000

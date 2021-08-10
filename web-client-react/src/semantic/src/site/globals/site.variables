@@ -17,21 +17,25 @@
 @grey           : #767676;
 @black          : #1b1c1d;
 
-@blue: #0097e6;
-@green: #44bd32;
-@yellow: #e1b12c;
-@red: #c23616;
-@purple: #8c7ae6;
+@teal: #22a6b3;
+@blue: #4834d4;
+@green: #6ab04c;
+@yellow: #f9ca24;
+@red: #eb4d4b;
+@orange: #f0932b;
+@purple: #be2edd;
 @grey: #718093;
-$black: #2f3640;
+@black: #2f3640;
 
-@lightBlue: #00a8ff;
-@lightGreen: #4cd137;
-@lightYellow: #fbc531;
-@lightRed: #e84118;
-@lightPurple: #9c88ff;
+@lightTeal: #7ed6df;
+@lightBlue: #686de0;
+@lightGreen: #badc58;
+@lightYellow: #f6e58d;
+@lightRed: #ff7979;
+@lightOrange: #ffbe76;
+@lightPurple: #e056fd;
 @lightGrey: #7f8fa6;
-$lightBlack: #353b48;
+@lightBlack: #353b48;
 
 @fontName          : 'Overpass';
 @fontSmoothing     : antialiased;

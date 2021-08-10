@@ -157,7 +157,7 @@ const Predictions = ({ history }) => {
 						options={coinOptions}
 						scrolling
 						trigger={
-							<Button color="black" fluid icon={coinId ? true : false} size="big">
+							<Button color="blue" fluid icon={coinId ? true : false} size="big">
 								{coinId ? coinName : "Coin"}
 								{coinId && (
 									<Icon
