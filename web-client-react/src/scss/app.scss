@@ -397,6 +397,12 @@ body {
 				}
 			}
 
+			.predictionList {
+				@media only screen and (max-width: 1025px) {
+					margin-top: 15px;
+				}
+			}
+
 			.ui.grid {
 				.imgColumn {
 					align-items: center;
