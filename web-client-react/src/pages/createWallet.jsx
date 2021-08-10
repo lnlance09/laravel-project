@@ -86,7 +86,7 @@ const CreateWallet = ({ history, match }) => {
 					<Wallet coin={coin} inverted={inverted} />
 				</Grid.Column>
 				<Grid.Column width={5}>
-					<Card className={`menuCard ${inverted ? "inverted" : null}`} fluid>
+					<Card className={`relax menuCard ${inverted ? "inverted" : null}`} fluid>
 						<Card.Content>
 							<Menu
 								fluid
