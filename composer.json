@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "aws/aws-sdk-php": "^3.185",
+        "brainfoolong/cryptojs-aes-php": "^2.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "greensea/keccak": "^1.0",

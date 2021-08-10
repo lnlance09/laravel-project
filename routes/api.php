@@ -25,10 +25,12 @@ Route::post('/applications/{id}/update', [ApplicationController::class, 'update'
 Route::post('/contact', [ApplicationController::class, 'sendMsg']);
 
 Route::get('/coins', [CoinController::class, 'index']);
+Route::get('/coins/coinsWithWallets', [CoinController::class, 'getCoinsWithWallets']);
 Route::get('/coins/graph', [CoinController::class, 'graph']);
 Route::get('/coins/options', [CoinController::class, 'showOptions']);
 Route::get('/coins/topTraders', [CoinController::class, 'topTraders']);
 Route::get('/coins/{slug}', [CoinController::class, 'show']);
+Route::post('/coins/incrementWalletCount', [WalletController::class, 'addCustomWallet']);
 
 Route::get('/predictions', [PredictionController::class, 'index']);
 Route::post('/predictions/create', [PredictionController::class, 'create'])->middleware(['auth:api', 'verified']);

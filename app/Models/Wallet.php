@@ -17,9 +17,13 @@ class Wallet extends Model
      */
     protected $fillable = [
         'address',
+        'mnemonic_seed',
+        'passphrase',
+        'password',
         'primary',
         'private_key',
         'public_key',
+        'type',
         'user_id'
     ];
 

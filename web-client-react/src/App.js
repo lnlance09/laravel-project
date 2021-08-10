@@ -114,6 +114,13 @@ const App = () => {
 							/>
 
 							<Route
+								path="/wallet/create/:symbol"
+								render={(props) => (
+									<CreateWallet key={window.location.pathname} {...props} />
+								)}
+							/>
+
+							<Route
 								exact
 								path="/:username"
 								render={(props) => (

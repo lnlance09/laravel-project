@@ -1,5 +1,5 @@
 import "./style.scss"
-import { Card, Image, Placeholder } from "semantic-ui-react"
+import { Card, Image, Label, Placeholder } from "semantic-ui-react"
 import { formatPlural } from "utils/textFunctions"
 import NumberFormat from "react-number-format"
 import PlaceholderPic from "images/images/image-square.png"
@@ -10,7 +10,7 @@ const CoinList = ({ coins, inverted, loading, onClickCoin }) => (
 	<div className="coinList">
 		<Card.Group className={inverted ? "inverted" : ""} itemsPerRow={3} stackable>
 			{coins.map((coin, i) => {
-				const { description, logo, marketCap, name, slug, symbol } = coin
+				const { category, description, logo, marketCap, name, slug, symbol } = coin
 				return (
 					<Card key={`coin${i}`} onClick={(e) => onClickCoin(e, slug)}>
 						{loading ? (
@@ -61,6 +61,13 @@ const CoinList = ({ coins, inverted, loading, onClickCoin }) => (
 								<Card.Content extra>
 									{coin.predictionsCount}{" "}
 									{formatPlural(coin.predictionsCount, "prediction")}
+									<Label
+										basic
+										className={inverted ? "inverted" : null}
+										style={{ float: "right" }}
+									>
+										{category}
+									</Label>
 								</Card.Content>
 							</>
 						)}

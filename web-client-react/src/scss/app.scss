@@ -215,6 +215,16 @@ body {
 					margin-top: 30px;
 				}
 			}
+
+			.message.coinVsToken {
+				.icon {
+					color: $lightRed;
+
+					@media only screen and (max-width: 1025px) {
+						display: none;
+					}
+				}
+			}
 		}
 
 		&.coinPage {
@@ -273,6 +283,11 @@ body {
 					display: inline-block;
 					font-weight: normal;
 				}
+			}
+			
+
+			.menuCard .content {
+				padding: 0 !important;
 			}
 		}
 
