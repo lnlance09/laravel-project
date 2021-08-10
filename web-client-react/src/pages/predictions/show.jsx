@@ -26,8 +26,8 @@ const Predictions = ({ history }) => {
 		initialState
 	)
 	const [activeItem, setActiveItem] = useState("created_at")
-	const [coinId, setCoinId] = useState(2)
-	const [coinName, setCoinName] = useState("Ethereum")
+	const [coinId, setCoinId] = useState(null)
+	const [coinName, setCoinName] = useState("")
 	const [coinOptions, setCoinOptions] = useState([])
 	const [createdAt, setCreatedAt] = useState("desc")
 	const [direction, setDirection] = useState(null)
@@ -36,7 +36,7 @@ const Predictions = ({ history }) => {
 	const [loadingMore, setLoadingMore] = useState(false)
 	const [margin, setMargin] = useState(null)
 	const [page, setPage] = useState(1)
-	const [status, setStatus] = useState("Correct")
+	const [status, setStatus] = useState("Pending")
 	const [targetDate, setTargetDate] = useState(null)
 
 	useEffect(() => {
@@ -158,7 +158,7 @@ const Predictions = ({ history }) => {
 						scrolling
 						trigger={
 							<Button color="blue" fluid icon={coinId ? true : false} size="big">
-								{coinId ? coinName : "Coin"}
+								{coinId ? coinName : "Pick a Coin"}
 								{coinId && (
 									<Icon
 										name="close"
@@ -166,7 +166,6 @@ const Predictions = ({ history }) => {
 											e.stopPropagation()
 											setCoinId(null)
 											setCoinName("")
-											getPredictions(null, status, activeItem, direction)
 										}}
 										style={{ float: "right" }}
 									/>
