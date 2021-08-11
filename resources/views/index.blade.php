@@ -70,6 +70,6 @@
 
     <!-- React build JS -->
     <script src="/static/js/2.6616c8bb.chunk.js"></script>
-    <script src="/static/js/main.be4cd732.chunk.js"></script>
+    <script src="/static/js/main.71ea5412.chunk.js"></script>
     <script src="/static/js/runtime-main.e1b51eb3.js"></script>
 </html>
