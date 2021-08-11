@@ -93,7 +93,7 @@ const CreateWallet = ({ history, match }) => {
 								inverted={inverted}
 								primary
 								relaxed="very"
-								size="large"
+								size="huge"
 								vertical
 							>
 								{coins.map((coin, i) => {
