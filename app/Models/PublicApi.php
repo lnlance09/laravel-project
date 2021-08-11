@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class PublicApi extends Model
 {
@@ -87,8 +88,11 @@ class PublicApi extends Model
      */
     public static function getExtendedInfo($id)
     {
-        $response = Http::retry(3, 10000)->withHeaders([
-            'Accepts' => 'application/json',
+        $response = Http::retry(3, 1000)->withHeaders([
+            'accepts' => 'application/json',
+            'origin' => 'https://coinmarketcap.com',
+            'referer' => 'https://coinmarketcap.com/',
+            'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36'
         ])->get('https://web-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest', [
             'id' => $id,
             'convert_id' => 2781 // This might be USD
@@ -100,6 +104,7 @@ class PublicApi extends Model
             return $data;
         }
 
+        Log::info($response->json());
         return false;
     }
 
